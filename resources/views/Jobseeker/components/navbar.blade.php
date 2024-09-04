@@ -5,16 +5,18 @@
                     <h1 class="display-6 text-primary m-0">
                         <img src="{{ asset('../assets/img/PESOLOGO.png') }}" alt="" class="mb-2 me-2">
                         {{-- <i class="fa-solid fa-helmet-safety me-3"></i> --}}
-                    </i>Job Portal</h1>
+                        </i>Job Portal
+                    </h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse">
                     <span class="fa fa-bars"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
-                        <a href="{{route('homepage')}}" class="nav-item nav-link active">Home</a>
-                        <a href="{{route('about')}}" class="nav-item nav-link">About</a>
+                        <a href="{{ route('homepage') }}" class="nav-item nav-link active">Home</a>
+                        <a href="{{ route('about') }}" class="nav-item nav-link">About</a>
                         <a href="service.html" class="nav-item nav-link">Services</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
@@ -28,34 +30,30 @@
                         </div>
                         <a href="contact.html" class="nav-item nav-link">Contact Us</a>
                     </div>
-                    <a href="{{route('login')}}"
-                        class="btn btn-light border border-primary rounded-pill text-primary py-2 px-4 me-4">Log In</a>
-                    <a href="#" class="btn btn-primary rounded-pill text-white py-2 px-4">Sign Up</a>
+                    <!-- Log In Dropdown -->
+                    <div class="dropdown d-inline">
+                        <button
+                            class="btn btn-light border border-primary rounded-pill text-primary py-2 px-4 dropdown-toggle me-4"
+                            type="button" id="loginDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Log In
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="loginDropdown">
+                            <li><a class="dropdown-item" href="{{route('login')}}">as Jobseeker</a></li>
+                            <li><a class="dropdown-item" href="{{route('agencylogin')}}">as Agency</a></li>
+                        </ul>
+                    </div>
+
+                    <!-- Sign Up Dropdown -->
+                    <div class="dropdown d-inline">
+                        <button class="btn btn-primary rounded-pill text-white py-2 px-4 dropdown-toggle" type="button"
+                            id="signupDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sign Up
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="signupDropdown">
+                            <li><a class="dropdown-item" href="{{route('signup')}}">as Jobseeker</a></li>
+                            <li><a class="dropdown-item" href="{{route('agencysignup')}}">as Agency</a></li>
+                        </ul>
+                    </div>
+
                 </div>
             </nav>
-
-
-            <!-- Hero Header Start -->
-            <div class="hero-header overflow-hidden px-5">
-                <div class="rotate-img">
-                    <img src="img/sty-1.png" class="img-fluid w-100" alt="">
-                    <div class="rotate-sty-2"></div>
-                </div>
-                <div class="row gy-5 align-items-center">
-                    <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
-                        <h1 class="display-4 text-dark mb-4 wow fadeInUp" data-wow-delay="0.3s">Turn Emails into Revenue
-                        </h1>
-                        <p class="fs-4 mb-4 wow fadeInUp" data-wow-delay="0.5s">Win new customers with the #1 email
-                            marketing and automations brand* that recommends ways to get more opens, clicks, and sales.
-                        </p>
-                        <a href="#" class="btn btn-primary rounded-pill py-3 px-5 wow fadeInUp"
-                            data-wow-delay="0.7s">Get Started</a>
-                    </div>
-                    <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
-                        <img src="img/hero-img-1.png" class="img-fluid w-100 h-100" alt="">
-                    </div>
-                </div>
-            </div>
-            <!-- Hero Header End -->
-        </div>
-        <!-- Navbar & Hero End -->
