@@ -30,4 +30,21 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <style>
+        <!-- CSS to enable hover dropdown
+        -->
+    <style>
+        .dropdown:hover .dropdown-menu {
+            display: block;
+            margin-top: 0;
+            /* optional for alignment */
+        }
+
+        /* Optional: Remove the caret for visual consistency */
+        .dropdown-toggle::after {
+            display: none;
+        }
+    </style>
+    </style>
 </head>

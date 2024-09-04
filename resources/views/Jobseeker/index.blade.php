@@ -18,15 +18,15 @@
     </div>
     <div class="row gy-5 align-items-center">
         <div class="col-lg-6 wow fadeInLeft" data-wow-delay="0.1s">
-            <h1 class="display-4 text-dark mb-4 wow fadeInUp" data-wow-delay="0.3s">Your Gateway to Endless Opportunities
+            <h1 class="display-4 text-dark mb-4 wow fadeInUp" data-wow-delay="0.3s">Public Employment Service Office Blue-Collar Center (PESOBCC)
             </h1>
-            <p class="fs-4 mb-4 wow fadeInUp" data-wow-delay="0.5s">Connecting Talents with Their Dream Careers Through Innovative Job Search and Career Management Tools
+            <p class="fs-4 mb-4 wow fadeInUp" data-wow-delay="0.5s">Looking for meaningful hands-on work that drives the economy? The Job Portal for Blue-Collar Workers by PESO connects job seekers with a wide range of opportunities in skilled trades and essential industries.
             </p>
             <a href="#" class="btn btn-primary rounded-pill py-3 px-5 wow fadeInUp"
                 data-wow-delay="0.7s">Get Started</a>
         </div>
         <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
-            <img src="img/hero-img-1.png" class="img-fluid w-100 h-100" alt="">
+            <img src="img/undraw_under_construction_-46-pa.svg" class="img-fluid w-100 h-100" alt="">
         </div>
     </div>
 </div>
