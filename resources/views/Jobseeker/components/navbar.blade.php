@@ -2,7 +2,10 @@
         <div class="container-fluid header position-relative overflow-hidden p-0">
             <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="index.html" class="navbar-brand p-0">
-                    <h1 class="display-6 text-primary m-0"><i class="fa-solid fa-helmet-safety me-3"></i></i>Job Portal</h1>
+                    <h1 class="display-6 text-primary m-0">
+                        <img src="{{ asset('../assets/img/PESOLOGO.png') }}" alt="" class="mb-2 me-2">
+                        {{-- <i class="fa-solid fa-helmet-safety me-3"></i> --}}
+                    </i>Job Portal</h1>
                     <!-- <img src="img/logo.png" alt="Logo"> -->
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -10,8 +13,8 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
-                        <a href="index.html" class="nav-item nav-link active">Home</a>
-                        <a href="about.html" class="nav-item nav-link">About</a>
+                        <a href="{{route('homepage')}}" class="nav-item nav-link active">Home</a>
+                        <a href="{{route('about')}}" class="nav-item nav-link">About</a>
                         <a href="service.html" class="nav-item nav-link">Services</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
@@ -25,7 +28,7 @@
                         </div>
                         <a href="contact.html" class="nav-item nav-link">Contact Us</a>
                     </div>
-                    <a href="#"
+                    <a href="{{route('login')}}"
                         class="btn btn-light border border-primary rounded-pill text-primary py-2 px-4 me-4">Log In</a>
                     <a href="#" class="btn btn-primary rounded-pill text-white py-2 px-4">Sign Up</a>
                 </div>

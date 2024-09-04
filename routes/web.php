@@ -27,5 +27,8 @@ Route::get('/Agency/ScreenedApplicants', function () { return view('Agency.scree
 Route::get('/Agency/ApprovedApplications', function () { return view('Agency.approvedapplications'); })->name('approvedapplications');
 
 // Jobseeker Routes
+Route::get('/Blank2', function () { return view('Jobseeker.blank'); })->name('blankpage');
 Route::get('/', function () { return view('Jobseeker.index'); })->name('homepage');
 Route::get('/About', function () { return view('Jobseeker.about'); })->name('about');
+Route::get('/Login', function () { return view('Jobseeker.Login'); })->name('login');
+
