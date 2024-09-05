@@ -9,7 +9,7 @@
 
     @include('Jobseeker.components.navbar', ['active' => 'jobs'])
 
-    @include('Jobseeker.components.header', ['title' => 'Jobs'])
+    @include('Jobseeker.components.header', ['title' => 'Job Categories'])
 
 
     <!-- job category Start -->

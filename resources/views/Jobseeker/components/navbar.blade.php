@@ -29,10 +29,10 @@
                             </div>
                             
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Agency</a>
+                                <a href="#" class="nav-link dropdown-toggle {{ in_array($active, ['agencies', 'feedback']) ? 'active' : '' }}" data-bs-toggle="dropdown">Agency</a>
                                 <div class="dropdown-menu dropdown-menu-adjust">
-                                    <a href="agencies.html" class="dropdown-item">Agencies</a>
-                                    <a href="feedback.html" class="dropdown-item">Feedback</a>
+                                    <a href="{{route('agencies')}}" class="dropdown-item {{ $active == 'agencies' ? 'active' : '' }}">Agencies</a>
+                                    <a href="{{route('agencyfeedback')}}" class="dropdown-item {{ $active == 'feedback' ? 'active' : '' }}">Feedback</a>
                                 </div>
                             </div>
                             
@@ -47,8 +47,8 @@
                             Log In
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="loginDropdown">
-                            <li><a class="dropdown-item" href="{{ route('login') }}">as Jobseeker</a></li>
-                            <li><a class="dropdown-item" href="{{ route('agencylogin') }}">as Agency</a></li>
+                            <li><a class="dropdown-item {{ $active == 'login' ? 'active' : '' }}" href="{{ route('login') }}">as Jobseeker</a></li>
+                            <li><a class="dropdown-item {{ $active == 'agencylogin' ? 'active' : '' }}" href="{{ route('agencylogin') }}">as Agency</a></li>
                         </ul>
                     </div>
 
@@ -59,8 +59,8 @@
                             Sign Up
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="signupDropdown">
-                            <li><a class="dropdown-item" href="{{ route('signup') }}">as Jobseeker</a></li>
-                            <li><a class="dropdown-item" href="{{ route('agencysignup') }}">as Agency</a></li>
+                            <li><a class="dropdown-item {{ $active == 'signup' ? 'active' : '' }}" href="{{ route('signup') }}">as Jobseeker</a></li>
+                            <li><a class="dropdown-item {{ $active == 'agencysignup' ? 'active' : '' }}" href="{{ route('agencysignup') }}">as Agency</a></li>
                         </ul>
                     </div>
 

@@ -7,7 +7,11 @@
 
     @include('Jobseeker.components.spinner')
 
-    <div class="row mt-3 mb-4">
+    @include('Jobseeker.components.navbar', ['active' => 'agencysignup'])
+
+    <div class="row mt-5 mb-4">
+
+    <div class="row mt-5 mb-4">
         <div class="col-xl-8 col-lg-8 col-md-8 d-flex flex-column mx-auto">
             <div class="card card-plain mt-2">
                 <div class="card-header pb-0 text-center bg-transparent" style="border: none">
@@ -117,6 +121,7 @@
             </div>
         </div>
     </div>
+</div>
 
 
     @include('Jobseeker.components.scripts')

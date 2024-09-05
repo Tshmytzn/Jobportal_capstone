@@ -9,6 +9,9 @@
 
     @include('Jobseeker.components.spinner')
 
+    @include('Jobseeker.components.navbar', ['active' => 'login'])
+
+    <div class="row mt-5 mb-4">
 
     <div class="row mt-5 mb-4">
         <div class="col-xl-4 col-lg-6 col-md-6 d-flex flex-column mx-auto">
@@ -48,6 +51,7 @@
             </div>
         </div>
     </div>
+</div>
 
 
     @include('Jobseeker.components.scripts')
