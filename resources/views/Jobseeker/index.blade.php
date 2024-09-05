@@ -38,39 +38,6 @@
     </div>
     <!-- Navbar & Hero End -->
 
-    <!-- Search Bar -->
-    <div class="search-bar container mt-5">
-        <form class="row g-3">
-            <div class="col-md-4">
-                <input type="text" class="form-control" id="keyword" placeholder="Enter Keyword">
-            </div>
-            <div class="col-md-3">
-                <select class="form-select" id="category">
-                    <option selected>Category</option>
-                    <option value="1">Construction</option>
-                    <option value="2">Electrician</option>
-                    <option value="3">Plumbing</option>
-                    <option value="4">Welding and Metalwork</option>
-                    <option value="5">Mechanical</option>
-                    <option value="6">Driving and Transportation</option>
-                    <option value="7">Warehouse and Custodial</option>
-                    <option value="8">Gardening and Landscape</option>
-                </select>
-            </div>
-            <div class="col-md-3">
-                <select class="form-select" id="location">
-                    <option selected>Location</option>
-                    <option value="1">Location 1</option>
-                    <option value="2">Location 2</option>
-                    <option value="3">Location 3</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-primary w-100">Search</button>
-            </div>
-        </form>
-    </div>
-    {{-- Search bar end --}}
 
     <!-- Service Start -->
     <div class="container-fluid service py-5">
@@ -127,8 +94,8 @@
                                 class="fa-solid fa-tachometer-alt fa-5x text-secondary"></i></div>
                         <div class="service-content">
                             <h4 class="mb-4">Welding and Metalwork</h4>
-                            <p class="mb-4">Perform welding and metal fabrication. Includes joining metal parts,
-                                cutting, and shaping for construction and manufacturing projects.</p>
+                            <p class="mb-4">Welding and metal fabrication. Includes joining metal parts,
+                                cutting, and shaping for manufacturing projects.</p>
                             <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">Read More</a>
                         </div>
                     </div>
@@ -139,8 +106,8 @@
                                 class="fa-solid fa-screwdriver-wrench fa-5x text-secondary"></i></div>
                         <div class="service-content">
                             <h4 class="mb-4">Mechanical</h4>
-                            <p class="mb-4">Work on various complex machinery and engines. Includes maintaining,
-                                repairing, and troubleshooting mechanical systems across diverse industries.</p>
+                            <p class="mb-4">Work on various fhfghfghfh complex machinery and engines. Includes maintaining,
+                                repairing, and troubleshooting mechanical systems across fdgdgffdg diverse dfgdgdg industries.</p>
                             <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">Read More</a>
                         </div>
                     </div>
