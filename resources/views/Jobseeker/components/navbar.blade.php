@@ -15,9 +15,18 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto py-0">
-                        <a href="{{ route('homepage') }}" class="nav-item nav-link active">Home</a>
-                        <a href="{{ route('about') }}" class="nav-item nav-link">About</a>
-                        <a href="jobs.html" class="nav-item nav-link">Jobs</a>
+                        <a href="{{ route('homepage') }}"
+                            class="nav-item nav-link {{ $active == 'homepage' ? 'active' : '' }}">Home</a>
+                        <a href="{{ route('about') }}"
+                            class="nav-item nav-link {{ $active == 'about' ? 'active' : '' }}">About</a>
+                        <div class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle {{ $active == 'jobs' ? 'active' : '' }}"
+                                data-bs-toggle="dropdown">Jobs</a>
+                            <div class="dropdown-menu">
+                                <a href="{{ route('jobs') }}" class="dropdown-item">Job Categories</a>
+                                <a href="{{ route('jobslist') }}" class="dropdown-item">Job List</a>
+                            </div>
+                        </div>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Agency</a>
                             <div class="dropdown-menu">

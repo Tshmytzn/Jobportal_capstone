@@ -33,6 +33,8 @@ Route::get('/About', function () { return view('Jobseeker.about'); })->name('abo
 Route::get('/SignUp', function () { return view('Jobseeker.signup'); })->name('signup');
 Route::get('/AgencySignUp', function () { return view('Jobseeker.agencysignup'); })->name('agencysignup');
 Route::get('/Login', function () { return view('Jobseeker.Login'); })->name('login');
+Route::get('/Jobs', function () { return view('Jobseeker.jobs'); })->name('jobs');
+Route::get('/JobsList', function () { return view('Jobseeker.jobslist'); })->name('jobslist');
 Route::get('/AgencyLogin', function () { return view('Jobseeker.agencylogin'); })->name('agencylogin');
 Route::get('/404', function () { return view('Jobseeker.404'); })->name('404');
 

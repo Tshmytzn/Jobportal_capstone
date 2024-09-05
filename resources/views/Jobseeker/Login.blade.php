@@ -40,7 +40,8 @@
                                 class="btn btn-light border border-primary rounded-pill w-100 mt-3 mb-3">Login</button>
                         </div>
                         <div class="text-center">
-                            <label for="signup" >Don't have an account yet? <span class="text-secondary small"> <a href="{{route('signup')}}">Sign up here. </a> </span></label>
+                            <label for="signup">Don't have an account yet? <span class="text-secondary small"> <a
+                                        href="{{ route('signup') }}">Sign up here. </a> </span></label>
                         </div>
                     </form>
                 </div>

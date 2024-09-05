@@ -52,19 +52,22 @@
                         <label>Gender: </label>
                         <div class="mb-3">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="male" value="Male">
+                                <input class="form-check-input" type="radio" name="gender" id="male"
+                                    value="Male">
                                 <label class="form-check-label" for="male">Male</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
+                                <input class="form-check-input" type="radio" name="gender" id="female"
+                                    value="Female">
                                 <label class="form-check-label" for="female">Female</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="other" value="Other">
+                                <input class="form-check-input" type="radio" name="gender" id="other"
+                                    value="Other">
                                 <label class="form-check-label" for="other">Other</label>
                             </div>
                         </div>
-                        
+
                         <label>Home Address: </label>
                         <div class="mb-3">
                             <input type="text" class="form-control" placeholder="Enter Home Address"
@@ -72,19 +75,20 @@
                         </div>
                         <div class="row">
 
-                        <div class="col-6 mb-3">
-                            <label>Email Address: </label>
-                            <input type="email" class="form-control" placeholder="Enter Email Address"
-                                aria-label="Email">
-                        </div>
-                        <div class="col-6 mb-3">
-                            <label>Contact Number: </label>
-                            <div class="input-group">
-                                <span class="input-group-text">+63</span>
-                                <input type="tel" class="form-control" placeholder="Enter Contact Number" aria-label="Contact Number">
+                            <div class="col-6 mb-3">
+                                <label>Email Address: </label>
+                                <input type="email" class="form-control" placeholder="Enter Email Address"
+                                    aria-label="Email">
+                            </div>
+                            <div class="col-6 mb-3">
+                                <label>Contact Number: </label>
+                                <div class="input-group">
+                                    <span class="input-group-text">+63</span>
+                                    <input type="tel" class="form-control" placeholder="Enter Contact Number"
+                                        aria-label="Contact Number">
+                                </div>
                             </div>
                         </div>
-                    </div>
 
                         <div class="row">
                             <div class="col-6 mb-3">
@@ -104,8 +108,9 @@
                                 Up</button>
                         </div>
                         <div class="text-center">
-                            <label for="signin">Already have an account? <span class="text-secondary small"> <a href="{{route('agencylogin')}}">Sign in
-                                    here.</a></span></label>
+                            <label for="signin">Already have an account? <span class="text-secondary small"> <a
+                                        href="{{ route('agencylogin') }}">Sign in
+                                        here.</a></span></label>
                         </div>
                     </form>
                 </div>
