@@ -32,19 +32,17 @@
     <link href="css/style.css" rel="stylesheet">
 
     <style>
-        <!-- CSS to enable hover dropdown
-        -->
-    <style>
         .dropdown:hover .dropdown-menu {
             display: block;
-            margin-top: 0;
-            /* optional for alignment */
+            margin-top: 2%;
         }
 
-        /* Optional: Remove the caret for visual consistency */
         .dropdown-toggle::after {
             display: none;
         }
-    </style>
+
+        .dropdown-menu.dropdown-menu-adjust {
+        margin-top: -15px; 
+}
     </style>
 </head>

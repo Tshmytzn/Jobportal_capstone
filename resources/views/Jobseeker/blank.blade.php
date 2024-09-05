@@ -7,9 +7,9 @@
 
     @include('Jobseeker.components.spinner')
 
-    @include('Jobseeker.components.navbar')
+    @include('Jobseeker.components.navbar', ['active' => 'blank'])
 
-    @include('Jobseeker.components.header')
+    @include('Jobseeker.components.header', ['title' => 'blank'])
 
     
 

@@ -19,22 +19,24 @@
                             class="nav-item nav-link {{ $active == 'homepage' ? 'active' : '' }}">Home</a>
                         <a href="{{ route('about') }}"
                             class="nav-item nav-link {{ $active == 'about' ? 'active' : '' }}">About</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle {{ $active == 'jobs' ? 'active' : '' }}"
-                                data-bs-toggle="dropdown">Jobs</a>
-                            <div class="dropdown-menu">
-                                <a href="{{ route('jobs') }}" class="dropdown-item">Job Categories</a>
-                                <a href="{{ route('jobslist') }}" class="dropdown-item">Job List</a>
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle {{ in_array($active, ['jobs', 'jobslist']) ? 'active' : '' }}" 
+                                    data-bs-toggle="dropdown">Jobs</a>
+                                <div class="dropdown-menu dropdown-menu-adjust">
+                                    <a href="{{ route('jobs') }}" class="dropdown-item {{ $active == 'jobs' ? 'active' : '' }}">Job Categories</a>
+                                    <a href="{{ route('jobslist') }}" class="dropdown-item {{ $active == 'jobslist' ? 'active' : '' }}">Job List</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Agency</a>
-                            <div class="dropdown-menu">
-                                <a href="agencies.html" class="dropdown-item">Agencies</a>
-                                <a href="feedback.html" class="dropdown-item">Feedback</a>
+                            
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Agency</a>
+                                <div class="dropdown-menu dropdown-menu-adjust">
+                                    <a href="agencies.html" class="dropdown-item">Agencies</a>
+                                    <a href="feedback.html" class="dropdown-item">Feedback</a>
+                                </div>
                             </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+                            
+                        <a href="{{route('contactus')}}" class="nav-item nav-link {{ $active == 'contactus' ? 'active' : '' }}">Contact Us</a>
                     </div>
 
                     <!-- Log In Dropdown -->
