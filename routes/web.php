@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JobseekerController;
 use Illuminate\Support\Facades\Route;
 
 // Admin Routes
@@ -35,10 +36,12 @@ Route::get('/AgencySignUp', function () { return view('Jobseeker.agencysignup');
 Route::get('/AgencyLogin', function () { return view('Jobseeker.agencylogin'); })->name('agencylogin');
 Route::get('/Login', function () { return view('Jobseeker.Login'); })->name('login');
 Route::get('/Jobs', function () { return view('Jobseeker.jobs'); })->name('jobs');
-Route::get('/JobsList', function () { return view('Jobseeker.jobslist'); })->name('jobslist');Route::get('/ContactUs', function () { return view('Jobseeker.contactus'); })->name('contactus');
+Route::get('/JobsList', function () { return view('Jobseeker.jobslist'); })->name('jobslist');
+Route::get('/ContactUs', function () { return view('Jobseeker.contactus'); })->name('contactus');
 Route::get('/Agency', function () { return view('Jobseeker.agencies'); })->name('agencies');
 Route::get('/AgencyFeedback', function () { return view('Jobseeker.agencyfeedback'); })->name('agencyfeedback');
 Route::get('/ContactUs', function () { return view('Jobseeker.contactus'); })->name('contactus');
 Route::get('/404', function () { return view('Jobseeker.404'); })->name('404');
+Route::post('/', [JobseekerController::class, 'create'])->name('jobseekersCreate');
 
 
