@@ -5,7 +5,7 @@
 
 <body class="g-sidenav-show  bg-gray-100">
 
-    @include('Admin.components.aside', ['active' => 'Verified Requests'])
+    @include('Admin.components.aside', ['active' => 'verifiedrequests'])
 
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->

@@ -1,27 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('Admin.components.head', ['title' => 'Jobseeker'])
+@include('Admin.components.head', ['title' => 'Administrators'])
 
 <body class="g-sidenav-show  bg-gray-100">
 
-    @include('Admin.components.aside', ['active' => 'Jobseeker'])
+    @include('Admin.components.aside', ['active' => 'Administrators'])
 
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
-        @include('Admin.components.navbar', ['headtitle' => 'Jobseeker'], ['pagetitle' => 'Admin'])        <!-- End Navbar -->
+        @include('Admin.components.navbar', ['headtitle' => 'Administrators'], ['pagetitle' => 'Admin'])        
         <!-- End Navbar -->
 
         {{-- cards --}}
         <div class="container-fluid py-0 m-2">
             <div class="row m-2">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#addNewAdminModal">
+                        <button class="btn bg-gradient-primary text-white">Add New Admin</button>
+                    </a>
+
                     <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
                             <th>Full Name</th>
                             <th>Email</th>
                             <th>Contact Number</th>
-                            <th>Date Created</th>
+                            <th>Date Added</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -34,7 +38,8 @@
                             <td>2023-02-10</td>
                             <td>Active</td>
                             <td>
-                                <button class="btn btn-sm btn-danger">Ban</button>
+                                <button class="btn btn-sm btn-warning">Edit</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
                             </td>
                         </tr>
                         <tr>
@@ -44,7 +49,8 @@
                             <td>2022-11-18</td>
                             <td>Active</td>
                             <td>
-                                <button class="btn btn-sm btn-danger">Ban</button>
+                                <button class="btn btn-sm btn-warning">Edit</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
                             </td>
                         </tr>
                         <tr>
@@ -54,7 +60,8 @@
                             <td>2021-08-05</td>
                             <td>Inactive</td>
                             <td>
-                                <button class="btn btn-sm btn-danger">Ban</button>
+                                <button class="btn btn-sm btn-warning">Edit</button>
+                                <button class="btn btn-sm btn-danger">Delete</button>
                             </td>
                         </tr>
                     </tbody>

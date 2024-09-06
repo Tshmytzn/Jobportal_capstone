@@ -11,7 +11,8 @@ Route::get('/Verification/Request', function () { return view('Admin.verifiedreq
 Route::get('/Verified/Agencies', function () { return view('Admin.verifiedagencies'); })->name('verifiedagencies');
 Route::get('/Unverified/Agencies', function () { return view('Admin.unverifiedagencies'); })->name('unverifiedagencies');
 Route::get('/Admin/Jobseeker', function () { return view('Admin.jobseeker'); })->name('jobseeker');
-Route::get('/Admin/Notification', function () { return view('Admin.notif'); })->name('adminnotif');
+Route::get('/Admin/Administrators', function () { return view('Admin.admins'); })->name('administrators');
+Route::get('/Admin/SkillAssessment', function () { return view('Admin.SkillAssessment'); })->name('adminskillassessment');
 Route::get('/Admin/Settings', function () { return view('Admin.settings'); })->name('adminsettings');
 
 

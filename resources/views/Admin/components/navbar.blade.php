@@ -1,3 +1,14 @@
+@include('Admin.components.modals')
+
+<style>
+    .modal-dialog-custom {
+      position: absolute;
+      top: 35px;
+      right: 30px;
+      margin: 1;
+    }
+  </style>
+
 <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur"
     navbar-scroll="true">
     <div class="container-fluid py-1 px-3">
@@ -51,7 +62,7 @@
                     </ul>
                 </li>
                 <li class="nav-item d-flex align-items-center me-3">
-                    <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
+                    <a href="" data-bs-toggle="modal" data-bs-target="#adminProfileModal" class="nav-link text-body font-weight-bold px-0">
                         <i class="fa fa-user me-sm-1"></i>
                         <span class="d-sm-inline d-none">Profile</span>
                     </a>
