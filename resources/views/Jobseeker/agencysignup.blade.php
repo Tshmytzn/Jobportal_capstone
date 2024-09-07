@@ -4,40 +4,34 @@
 @include('Jobseeker.components.head', ['title' => 'Job Portal'])
 
 <style>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css"><script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script><style>select.form-select {
+        background-color: #fff;
+        color: #495057;
+        border: 1px solid #ced4da;
+        border-radius: 0.375rem;
+        padding: 0.375rem 0.75rem;
+        box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.05);
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
 
-  <style>
+    select.form-select option {
+        background-color: #fff;
+        color: #49868c;
+        padding: 10px;
+        border-bottom: 1px solid #e9ecef;
+        cursor: pointer;
+    }
 
-select.form-select {
-    background-color: #fff; 
-    color: #495057; 
-    border: 1px solid #ced4da; 
-    border-radius: 0.375rem; 
-    padding: 0.375rem 0.75rem; 
-    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.05); 
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; 
-}
+    select.form-select option:hover {
+        background-color: #f8f9fa;
+        color: #43475c;
+    }
 
-select.form-select option {
-    background-color: #fff; 
-    color: #49868c; 
-    padding: 10px; 
-    border-bottom: 1px solid #e9ecef; 
-    cursor: pointer; 
-}
-
-select.form-select option:hover {
-    background-color: #f8f9fa; 
-    color: #43475c; 
-}
-
-select.form-select option:checked {
-    background-color: #40166f; 
-    color: #fff; 
-}
-
-  </style>
+    select.form-select option:checked {
+        background-color: #40166f;
+        color: #fff;
+    }
+</style>
 </style>
 
 <body style="background-color: #e3ddeb">
@@ -63,44 +57,51 @@ select.form-select option:checked {
                     <hr>
                     <div class="card-body " style="border: none">
 
-                        <form role="form" class="">
-
+                        <form action="{{ route('agency.register') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <div class="row">
                                 <!-- Agency Name -->
                                 <div class="col-12 mb-3">
                                     <label for="agency_name">Agency Name: </label>
-                                    <input type="text" id="agency_name" name="agency_name" class="form-control" placeholder="Enter Agency Name" aria-label="Agency Name">
+                                    <input type="text" id="agency_name" name="agency_name" class="form-control"
+                                        placeholder="Enter Agency Name" aria-label="Agency Name">
                                 </div>
-                            
+
                                 <!-- Agency Address -->
                                 <div class="col-12 mb-3">
                                     <label for="agency_address">Agency Address: </label>
-                                    <input type="text" id="agency_address" name="agency_address" class="form-control" placeholder="Enter Agency Address" aria-label="Agency Address">
+                                    <input type="text" id="agency_address" name="agency_address" class="form-control"
+                                        placeholder="Enter Agency Address" aria-label="Agency Address">
                                 </div>
-                            
+
                                 <!-- Email Address -->
                                 <div class="col-4 mb-3">
                                     <label for="email_address">Email Address: </label>
-                                    <input type="email" id="email_address" name="email_address" class="form-control" placeholder="Enter Email Address" aria-label="Email Address">
+                                    <input type="email" id="email_address" name="email_address" class="form-control"
+                                        placeholder="Enter Email Address" aria-label="Email Address" required>
                                 </div>
-                            
+
                                 <!-- Contact Number -->
                                 <div class="col-4 mb-3">
                                     <label for="contact_number">Contact Number: </label>
                                     <div class="input-group">
                                         <span class="input-group-text">+63</span>
-                                        <input type="tel" id="contact_number" name="contact_number" class="form-control" placeholder="Enter Contact Number" aria-label="Contact Number" pattern="[0-9]{10}">
+                                        <input type="tel" id="contact_number" name="contact_number"
+                                            class="form-control" placeholder="Enter Contact Number"
+                                            aria-label="Contact Number" pattern="[0-9]{10}">
                                     </div>
                                 </div>
-                            
+
                                 <!-- Landline Number -->
                                 <div class="col-4 mb-3">
                                     <label for="landline_number">Landline Number: </label>
                                     <div class="input-group">
-                                        <input type="tel" id="landline_number" name="landline_number" class="form-control" placeholder="Enter Landline Number" aria-label="Landline Number" pattern="[0-9]{2}-[0-9]{8}">
+                                        <input type="tel" id="landline_number" name="landline_number"
+                                            class="form-control" placeholder="Enter Landline Number"
+                                            aria-label="Landline Number" pattern="[0-9]{2}-[0-9]{8}">
                                     </div>
                                 </div>
-                            
+
                                 <!-- Geographical Coverage Dropdown -->
                                 <div class="col-6 mb-3">
                                     <label for="geo_coverage" class="form-label">Geographical Coverage:</label>
@@ -110,7 +111,7 @@ select.form-select option:checked {
                                         <option value="international">International</option>
                                     </select>
                                 </div>
-                            
+
                                 <!-- Number of Employees Dropdown -->
                                 <div class="col-6 mb-3">
                                     <label for="employee_count" class="form-label">Number of Employees:</label>
@@ -124,42 +125,47 @@ select.form-select option:checked {
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="row">
                                 <!-- Agency Business Permit -->
                                 <div class="col-4 mb-3">
                                     <label for="agency_business_permit">Agency Business Permit:</label>
-                                    <input type="file" id="agency_business_permit" name="agency_business_permit" class="form-control">
+                                    <input type="file" id="agency_business_permit" name="agency_business_permit"
+                                        class="form-control">
                                 </div>
-                            
+
                                 <!-- Agency DTI Permit -->
                                 <div class="col-4 mb-3">
                                     <label for="agency_dti_permit">Agency DTI Permit:</label>
-                                    <input type="file" id="agency_dti_permit" name="agency_dti_permit" class="form-control">
+                                    <input type="file" id="agency_dti_permit" name="agency_dti_permit"
+                                        class="form-control">
                                 </div>
-                            
+
                                 <!-- Agency BIR Permit -->
                                 <div class="col-4 mb-3">
                                     <label for="agency_bir_permit">Agency BIR Permit:</label>
-                                    <input type="file" id="agency_bir_permit" name="agency_bir_permit" class="form-control">
+                                    <input type="file" id="agency_bir_permit" name="agency_bir_permit"
+                                        class="form-control">
                                 </div>
+
                             </div>
-                            
+
 
                             <div class="row">
                                 <div class="col-6 mb-3">
                                     <label>Password: </label>
-                                    <input type="password" class="form-control" placeholder="Enter Password"
-                                        aria-label="Password">
+                                    <input type="password" id="agencypassword" name="agencypassword"
+                                        class="form-control" placeholder="Enter Password" aria-label="Password">
                                 </div>
                                 <div class="col-6 mb-3">
                                     <label>Confirm Password: </label>
-                                    <input type="password" class="form-control" placeholder="Confirm Password"
+                                    <input type="password" class="form-control" id="confirm_agencypassword"
+                                        name="confirm_agencypassword" placeholder="Confirm Password"
                                         aria-label="Confirm Password">
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button type="button"
+                                <button type="submit"
                                     class="btn btn-light border border-primary rounded-pill w-100 mt-3 mb-3">Sign
                                     Up</button>
                             </div>
@@ -174,7 +180,6 @@ select.form-select option:checked {
             </div>
         </div>
     </div>
-
 
     @include('Jobseeker.components.scripts')
 

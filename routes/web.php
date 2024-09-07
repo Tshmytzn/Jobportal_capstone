@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\JobseekerController;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,9 @@ Route::get('/Agency', function () { return view('Jobseeker.agencies'); })->name(
 Route::get('/AgencyFeedback', function () { return view('Jobseeker.agencyfeedback'); })->name('agencyfeedback');
 Route::get('/ContactUs', function () { return view('Jobseeker.contactus'); })->name('contactus');
 Route::get('/404', function () { return view('Jobseeker.404'); })->name('404');
+
+// Jobseeker Page Controllers
 Route::post('/', [JobseekerController::class, 'create'])->name('jobseekersCreate');
+Route::post('/AgencyRegister', [AgencyController::class, 'RegisterAgency'])->name('agency.register');  // Changed from 'store' to 'registerAgency'
 
 

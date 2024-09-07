@@ -28,59 +28,62 @@
                             <div class="row">
                                 <div class="col-3 mb-3">
                                     <label for="firstname">First Name: </label>
-                                    <input type="text" class="form-control" name="firstname" placeholder="Enter First Name"
-                                        aria-label="First Name" required>
+                                    <input type="text" class="form-control" name="firstname"
+                                        placeholder="Enter First Name" aria-label="First Name" required>
                                 </div>
                                 <div class="col-3 mb-3">
                                     <label for="midname">Middle Name: </label>
-                                    <input type="text" class="form-control" name="midname" placeholder="Enter Middle Name"
-                                        aria-label="Middle Name" required>
+                                    <input type="text" class="form-control" name="midname"
+                                        placeholder="Enter Middle Name" aria-label="Middle Name" required>
                                 </div>
                                 <div class="col-3 mb-3">
                                     <label for="lastname">Last Name: </label>
-                                    <input type="text" class="form-control" name="lastname" placeholder="Enter Last Name"
-                                        aria-label="Last Name" required>
+                                    <input type="text" class="form-control" name="lastname"
+                                        placeholder="Enter Last Name" aria-label="Last Name" required>
                                 </div>
                                 <div class="col-3 mb-3">
                                     <label for="suffix">Suffix: </label>
-                                    <input type="text" class="form-control" name="suffix" placeholder="Enter Suffix (e.g., Jr., Sr.)"
-                                        aria-label="Suffix" required>
+                                    <input type="text" class="form-control" name="suffix"
+                                        placeholder="Enter Suffix (e.g., Jr., Sr.)" aria-label="Suffix" required>
                                 </div>
                             </div>
 
                             <label>Gender: </label>
                             <div class="mb-3">
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="gender" id="male" value="Male" required>
+                                    <input class="form-check-input" type="radio" name="gender" id="male"
+                                        value="Male" required>
                                     <label class="form-check-label" for="male">Male</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
+                                    <input class="form-check-input" type="radio" name="gender" id="female"
+                                        value="Female">
                                     <label class="form-check-label" for="female">Female</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="gender" id="other" value="Other">
+                                    <input class="form-check-input" type="radio" name="gender" id="other"
+                                        value="Other">
                                     <label class="form-check-label" for="other">Other</label>
                                 </div>
                             </div>
 
                             <label for="address">Home Address: </label>
                             <div class="mb-3">
-                                <input type="text" class="form-control" name="address" placeholder="Enter Home Address"
-                                    aria-label="Home Address" required>
+                                <input type="text" class="form-control" name="address"
+                                    placeholder="Enter Home Address" aria-label="Home Address" required>
                             </div>
                             <div class="row">
                                 <div class="col-6 mb-3">
                                     <label for="email">Email Address: </label>
-                                    <input type="email" class="form-control" name="email" placeholder="Enter Email Address"
-                                        aria-label="Email" required>
+                                    <input type="email" class="form-control" name="email"
+                                        placeholder="Enter Email Address" aria-label="Email" required>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <label for="contact">Contact Number: </label>
                                     <div class="input-group">
                                         <span class="input-group-text">+63</span>
-                                        <input type="tel" class="form-control" name="contact" placeholder="Enter Contact Number"
-                                            aria-label="Contact Number" required>
+                                        <input type="tel" class="form-control" name="contact"
+                                            placeholder="Enter Contact Number" aria-label="Contact Number" required>
                                     </div>
                                 </div>
                             </div>
@@ -88,13 +91,13 @@
                             <div class="row">
                                 <div class="col-6 mb-3">
                                     <label for="password">Password: </label>
-                                    <input type="password" class="form-control" name="password" placeholder="Enter Password"
-                                        aria-label="Password" required>
+                                    <input type="password" class="form-control" name="password"
+                                        placeholder="Enter Password" aria-label="Password" required>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <label for="password_confirmation">Confirm Password: </label>
-                                    <input type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password"
-                                        aria-label="Confirm Password" required>
+                                    <input type="password" class="form-control" name="password_confirmation"
+                                        placeholder="Confirm Password" aria-label="Confirm Password" required>
                                 </div>
                             </div>
                             <div class="text-center">
@@ -105,9 +108,9 @@
                         </form>
                         <div class="text-center">
                             <label for="signin">Already have an account? <span class="text-secondary small"> <a
-                                    href="{{ route('login') }}">Sign in
-                                    here.</a></span></label>
-                        </div>    
+                                        href="{{ route('login') }}">Sign in
+                                        here.</a></span></label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -121,31 +124,44 @@
     <script>
         $(document).ready(function() {
             $('#jobseekerForm').on('submit', function(event) {
-                event.preventDefault(); // Prevent the default form submission
+                event.preventDefault();
 
-                // Send the AJAX request
                 $.ajax({
                     url: "{{ route('jobseekersCreate') }}",
                     method: 'POST',
                     data: $(this).serialize(),
                     success: function(response) {
-                        // Handle successful response
-                        alert('Account created successfully!');
-                        window.location.href = "{{ route('homepage') }}";
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Account created successfully!',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Redirect after alert is closed
+                                window.location.href = "{{ route('login') }}";
+                            }
+                        });
                     },
                     error: function(xhr) {
-                        // Handle errors
                         var errors = xhr.responseJSON.errors;
                         var errorMessages = '';
                         $.each(errors, function(key, value) {
-                            errorMessages += value[0] + '\n';
+                            errorMessages += value[0] + '<br>';
                         });
-                        alert('Error:\n' + errorMessages);
+
+                        Swal.fire({
+                            title: 'Error!',
+                            html: errorMessages,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
                     }
                 });
             });
         });
     </script>
+
 
 </body>
 

@@ -31,6 +31,10 @@
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
+    <!-- SweetAlert2  -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
     <style>
         .dropdown:hover .dropdown-menu {
             display: block;
@@ -42,7 +46,7 @@
         }
 
         .dropdown-menu.dropdown-menu-adjust {
-        margin-top: -15px; 
-}
+            margin-top: -15px;
+        }
     </style>
 </head>
