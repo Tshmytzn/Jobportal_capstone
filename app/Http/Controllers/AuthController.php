@@ -187,4 +187,58 @@ class AuthController extends Controller
         }
     }
 
+    // ADMIN AUTHENTICATION
+    public function LoginAdmin(Request $request)
+    {
+        // Validate the login data
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        // Fetch user from the jobseeker table
+        $user = DB::table('admins')
+            ->where('admin_email', $request->input('email'))
+            ->first();
+
+        // Check if user exists and passwords match
+        if ($user && Hash::check($request->input('password'), $user->admin_password)) {
+            // Authentication passed
+            Auth::loginUsingId($user->id); // Log the user in using their ID
+
+            // Store user data in session
+            session([
+                'user_id' => $user->id, 
+                'user_name' => $user->admin_name, 
+            ]);
+
+            return response()->json(['message' => 'Login successful!', 'status' => 'success']);
+        } else {
+            // Authentication failed
+            return response()->json(['message' => 'Invalid credentials.', 'status' => 'error']);
+        }
+    }
+
+    
+    public function logoutAdmin(Request $request)
+    {
+        // Log the user out
+        Auth::logout();
+
+        // Clear session data
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('AdminLogin'); 
+    }
+
+    public function admindashboard(Request $request)
+    {
+        // Check if the user is authenticated
+        $response = $this->checkAuth();
+        if ($response instanceof \Illuminate\Http\RedirectResponse) {
+            return $response;
+        }
+        return view('admindashboard');
+    }
 }

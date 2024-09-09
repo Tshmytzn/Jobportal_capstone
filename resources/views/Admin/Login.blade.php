@@ -25,19 +25,20 @@
                                     <p class="mb-0">Enter your email and password to login</p>
                                 </div>
                                 <div class="card-body">
-                                    <form role="form">
+                                    <form method="POST" id="adminLoginForm">
+                                        @csrf
                                         <label>Email</label>
                                         <div class="mb-3">
-                                            <input type="email" class="form-control" placeholder="Email"
+                                            <input type="email" id="admin_email" name="email" class="form-control" placeholder="Email"
                                                 aria-label="Email" aria-describedby="email-addon">
                                         </div>
                                         <label>Password</label>
                                         <div class="mb-3">
-                                            <input type="email" class="form-control" placeholder="Password"
+                                            <input type="password" id="admin_password" name="password" class="form-control" placeholder="Password"
                                                 aria-label="Password" aria-describedby="password-addon">
                                         </div>
                                         <div class="text-center">
-                                            <button type="button"
+                                            <button type="button" onclick="loginAdmin()"
                                                 class="btn bg-gradient-primary w-100 mt-4 mb-0">Login</button>
                                         </div>
                                     </form>
@@ -50,6 +51,38 @@
         </section>
     </main>
     @include('Admin.components.scripts')
+    <script>
+        function loginAdmin() {
+            var formElement = document.getElementById('adminLoginForm');
+            var formData = new FormData(formElement);
+
+            $.ajax({
+                type: "POST",
+                url: '{{ route('LoginAdmin') }}',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if (response.status === 'error') {
+                        Swal.fire('Error', response.message, 'error');
+                    } else {
+                        Swal.fire({
+                            title: 'Success',
+                            text: response.message,
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then(() => {
+                            window.location.href = '{{ route('dashboard') }}';
+                        });
+                    }
+                },
+                error: function(xhr) {
+                    console.error('AJAX Error:', xhr.responseText); // Log the error
+                    Swal.fire('Error', 'Invalid Credentials.', 'error');
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>
