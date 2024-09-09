@@ -27,19 +27,20 @@
                 </div>
                 <hr>
                 <div class="card-body" style="border: none">
-                    <form role="form">
+                    <form method="POST" id="jobseekerloginform">
+                        @csrf
                         <label>Email: </label>
                         <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Enter Email" aria-label="Email"
+                            <input type="email" id="jobseeker_email" name="email" class="form-control" placeholder="Enter Email" aria-label="Email"
                                 aria-describedby="email-addon">
                         </div>
                         <label>Password: </label>
                         <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Enter Password"
+                            <input type="password" id="jobseeker_password" name="password" class="form-control" placeholder="Enter Password"
                                 aria-label="Password" aria-describedby="password-addon">
                         </div>
                         <div class="text-center">
-                            <button type="button"
+                            <button type="button" onclick="loginJobseeker()"
                                 class="btn btn-light border border-primary rounded-pill w-100 mt-3 mb-3">Login</button>
                         </div>
                         <div class="text-center">
@@ -56,6 +57,38 @@
 
     @include('Jobseeker.components.scripts')
 
+    <script>
+        function loginJobseeker() {
+            var formElement = document.getElementById('jobseekerloginform');
+            var formData = new FormData(formElement);
+
+            $.ajax({
+                type: "POST",
+                url: '{{ route('LoginJobseeker') }}',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    if (response.status === 'error') {
+                        Swal.fire('Error', response.message, 'error');
+                    } else {
+                        Swal.fire({
+                            title: 'Success',
+                            text: response.message,
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then(() => {
+                            window.location.href = '{{ route('homepage') }}';
+                        });
+                    }
+                },
+                error: function(xhr) {
+                    console.error('AJAX Error:', xhr.responseText); 
+                    Swal.fire('Error', 'Invalid Credentials.', 'error');
+                }
+            });
+        }
+    </script>
 
 </body>
 

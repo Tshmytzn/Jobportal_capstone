@@ -41,8 +41,8 @@ class AuthController extends Controller
 
             // Store user data in session
             session([
-                'user_id' => $user->id, // Store the user ID in the session
-                'user_name' => $user->agency_name, // Assuming you have a 'name' field in your table
+                'user_id' => $user->id, 
+                'user_name' => $user->agency_name, 
             ]);
 
             return response()->json(['message' => 'Login successful!', 'status' => 'success']);
@@ -61,7 +61,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('agencylogin'); // Redirect to the login page or any other route
+        return redirect()->route('agencylogin'); 
     }
 
     public function dashboard(Request $request)
@@ -152,6 +152,39 @@ class AuthController extends Controller
             return $response;
         }
         return view('Agency.approvedapplications');
+    }
+
+    // JOBSEEKER Authentication
+
+    public function LoginJobseeker(Request $request)
+    {
+        // Validate the login data
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        // Fetch user from the jobseeker table
+        $user = DB::table('jobseeker_details')
+            ->where('js_email', $request->input('email'))
+            ->first();
+
+        // Check if user exists and passwords match
+        if ($user && Hash::check($request->input('password'), $user->js_password)) {
+            // Authentication passed
+            Auth::loginUsingId($user->js_id); // Log the user in using their ID
+
+            // Store user data in session
+            session([
+                'user_id' => $user->js_id, 
+                'user_name' => $user->js_firstname, 
+            ]);
+
+            return response()->json(['message' => 'Login successful!', 'status' => 'success']);
+        } else {
+            // Authentication failed
+            return response()->json(['message' => 'Invalid credentials.', 'status' => 'error']);
+        }
     }
 
 }

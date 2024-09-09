@@ -61,10 +61,12 @@ Route::get('/404', function () { return view('Jobseeker.404'); })->name('404');
 
 // Jobseeker Page Controllers
 Route::post('/', [JobseekerController::class, 'create'])->name('jobseekersCreate');
+Route::post('/LoginJobseeker', [AuthController::class, 'LoginJobseeker'])->name('LoginJobseeker');
 
 //Agency Login and Signup
 Route::post('/AgencyRegister', [AgencyController::class, 'RegisterAgency'])->name('RegisterAgency');
 Route::post('/LoginAgency', [AuthController::class, 'LoginAgency'])->name('LoginAgency');
+
 
 
 
