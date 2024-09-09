@@ -3,6 +3,7 @@
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\JobseekerController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 // Admin Routes
 Route::get('/Blank', function () { return view('Admin.blank'); })->name('blankpage');
@@ -18,16 +19,29 @@ Route::get('/Admin/Settings', function () { return view('Admin.settings'); })->n
 
 
 // Agency Routes
-Route::get('/Blank1', function () { return view('Agency.blank'); })->name('blankpage');
-Route::get('/Agency/Dashboard', function () { return view('Agency.index'); })->name('agencydashboard');
-Route::get('/Agency/Notification', function () { return view('Agency.notif'); })->name('agencynotif');
-Route::get('/Agency/Settings', function () { return view('Agency.settings'); })->name('agencysettings');
-Route::get('/Agency/JobPosting', function () { return view('Agency.jobposting'); })->name('agencyjobposting');
-Route::get('/Agency/SkillAssessment', function () { return view('Agency.assessed'); })->name('agencyskillassess');
-Route::get('/Agency/SubmittedApplications', function () { return view('Agency.submittedapplications'); })->name('submittedapplications');
-Route::get('/Agency/SASCompleted', function () { return view('Agency.sascompleted'); })->name('sascompleted');
-Route::get('/Agency/ScreenedApplicants', function () { return view('Agency.screenedapplicants'); })->name('screenedapplicants');
-Route::get('/Agency/ApprovedApplications', function () { return view('Agency.approvedapplications'); })->name('approvedapplications');
+// Route::get('/Blank1', function () { return view('Agency.blank'); })->name('blankpage');
+// Route::get('/Agency/Dashboard', function () { return view('Agency.index'); })->name('agencydashboard');
+// Route::get('/Agency/Notification', function () { return view('Agency.notif'); })->name('agencynotif');
+// Route::get('/Agency/Settings', function () { return view('Agency.settings'); })->name('agencysettings');
+// Route::get('/Agency/JobPosting', function () { return view('Agency.jobposting'); })->name('agencyjobposting');
+// Route::get('/Agency/SkillAssessment', function () { return view('Agency.assessed'); })->name('agencyskillassess');
+// Route::get('/Agency/SubmittedApplications', function () { return view('Agency.submittedapplications'); })->name('submittedapplications');
+// Route::get('/Agency/SASCompleted', function () { return view('Agency.sascompleted'); })->name('sascompleted');
+// Route::get('/Agency/ScreenedApplicants', function () { return view('Agency.screenedapplicants'); })->name('screenedapplicants');
+// Route::get('/Agency/ApprovedApplications', function () { return view('Agency.approvedapplications'); })->name('approvedapplications');
+
+// Agency Protected routes
+Route::get('/Agency/Dashboard', [AuthController::class, 'dashboard'])->name('agencydashboard');
+Route::get('/Agency/Notification', [AuthController::class, 'notification'])->name('agencynotif');
+Route::get('/Agency/Settings', [AuthController::class, 'settings'])->name('agencysettings');
+Route::get('/Agency/JobPosting', [AuthController::class, 'jobposting'])->name('agencyjobposting');
+Route::get('/Agency/SkillAssessment', [AuthController::class, 'skillAssessment'])->name('agencyskillassess');
+Route::get('/Agency/SubmittedApplications', [AuthController::class, 'submittedApplications'])->name('submittedapplications');
+Route::get('/Agency/SASCompleted', [AuthController::class, 'sasCompleted'])->name('sascompleted');
+Route::get('/Agency/ScreenedApplicants', [AuthController::class, 'screenedApplicants'])->name('screenedapplicants');
+Route::get('/Agency/ApprovedApplications', [AuthController::class, 'approvedApplications'])->name('approvedapplications');
+Route::post('/logoutAgency', [AuthController::class, 'logoutAgency'])->name('logoutAgency');
+
 
 // Jobseeker Routes
 Route::get('/Blank2', function () { return view('Jobseeker.blank'); })->name('blankpage');
@@ -47,6 +61,10 @@ Route::get('/404', function () { return view('Jobseeker.404'); })->name('404');
 
 // Jobseeker Page Controllers
 Route::post('/', [JobseekerController::class, 'create'])->name('jobseekersCreate');
-Route::post('/AgencyRegister', [AgencyController::class, 'RegisterAgency'])->name('agency.register');  // Changed from 'store' to 'registerAgency'
+
+//Agency Login and Signup
+Route::post('/AgencyRegister', [AgencyController::class, 'RegisterAgency'])->name('RegisterAgency');
+Route::post('/LoginAgency', [AuthController::class, 'LoginAgency'])->name('LoginAgency');
+
 
 

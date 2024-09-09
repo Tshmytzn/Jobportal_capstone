@@ -57,7 +57,7 @@
                     <hr>
                     <div class="card-body " style="border: none">
 
-                        <form action="{{ route('agency.register') }}" method="POST" enctype="multipart/form-data">
+                        <form id="agencyForm" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <!-- Agency Name -->
@@ -154,18 +154,18 @@
                             <div class="row">
                                 <div class="col-6 mb-3">
                                     <label>Password: </label>
-                                    <input type="password" id="agencypassword" name="agencypassword"
-                                        class="form-control" placeholder="Enter Password" aria-label="Password">
+                                    <input type="password" id="password" name="password" class="form-control"
+                                        placeholder="Enter Password" aria-label="Password">
                                 </div>
                                 <div class="col-6 mb-3">
                                     <label>Confirm Password: </label>
-                                    <input type="password" class="form-control" id="confirm_agencypassword"
-                                        name="confirm_agencypassword" placeholder="Confirm Password"
+                                    <input type="password" class="form-control" id="password_confirmation"
+                                        name="password_confirmation" placeholder="Confirm Password"
                                         aria-label="Confirm Password">
                                 </div>
                             </div>
                             <div class="text-center">
-                                <button type="submit"
+                                <button type="button" onclick="registerAgency()"
                                     class="btn btn-light border border-primary rounded-pill w-100 mt-3 mb-3">Sign
                                     Up</button>
                             </div>
@@ -180,8 +180,55 @@
             </div>
         </div>
     </div>
-
     @include('Jobseeker.components.scripts')
+    <script>
+        function registerAgency() {
+
+            var formElement = document.getElementById("agencyForm");
+            var formData = new FormData(formElement);
+            formData.append('_token', '{{ csrf_token() }}'); // Append CSRF token
+
+            // Send the AJAX request
+            $.ajax({
+                type: "POST",
+                url: '{{ route('RegisterAgency') }}',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    if (response.status === 'error') {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Warning',
+                            text: response.message,
+                        });
+                    } else {
+                        formElement.reset(); // Reset form
+                        $('#' + response.modal).modal('hide');
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Message',
+                            text: response.message,
+                        });
+                        if (response.reload && typeof window[response.reload] === 'function') {
+                            window[response.reload]();
+                        }
+                        window.location.href = '{{ route('agencylogin') }}';
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An error occurred while processing your request.',
+                    });
+                }
+            });
+        }
+    </script>
+
+
 
 
 </body>
