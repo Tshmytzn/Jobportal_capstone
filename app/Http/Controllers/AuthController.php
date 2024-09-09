@@ -71,7 +71,10 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        return view('Agency.index');
+        $userId = Session::get('user_id');
+        $user = DB::table('agencies')->where('id', $userId)->first();
+
+        return view('Agency.index', compact('user'));
     }
 
     public function notification(Request $request)
@@ -81,7 +84,10 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        return view('Agency.notif');
+        $userId = Session::get('user_id');
+        $user = DB::table('agencies')->where('id', $userId)->first();
+
+        return view('Agency.notif', compact('user'));
     }
 
     public function settings(Request $request)
@@ -91,7 +97,10 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        return view('Agency.settings');
+        $userId = Session::get('user_id');
+        $user = DB::table('agencies')->where('id', $userId)->first();
+
+        return view('Agency.settings', compact('user'));
     }
 
     public function jobposting(Request $request)
@@ -101,7 +110,10 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        return view('Agency.jobposting');
+        $userId = Session::get('user_id');
+        $user = DB::table('agencies')->where('id', $userId)->first();
+
+        return view('Agency.jobposting', compact('user'));
     }
 
     public function skillAssessment(Request $request)
@@ -111,7 +123,11 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        return view('Agency.assessed');
+
+        $userId = Session::get('user_id');
+        $user = DB::table('agencies')->where('id', $userId)->first();
+
+        return view('Agency.assessed', compact('user'));
     }
 
     public function submittedApplications(Request $request)
@@ -121,7 +137,10 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        return view('Agency.submittedapplications');
+        $userId = Session::get('user_id');
+        $user = DB::table('agencies')->where('id', $userId)->first();
+
+        return view('Agency.submittedapplications', compact('user'));
     }
 
     public function sasCompleted(Request $request)
@@ -131,7 +150,10 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        return view('Agency.sascompleted');
+        $userId = Session::get('user_id');
+        $user = DB::table('agencies')->where('id', $userId)->first();
+
+        return view('Agency.sascompleted', compact('user'));
     }
 
     public function screenedApplicants(Request $request)
@@ -141,7 +163,11 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        return view('Agency.screenedapplicants');
+
+        $userId = Session::get('user_id');
+        $user = DB::table('agencies')->where('id', $userId)->first();
+
+        return view('Agency.screenedapplicants', compact('user'));
     }
 
     public function approvedApplications(Request $request)
@@ -151,7 +177,11 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        return view('Agency.approvedapplications');
+
+        $userId = Session::get('user_id');
+        $user = DB::table('agencies')->where('id', $userId)->first();
+
+        return view('Agency.approvedapplications', compact('user'));
     }
 
     // JOBSEEKER Authentication
