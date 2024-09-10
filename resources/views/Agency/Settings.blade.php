@@ -98,7 +98,7 @@
                                 <button data-bs-toggle="modal" class="btn btn-outline-primary w-100">Update Profile Picture</button>
                               </div>
                           
-                            <form id="updatePasswordForm">
+                              <form id="updatePasswordForm" method="POST" action="{{ route('UpdatePassword') }}">
                                 @csrf
                                 <div class="mt-1 mb-2 ms-4 me-4">
                                     <label class="form-label text-dark"><strong>Enter Password:</strong></label>
@@ -162,7 +162,7 @@
                                                 class="form-control" value="{{ $user->email_address }}">
                                         </div>
                                         <div class="col-6 mb-1">
-                                            <label class="form-label text-dark"><strong>Email:</strong></label>
+                                            <label class="form-label text-dark"><strong>Address:</strong></label>
                                             <input type="text" id="agency_address" name="agency_address"
                                                 class="form-control" value="{{ $user->agency_address }}">
                                         </div>
@@ -237,91 +237,7 @@
         </div>
     </main>
     @include('Agency.components.scripts')
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script>
-        function updateAgency() {
-            var formData = $("#updateAgencyForm").serialize();
-
-            $.ajax({
-                url: "{{ route('UpdateAgency') }}",
-                type: "POST",
-                data: formData,
-                success: function(response) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: response.message,
-                        showConfirmButton: false,
-                        timer: 1500
-                    }).then(() => {
-                        $('#agency_name').val(response.data.agency_name);
-                        $('#email_address').val(response.data.email_address);
-                        $('#agency_address').val(response.data.agency_address);
-                        $('#contact_number').val(response.data.contact_number);
-                        $('#landline_number').val(response.data.landline_number);
-                        $('#geo_coverage').val(response.data.geo_coverage);
-                        $('#employee_count').val(response.data.employee_count);
-                    });
-                },
-                error: function(xhr, status, error) {
-                    var errors = xhr.responseJSON.errors;
-                    var errorMessage = '';
-
-                    $.each(errors, function(key, value) {
-                        errorMessage += value + '<br>';
-                    });
-
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        html: errorMessage,
-                        showConfirmButton: true
-                    });
-                }
-            });
-        }
-    </script>
-
-    <script>
-        function updatePassword() {
-            var formData = $("#updatePasswordForm").serialize();
-
-            $.ajax({
-                url: "{{ route('UpdatePassword') }}",
-                type: "POST",
-                data: formData,
-                success: function(response) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: response.message,
-                        showConfirmButton: false,
-                        timer: 1500
-                    }).then(() => {
-                        $('#updatePasswordForm')[0].reset();
-                    });
-                },
-                error: function(xhr) {
-                    var errors = xhr.responseJSON.errors;
-                    var errorMessage = '';
-
-                    $.each(errors, function(key, value) {
-                        errorMessage += value + '<br>';
-                    });
-
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        html: errorMessage,
-                        showConfirmButton: true
-                    });
-                }
-            });
-        }
-    </script>
-
+    @include('Agency.components.agencysettingscripts')
 
 </body>
 

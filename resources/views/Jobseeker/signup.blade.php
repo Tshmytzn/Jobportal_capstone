@@ -44,7 +44,7 @@
                                 <div class="col-3 mb-3">
                                     <label for="suffix">Suffix: </label>
                                     <input type="text" class="form-control" name="suffix"
-                                        placeholder="Enter Suffix (e.g., Jr., Sr.)" aria-label="Suffix" required>
+                                        placeholder="Enter Suffix (e.g., Jr., Sr.)" aria-label="Suffix" optional>
                                 </div>
                             </div>
 
@@ -118,50 +118,7 @@
     </div>
 
     @include('Jobseeker.components.scripts')
-
-    <!-- Include jQuery if not already included -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#jobseekerForm').on('submit', function(event) {
-                event.preventDefault();
-
-                $.ajax({
-                    url: "{{ route('jobseekersCreate') }}",
-                    method: 'POST',
-                    data: $(this).serialize(),
-                    success: function(response) {
-                        Swal.fire({
-                            title: 'Success!',
-                            text: 'Account created successfully!',
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                // Redirect after alert is closed
-                                window.location.href = "{{ route('login') }}";
-                            }
-                        });
-                    },
-                    error: function(xhr) {
-                        var errors = xhr.responseJSON.errors;
-                        var errorMessages = '';
-                        $.each(errors, function(key, value) {
-                            errorMessages += value[0] + '<br>';
-                        });
-
-                        Swal.fire({
-                            title: 'Error!',
-                            html: errorMessages,
-                            icon: 'error',
-                            confirmButtonText: 'OK'
-                        });
-                    }
-                });
-            });
-        });
-    </script>
-
+    @include('Jobseeker.components.jsAuthscripts')
 
 </body>
 

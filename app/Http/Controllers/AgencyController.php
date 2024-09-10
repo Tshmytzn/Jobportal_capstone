@@ -120,32 +120,38 @@ class AgencyController extends Controller
         return response()->json(['message' => 'Agency details updated successfully.']);
     }
 
-        public function updatePassword(Request $request)
+    
+    public function updatePassword(Request $request)
     {
-        // Validate the request
         $validatedData = $request->validate([
             'current_password' => 'required|string',
             'new_password' => 'required|string|min:8|confirmed',
         ]);
-
-        // Get the current authenticated user
-        $user = Auth::user();
-
-        // Check if the current password is correct
-        if (!Hash::check($request->current_password, $user->password)) {
+    
+        $userId = Auth::id();
+    
+        $agency = Agency::find($userId);
+    
+        if (!$agency) {
+            return response()->json([
+                'message' => 'User not found.',
+            ], 404);
+        }
+    
+        if (!Hash::check($request->current_password, $agency->password)) {
             return response()->json([
                 'message' => 'Current password is incorrect.',
                 'errors' => ['current_password' => ['Current password is incorrect.']]
             ], 422);
         }
-
-        // Update the user's password
-        $user->password = Hash::make($request->new_password);
-        $user->save();
-
+    
+        $agency->password = Hash::make($request->new_password);
+        $agency->save(); 
+    
         return response()->json([
             'message' => 'Password updated successfully.',
         ]);
     }
+    
 
     }

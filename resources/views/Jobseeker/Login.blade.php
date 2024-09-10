@@ -56,40 +56,8 @@
 
 
     @include('Jobseeker.components.scripts')
-
-    <script>
-        function loginJobseeker() {
-            var formElement = document.getElementById('jobseekerloginform');
-            var formData = new FormData(formElement);
-
-            $.ajax({
-                type: "POST",
-                url: '{{ route('LoginJobseeker') }}',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    if (response.status === 'error') {
-                        Swal.fire('Error', response.message, 'error');
-                    } else {
-                        Swal.fire({
-                            title: 'Success',
-                            text: response.message,
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                        }).then(() => {
-                            window.location.href = '{{ route('homepage') }}';
-                        });
-                    }
-                },
-                error: function(xhr) {
-                    console.error('AJAX Error:', xhr.responseText); 
-                    Swal.fire('Error', 'Invalid Credentials.', 'error');
-                }
-            });
-        }
-    </script>
-
+    @include('Jobseeker.components.jsAuthscripts')
+    
 </body>
 
 </html>

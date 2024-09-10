@@ -11,11 +11,14 @@
                     <img src="{{ asset('../assets/img/team-1.jpg') }}" alt="profile_image"
                         class="w-100 border-radius-md shadow-sm">
                 </div>
-                
-                <h6 class="mb-2">{{session('user_name')}}</h6>
-                <a href="{{ route('adminsettings') }}"> <button
+
+                <h6 class="mb-2">{{ session('user_name') }}</h6>
+                <a href="{{ route('agencysettings') }}"> <button
                         class="btn bg-gradient-primary text-white w-100 mb-2">Settings</button></a>
-                <button class="btn bg-gradient-primary text-white w-100">Log Out</button>
+                <form action="{{ route('logoutAgency') }}" method="POST" id="logoutForm">
+                    @csrf
+                    <button type="submit" class="btn bg-gradient-primary w-100">Log out</button>
+                </form>
             </div>
         </div>
     </div>
@@ -23,7 +26,8 @@
 <!-- Admin Profile Modal End-->
 
 <!--Create New Admin Modal start -->
-<div class="modal fade" id="addNewAdminModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addNewAdminLabel" aria-hidden="true">
+<div class="modal fade" id="addNewAdminModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="addNewAdminLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -61,7 +65,8 @@
                     <!-- Confirm Password Input -->
                     <div class="col-6 mb-3">
                         <label for="adminConfirmPassword" class="form-label"><strong>Confirm Password</strong></label>
-                        <input type="password" class="form-control" id="adminConfirmPassword" placeholder="Confirm Password">
+                        <input type="password" class="form-control" id="adminConfirmPassword"
+                            placeholder="Confirm Password">
                     </div>
                 </div>
 
