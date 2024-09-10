@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('js_gender', 12);
             $table->string('js_address', 255); // Address with maximum length
             $table->string('js_email', 100)->unique(); // Email with unique constraint
+            $table->string('js_resume', 100)->nullable(); 
             $table->string('js_contactnumber', 15); // Contact number with length constraint
             $table->string('js_password', 255); // Password (hashed)
 
