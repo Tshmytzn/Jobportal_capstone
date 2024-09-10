@@ -6,6 +6,7 @@ use App\Models\Agency;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class AgencyController extends Controller
 {
@@ -85,4 +86,66 @@ class AgencyController extends Controller
             'status' => 'success'
         ], 201);
     }
-}
+
+    public function UpdateAgency(Request $request){
+
+        // Validate the incoming request data
+        $validated = $request->validate([
+            'id' => 'required|integer|exists:agencies,id',
+            'agency_name' => 'required|string|max:255',
+            'email_address' => 'required|email|max:255',
+            'agency_address' => 'required|string|max:255',
+            'contact_number' => 'nullable|string|max:20',
+            'landline_number' => 'nullable|string|max:20',
+            'geo_coverage' => 'required|string',
+            'employee_count' => 'required|string',
+        ]);
+
+        // Find the agency by ID
+        $agency = Agency::find($validated['id']);
+
+        // Update the agency details
+        $agency->agency_name = $validated['agency_name'];
+        $agency->email_address = $validated['email_address'];
+        $agency->agency_address = $validated['agency_address'];
+        $agency->contact_number = $validated['contact_number'];
+        $agency->landline_number = $validated['landline_number'];
+        $agency->geo_coverage = $validated['geo_coverage'];
+        $agency->employee_count = $validated['employee_count'];
+
+        // Save the changes to the database
+        $agency->save();
+
+        // Return a JSON response
+        return response()->json(['message' => 'Agency details updated successfully.']);
+    }
+
+        public function updatePassword(Request $request)
+    {
+        // Validate the request
+        $validatedData = $request->validate([
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
+
+        // Get the current authenticated user
+        $user = Auth::user();
+
+        // Check if the current password is correct
+        if (!Hash::check($request->current_password, $user->password)) {
+            return response()->json([
+                'message' => 'Current password is incorrect.',
+                'errors' => ['current_password' => ['Current password is incorrect.']]
+            ], 422);
+        }
+
+        // Update the user's password
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return response()->json([
+            'message' => 'Password updated successfully.',
+        ]);
+    }
+
+    }

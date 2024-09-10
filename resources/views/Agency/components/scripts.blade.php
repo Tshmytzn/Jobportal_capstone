@@ -4,7 +4,7 @@
  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
  <script src="../assets/js/plugins/chartjs.min.js"></script>
- <script>
+ {{-- <script>
      var ctx = document.getElementById("chart-bars").getContext("2d");
 
      new Chart(ctx, {
@@ -173,7 +173,7 @@
              },
          },
      });
- </script>
+ </script> --}}
 
  <script>
      var win = navigator.platform.indexOf('Win') > -1;
@@ -191,10 +191,5 @@
  <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
  <!-- DataTables JS (only needed if not already included in head) -->
 <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#example').DataTable(); 
-    });
-  </script>
-  
+
 

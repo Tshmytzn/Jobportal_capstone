@@ -9,7 +9,7 @@ use App\Http\Middleware\AuthMiddleware;
 // Admin Routes
 Route::middleware([AuthMiddleware::class])->group(function () {
 
-Route::get('/Blank', function () { return view('Admin.blank'); })->name('blankpage');
+Route::get('/Blank', function () { return view('Admin.blank'); })->name('blankpage1');
 Route::get('/Admin/Dashboard', function () { return view('Admin.index'); })->name('dashboard');
 Route::get('/Verification/Request', function () { return view('Admin.verifiedrequests'); })->name('verifiedrequests');
 Route::get('/Verified/Agencies', function () { return view('Admin.verifiedagencies'); })->name('verifiedagencies');
@@ -74,3 +74,7 @@ Route::post('/LoginJobseeker', [AuthController::class, 'LoginJobseeker'])->name(
 //Agency Login and Signup
 Route::post('/AgencyRegister', [AgencyController::class, 'RegisterAgency'])->name('RegisterAgency');
 Route::post('/LoginAgency', [AuthController::class, 'LoginAgency'])->name('LoginAgency');
+Route::post('/UpdateAgency', [AgencyController::class, 'UpdateAgency'])->name('UpdateAgency');
+
+// agency update password pending
+Route::post('/UpdatePassword', [AgencyController::class, 'updatePassword'])->name('UpdatePassword');

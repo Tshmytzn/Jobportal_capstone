@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
 
-  <style>
+<link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/css/bootstrap-select.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.18/js/bootstrap-select.min.js"></script>
 
-select.form-select {
-    background-color: #fff; /* White background for select */
-    color: #495057; /* Bootstrap text color */
-    border: 1px solid #ced4da; /* Light border */
-    border-radius: 0.375rem; /* Slight rounding */
-    padding: 0.375rem 0.75rem; /* Consistent padding */
-    box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
-    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; /* Smooth transitions */
-}
+<style>
+    select.form-select {
+        background-color: #fff;
+        /* White background for select */
+        color: #495057;
+        /* Bootstrap text color */
+        border: 1px solid #ced4da;
+        /* Light border */
+        border-radius: 0.375rem;
+        /* Slight rounding */
+        padding: 0.375rem 0.75rem;
+        /* Consistent padding */
+        box-shadow: 0 0.2rem 0.5rem rgba(0, 0, 0, 0.05);
+        /* Soft shadow for depth */
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        /* Smooth transitions */
+    }
 
-select.form-select option {
-    background-color: #fff; 
-    color: #49868c; 
-    padding: 10px; 
-    border-bottom: 1px solid #e9ecef; 
-    cursor: pointer; 
-}
+    select.form-select option {
+        background-color: #fff;
+        color: #49868c;
+        padding: 10px;
+        border-bottom: 1px solid #e9ecef;
+        cursor: pointer;
+    }
 
-select.form-select option:hover {
-    background-color: #f8f9fa; 
-    color: #43475c; 
-}
+    select.form-select option:hover {
+        background-color: #f8f9fa;
+        color: #43475c;
+    }
 
-select.form-select option:checked {
-    background-color: #40166f; 
-    color: #fff; 
-}
+    select.form-select option:checked {
+        background-color: #40166f;
+        color: #fff;
+    }
+</style>
 
-  </style>
-  
 @include('Agency.components.head', ['title' => 'Settings'])
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -63,7 +69,7 @@ select.form-select option:checked {
                     <div class="col-auto my-auto">
                         <div class="h-100">
                             <h5 class="mb-1">
-                                {{session('user_name')}}
+                                {{ session('user_name') }}
                             </h5>
                             <p class="mb-0 font-weight-bold text-sm">
                                 Administrator
@@ -72,7 +78,7 @@ select.form-select option:checked {
                     </div>
                     <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
                         <div class="nav-wrapper position-relative end-0">
-                           
+
                         </div>
                     </div>
                 </div>
@@ -81,43 +87,45 @@ select.form-select option:checked {
 
         <div class="container-fluid py-4">
             <div class="row">
-                <div class="col-12 col-xl-4">
+                <div class="col-12 col-xl-4 mb-2">
                     <div class="card h-100">
                         <div class="card-header pb-0 p-3">
                             <h6 class="mb-0">Update Profile</h6>
                         </div>
                         <div class="card-body p-3">
 
-                          
-                          <div class="mt-2 mb-2 ms-4 me-4">
-                            <button data-bs-toggle="modal" class="btn btn-outline-primary w-100">Update Profile Picture</button>
-                          </div>
-                          
-
-                          <div class="mt-1 mb-2 ms-4 me-4">
-                            <label class="form-label text-dark"><strong>Enter Password:</strong></label>
-                                <input type="Password" class="form-control" placeholder="Enter Current Password"
-                                    aria-label="Password" aria-describedby="Password-addon">
-                            </div>
-
                             <div class="mt-2 mb-2 ms-4 me-4">
-                              <label class="form-label text-dark"><strong>Enter New Password:</strong></label>
-                                <input type="Password" class="form-control" placeholder="Enter New Password"
-                                    aria-label="Password" aria-describedby="Password-addon">
-                            </div>
-                            <div class="mt-2 mb-3 ms-4 me-4">
-                              <label class="form-label text-dark"><strong>Confirm Password:</strong></label>
-                                <input type="Password" class="form-control" placeholder="Confirm New Password"
-                                    aria-label="Password" aria-describedby="Password-addon">
-                            </div>
+                                <button data-bs-toggle="modal" class="btn btn-outline-primary w-100">Update Profile Picture</button>
+                              </div>
+                          
+                            <form id="updatePasswordForm">
+                                @csrf
+                                <div class="mt-1 mb-2 ms-4 me-4">
+                                    <label class="form-label text-dark"><strong>Enter Password:</strong></label>
+                                    <input type="password" id="current_password" name="current_password"
+                                        class="form-control" placeholder="Enter Current Password">
+                                </div>
 
-                            <div class="text-center mx-4" style="margin-top: -6%">
-                                <button type="button" class="btn bg-gradient-primary w-100 mt-4 mb-0">Save
-                                    Changes</button>
-                            </div>
+                                <div class="mt-2 mb-2 ms-4 me-4">
+                                    <label class="form-label text-dark"><strong>Enter New Password:</strong></label>
+                                    <input type="password" id="new_password" name="new_password" class="form-control"
+                                        placeholder="Enter New Password">
+                                </div>
 
+                                <div class="mt-2 mb-3 ms-4 me-4">
+                                    <label class="form-label text-dark"><strong>Confirm Password:</strong></label>
+                                    <input type="password" id="new_password_confirmation"
+                                        name="new_password_confirmation" class="form-control"
+                                        placeholder="Confirm New Password">
+                                </div>
 
+                                <div class="mt-2 mb-3 ms-4 me-4 text-center">
+                                    <button type="button" class="btn bg-gradient-primary w-100 mt-4 mb-0"
+                                        onclick="updatePassword()">Save Changes</button>
+                                </div>
+                            </form>
                         </div>
+
                     </div>
                 </div>
                 <div class="col-12 col-xl-8">
@@ -137,64 +145,79 @@ select.form-select option:checked {
                         </div>
                         <div class="card-body p-3" style="margin-top: -3%">
                             <div class="m-4">
-                                <form method="POST" action="">
+                                <form method="POST" id="updateAgencyForm">
                                     @csrf
-                                    
+
                                     <div class="mb-1">
+                                        <input type="hidden" name="id" value="{{ session('user_id') }}">
+
                                         <label class="form-label text-dark"><strong>Agency Name:</strong></label>
-                                        <input type="text" id="agency_name" name="agency_name" class="form-control" value="{{ session('user_name') }}">
+                                        <input type="text" id="agency_name" name="agency_name" class="form-control"
+                                            value="{{ $user->agency_name }}">
                                     </div>
-                                
-                                    <div class="mb-1">
-                                        <label class="form-label text-dark"><strong>Email:</strong></label>
-                                        <input type="email" id="email_address" name="email_address" class="form-control" value="{{ $user->email_address }}">
-                                    </div>
-                                
                                     <div class="row">
                                         <div class="col-6 mb-1">
-                                            <label class="form-label text-dark"><strong>Contact Number:</strong></label>
-                                            <input type="text" id="contact_number" name="contact_number" class="form-control" value="{{ $user->contact_number }}">
+                                            <label class="form-label text-dark"><strong>Email:</strong></label>
+                                            <input type="email" id="email_address" name="email_address"
+                                                class="form-control" value="{{ $user->email_address }}">
                                         </div>
-                                
                                         <div class="col-6 mb-1">
-                                            <label class="form-label text-dark"><strong>Landline Number:</strong></label>
-                                            <input type="text" id="landline_number" name="landline_number" class="form-control" value="{{ $user->landline_number }}">
+                                            <label class="form-label text-dark"><strong>Email:</strong></label>
+                                            <input type="text" id="agency_address" name="agency_address"
+                                                class="form-control" value="{{ $user->agency_address }}">
                                         </div>
                                     </div>
-                                
-                                <div class="row">
-                                    <div class="col-6 mb-1">
-                                        <label class="form-label text-dark"><strong>Geographical
-                                                Coverage:</strong></label>
-                                        <select class="form-select">
-                                            <option selected value="{{ $user->geo_coverage }}">{{ $user->geo_coverage }}</option>
-                                            <option value="local">Local</option>
-                                            <option value="national">National</option>
-                                            <option value="international">International</option>
-                                        </select>
+                                    <div class="row">
+                                        <div class="col-6 mb-1">
+                                            <label class="form-label text-dark"><strong>Contact
+                                                    Number:</strong></label>
+                                            <input type="text" id="contact_number" name="contact_number"
+                                                class="form-control" value="{{ $user->contact_number }}">
+                                        </div>
+
+                                        <div class="col-6 mb-1">
+                                            <label class="form-label text-dark"><strong>Landline
+                                                    Number:</strong></label>
+                                            <input type="text" id="landline_number" name="landline_number"
+                                                class="form-control" value="{{ $user->landline_number }}">
+                                        </div>
                                     </div>
 
-                                    <div class="col-6 mb-1">
-                                        <label class="form-label text-dark"><strong>Number of
-                                                Employees:</strong></label>
-                                        <select class="form-select">
-                                            <option value="{{ $user->employee_count }}">{{ $user->employee_count }}</option>
-                                            <option value="11-20">11-20</option>
-                                            <option value="21-30">21-30</option>
-                                            <option value="31-40">31-40</option>
-                                            <option value="41-50">41-50</option>
-                                            <option value="41-50">51 and above</option>
-                                        </select>
+                                    <div class="row">
+                                        <div class="col-6 mb-1">
+                                            <label class="form-label text-dark"><strong>Geographical
+                                                    Coverage:</strong></label>
+                                            <select class="form-select" id="geo_coverage" name="geo_coverage">
+                                                <option selected value="{{ $user->geo_coverage }}">
+                                                    {{ $user->geo_coverage }}</option>
+                                                <option value="local">Local</option>
+                                                <option value="national">National</option>
+                                                <option value="international">International</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-6 mb-1">
+                                            <label class="form-label text-dark"><strong>Number of
+                                                    Employees:</strong></label>
+                                            <select class="form-select" id="employee_count" name="employee_count">
+                                                <option value="{{ $user->employee_count }}">
+                                                    {{ $user->employee_count }}</option>
+                                                <option value="11-20">11-20</option>
+                                                <option value="21-30">21-30</option>
+                                                <option value="31-40">31-40</option>
+                                                <option value="41-50">41-50</option>
+                                                <option value="51 and above">51 and above</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
+                                </form>
 
                             </div>
 
 
                             <div class="text-center mx-4 mb-4" style="margin-top: -4%">
-                                <button type="button" class="btn bg-gradient-primary w-100 mt-4 mb-0">Save
-                                    Changes</button>
+                                <button type="button" onclick="updateAgency()"
+                                    class="btn bg-gradient-primary w-100 mt-4 mb-0">Save Changes</button>
                             </div>
                         </div>
                     </div>
@@ -214,6 +237,92 @@ select.form-select option:checked {
         </div>
     </main>
     @include('Agency.components.scripts')
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        function updateAgency() {
+            var formData = $("#updateAgencyForm").serialize();
+
+            $.ajax({
+                url: "{{ route('UpdateAgency') }}",
+                type: "POST",
+                data: formData,
+                success: function(response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: response.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(() => {
+                        $('#agency_name').val(response.data.agency_name);
+                        $('#email_address').val(response.data.email_address);
+                        $('#agency_address').val(response.data.agency_address);
+                        $('#contact_number').val(response.data.contact_number);
+                        $('#landline_number').val(response.data.landline_number);
+                        $('#geo_coverage').val(response.data.geo_coverage);
+                        $('#employee_count').val(response.data.employee_count);
+                    });
+                },
+                error: function(xhr, status, error) {
+                    var errors = xhr.responseJSON.errors;
+                    var errorMessage = '';
+
+                    $.each(errors, function(key, value) {
+                        errorMessage += value + '<br>';
+                    });
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        html: errorMessage,
+                        showConfirmButton: true
+                    });
+                }
+            });
+        }
+    </script>
+
+    <script>
+        function updatePassword() {
+            var formData = $("#updatePasswordForm").serialize();
+
+            $.ajax({
+                url: "{{ route('UpdatePassword') }}",
+                type: "POST",
+                data: formData,
+                success: function(response) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: response.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    }).then(() => {
+                        $('#updatePasswordForm')[0].reset();
+                    });
+                },
+                error: function(xhr) {
+                    var errors = xhr.responseJSON.errors;
+                    var errorMessage = '';
+
+                    $.each(errors, function(key, value) {
+                        errorMessage += value + '<br>';
+                    });
+
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        html: errorMessage,
+                        showConfirmButton: true
+                    });
+                }
+            });
+        }
+    </script>
+
+
 </body>
 
 </html>
