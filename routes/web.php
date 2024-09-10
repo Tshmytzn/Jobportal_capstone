@@ -63,6 +63,8 @@ Route::get('/Agency', function () { return view('Jobseeker.agencies'); })->name(
 Route::get('/AgencyFeedback', function () { return view('Jobseeker.agencyfeedback'); })->name('agencyfeedback');
 Route::get('/ContactUs', function () { return view('Jobseeker.contactus'); })->name('contactus');
 Route::get('/404', function () { return view('Jobseeker.404'); })->name('404');
+Route::get('/Profile', function () { return view('Jobseeker.profile'); })->name('profile');
+Route::get('/Settings', function () { return view('Jobseeker.settings'); })->name('settings');
 
 
 // Jobseeker Page Controllers
