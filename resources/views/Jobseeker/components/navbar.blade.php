@@ -1,3 +1,4 @@
+    <?php $active = $active ?? ''; ?>
         <!-- Navbar & Hero Start -->
         <div class="container-fluid header position-relative overflow-hidden p-0">
             <nav class="navbar navbar-expand-lg fixed-top navbar-light px-4 px-lg-5 py-3 py-lg-0">
@@ -58,8 +59,8 @@
                                 {{ session('user_name') }} <i class="ms-2 fas fa-user"></i>
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                                <li><a class="dropdown-item" href="">Profile</a></li>
-                                <li><a class="dropdown-item" href="">Settings</a></li>
+                                <li><a class="dropdown-item" href="{{route('profile')}}">Profile</a></li>
+                                <li><a class="dropdown-item" href="{{route('settings')}}">Settings</a></li>
                                 <form action="{{ route('LogoutJobseeker') }}" method="POST" id="logoutadminForm">
                                     @csrf
                                     <li>
