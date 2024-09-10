@@ -34,6 +34,18 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
+
+        $('input[name="firstname"], input[name="midname"], input[name="lastname"], input[name="suffix"]').on('input', function(e) {
+                this.value = this.value.replace(/[^A-Za-z\s-]/g, ''); 
+            });
+
+            $('input[name="contact"]').on('input', function(e) {
+                this.value = this.value.replace(/\D/g, ''); 
+                if (this.value.length > 9) {
+                    this.value = this.value.slice(0, 9); 
+                }
+            });
+            
         $('#jobseekerForm').on('submit', function(event) {
             event.preventDefault();
 
