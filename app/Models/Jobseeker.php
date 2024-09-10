@@ -25,6 +25,7 @@ class Jobseeker extends Model
         'js_gender',
         'js_address',
         'js_email',
+        'js_resume',
         'js_contactnumber',
         'js_password',
     ];
