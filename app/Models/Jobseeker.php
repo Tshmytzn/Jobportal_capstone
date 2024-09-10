@@ -9,13 +9,13 @@ class Jobseeker extends Model
 {
     use HasFactory;
 
-    protected $table = 'jobseeker_details'; // Maps to the jobseeker_details table
+    protected $table = 'jobseeker_details'; 
 
-    protected $primaryKey = 'js_id'; // Primary key is js_id
+    protected $primaryKey = 'js_id'; 
 
-    public $incrementing = true; // Primary key is auto-incrementing
+    public $incrementing = true; 
 
-    public $timestamps = true; // Enable created_at and updated_at timestamps
+    public $timestamps = true; 
 
     protected $fillable = [
         'js_firstname',
@@ -29,7 +29,6 @@ class Jobseeker extends Model
         'js_password',
     ];
 
-    // Optionally, you can add some accessor or mutator methods for password hashing, etc.
     public function setPasswordAttribute($value)
     {
         $this->attributes['js_password'] = bcrypt($value);
