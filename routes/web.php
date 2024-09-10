@@ -4,10 +4,12 @@ use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\JobseekerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Middleware\AuthMiddleware;
 
 // Admin Routes
+Route::middleware([AuthMiddleware::class])->group(function () {
+
 Route::get('/Blank', function () { return view('Admin.blank'); })->name('blankpage');
-Route::get('/Admin/Login', function () { return view('Admin.Login'); })->name('AdminLogin');
 Route::get('/Admin/Dashboard', function () { return view('Admin.index'); })->name('dashboard');
 Route::get('/Verification/Request', function () { return view('Admin.verifiedrequests'); })->name('verifiedrequests');
 Route::get('/Verified/Agencies', function () { return view('Admin.verifiedagencies'); })->name('verifiedagencies');
@@ -16,6 +18,12 @@ Route::get('/Admin/Jobseeker', function () { return view('Admin.jobseeker'); })-
 Route::get('/Admin/Administrators', function () { return view('Admin.admins'); })->name('administrators');
 Route::get('/Admin/SkillAssessment', function () { return view('Admin.SkillAssessment'); })->name('adminskillassessment');
 Route::get('/Admin/Settings', function () { return view('Admin.settings'); })->name('adminsettings');
+
+});
+
+Route::post('/LoginAdmin', [AuthController::class, 'LoginAdmin'])->name('LoginAdmin');
+Route::post('/logoutAdmin', [AuthController::class, 'logoutAdmin'])->name('logoutAdmin');
+Route::get('/Admin/Login', function () { return view('Admin.Login'); })->name('AdminLogin');
 
 
 // Agency Routes
@@ -61,10 +69,8 @@ Route::get('/404', function () { return view('Jobseeker.404'); })->name('404');
 
 // Jobseeker Page Controllers
 Route::post('/', [JobseekerController::class, 'create'])->name('jobseekersCreate');
+Route::post('/LoginJobseeker', [AuthController::class, 'LoginJobseeker'])->name('LoginJobseeker');
 
 //Agency Login and Signup
 Route::post('/AgencyRegister', [AgencyController::class, 'RegisterAgency'])->name('RegisterAgency');
 Route::post('/LoginAgency', [AuthController::class, 'LoginAgency'])->name('LoginAgency');
-
-
-

@@ -1,5 +1,5 @@
 <!-- Admin Profile Modal start -->
-<div class="modal fade" id="adminProfileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+<div class="modal fade" id="agencyProfileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-custom">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,7 +11,8 @@
                     <img src="{{ asset('../assets/img/team-1.jpg') }}" alt="profile_image"
                         class="w-100 border-radius-md shadow-sm">
                 </div>
-                <h6 class="mb-2">Kailah Leyva</h6>
+                
+                <h6 class="mb-2">{{session('user_name')}}</h6>
                 <a href="{{ route('adminsettings') }}"> <button
                         class="btn bg-gradient-primary text-white w-100 mb-2">Settings</button></a>
                 <button class="btn bg-gradient-primary text-white w-100">Log Out</button>

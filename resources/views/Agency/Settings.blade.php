@@ -63,7 +63,7 @@ select.form-select option:checked {
                     <div class="col-auto my-auto">
                         <div class="h-100">
                             <h5 class="mb-1">
-                                Kailah Leyva
+                                {{session('user_name')}}
                             </h5>
                             <p class="mb-0 font-weight-bold text-sm">
                                 Administrator
@@ -90,23 +90,23 @@ select.form-select option:checked {
 
                           
                           <div class="mt-2 mb-2 ms-4 me-4">
-                            <button class="btn btn-outline-primary w-100">Update Profile Picture</button>
+                            <button data-bs-toggle="modal" class="btn btn-outline-primary w-100">Update Profile Picture</button>
                           </div>
                           
 
                           <div class="mt-1 mb-2 ms-4 me-4">
-                            <label class="form-label text-dark"><strong>Agency Name:</strong></label>
+                            <label class="form-label text-dark"><strong>Enter Password:</strong></label>
                                 <input type="Password" class="form-control" placeholder="Enter Current Password"
                                     aria-label="Password" aria-describedby="Password-addon">
                             </div>
 
                             <div class="mt-2 mb-2 ms-4 me-4">
-                              <label class="form-label text-dark"><strong>Agency Name:</strong></label>
+                              <label class="form-label text-dark"><strong>Enter New Password:</strong></label>
                                 <input type="Password" class="form-control" placeholder="Enter New Password"
                                     aria-label="Password" aria-describedby="Password-addon">
                             </div>
                             <div class="mt-2 mb-3 ms-4 me-4">
-                              <label class="form-label text-dark"><strong>Agency Name:</strong></label>
+                              <label class="form-label text-dark"><strong>Confirm Password:</strong></label>
                                 <input type="Password" class="form-control" placeholder="Confirm New Password"
                                     aria-label="Password" aria-describedby="Password-addon">
                             </div>
@@ -137,34 +137,37 @@ select.form-select option:checked {
                         </div>
                         <div class="card-body p-3" style="margin-top: -3%">
                             <div class="m-4">
-                                <div class="mb-1">
-                                    <label class="form-label text-dark"><strong>Agency Name:</strong></label>
-                                    <input type="text" class="form-control" value="Kailah Leyva" readonly>
-                                </div>
-
-                                <div class="mb-1">
-                                    <label class="form-label text-dark"><strong>Email:</strong></label>
-                                    <input type="email" class="form-control" value="kailah@gmail.com" readonly>
-                                </div>
-
-                                <div class="row">
-
-                                    <div class="col-6 mb-1">
-                                        <label class="form-label text-dark"><strong>Contact Number:</strong></label>
-                                        <input type="text" class="form-control" value="09176473485" readonly>
+                                <form method="POST" action="">
+                                    @csrf
+                                    
+                                    <div class="mb-1">
+                                        <label class="form-label text-dark"><strong>Agency Name:</strong></label>
+                                        <input type="text" id="agency_name" name="agency_name" class="form-control" value="{{ session('user_name') }}">
                                     </div>
-
-                                    <div class=" col-6 mb-1">
-                                        <label class="form-label text-dark"><strong>Landline Number:</strong></label>
-                                        <input type="text" class="form-control" value="6756745633" readonly>
+                                
+                                    <div class="mb-1">
+                                        <label class="form-label text-dark"><strong>Email:</strong></label>
+                                        <input type="email" id="email_address" name="email_address" class="form-control" value="{{ $user->email_address }}">
                                     </div>
-                                </div>
-
+                                
+                                    <div class="row">
+                                        <div class="col-6 mb-1">
+                                            <label class="form-label text-dark"><strong>Contact Number:</strong></label>
+                                            <input type="text" id="contact_number" name="contact_number" class="form-control" value="{{ $user->contact_number }}">
+                                        </div>
+                                
+                                        <div class="col-6 mb-1">
+                                            <label class="form-label text-dark"><strong>Landline Number:</strong></label>
+                                            <input type="text" id="landline_number" name="landline_number" class="form-control" value="{{ $user->landline_number }}">
+                                        </div>
+                                    </div>
+                                
                                 <div class="row">
                                     <div class="col-6 mb-1">
                                         <label class="form-label text-dark"><strong>Geographical
                                                 Coverage:</strong></label>
                                         <select class="form-select">
+                                            <option selected value="{{ $user->geo_coverage }}">{{ $user->geo_coverage }}</option>
                                             <option value="local">Local</option>
                                             <option value="national">National</option>
                                             <option value="international">International</option>
@@ -175,7 +178,7 @@ select.form-select option:checked {
                                         <label class="form-label text-dark"><strong>Number of
                                                 Employees:</strong></label>
                                         <select class="form-select">
-                                            <option value="1-10">1-10</option>
+                                            <option value="{{ $user->employee_count }}">{{ $user->employee_count }}</option>
                                             <option value="11-20">11-20</option>
                                             <option value="21-30">21-30</option>
                                             <option value="31-40">31-40</option>
@@ -184,6 +187,8 @@ select.form-select option:checked {
                                         </select>
                                     </div>
                                 </div>
+                            </form>
+
                             </div>
 
 

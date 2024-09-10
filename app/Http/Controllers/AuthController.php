@@ -41,8 +41,8 @@ class AuthController extends Controller
 
             // Store user data in session
             session([
-                'user_id' => $user->id, // Store the user ID in the session
-                'user_name' => $user->agency_name, // Assuming you have a 'name' field in your table
+                'user_id' => $user->id, 
+                'user_name' => $user->agency_name, 
             ]);
 
             return response()->json(['message' => 'Login successful!', 'status' => 'success']);
@@ -61,7 +61,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('agencylogin'); // Redirect to the login page or any other route
+        return redirect()->route('agencylogin'); 
     }
 
     public function dashboard(Request $request)
@@ -71,7 +71,10 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        return view('Agency.index');
+        $userId = Session::get('user_id');
+        $user = DB::table('agencies')->where('id', $userId)->first();
+
+        return view('Agency.index', compact('user'));
     }
 
     public function notification(Request $request)
@@ -81,7 +84,10 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        return view('Agency.notif');
+        $userId = Session::get('user_id');
+        $user = DB::table('agencies')->where('id', $userId)->first();
+
+        return view('Agency.notif', compact('user'));
     }
 
     public function settings(Request $request)
@@ -91,7 +97,10 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        return view('Agency.settings');
+        $userId = Session::get('user_id');
+        $user = DB::table('agencies')->where('id', $userId)->first();
+
+        return view('Agency.settings', compact('user'));
     }
 
     public function jobposting(Request $request)
@@ -101,7 +110,10 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        return view('Agency.jobposting');
+        $userId = Session::get('user_id');
+        $user = DB::table('agencies')->where('id', $userId)->first();
+
+        return view('Agency.jobposting', compact('user'));
     }
 
     public function skillAssessment(Request $request)
@@ -111,7 +123,11 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        return view('Agency.assessed');
+
+        $userId = Session::get('user_id');
+        $user = DB::table('agencies')->where('id', $userId)->first();
+
+        return view('Agency.assessed', compact('user'));
     }
 
     public function submittedApplications(Request $request)
@@ -121,7 +137,10 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        return view('Agency.submittedapplications');
+        $userId = Session::get('user_id');
+        $user = DB::table('agencies')->where('id', $userId)->first();
+
+        return view('Agency.submittedapplications', compact('user'));
     }
 
     public function sasCompleted(Request $request)
@@ -131,7 +150,10 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        return view('Agency.sascompleted');
+        $userId = Session::get('user_id');
+        $user = DB::table('agencies')->where('id', $userId)->first();
+
+        return view('Agency.sascompleted', compact('user'));
     }
 
     public function screenedApplicants(Request $request)
@@ -141,7 +163,11 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        return view('Agency.screenedapplicants');
+
+        $userId = Session::get('user_id');
+        $user = DB::table('agencies')->where('id', $userId)->first();
+
+        return view('Agency.screenedapplicants', compact('user'));
     }
 
     public function approvedApplications(Request $request)
@@ -151,7 +177,98 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        return view('Agency.approvedapplications');
+
+        $userId = Session::get('user_id');
+        $user = DB::table('agencies')->where('id', $userId)->first();
+
+        return view('Agency.approvedapplications', compact('user'));
     }
 
+    // JOBSEEKER Authentication
+
+    public function LoginJobseeker(Request $request)
+    {
+        // Validate the login data
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        // Fetch user from the jobseeker table
+        $user = DB::table('jobseeker_details')
+            ->where('js_email', $request->input('email'))
+            ->first();
+
+        // Check if user exists and passwords match
+        if ($user && Hash::check($request->input('password'), $user->js_password)) {
+            // Authentication passed
+            Auth::loginUsingId($user->js_id); // Log the user in using their ID
+
+            // Store user data in session
+            session([
+                'user_id' => $user->js_id, 
+                'user_name' => $user->js_firstname, 
+            ]);
+
+            return response()->json(['message' => 'Login successful!', 'status' => 'success']);
+        } else {
+            // Authentication failed
+            return response()->json(['message' => 'Invalid credentials.', 'status' => 'error']);
+        }
+    }
+
+    // ADMIN AUTHENTICATION
+    public function LoginAdmin(Request $request)
+    {
+        // Validate the login data
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
+
+        // Fetch user from the jobseeker table
+        $user = DB::table('admins')
+            ->where('admin_email', $request->input('email'))
+            ->first();
+
+        // Check if user exists and passwords match
+        if ($user && Hash::check($request->input('password'), $user->admin_password)) {
+            // Authentication passed
+            Auth::loginUsingId($user->id); // Log the user in using their ID
+
+            // Store user data in session
+            session([
+                'user_id' => $user->id, 
+                'user_name' => $user->admin_name, 
+            ]);
+
+            return response()->json(['message' => 'Login successful!', 'status' => 'success']);
+        } else {
+            // Authentication failed
+            return response()->json(['message' => 'Invalid credentials.', 'status' => 'error']);
+        }
+    }
+
+    
+    public function logoutAdmin(Request $request)
+    {
+        // Log the user out
+        Auth::logout();
+
+        // Clear session data
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('AdminLogin'); 
+    }
+
+    public function admindashboard(Request $request)
+    {
+        // Check if the user is authenticated
+        $response = $this->checkAuth();
+        if ($response instanceof \Illuminate\Http\RedirectResponse) {
+            return $response;
+        }
+        return view('admindashboard');
+    }
 }

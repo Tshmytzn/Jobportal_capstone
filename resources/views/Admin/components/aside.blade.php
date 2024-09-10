@@ -211,7 +211,9 @@
     </div>
     <div class="sidenav-footer mx-3 ">
     </div>
-    <a class="btn bg-gradient-primary mt-3 w-100"
-        href="https://www.creative-tim.com/product/soft-ui-dashboard-pro?ref=sidebarfree"> Log out </a>
+    <form action="{{ route('logoutAdmin') }}" method="POST" id="logoutadminForm">
+        @csrf
+        <button type="submit" class="btn bg-gradient-primary mt-3 w-100">Log out</button>
+    </form>
     </div>
 </aside>
