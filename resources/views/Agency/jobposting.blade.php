@@ -5,8 +5,10 @@
 
 <style>
     .list-group-item-action.custom-hover:hover {
-        background-color: #ddbbe2; /* Light blue shade */
-        transition: background-color 0.3s; /* Smooth transition */
+        background-color: #ddbbe2;
+        /* Light blue shade */
+        transition: background-color 0.3s;
+        /* Smooth transition */
     }
 </style>
 
@@ -39,8 +41,7 @@
 
                 <div class="col-4">
                     <div class="card text-sm">
-                        <div class="card-header"
-                            style="background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%); height: 50px; display: flex; align-items: center;">
+                        <div class="card-header bgp-gradient">
                             <h5 class="card-title text-white">Jobs Listed</h5>
                         </div>
                         <div class="list-group list-group-flush overflow-auto" style="max-height: 400px;">
@@ -121,7 +122,8 @@
                                         </a>
                                     </div>
                                     <div class="col-8">
-                                        <a href="#" class="text-reset d-block fw-bold">Welder - Industrial Fabrication</a>
+                                        <a href="#" class="text-reset d-block fw-bold">Welder - Industrial
+                                            Fabrication</a>
                                         <div class="d-block text-secondary mt-n1 text-truncate"
                                             style="max-width: 100%;">
                                             Seeking a certified welder for industrial fabrication work. Must have
@@ -142,7 +144,8 @@
                                         </a>
                                     </div>
                                     <div class="col-8">
-                                        <a href="#" class="text-reset d-block fw-bold">HVAC Technician - Maintenance and
+                                        <a href="#" class="text-reset d-block fw-bold">HVAC Technician -
+                                            Maintenance and
                                             Repair</a>
                                         <div class="d-block text-secondary mt-n1 text-truncate"
                                             style="max-width: 100%;">

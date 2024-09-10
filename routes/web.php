@@ -18,6 +18,7 @@ Route::get('/Admin/Jobseeker', function () { return view('Admin.jobseeker'); })-
 Route::get('/Admin/Administrators', function () { return view('Admin.admins'); })->name('administrators');
 Route::get('/Admin/SkillAssessment', function () { return view('Admin.SkillAssessment'); })->name('adminskillassessment');
 Route::get('/Admin/Settings', function () { return view('Admin.settings'); })->name('adminsettings');
+Route::get('/Admin/JobCategory', function () { return view('Admin.jobcategory'); })->name('jobcategory');
 
 });
 

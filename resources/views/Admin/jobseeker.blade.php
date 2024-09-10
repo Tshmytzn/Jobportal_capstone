@@ -18,44 +18,47 @@
                     <table id="example" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
+                            <th>#</th>
                             <th>Full Name</th>
                             <th>Email</th>
                             <th>Contact Number</th>
                             <th>Date Created</th>
-                            <th>Status</th>
                             <th>Action</th>
+                            
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>John Doe</td>
+                            <td>1</td>
+                            <td>John A. Doe</td>
                             <td>john.doe@example.com</td>
-                            <td>0917-123-4567</td>
-                            <td>2023-02-10</td>
-                            <td>Active</td>
-                            <td>
-                                <button class="btn btn-sm btn-danger">Ban</button>
-                            </td>
+                            <td>(555) 123-4567</td>
+                            <td>2024-09-01</td>
+                            <td><button class="btn btn-success">Edit</button> <button class="btn btn-primary">Delete</button></td>
                         </tr>
                         <tr>
-                            <td>Jane Smith</td>
+                            <td>2</td>
+                            <td>Jane B. Smith</td>
                             <td>jane.smith@example.com</td>
-                            <td>0918-234-5678</td>
-                            <td>2022-11-18</td>
-                            <td>Active</td>
-                            <td>
-                                <button class="btn btn-sm btn-danger">Ban</button>
-                            </td>
+                            <td>(555) 234-5678</td>
+                            <td>2024-08-15</td>
+                            <td><button class="btn btn-success">Edit</button> <button class="btn btn-primary">Delete</button></td>
                         </tr>
                         <tr>
-                            <td>Michael Johnson</td>
+                            <td>3</td>
+                            <td>Michael C. Johnson</td>
                             <td>michael.johnson@example.com</td>
-                            <td>0920-345-6789</td>
-                            <td>2021-08-05</td>
-                            <td>Inactive</td>
-                            <td>
-                                <button class="btn btn-sm btn-danger">Ban</button>
-                            </td>
+                            <td>(555) 345-6789</td>
+                            <td>2024-07-20</td>
+                            <td><button class="btn btn-success">Edit</button> <button class="btn btn-primary">Delete</button></td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Emily D. Davis</td>
+                            <td>emily.davis@example.com</td>
+                            <td>(555) 456-7890</td>
+                            <td>2024-06-10</td>
+                            <td><button class="btn btn-success">Edit</button> <button class="btn btn-primary">Delete</button></td>
                         </tr>
                     </tbody>
                 </table>
