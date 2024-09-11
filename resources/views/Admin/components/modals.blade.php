@@ -1,4 +1,5 @@
 <!-- Update Profile Picture Modal -->
+
 <div class="modal fade" id="UpdateProfilePic" tabindex="-1" aria-labelledby="UpdateProfilePicLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -61,53 +62,50 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <!-- Full Name Input -->
-                <div class="mb-3">
-                    <label for="adminFullName" class="form-label"><strong>Full Name</strong></label>
-                    <input type="text" class="form-control" id="adminFullName" placeholder="Enter Full Name">
-                </div>
-
-                <div class="row">
-                    <!-- Mobile Number Input -->
-                    <div class="col-6 mb-3">
-                        <label for="adminMobile" class="form-label"><strong>Mobile Number</strong></label>
-                        <input type="text" class="form-control" id="adminMobile" placeholder="Enter Mobile Number">
+                <!-- Form Start -->
+                <form id="adminForm" action="{{ route('createAdmin') }}" method="POST">
+                    @csrf <!-- CSRF protection token -->
+                
+                    <!-- Full Name Input -->
+                    <div class="mb-3">
+                        <label for="adminFullName" class="form-label"><strong>Full Name</strong></label>
+                        <input type="text" class="form-control" id="adminFullName" name="name" placeholder="Enter Full Name" required>
                     </div>
-
-                    <!-- Email Input -->
-                    <div class="col-6 mb-3">
-                        <label for="adminEmail" class="form-label"><strong>Email</strong></label>
-                        <input type="email" class="form-control" id="adminEmail" placeholder="Enter Email">
+                
+                    <div class="row">
+                        <!-- Mobile Number Input -->
+                        <div class="col-6 mb-3">
+                            <label for="adminMobile" class="form-label"><strong>Mobile Number</strong></label>
+                            <input type="tel" class="form-control" id="adminMobile" name="contact_number" placeholder="Enter Mobile Number" required>
+                        </div>
+                
+                        <!-- Email Input -->
+                        <div class="col-6 mb-3">
+                            <label for="adminEmail" class="form-label"><strong>Email</strong></label>
+                            <input type="email" class="form-control" id="adminEmail" name="email" placeholder="Enter Email" required>
+                        </div>
                     </div>
-                </div>
-
-                <div class="row">
-                    <!-- Password Input -->
-                    <div class="col-6 mb-3">
-                        <label for="adminPassword" class="form-label"><strong>Password</strong></label>
-                        <input type="password" class="form-control" id="adminPassword" placeholder="Enter Password">
+                
+                    <div class="row">
+                        <!-- Password Input -->
+                        <div class="col-6 mb-3">
+                            <label for="adminPassword" class="form-label"><strong>Password</strong></label>
+                            <input type="password" class="form-control" id="adminPassword" name="password" placeholder="Enter Password" required>
+                        </div>
+                
+                        <!-- Confirm Password Input -->
+                        <div class="col-6 mb-3">
+                            <label for="adminConfirmPassword" class="form-label"><strong>Confirm Password</strong></label>
+                            <input type="password" class="form-control" id="adminConfirmPassword" name="password_confirmation" placeholder="Confirm Password" required>
+                        </div>
                     </div>
-
-                    <!-- Confirm Password Input -->
-                    <div class="col-6 mb-3">
-                        <label for="adminConfirmPassword" class="form-label"><strong>Confirm Password</strong></label>
-                        <input type="password" class="form-control" id="adminConfirmPassword"
-                            placeholder="Confirm Password">
-                    </div>
-                </div>
-
-                <!-- Profile Picture Upload -->
-                <div class="mb-3">
-                    <label for="adminProfilePicture" class="form-label"><strong>Upload Profile
-                            Picture</strong></label>
-                    <input type="file" class="form-control" id="adminProfilePicture">
-                </div>
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn bgp-gradient">Add Admin</button>
+                <button type="button" class="btn bgp-gradient" id="submitAdminForm">Add Admin</button>
             </div>
+            </form>
         </div>
     </div>
 </div>
