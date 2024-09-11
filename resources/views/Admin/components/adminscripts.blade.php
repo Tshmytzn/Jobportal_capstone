@@ -16,6 +16,7 @@
                 });
 
                 setTimeout(function() {
+                    $('#adminProfileName').text(response.admin_name);
                     var myModal = bootstrap.Modal.getInstance(document.getElementById(
                         'UpdateProfilePic'));
                     myModal.hide();
@@ -101,7 +102,13 @@
                 });
 
                 setTimeout(function() {
-                    $('#UpdateProfilePic').modal('hide');
+                    $('#adminProfileImage').attr('src', '/admin_profile/' + response.admin_profile);
+                    var modalElement = document.getElementById('UpdateProfilePic');
+                    var modal = bootstrap.Modal.getInstance(modalElement);
+                    if (modal) {
+                        modal.hide();
+                    }
+                    $('#updateProfilePicForm')[0].reset(); 
                 }, 1500);
             },
             error: function(xhr, status, error) {

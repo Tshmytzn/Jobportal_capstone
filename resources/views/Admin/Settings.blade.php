@@ -21,14 +21,14 @@
                 <div class="row gx-4">
                     <div class="col-auto">
                         <div class="avatar avatar-xl position-relative">
-                            <img src="{{ asset('../assets/img/team-1.jpg') }}" alt="profile_image"
+                            <img id="adminProfileImage" src="/admin_profile/{{ $admin->admin_profile }}" alt="profile_image"
                                 class="w-100 border-radius-md shadow-sm">
                         </div>
                     </div>
                     <div class="col-auto my-auto">
                         <div class="h-100">
-                            <h5 class="mb-1">
-                                Kailah Leyva
+                            <h5 id="adminProfileName" class="mb-1">
+                                {{ $admin->admin_name }}
                             </h5>
                             <p class="mb-0 font-weight-bold text-sm">
                                 Administrator

@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admins; 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+
 
 class AdminController extends Controller
 {
@@ -19,7 +21,8 @@ class AdminController extends Controller
         return view('Admin.Settings', compact('admin'));
     } 
 
-    public function UpdateAdmin(Request $request){
+    public function UpdateAdmin(Request $request)
+    {
 
         // Validate the incoming request data
         $validated = $request->validate([
@@ -37,8 +40,10 @@ class AdminController extends Controller
 
         $admin->save();
 
-        return response()->json(['message' => 'Admin details updated successfully.']);
-    }
+        return response()->json([
+            'message' => 'Admin details updated successfully.',
+            'admin_name' => $admin->admin_name,
+        ]);    }
 
     public function UpdateAdminPassword(Request $request)
     {
@@ -66,15 +71,18 @@ class AdminController extends Controller
         $admin = Admins::find($request->id);
 
         if ($request->hasFile('admin_profile')) {
-            $fileName = time() . '_' . $request->file('admin_profile')->getClientOriginalName();
+            $imgName = $request->file('admin_profile');
+            $imageNameWithExtension =   $imgName->getClientOriginalName();
+            $request->admin_profile->move(public_path('admin_profile/'), $imageNameWithExtension);
 
-            $filePath = $request->file('admin_profile')->storeAs('admin_profile', $fileName, 'public');
-
-            $admin->admin_profile = $filePath;
+            
+            $admin->admin_profile = $imageNameWithExtension;
             $admin->save();
         }
 
-        return response()->json(['message' => 'Profile picture updated successfully.']);
-    }
+        return response()->json([
+            'message' => 'Profile picture updated successfully.',
+            'admin_profile' => $imageNameWithExtension  
+        ]);    }
 
 }
