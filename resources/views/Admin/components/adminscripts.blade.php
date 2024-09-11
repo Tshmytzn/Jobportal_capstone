@@ -131,139 +131,109 @@
 </script>
 
 <script>
-    function CreateJobCategory() {
+    $(document).ready(function() {
 
-        var formElement = document.getElementById("createJobCategoryForm");
-        var formData = new FormData(formElement);
-        formData.append('_token', '{{ csrf_token() }}');
-
-        $.ajax({
-            url: "{{ route('CreateJobCategory') }}",
-            type: "POST",
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(response) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: response.message,
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-
-                setTimeout(function() {
-                    var modalElement = document.getElementById('createjobcategories1');
-                    var modal = bootstrap.Modal.getInstance(modalElement);
-                    if (modal) {
-                        modal.hide();
-                    }
-                    $('#JobCategories_tbl').DataTable().ajax.reload();
-                    $('#createJobCategoryForm')[0].reset();
-                }, 1500);
-            },
-
-            error: function(xhr, status, error) {
-                var errors = xhr.responseJSON.errors;
-                var errorMessage = '';
-
-                $.each(errors, function(key, value) {
-                    errorMessage += value + '<br>';
-                });
-
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    html: errorMessage,
-                    showConfirmButton: true
-                });
+        // Real-time validation for the name field (letters and spaces only)
+        $('#adminFullName').on('input', function() {
+            const nameValue = $(this).val();
+            const validName = /^[a-zA-Z\s]*$/;
+            if (!validName.test(nameValue)) {
+                alert('Name can only contain letters and spaces.');
+                $(this).val(nameValue.replace(/[^a-zA-Z\s]/g, ''));
             }
         });
-    }
-</script>
 
-<script>
-    $(document).ready(function() {
-        $('#JobCategories_tbl').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: '/Job/Categories',
-                type: 'GET'
-            },
-            columns: [{
-                    data: 'id',
-                    name: 'id'
-                },
-                {
-                    data: 'name',
-                    name: 'name'
-                },
-                {
-                    data: 'description',
-                    name: 'description'
-                },
-                {
-                    data: null,
-                    render: function(data, type, row) {
-                        return `
-                        <button class="btn btn-sm btn-success edit-btn" data-id="${row.id}">Edit</button>
-                        <button class="btn btn-sm btn-danger delete-btn" data-id="${row.id}">Delete</button>
-                    `;
-                    }
-                }
-            ]
-        });
-    });
-</script>
-
-<script>
-    $(document).ready(function() {
-        $('#Jobseeker_tbl').DataTable({
-            processing: true,
-            serverSide: false,
-            destroy:true, // Since we're returning all jobseekers at once, we don't need server-side processing here
-            ajax: {
-                url: "{{route('jobseekers')}}",
-                type: 'GET',
-                dataSrc: 'data',
-            },
-            columns: [
-                {
-                    data: 'js_id',
-                    name: 'js_id'
-                },
-                {
-                    data: null,
-                    render: function(data, type, row) {
-                        const name = data.js_firstname +' '+data.js_middlename+' '+data.js_lastname
-                        return name;
-                    }
-                },
-                {
-                    data: 'js_email',
-                    name: 'js_email'
-                },
-                {
-                    data: 'js_contactnumber',
-                    name: 'js_contactnumber'
-                },
-                {
-                    data: 'created_at',
-                    name: 'created_at'
-                },
-                {
-                    data: null,
-                    render: function(data, type, row) {
-                        return `
-                    <button class="btn btn-sm btn-primary edit-btn" data-id="${row.js_id}">Edit</button>
-                    <button class="btn btn-sm btn-danger delete-btn" data-id="${row.js_id}">Delete</button>
-                `;
-                    }
-                }
-            ]
+        // Real-time validation for the mobile number (digits only, max length 10)
+        $('#adminMobile').on('input', function() {
+            const mobileValue = $(this).val();
+            const validNumber = /^[0-9]*$/;
+            if (!validNumber.test(mobileValue) || mobileValue.length > 10) {
+                alert('Mobile number can only contain digits and must be 10 digits long.');
+                $(this).val(mobileValue.replace(/[^0-9]/g, '').slice(0, 10));
+            }
         });
 
+        // Real-time validation for email format
+        $('#adminEmail').on('blur', function() {
+            const emailValue = $(this).val();
+            const validEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+            if (!validEmail.test(emailValue)) {
+                alert('Please enter a valid email address.');
+                $(this).val(''); // Optionally clear the field if the email is invalid
+            }
+        });
+
+        // Real-time validation for password match
+        $('#adminConfirmPassword').on('input', function() {
+            const password = $('#adminPassword').val();
+            const confirmPassword = $(this).val();
+            if (password !== confirmPassword) {
+                this.setCustomValidity('Passwords do not match');
+            } else {
+                this.setCustomValidity('');
+            }
+        });
+
+        // Handle form submission
+        $('#submitAdminForm').on('click', function(event) {
+            event.preventDefault();
+
+            const formData = {
+                name: $('#adminFullName').val(),
+                contact_number: $('#adminMobile').val(),
+                email: $('#adminEmail').val(),
+                password: $('#adminPassword').val(),
+                password_confirmation: $('#adminConfirmPassword').val()
+            };
+
+            // Check if passwords match before submission
+            if (formData.password !== formData.password_confirmation) {
+                alert('Passwords do not match!');
+                return;
+            }
+
+            // Submit the form via fetch
+            fetch('{{ route('createAdmin') }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': $('input[name="_token"]').val()
+                    },
+                    body: JSON.stringify(formData)
+                })
+                .then(response => {
+                    const contentType = response.headers.get("content-type");
+                    if (contentType && contentType.includes("application/json")) {
+                        return response.json();
+                    } else {
+                        return response.text().then(text => {
+                            throw new Error(text);
+                        });
+                    }
+                })
+                .then(data => {
+                    if (data.success) {
+                        alert('Admin created successfully.');
+
+                        // Clear the form fields
+                        $('#adminForm')[0].reset();
+
+                        // Close the modal
+                        const modal = new bootstrap.Modal(document.getElementById(
+                            'addNewAdminModal'));
+                        modal.hide();
+
+                        // Optionally, refresh the page or update the table of admins
+                        location.reload();
+                    } else {
+                        alert('Error creating admin: ' + data.error);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                    alert('An error occurred: ' + error.message);
+                });
+        });
     });
 </script>

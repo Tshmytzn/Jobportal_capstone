@@ -76,8 +76,8 @@
     </div>
     {{-- Create Job Categories Modal end --}}
 
-    @include('Admin.components.modals')
-    @include('Admin.components.adminscripts')
+    @include('Admin.components.modals.jobcategorymodal')
+    @include('Admin.components.jobcategoryscripts')
 </body>
 
 </html>
