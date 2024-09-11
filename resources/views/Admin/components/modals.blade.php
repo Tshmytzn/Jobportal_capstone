@@ -45,7 +45,10 @@
                 <h6 class="mb-2">Kailah Leyva</h6>
                 <a href="{{ route('adminsettings') }}"> <button
                         class="btn bg-gradient-primary text-white w-100 mb-2">Settings</button></a>
-                <button class="btn bg-gradient-primary text-white w-100">Log Out</button>
+                <form action="{{ route('logoutAdmin') }}" method="POST" id="logoutadminForm">
+                    @csrf
+                    <button type="submit" class="btn bg-gradient-primary w-100">Log out</button>
+                </form>
             </div>
         </div>
     </div>
@@ -65,38 +68,44 @@
                 <!-- Form Start -->
                 <form id="adminForm" action="{{ route('createAdmin') }}" method="POST">
                     @csrf <!-- CSRF protection token -->
-                
+
                     <!-- Full Name Input -->
                     <div class="mb-3">
                         <label for="adminFullName" class="form-label"><strong>Full Name</strong></label>
-                        <input type="text" class="form-control" id="adminFullName" name="name" placeholder="Enter Full Name" required>
+                        <input type="text" class="form-control" id="adminFullName" name="name"
+                            placeholder="Enter Full Name" required>
                     </div>
-                
+
                     <div class="row">
                         <!-- Mobile Number Input -->
                         <div class="col-6 mb-3">
                             <label for="adminMobile" class="form-label"><strong>Mobile Number</strong></label>
-                            <input type="tel" class="form-control" id="adminMobile" name="contact_number" placeholder="Enter Mobile Number" required>
+                            <input type="tel" class="form-control" id="adminMobile" name="contact_number"
+                                placeholder="Enter Mobile Number" required>
                         </div>
-                
+
                         <!-- Email Input -->
                         <div class="col-6 mb-3">
                             <label for="adminEmail" class="form-label"><strong>Email</strong></label>
-                            <input type="email" class="form-control" id="adminEmail" name="email" placeholder="Enter Email" required>
+                            <input type="email" class="form-control" id="adminEmail" name="email"
+                                placeholder="Enter Email" required>
                         </div>
                     </div>
-                
+
                     <div class="row">
                         <!-- Password Input -->
                         <div class="col-6 mb-3">
                             <label for="adminPassword" class="form-label"><strong>Password</strong></label>
-                            <input type="password" class="form-control" id="adminPassword" name="password" placeholder="Enter Password" required>
+                            <input type="password" class="form-control" id="adminPassword" name="password"
+                                placeholder="Enter Password" required>
                         </div>
-                
+
                         <!-- Confirm Password Input -->
                         <div class="col-6 mb-3">
-                            <label for="adminConfirmPassword" class="form-label"><strong>Confirm Password</strong></label>
-                            <input type="password" class="form-control" id="adminConfirmPassword" name="password_confirmation" placeholder="Confirm Password" required>
+                            <label for="adminConfirmPassword" class="form-label"><strong>Confirm
+                                    Password</strong></label>
+                            <input type="password" class="form-control" id="adminConfirmPassword"
+                                name="password_confirmation" placeholder="Confirm Password" required>
                         </div>
                     </div>
             </div>
