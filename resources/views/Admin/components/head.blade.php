@@ -41,8 +41,6 @@
 
     <!-- Bootstrap JS for Bootstrap 4 -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-
     <!-- SweetAlert2  -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
