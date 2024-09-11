@@ -16,9 +16,10 @@
         {{-- cards --}}
         <div class="container-fluid py-0 m-2">
 
-            <div class="d-flex justify-content-start mb-3">
-                <button class="btn bgp-gradient m-4" data-bs-toggle="modal" data-bs-target="#createjobcategories">Add Job Category</button>
-            </div>
+            <a href="" data-bs-toggle="modal" data-bs-target="#createjobcategories">
+                <button class="btn bgp-gradient ms-4 text-white">Add Job Category</button>
+            </a>
+
             <div class="row m-2">
                     <table id="example" class="table table-hover" style="width:100%">
                     <thead>

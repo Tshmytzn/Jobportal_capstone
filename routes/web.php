@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\JobseekerController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AuthMiddleware;
+
 
 // Admin Protected Routes
 Route::middleware([AuthMiddleware::class])->group(function () {
@@ -17,7 +19,11 @@ Route::get('/Unverified/Agencies', function () { return view('Admin.unverifiedag
 Route::get('/Admin/Jobseeker', function () { return view('Admin.jobseeker'); })->name('jobseeker');
 Route::get('/Admin/Administrators', function () { return view('Admin.admins'); })->name('administrators');
 Route::get('/Admin/SkillAssessment', function () { return view('Admin.SkillAssessment'); })->name('adminskillassessment');
-Route::get('/Admin/Settings', function () { return view('Admin.settings'); })->name('adminsettings');
+// Route::get('/Admin/Settings', function () { return view('Admin.settings'); })->name('adminsettings');
+Route::get('/Admin/Settings', [AdminController::class, 'showAdminDetails'])->name('adminsettings');
+Route::post('/Admin/UpdateSettings', [AdminController::class, 'UpdateAdmin'])->name('UpdateAdmin');
+Route::post('/Admin/UpdatePassword', [AdminController::class, 'UpdateAdminPassword'])->name('UpdateAdminPassword');
+Route::post('/Admin/ProfilePic', [AdminController::class, 'UpdateAdminProfilePic'])->name('UpdateAdminProfilePic');
 Route::get('/Admin/JobCategory', function () { return view('Admin.jobcategory'); })->name('jobcategory');
 
 });

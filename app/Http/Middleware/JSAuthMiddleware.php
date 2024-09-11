@@ -22,15 +22,12 @@ class JSAuthMiddleware
             return $response;
         }
 
-        return $next($request); // Allow request to proceed
+        return $next($request); 
     }
 
-    // The checkAuth function logic
     protected function checkAuth()
     {
-        // Check if the session has 'user_id'
         if (!Session::has('user_id')) {
-            // Redirect to home page with an error message if not authenticated
             return redirect()->route('homepage')->with('error', 'Please login first.');
         }
     }
