@@ -33,7 +33,7 @@
         </div>
     </main>
     @include('Admin.components.scripts')
-    @include('Admin.components.adminscripts')
+    @include('Admin.components.jobseekerscripts')
 
 </body>
 

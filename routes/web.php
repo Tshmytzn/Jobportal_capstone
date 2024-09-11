@@ -46,6 +46,8 @@ Route::get('/Admin/Login', function () { return view('Admin.Login'); })->name('A
 Route::post('/AgencyRegister', [AgencyController::class, 'RegisterAgency'])->name('RegisterAgency');
 Route::post('/LoginAgency', [AuthController::class, 'LoginAgency'])->name('LoginAgency');
 Route::post('/UpdateAgency', [AgencyController::class, 'UpdateAgency'])->name('UpdateAgency');
+//Agency post, update, delete
+Route::post('/Agency', [AgencyController::class, 'Agency'])->name('Agency');
 
 //Agency update password pending
 Route::post('/UpdatePassword', [AgencyController::class, 'updatePassword'])->name('UpdatePassword');
