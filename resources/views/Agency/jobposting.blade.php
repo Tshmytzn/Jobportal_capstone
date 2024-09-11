@@ -11,7 +11,7 @@
         /* Smooth transition */
     }
 </style>
-
+@include('Admin.components.loading')
 <body class="g-sidenav-show  bg-gray-100">
 
     @include('Agency.components.aside', ['active' => 'jobposting'])
@@ -41,7 +41,8 @@
 
                 <div class="col-4">
                     <div class="card text-sm">
-                        <div class="card-header bgp-gradient">
+                        <div class="card-header"
+                            style="background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%); height: 50px; display: flex; align-items: center;">
                             <h5 class="card-title text-white">Jobs Listed</h5>
                         </div>
                         <div class="list-group list-group-flush overflow-auto" style="max-height: 400px;">
@@ -178,8 +179,10 @@
             @include('Agency.components.footer')
         </div>
     </main>
+    
     @include('Agency.components.scripts')
     @include('Agency.components.modals')
+    @include('Agency.components.jobpostscript')
 </body>
 
 </html>

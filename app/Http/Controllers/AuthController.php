@@ -15,8 +15,8 @@ class AuthController extends Controller
     // AGENCY AUTHENTICATION
     protected function checkAuth()
     {
-        if (!Session::has('user_id')) {
-            return redirect()->route('agencylogin')->with('error', 'Please login first.');
+        if (!Session::has(key: 'user_id')) {
+            return redirect()->route(route: 'agencylogin')->with('error', 'Please login first.');
         }
     }
 

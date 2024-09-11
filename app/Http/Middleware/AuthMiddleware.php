@@ -30,5 +30,6 @@ class AuthMiddleware
         if (!Session::has('user_id')) {
             return redirect()->route('AdminLogin')->with('error', 'Please login first.');
         }
+        
     }
 }
