@@ -8,6 +8,36 @@ use Illuminate\Support\Facades\Hash;
 
 class JobseekerController extends Controller
 {
+    public function getJobseeker()
+    {
+        $user_id = session('user_id');
+
+        $jobseeker = Jobseeker::where('js_id', $user_id)->first();
+
+        return view('Jobseeker.profile', compact('jobseeker'));
+    } 
+
+    public function updateJobseeker(Request $request)
+    {
+        // Validate and update jobseeker data here
+        $validated = $request->validate([
+            'js_firstname' => 'required|string|max:255',
+            'js_midname' => 'nullable|string|max:255',
+            'js_lastname' => 'required|string|max:255',
+            'js_suffix' => 'nullable|string|max:255',
+            'js_gender' => 'required|string',
+            'js_address' => 'required|string',
+            'js_email' => 'required|email',
+            'js_contact' => 'required|string',
+        ]);
+    
+        $jobseeker = Jobseeker::findOrFail($request->id);
+        $jobseeker->update($validated);
+    
+        return response()->json(['success' => true, 'message' => 'Your information has been updated successfully.']);
+    }
+    
+
     public function create(Request $request)
     {
         // Validate the request data

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
+use App\Models\JobDetails;
 
 class AgencyController extends Controller
 {
@@ -152,6 +153,22 @@ class AgencyController extends Controller
             'message' => 'Password updated successfully.',
         ]);
     }
-    
 
+    public function Agency(request $request){
+        if($request->process=='add'){
+            if($request->job_title==''||$request->job_category==''||$request->job_location==''||$request->job_type==''||$request->job_details==''){
+            return response()->json(['message' => 'Please fill in all required  fields.','status'=>'error']);
+            }
+            $data = new JobDetails;
+            $data->job_title = $request->job_title;
+            $data->category_id = $request->job_category;
+            $data->job_location = $request->job_location;
+            $data->job_type = $request->job_type;
+            $data->job_description = $request->job_details;
+            $data->save();
+            return response()->json(['message' => 'Job Details successfully added.','form'=> 'jobDetailsForm','status'=>'success']);
+        }
+        
     }
+
+}
