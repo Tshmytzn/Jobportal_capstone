@@ -15,7 +15,7 @@
         {{-- cards --}}
         <div class="container-fluid py-0 m-2">
             <div class="row m-2">
-                <table id="Jobseeker_tbl" class="table table-striped" style="width:100%">
+                <table id="Jobseeker_tbl" class="table table-hover" style="width:100%;">
                     <thead>
                         <tr>
                             <th>ID</th>
