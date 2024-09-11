@@ -25,8 +25,8 @@
 <div class="modal fade" id="addNewAdminModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="addNewAdminLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addNewAdminLabel">Add New Administrator</h5>
+            <div class="modal-header bgp-gradient">
+                <h5 class="modal-title text-white" id="addNewAdminLabel">Add New Administrator</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -73,7 +73,7 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn bg-gradient-primary">Add Admin</button>
+                <button type="button" class="btn bgp-gradient">Add Admin</button>
             </div>
         </div>
     </div>
@@ -83,7 +83,7 @@
 
 {{-- Create Job Categories Modal start --}}
 <div class="modal fade" id="createjobcategories" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header bgp-gradient">
           <h5 class="modal-title text-white" id="exampleModalLabel">Job Category</h5>
@@ -92,6 +92,10 @@
         </div>
         <div class="modal-body">
           <form>
+            <div class="form-group">
+                <label for="jobcategory_image" class="col-form-label">Image:</label>
+                <input type="file" class="form-control" name="jobcategory_image" id="jobcategory_image" optional>
+              </div>
             <div class="form-group">
               <label for="jobcategory_name" class="col-form-label">Name:</label>
               <input type="text" class="form-control" name="jobcategory_name" id="jobcategory_name" optional>

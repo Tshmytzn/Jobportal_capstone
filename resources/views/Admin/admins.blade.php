@@ -16,10 +16,10 @@
         <div class="container-fluid py-0 m-2">
             <div class="row m-2">
                     <a href="" data-bs-toggle="modal" data-bs-target="#addNewAdminModal">
-                        <button class="btn bg-gradient-primary text-white">Add New Admin</button>
+                        <button class="btn bgp-gradient text-white">Add New Admin</button>
                     </a>
 
-                    <table id="example" class="table table-striped" style="width:100%">
+                    <table id="example" class="table table-hover" style="width:100%">
                     <thead>
                         <tr>
                             <th>Full Name</th>
