@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('admin_mobile');
             $table->text('admin_password');
             $table->string('admin_profile')->nullable();
-            $table->timestamps(); // This will add created_at and updated_at columns
+            $table->timestamps();
         });
     }
 
