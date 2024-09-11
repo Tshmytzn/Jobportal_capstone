@@ -76,8 +76,8 @@
                 $('#adminMobile').on('input', function() {
                     const mobileValue = $(this).val();
                     const validNumber = /^[0-9]*$/;
-                    if (!validNumber.test(mobileValue) || mobileValue.length > 9) {
-                        alert('Mobile number can only contain digits and must be 9 digits long.');
+                    if (!validNumber.test(mobileValue) || mobileValue.length > 10) {
+                        alert('Mobile number can only contain digits and must be 10 digits long.');
                         $(this).val(mobileValue.replace(/[^0-9]/g, '').slice(0, 10));
                     }
                 });
