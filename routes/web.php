@@ -25,7 +25,8 @@ Route::post('/Admin/UpdateSettings', [AdminController::class, 'UpdateAdmin'])->n
 Route::post('/Admin/UpdatePassword', [AdminController::class, 'UpdateAdminPassword'])->name('UpdateAdminPassword');
 Route::post('/Admin/ProfilePic', [AdminController::class, 'UpdateAdminProfilePic'])->name('UpdateAdminProfilePic');
 Route::get('/Admin/JobCategory', function () { return view('Admin.jobcategory'); })->name('jobcategory');
-
+Route::get('/Admin/Administrators', [AdminController::class, 'showAllAdmins'])->name('administrators');
+Route::post('/Admin/Create', [AdminController::class, 'createAdmin'])->name('createAdmin');
 });
 
 Route::post('/LoginAdmin', [AuthController::class, 'LoginAdmin'])->name('LoginAdmin');
