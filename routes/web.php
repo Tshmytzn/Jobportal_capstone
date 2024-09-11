@@ -88,3 +88,6 @@ Route::get('/Settings', function () { return view('Jobseeker.settings'); })->nam
 Route::post('/', [JobseekerController::class, 'create'])->name('jobseekersCreate');
 Route::post('/LoginJobseeker', [AuthController::class, 'LoginJobseeker'])->name('LoginJobseeker');
 Route::post('/LogoutJobseeker', [AuthController::class, 'LogoutJobseeker'])->name('LogoutJobseeker');
+
+Route::get('/Profile', [JobseekerController::class, 'getJobseeker'])->name('profile');
+Route::post('/Update', [JobseekerController::class, 'updateJobseeker'])->name('updateJobseeker');
