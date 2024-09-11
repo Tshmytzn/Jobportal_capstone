@@ -75,12 +75,51 @@
                     data: null,
                     render: function(data, type, row) {
                         return `
-                        <button class="btn btn-sm btn-success edit-btn" data-id="${row.id}">Edit</button>
+                        <button class="btn btn-sm btn-success edit-btn" data-bs-toggle="modal" data-bs-target="#editjobcategories" data-id="${row.id}">Edit</button>
                         <button class="btn btn-sm btn-danger delete-btn" data-id="${row.id}">Delete</button>
                     `;
                     }
                 }
             ]
+        });
+    });
+
+    $(document).on('click', '.delete-btn', function() {
+        var id = $(this).data('id');
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: '/Job/Categories/' + id,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}' 
+                    },
+                    success: function(response) {
+                        Swal.fire(
+                            'Deleted!',
+                            response.message,
+                            'success'
+                        );
+                        $('#JobCategories_tbl').DataTable().ajax.reload();
+                    },
+                    error: function(xhr) {
+                        Swal.fire(
+                            'Oops...',
+                            'Something went wrong!',
+                            'error'
+                        );
+                    }
+                });
+            }
         });
     });
 </script>

@@ -64,6 +64,23 @@ class AdminCRUDController extends Controller
         return response()->json(['data' => $jobseekers]);
     }
 
+    public function deleteJobCategory($id)
+    {
+        try {
+            $jobCategory = JobCategory::findOrFail($id);
+            $jobCategory->delete();
+
+            return response()->json([
+                'message' => 'Job category deleted successfully!'
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error deleting job category!'
+            ], 500);
+        }
+    }
+
+
     
     }
 

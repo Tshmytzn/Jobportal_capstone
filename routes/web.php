@@ -8,48 +8,52 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AuthMiddleware;
 
-
 // Admin Protected Routes
 Route::middleware([AuthMiddleware::class])->group(function () {
 
+//Admin view routes
 Route::get('/Blank', function () { return view('Admin.blank'); })->name('blankpage1');
 Route::get('/Admin/Dashboard', function () { return view('Admin.index'); })->name('dashboard');
 Route::get('/Verification/Request', function () { return view('Admin.verifiedrequests'); })->name('verifiedrequests');
 Route::get('/Verified/Agencies', function () { return view('Admin.verifiedagencies'); })->name('verifiedagencies');
 Route::get('/Unverified/Agencies', function () { return view('Admin.unverifiedagencies'); })->name('unverifiedagencies');
-
-Route::get('/Admin/Jobseeker', function () { return view('Admin.jobseeker'); })->name('jobseeker');
-Route::get('/Job/Seekers', [AdminCRUDController::class, 'getJobseekers'])->name('jobseekers');
-
-Route::get('/Admin/Administrators', function () { return view('Admin.admins'); })->name('administrators');
 Route::get('/Admin/SkillAssessment', function () { return view('Admin.SkillAssessment'); })->name('adminskillassessment');
-// Route::get('/Admin/Settings', function () { return view('Admin.settings'); })->name('adminsettings');
 Route::get('/Admin/Settings', [AdminController::class, 'showAdminDetails'])->name('adminsettings');
 Route::post('/Admin/UpdateSettings', [AdminController::class, 'UpdateAdmin'])->name('UpdateAdmin');
 Route::post('/Admin/UpdatePassword', [AdminController::class, 'UpdateAdminPassword'])->name('UpdateAdminPassword');
 Route::post('/Admin/ProfilePic', [AdminController::class, 'UpdateAdminProfilePic'])->name('UpdateAdminProfilePic');
 
+//Jobseekers Admin view
+Route::get('/Admin/Jobseeker', function () { return view('Admin.jobseeker'); })->name('jobseeker');
+Route::get('/Job/Seekers', [AdminCRUDController::class, 'getJobseekers'])->name('jobseekers');
+
+//Job Category admin controller routes
 Route::post('/Admin/CreateJobCategory', [AdminCRUDController::class, 'CreateJobCategory'])->name('CreateJobCategory');
 Route::get('/Admin/JobCategory', function () { return view('Admin.jobcategory'); })->name('jobcategory');
+Route::delete('/Job/Categories/{id}', [AdminCRUDController::class, 'deleteJobCategory'])->name('DeleteJobCategory');
 Route::get('/Job/Categories', [AdminCRUDController::class, 'getJobCategories'])->name('jobcategories');
 
+//Administrator controller routes
 Route::get('/Admin/Administrators', [AdminController::class, 'showAllAdmins'])->name('administrators');
 Route::post('/Admin/Create', [AdminController::class, 'createAdmin'])->name('createAdmin');
+Route::get('/Admin/Administrators', function () { return view('Admin.admins'); })->name('administrators');
+
 });
 
+//Admin Login and Logouts
 Route::post('/LoginAdmin', [AuthController::class, 'LoginAdmin'])->name('LoginAdmin');
 Route::post('/logoutAdmin', [AuthController::class, 'logoutAdmin'])->name('logoutAdmin');
 Route::get('/Admin/Login', function () { return view('Admin.Login'); })->name('AdminLogin');
-
 
 //Agency Login and Signup
 Route::post('/AgencyRegister', [AgencyController::class, 'RegisterAgency'])->name('RegisterAgency');
 Route::post('/LoginAgency', [AuthController::class, 'LoginAgency'])->name('LoginAgency');
 Route::post('/UpdateAgency', [AgencyController::class, 'UpdateAgency'])->name('UpdateAgency');
-//Agency post, update, delete
+
+//Agency Job details creation done, update $ delete: pending
 Route::post('/Agency', [AgencyController::class, 'Agency'])->name('Agency');
 
-//Agency update password pending
+//Agency update password: pending
 Route::post('/UpdatePassword', [AgencyController::class, 'updatePassword'])->name('UpdatePassword');
 
 // Agency Protected routes
@@ -63,7 +67,6 @@ Route::get('/Agency/SASCompleted', [AuthController::class, 'sasCompleted'])->nam
 Route::get('/Agency/ScreenedApplicants', [AuthController::class, 'screenedApplicants'])->name('screenedapplicants');
 Route::get('/Agency/ApprovedApplications', [AuthController::class, 'approvedApplications'])->name('approvedapplications');
 Route::post('/logoutAgency', [AuthController::class, 'logoutAgency'])->name('logoutAgency');
-
 
 // Jobseeker Routes
 Route::get('/Blank2', function () { return view('Jobseeker.blank'); })->name('blankpage');
@@ -83,11 +86,9 @@ Route::get('/404', function () { return view('Jobseeker.404'); })->name('404');
 Route::get('/Profile', function () { return view('Jobseeker.profile'); })->name('profile');
 Route::get('/Settings', function () { return view('Jobseeker.settings'); })->name('settings');
 
-
 // Jobseeker Page Controllers
 Route::post('/', [JobseekerController::class, 'create'])->name('jobseekersCreate');
 Route::post('/LoginJobseeker', [AuthController::class, 'LoginJobseeker'])->name('LoginJobseeker');
 Route::post('/LogoutJobseeker', [AuthController::class, 'LogoutJobseeker'])->name('LogoutJobseeker');
-
 Route::get('/Profile', [JobseekerController::class, 'getJobseeker'])->name('profile');
 Route::post('/Update', [JobseekerController::class, 'updateJobseeker'])->name('updateJobseeker');

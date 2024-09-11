@@ -37,14 +37,11 @@
                     data: null,
                     render: function(data, type, row) {
                         return `
-                    <button class="btn btn-sm btn-success edit-btn" data-id="${row.js_id}">Edit</button>
-                    <button class="btn btn-sm btn-danger delete-btn" data-id="${row.js_id}">Delete</button>
+                    <button class="btn btn-sm bgp-gradient delete-btn" data-id="${row.js_id}">Ban</button>
                 `;
                     }
                 }
             ]
         });
-
-
     });
 </script>
