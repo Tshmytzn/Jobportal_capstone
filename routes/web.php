@@ -3,6 +3,7 @@
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\JobseekerController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminCRUDController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AuthMiddleware;
@@ -16,7 +17,10 @@ Route::get('/Admin/Dashboard', function () { return view('Admin.index'); })->nam
 Route::get('/Verification/Request', function () { return view('Admin.verifiedrequests'); })->name('verifiedrequests');
 Route::get('/Verified/Agencies', function () { return view('Admin.verifiedagencies'); })->name('verifiedagencies');
 Route::get('/Unverified/Agencies', function () { return view('Admin.unverifiedagencies'); })->name('unverifiedagencies');
+
 Route::get('/Admin/Jobseeker', function () { return view('Admin.jobseeker'); })->name('jobseeker');
+Route::get('/Job/Seekers', [AdminCRUDController::class, 'getJobseekers'])->name('jobseekers');
+
 Route::get('/Admin/Administrators', function () { return view('Admin.admins'); })->name('administrators');
 Route::get('/Admin/SkillAssessment', function () { return view('Admin.SkillAssessment'); })->name('adminskillassessment');
 // Route::get('/Admin/Settings', function () { return view('Admin.settings'); })->name('adminsettings');
@@ -24,7 +28,11 @@ Route::get('/Admin/Settings', [AdminController::class, 'showAdminDetails'])->nam
 Route::post('/Admin/UpdateSettings', [AdminController::class, 'UpdateAdmin'])->name('UpdateAdmin');
 Route::post('/Admin/UpdatePassword', [AdminController::class, 'UpdateAdminPassword'])->name('UpdateAdminPassword');
 Route::post('/Admin/ProfilePic', [AdminController::class, 'UpdateAdminProfilePic'])->name('UpdateAdminProfilePic');
+
+Route::post('/Admin/CreateJobCategory', [AdminCRUDController::class, 'CreateJobCategory'])->name('CreateJobCategory');
 Route::get('/Admin/JobCategory', function () { return view('Admin.jobcategory'); })->name('jobcategory');
+Route::get('/Job/Categories', [AdminCRUDController::class, 'getJobCategories'])->name('jobcategories');
+
 Route::get('/Admin/Administrators', [AdminController::class, 'showAllAdmins'])->name('administrators');
 Route::post('/Admin/Create', [AdminController::class, 'createAdmin'])->name('createAdmin');
 });
