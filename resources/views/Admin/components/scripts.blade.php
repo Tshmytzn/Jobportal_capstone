@@ -190,11 +190,10 @@
  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
  <script src="../assets/js/soft-ui-dashboard.min.js?v=1.0.7"></script>
  <!-- DataTables JS (only needed if not already included in head) -->
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#example').DataTable(); 
-    });
-  </script>
-  
+ <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
 
+ <script>
+     $(document).ready(function() {
+         $('#example').DataTable();
+     });
+ </script>
