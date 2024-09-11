@@ -100,11 +100,7 @@
                           
                               <form id="updatePasswordForm" method="POST" action="{{ route('UpdatePassword') }}">
                                 @csrf
-                                <div class="mt-1 mb-2 ms-4 me-4">
-                                    <label class="form-label text-dark"><strong>Enter Password:</strong></label>
-                                    <input type="password" id="current_password" name="current_password"
-                                        class="form-control" placeholder="Enter Current Password">
-                                </div>
+                                <input type="hidden" name="id" value="{{ session('user_id') }}">
 
                                 <div class="mt-2 mb-2 ms-4 me-4">
                                     <label class="form-label text-dark"><strong>Enter New Password:</strong></label>

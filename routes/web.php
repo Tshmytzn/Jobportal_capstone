@@ -21,6 +21,9 @@ Route::get('/Admin/Administrators', function () { return view('Admin.admins'); }
 Route::get('/Admin/SkillAssessment', function () { return view('Admin.SkillAssessment'); })->name('adminskillassessment');
 // Route::get('/Admin/Settings', function () { return view('Admin.settings'); })->name('adminsettings');
 Route::get('/Admin/Settings', [AdminController::class, 'showAdminDetails'])->name('adminsettings');
+Route::post('/Admin/UpdateSettings', [AdminController::class, 'UpdateAdmin'])->name('UpdateAdmin');
+Route::post('/Admin/UpdatePassword', [AdminController::class, 'UpdateAdminPassword'])->name('UpdateAdminPassword');
+Route::post('/Admin/ProfilePic', [AdminController::class, 'UpdateAdminProfilePic'])->name('UpdateAdminProfilePic');
 Route::get('/Admin/JobCategory', function () { return view('Admin.jobcategory'); })->name('jobcategory');
 
 });

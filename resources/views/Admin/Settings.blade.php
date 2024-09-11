@@ -46,36 +46,40 @@
 
         <div class="container-fluid py-4">
             <div class="row">
-                <div class="col-12 col-xl-4">
+                <div class="col-12 col-xl-4 mb-2">
                     <div class="card h-100">
                         <div class="card-header pb-0 p-3">
                             <h6 class="mb-0">Update Account Password</h6>
                         </div>
                         <div class="card-body p-3">
-
-                            <div class="ms-4 me-4">
-                                <button class="btn btn-outline-primary w-100">Update Profile Picture</button>
+                            
+                            <div class="ms-4 me-4 mt-4">
+                                <button data-bs-toggle="modal" data-bs-target="#UpdateProfilePic" class="btn btn-outline-primary w-100">Update Profile Picture</button>
                             </div>
 
-                            <div class="mt-2 mb-2 ms-4 me-4">
-                                <input type="Password" class="form-control" placeholder="Enter Current Password"
-                                    aria-label="Password" aria-describedby="Password-addon">
-                            </div>
+                            <form method="POST" id="updateAdminpasswordForm">
+                                @csrf
 
-                            <div class="m-4">
-                                <input type="Password" class="form-control" placeholder="Enter New Password"
-                                    aria-label="Password" aria-describedby="Password-addon">
-                            </div>
-                            <div class="m-4">
-                                <input type="Password" class="form-control" placeholder="Confirm New Password"
-                                    aria-label="Password" aria-describedby="Password-addon">
-                            </div>
+                                <input type="hidden" name="id" value="{{ session('user_id') }}"
+                                    placeholder="User ID">
 
-                            <div class="text-center mx-4" style="margin-top: -6%">
-                                <button type="button" class="btn bg-gradient-primary w-100 mt-4 mb-0">Save
-                                    Changes</button>
-                            </div>
+                                <div class="m-4">
+                                    <input type="password" class="form-control" id="new_password" name="new_password"
+                                        placeholder="Enter New Password" aria-label="Password"
+                                        aria-describedby="Password-addon">
+                                </div>
+                                <div class="m-4">
+                                    <input type="password" class="form-control" id="new_password_confirmation"
+                                        name="new_password_confirmation" placeholder="Confirm New Password"
+                                        aria-label="Password" aria-describedby="Password-addon">
+                                </div>
 
+                                <div class="text-center m-4" style="margin-top: -6%">
+                                    <button type="button" onclick="UpdateAdminPassword()"
+                                        class="btn bg-gradient-primary w-100 mt-4 mb-0">Save
+                                        Changes</button>
+                                </div>
+                            </form>
 
                         </div>
                     </div>
@@ -100,22 +104,25 @@
                                 <form method="POST" id="updateAdminForm">
                                     @csrf
 
-                                    <input type="hidden" name="user_id" value="{{ session('user_id') }}"
+                                    <input type="hidden" name="id" value="{{ session('user_id') }}"
                                         placeholder="User ID">
 
                                     <div class="mb-1">
                                         <label class="form-label text-dark"><strong>Full Name:</strong></label>
-                                        <input type="text" id="admin_name" name="admin_name" class="form-control" value="{{ $admin->admin_name }}">
+                                        <input type="text" id="admin_name" name="admin_name" class="form-control"
+                                            value="{{ $admin->admin_name }}">
                                     </div>
 
                                     <div class="mb-1">
                                         <label class="form-label text-dark"><strong>Mobile:</strong></label>
-                                        <input type="text" id="admin_mobile" name="admin_mobile" class="form-control" value="{{ $admin->admin_mobile }}">
+                                        <input type="text" id="admin_mobile" name="admin_mobile" class="form-control"
+                                            value="{{ $admin->admin_mobile }}">
                                     </div>
 
                                     <div class="mb-1">
                                         <label class="form-label text-dark"><strong>Email:</strong></label>
-                                        <input type="email" id="admin_email" name="admin_email" class="form-control" value="{{ $admin->admin_email }}">
+                                        <input type="email" id="admin_email" name="admin_email" class="form-control"
+                                            value="{{ $admin->admin_email }}">
                                     </div>
 
                                 </form>
