@@ -18,12 +18,12 @@
 
             {{-- cards --}}
             <div class="container-fluid py-0 m-2">
-                <div class="row m-2">
+                <div class="row m-2" id="tabletag">
                     <a href="" data-bs-toggle="modal" data-bs-target="#addNewAdminModal">
                         <button class="btn bgp-gradient text-white">Add New Admin</button>
                     </a>
 
-                    <table id="example" class="table table-hover" style="width:100%">
+                    <table id="admindatatable" class="table table-hover" style="width:100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -32,10 +32,11 @@
                                 <th>Contact Number</th>
                                 <th>Date Added</th>
                                 <th>Action</th>
+                               
                             </tr>
                         </thead>
                         <tbody>
-                            @if ($admins->isEmpty())
+                            {{-- @if ($admins->isEmpty())
                                 <tr>
                                     <td colspan="6" class="text-center">No admin accounts available.</td>
                                 </tr>
@@ -55,11 +56,11 @@
                                             data-mobile="{{ $admin->admin_mobile }}"
                                             data-bs-toggle="modal" 
                                             data-bs-target="#editAdminModal">Edit</button>
-                                            <button class="btn btn-sm btn-danger">Delete</button>
+                                            <button class="btn btn-sm btn-danger deleteAdminBtn" data-id="{{ $admin->id }}">Delete</button>
                                         </td>
                                     </tr>
                                 @endforeach
-                            @endif
+                            @endif --}}
                         </tbody>
                     </table>
 
@@ -69,7 +70,7 @@
         </main>
         @include('Admin.components.modals.adminmodals')
         @include('Admin.components.scripts')
-        @include('Admin.components.adminscripts')
+        @include('Admin.components.manageadminscripts')
 
     </body>
 

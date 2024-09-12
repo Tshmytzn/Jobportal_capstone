@@ -45,8 +45,9 @@
                             style="background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%); height: 50px; display: flex; align-items: center;">
                             <h5 class="card-title text-white">Jobs Listed</h5>
                         </div>
-                        <div class="list-group list-group-flush overflow-auto" style="max-height: 400px;">
-                            <div class="list-group-item list-group-item-action custom-hover">
+                        <div class="list-group list-group-flush overflow-auto" style="max-height: 400px;" id="joblist">
+
+                            {{-- <div class="list-group-item list-group-item-action custom-hover">
                                 <div class="row align-items-center">
                                     <!-- Image Column -->
                                     <div class="col-4">
@@ -65,97 +66,8 @@
                                             certification.
                                         </div>
                                     </div>
-
                                 </div>
-                            </div>
-
-                            <!-- Job Listing 2 -->
-                            <div class="list-group-item list-group-item-action custom-hover">
-                                <div class="row align-items-center">
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <span class="avatar" style=" width: 100%;">
-                                                <img src="{{ asset('img/blog-1.png') }}" alt="">
-                                            </span> </a>
-                                    </div>
-                                    <div class="col-8">
-                                        <a href="#" class="text-reset d-block fw-bold">Electrician - Commercial
-                                            Projects</a>
-                                        <div class="d-block text-secondary mt-n1 text-truncate"
-                                            style="max-width: 100%;">
-                                            Seeking a skilled electrician for commercial project installations. Requires
-                                            experience with high voltage systems and adherence to safety protocols...
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <!-- Repeat similar structure for more job listings -->
-                            <div class="list-group-item list-group-item-action custom-hover">
-                                <div class="row align-items-center">
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <span class="avatar" style="width: 100%;">
-                                                <img src="{{ asset('img/blog-2.png') }}" alt="">
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <div class="col-8">
-                                        <a href="#" class="text-reset d-block fw-bold">Carpenter - Residential
-                                            Renovations</a>
-                                        <div class="d-block text-secondary mt-n1 text-truncate"
-                                            style="max-width: 100%;">
-                                            Looking for an experienced carpenter to work on residential renovation
-                                            projects. Must be skilled in cabinetry, framing, and flooring
-                                            installation...
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="list-group-item list-group-item-action custom-hover">
-                                <div class="row align-items-center">
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <span class="avatar" style="width: 100%;">
-                                                <img src="{{ asset('img/blog-3.png') }}" alt="">
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <div class="col-8">
-                                        <a href="#" class="text-reset d-block fw-bold">Welder - Industrial
-                                            Fabrication</a>
-                                        <div class="d-block text-secondary mt-n1 text-truncate"
-                                            style="max-width: 100%;">
-                                            Seeking a certified welder for industrial fabrication work. Must have
-                                            experience with MIG, TIG, and stick welding, and the ability to read
-                                            blueprints...
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="list-group-item list-group-item-action custom-hover">
-                                <div class="row align-items-center">
-                                    <div class="col-4">
-                                        <a href="#">
-                                            <span class="avatar" style="width: 100%;">
-                                                <img src="{{ asset('img/blog-4.png') }}" alt="">
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <div class="col-8">
-                                        <a href="#" class="text-reset d-block fw-bold">HVAC Technician -
-                                            Maintenance and
-                                            Repair</a>
-                                        <div class="d-block text-secondary mt-n1 text-truncate"
-                                            style="max-width: 100%;">
-                                            Hiring an HVAC technician for maintenance and repair services. Must be
-                                            knowledgeable in HVAC systems, troubleshooting, and repair work...
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>
@@ -167,15 +79,20 @@
                             style="background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%); height: 50px; display: flex; align-items: center;">
                             <h5 class="card-title text-white">Job Details</h5>
                         </div>
-                        <div class="card-body text-center">
-                            <h4>No Job Post Selected</h4>
-                            <p style="font-size: 15px;">Select a job to view its full details.</p>
-                            <img src="{{ asset('img/unDraw_select-option_w7yy45h.svg') }}"
-                                style="height: 250px; width: auto;" alt="">
+                        <div class="card-body" id="job_detail">
+                        <!-- Job Overview -->
+                        
                         </div>
-                    </div>
+
+                        </div>
                 </div>
+                
             </div>
+            <form action="" id="deletejobdetail" method="post" hidden>
+                @csrf
+                <input type="text" name="id"  id="jobid" >
+                <input type="text" name="process" id="" value="delete">
+            </form>
             @include('Agency.components.footer')
         </div>
     </main>

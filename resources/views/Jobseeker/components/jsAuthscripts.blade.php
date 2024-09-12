@@ -66,7 +66,6 @@
                         timer: 1500
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            // Redirect after alert is closed
                             window.location.href = "{{ route('login') }}";
                         }
                     });

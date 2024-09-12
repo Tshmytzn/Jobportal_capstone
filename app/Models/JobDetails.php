@@ -14,6 +14,7 @@ class JobDetails extends Model
     protected $fillable = [
         'job_title',
         'category_id',
+        'job_image',
         'job_location',
         'job_type',
         'job_description',
