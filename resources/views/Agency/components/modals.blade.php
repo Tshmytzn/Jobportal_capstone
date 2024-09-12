@@ -55,67 +55,6 @@
 </div>
 <!-- Admin Profile Modal End-->
 
-<!--Create New Admin Modal start -->
-<div class="modal fade" id="addNewAdminModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="addNewAdminLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addNewAdminLabel">Add New Administrator</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Full Name Input -->
-                <div class="mb-3">
-                    <label for="adminFullName" class="form-label"><strong>Full Name</strong></label>
-                    <input type="text" class="form-control" id="adminFullName" placeholder="Enter Full Name">
-                </div>
-
-                <div class="row">
-                    <!-- Mobile Number Input -->
-                    <div class="col-6 mb-3">
-                        <label for="adminMobile" class="form-label"><strong>Mobile Number</strong></label>
-                        <input type="text" class="form-control" id="adminMobile" placeholder="Enter Mobile Number">
-                    </div>
-
-                    <!-- Email Input -->
-                    <div class="col-6 mb-3">
-                        <label for="adminEmail" class="form-label"><strong>Email</strong></label>
-                        <input type="email" class="form-control" id="adminEmail" placeholder="Enter Email">
-                    </div>
-                </div>
-
-                <div class="row">
-                    <!-- Password Input -->
-                    <div class="col-6 mb-3">
-                        <label for="adminPassword" class="form-label"><strong>Password</strong></label>
-                        <input type="password" class="form-control" id="adminPassword" placeholder="Enter Password">
-                    </div>
-
-                    <!-- Confirm Password Input -->
-                    <div class="col-6 mb-3">
-                        <label for="adminConfirmPassword" class="form-label"><strong>Confirm Password</strong></label>
-                        <input type="password" class="form-control" id="adminConfirmPassword"
-                            placeholder="Confirm Password">
-                    </div>
-                </div>
-
-                <!-- Profile Picture Upload -->
-                <div class="mb-3">
-                    <label for="adminProfilePicture" class="form-label"><strong>Upload Profile Picture</strong></label>
-                    <input type="file" class="form-control" id="adminProfilePicture">
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn bg-gradient-primary">Add Admin</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!--Create New Admin Modal end -->
-
 {{-- Create Job Post Modal --}}
 
 <div class="modal fade bd-example-modal-lg" id="jobpostmodal" tabindex="-1" role="dialog"
@@ -128,8 +67,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 
             </div>
-            <form action="" id="jobDetailsForm" method="POST">
-                @csrf=
+            <form action="" id="jobDetailsForm" method="POST" enctype="multipart/form-data">
+                @csrf
             <div class="modal-body">
 
                 <div class="card-body m-2">
@@ -170,10 +109,14 @@
                         </div>
                         
                     </div>
-
+                    <div class="row">
+                        <div class="col-12 form-group">
+                            <input type="file" class="form-control" name="job_image" id="job_image" placeholder="Image.....">
+                        </div>
+                    </div>
                     <div class="container mb-2">
                         <h6>Description:</h6>
-                        <textarea id="job_details" class="summernote" name="job_details" id="job_details"></textarea>
+                        <textarea class="summernote" name="job_details"></textarea>
                     </div>
 
                 </div>
@@ -181,7 +124,7 @@
             </div>
             </form>
             <div class="modal-footer">
-                <button type="button" class="btn text-white" onclick="submit('#jobDetailsForm',`{{route('Agency')}}`)" style="background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%);">Save changes</button>
+                <button type="button" class="btn text-white" onclick="submit('jobDetailsForm',`{{route('Agency')}}`)" style="background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%);">Save changes</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
