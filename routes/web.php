@@ -99,3 +99,5 @@ Route::post('/LoginJobseeker', [AuthController::class, 'LoginJobseeker'])->name(
 Route::post('/LogoutJobseeker', [AuthController::class, 'LogoutJobseeker'])->name('LogoutJobseeker');
 Route::get('/Profile', [JobseekerController::class, 'getJobseeker'])->name('profile');
 Route::post('/Update', [JobseekerController::class, 'updateJobseeker'])->name('updateJobseeker');
+Route::post('/updateJsPassword', [JobseekerController::class, 'updateJsPassword'])->name('updateJsPassword');
+Route::post('/uploadResume', [JobseekerController::class, 'uploadResume'])->name('uploadResume');
