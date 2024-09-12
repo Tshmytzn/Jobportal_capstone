@@ -25,6 +25,8 @@ Route::get('/Admin/Administrators', function () { return view('Admin.admins'); }
 //Admin view
 Route::get('/Admin/Settings', [AdminController::class, 'showAdminDetails'])->name('adminsettings');
 Route::get('/Admin/AddAdministrators', [AdminController::class, 'showAllAdmins'])->name('administrators');
+Route::post('/Admin/EditAdministrators', [AdminController::class, 'EditAdmin'])->name('EditAdmin');
+Route::delete('/Admin/DeleteAdministrator', [AdminController::class, 'DeleteAdmin'])->name('DeleteAdmin');
 
 //Jobseekers Admin view
 Route::get('/Job/Seekers', [AdminCRUDController::class, 'getJobseekers'])->name('jobseekers');
