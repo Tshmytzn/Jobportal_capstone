@@ -227,3 +227,23 @@
         });
     });
 </script>
+
+<script>
+    $(document).ready(function() {
+
+        $('.editAdminBtn').on('click', function() {
+
+            const adminId = $(this).data('id');
+            const adminName = $(this).data('name');
+            const adminEmail = $(this).data('email');
+            const adminMobile = $(this).data('mobile');
+
+            $('#newAdminFullName').val(adminName);
+            $('#newAdminEmail').val(adminEmail);
+            $('#newAdminMobile').val(adminMobile);
+
+            $('#editadminForm').attr('action', `/admin/update/${adminId}`);
+        });
+    });
+</script>
+
