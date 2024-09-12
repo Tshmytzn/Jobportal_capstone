@@ -75,9 +75,6 @@
         contentType: false, // Disable setting content type for FormData
         processData: false, 
         success: function(response) {
-            
-            console.log(response);
-
             var cardsContainer = document.getElementById('joblist');
                 cardsContainer.innerHTML = '';
             var d = document.getElementById('job_detail');
