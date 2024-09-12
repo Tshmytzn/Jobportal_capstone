@@ -17,7 +17,8 @@
                         title: 'Success',
                         text: response.message,
                         icon: 'success',
-                        confirmButtonText: 'OK'
+                        showConfirmButton: false,
+                        timer: 1500
                     }).then(() => {
                         window.location.href = '{{ route('agencydashboard') }}';
                     });
@@ -56,9 +57,11 @@
                     formElement.reset(); // Reset form
                     $('#' + response.modal).modal('hide');
                     Swal.fire({
-                        icon: 'success',
-                        title: 'Message',
+                        title: 'Success',
                         text: response.message,
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1500
                     });
                     if (response.reload && typeof window[response.reload] === 'function') {
                         window[response.reload]();
