@@ -17,14 +17,15 @@
                         title: 'Success',
                         text: response.message,
                         icon: 'success',
-                        confirmButtonText: 'OK'
+                        showConfirmButton: false,
+                        timer: 1500
                     }).then(() => {
                         window.location.href = '{{ route('homepage') }}';
                     });
                 }
             },
             error: function(xhr) {
-                console.error('AJAX Error:', xhr.responseText); 
+                console.error('AJAX Error:', xhr.responseText);
                 Swal.fire('Error', 'Invalid Credentials.', 'error');
             }
         });
@@ -32,20 +33,23 @@
 </script>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <script>
     $(document).ready(function() {
 
-        $('input[name="firstname"], input[name="midname"], input[name="lastname"], input[name="suffix"]').on('input', function(e) {
-                this.value = this.value.replace(/[^A-Za-z\s-]/g, ''); 
+        $('input[name="firstname"], input[name="midname"], input[name="lastname"], input[name="suffix"]').on(
+            'input',
+            function(e) {
+                this.value = this.value.replace(/[^A-Za-z\s-]/g, '');
             });
 
-            $('input[name="contact"]').on('input', function(e) {
-                this.value = this.value.replace(/\D/g, ''); 
-                if (this.value.length > 9) {
-                    this.value = this.value.slice(0, 9); 
-                }
-            });
-            
+        $('input[name="contact"]').on('input', function(e) {
+            this.value = this.value.replace(/\D/g, '');
+            if (this.value.length > 9) {
+                this.value = this.value.slice(0, 9);
+            }
+        });
+
         $('#jobseekerForm').on('submit', function(event) {
             event.preventDefault();
 
@@ -55,10 +59,11 @@
                 data: $(this).serialize(),
                 success: function(response) {
                     Swal.fire({
-                        title: 'Success!',
-                        text: 'Account created successfully!',
+                        title: 'Success',
+                        text: response.message,
                         icon: 'success',
-                        confirmButtonText: 'OK'
+                        showConfirmButton: false,
+                        timer: 1500
                     }).then((result) => {
                         if (result.isConfirmed) {
                             // Redirect after alert is closed
@@ -84,4 +89,3 @@
         });
     });
 </script>
-
