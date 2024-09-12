@@ -75,13 +75,18 @@
         contentType: false, // Disable setting content type for FormData
         processData: false, 
         success: function(response) {
-            
-            console.log(response);
-
             var cardsContainer = document.getElementById('joblist');
                 cardsContainer.innerHTML = '';
             var d = document.getElementById('job_detail');
+             d.innerHTML = ``;
                 if (response.data.length === 0) {
+                     d.innerHTML = `
+                    <div class="text-center">
+                    <h4>No Job Post Selected</h4>
+                            <p style="font-size: 15px;">Select a job to view its full details.</p>
+                            <img src="{{ asset('img/unDraw_select-option_w7yy45h.svg') }}"
+                                style="height: 250px; width: auto;" alt="">
+                                </div>`;
                     cardsContainer.innerHTML = `
                     <div class="list-group-item list-group-item-action custom-hover">
                                 <div class="row align-items-center">
