@@ -81,6 +81,7 @@
             var cardsContainer = document.getElementById('joblist');
                 cardsContainer.innerHTML = '';
             var d = document.getElementById('job_detail');
+             d.innerHTML = ``;
                 if (response.data.length === 0) {
                      d.innerHTML = `
                     <div class="text-center">
