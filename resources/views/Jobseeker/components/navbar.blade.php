@@ -64,7 +64,7 @@
                                 <form action="{{ route('LogoutJobseeker') }}" method="POST" id="logoutadminForm">
                                     @csrf
                                     <li>
-                                        <a class="dropdown-item" href="#" onclick="document.getElementById('logoutadminForm').submit();">Log Out</a>
+                                        <a class="dropdown-item" href="#" onclick="confirmLogout(event)">Log Out</a>
                                     </li>
                                 </form>
                                 
@@ -105,3 +105,24 @@
 
                 </div>
             </nav>
+
+            <script>
+                function confirmLogout(event) {
+                    event.preventDefault(); // Prevent the default action of the anchor tag
+            
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You will be logged out!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, log me out!',
+                        cancelButtonText: 'Cancel'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.getElementById('logoutadminForm').submit(); // Submit the form if confirmed
+                        }
+                    });
+                }
+            </script>

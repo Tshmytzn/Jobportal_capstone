@@ -17,8 +17,10 @@
             <div class="card col-md-4">
                 <div class="text-center">
                     <div class="card-body">
-                        <img src="{{asset('../assets/img/team-1.jpg')}}" alt="profile_image" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px;">
-                        <h5 class="card-title">{{$jobseeker->js_firstname.' '.$jobseeker->js_lastname}}</h5> <!-- Replace with dynamic jobseeker name -->
+                        <img src="{{ asset('../assets/img/team-1.jpg') }}" alt="profile_image"
+                            class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px;">
+                        <h5 class="card-title">{{ $jobseeker->js_firstname . ' ' . $jobseeker->js_lastname }}</h5>
+                        <!-- Replace with dynamic jobseeker name -->
                         <p class="text-muted">Job Seeker</p>
                         <button class="btn btn-outline-primary btn-sm w-100">Update Profile Picture</button>
                     </div>
@@ -30,7 +32,8 @@
                     <div class="card-body">
                         <div class="form-group mb-3">
                             <label for="currentPassword">Enter Current Password</label>
-                            <input type="password" id="currentPassword" class="form-control" placeholder="Current Password">
+                            <input type="password" id="currentPassword" class="form-control"
+                                placeholder="Current Password">
                         </div>
                         <div class="form-group mb-3">
                             <label for="newPassword">Enter New Password</label>
@@ -38,7 +41,8 @@
                         </div>
                         <div class="form-group mb-4">
                             <label for="confirmPassword">Confirm New Password</label>
-                            <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm Password">
+                            <input type="password" id="confirmPassword" class="form-control"
+                                placeholder="Confirm Password">
                         </div>
                         <button class="btn btn-primary w-100 mb-2">Change Password</button>
                     </div>
@@ -65,19 +69,19 @@
                                 <div class="col-6 mb-3">
                                     <label for="midname">Middle Name: </label>
                                     <input type="text" class="form-control" name="js_midname"
-                                    value="{{ $jobseeker->js_middlename }}" aria-label="Middle Name">
+                                        value="{{ $jobseeker->js_middlename }}" aria-label="Middle Name">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-6 mb-3">
                                     <label for="lastname">Last Name: </label>
                                     <input type="text" class="form-control" name="js_lastname"
-                                    value="{{ $jobseeker->js_lastname }}" aria-label="Last Name">
+                                        value="{{ $jobseeker->js_lastname }}" aria-label="Last Name">
                                 </div>
                                 <div class="col-6 mb-3">
                                     <label for="suffix">Suffix: </label>
                                     <input type="text" class="form-control" name="js_suffix"
-                                    value="{{ $jobseeker->js_suffix }}" aria-label="Suffix" optional>
+                                        value="{{ $jobseeker->js_suffix }}" aria-label="Suffix" optional>
                                 </div>
                             </div>
                             <div class="row">
@@ -85,17 +89,17 @@
                                 <div class="mb-3">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="js_gender" id="male"
-                                        value="Male" {{ $jobseeker->js_gender == 'Male' ? 'checked' : '' }}>
+                                            value="Male" {{ $jobseeker->js_gender == 'Male' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="male">Male</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="js_gender" id="female"
-                                        value="Female" {{ $jobseeker->js_gender == 'Female' ? 'checked' : '' }}>
+                                            value="Female" {{ $jobseeker->js_gender == 'Female' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="female">Female</label>
                                     </div>
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="js_gender" id="other"
-                                        value="Other" {{ $jobseeker->js_gender == 'Other' ? 'checked' : '' }}>
+                                            value="Other" {{ $jobseeker->js_gender == 'Other' ? 'checked' : '' }}>
                                         <label class="form-check-label" for="other">Other</label>
                                     </div>
                                 </div>
@@ -104,21 +108,22 @@
                                 <label for="address">Home Address: </label>
                                 <div class="mb-3">
                                     <input type="text" class="form-control" name="js_address"
-                                    value="{{ $jobseeker->js_address }}" aria-label="Home Address">
+                                        value="{{ $jobseeker->js_address }}" aria-label="Home Address">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-6 mb-4">
                                     <label for="email">Email Address: </label>
                                     <input type="email" class="form-control" name="js_email"
-                                    value="{{ $jobseeker->js_email }}" aria-label="Email" required>
+                                        value="{{ $jobseeker->js_email }}" aria-label="Email" required>
                                 </div>
                                 <div class="col-6 mb-4">
                                     <label for="contact">Contact Number: </label>
                                     <div class="input-group">
                                         <span class="input-group-text">+63</span>
                                         <input type="tel" class="form-control" name="js_contact"
-                                        value="{{ $jobseeker->js_contactnumber }}" aria-label="Contact Number" required>
+                                            value="{{ $jobseeker->js_contactnumber }}" aria-label="Contact Number"
+                                            required>
                                     </div>
                                 </div>
                             </div>
@@ -133,8 +138,8 @@
                     <div class="card-body">
                         <form action="">
                             <label for="resume">Resume:</label>
-                            <input type="file" id="resume" name="resume" class="form-control">   
-                            <button class="btn btn-primary w-100 mt-4 mb-2">Upload</button>                         
+                            <input type="file" id="resume" name="resume" class="form-control">
+                            <button class="btn btn-primary w-100 mt-4 mb-2">Upload</button>
                         </form>
                     </div>
                 </div>
@@ -150,28 +155,43 @@
         $(document).ready(function() {
             $('#updateJobseekerInfo').on('submit', function(event) {
                 event.preventDefault();
-    
+
                 $.ajax({
                     url: $(this).attr('action'),
-                    type: 'POST', 
-                    data: $(this).serialize(), 
+                    type: 'POST',
+                    data: $(this).serialize(),
                     success: function(response) {
                         if (response.success) {
-
-                            alert(response.message);
-
+                            Swal.fire({
+                                title: 'Success',
+                                text: response.message,
+                                icon: 'success',
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
                         } else {
-                            alert('Update failed. Please try again.');
+                            Swal.fire({
+                                title: 'Failed',
+                                text: 'Update failed. Please try again.',
+                                icon: 'error',
+                                showConfirmButton: true
+                            });
                         }
                     },
                     error: function(xhr, status, error) {
-                        alert('An error occurred: ' + error);
+                        Swal.fire({
+                            title: 'Error',
+                            text: 'An error occurred: ' + error,
+                            icon: 'error',
+                            showConfirmButton: true
+                        });
                     }
+
                 });
             });
         });
     </script>
-    
+
 </body>
 
 </html>

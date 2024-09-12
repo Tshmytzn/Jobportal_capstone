@@ -43,7 +43,6 @@ Route::delete('/Job/Categories/{id}', [AdminCRUDController::class, 'deleteJobCat
 
 //Administrator post controller routes
 Route::post('/Admin/Create', [AdminController::class, 'createAdmin'])->name('createAdmin');
-
 });
 
 //Admin Login and Logouts

@@ -9,7 +9,7 @@
             <div class="modal-body">
                 <form id="updateProfilePicForm" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="id" value="{{ session('user_id') }}">
+                    <input type="hidden" name="id" value="{{ session('admin_id') }}">
 
                     <div class="mb-3">
                         <label for="admin_profile" class="form-label">Choose Profile Picture</label>

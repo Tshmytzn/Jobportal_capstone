@@ -28,7 +28,7 @@
     }
 </style>
 
-<!-- Admin Profile Modal start -->
+<!-- AGency Profile Modal start -->
 <div class="modal fade" id="agencyProfileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-custom">
         <div class="modal-content">
@@ -53,7 +53,7 @@
         </div>
     </div>
 </div>
-<!-- Admin Profile Modal End-->
+<!-- AGency Profile Modal End-->
 
 {{-- Create Job Post Modal --}}
 
@@ -130,9 +130,6 @@
         </div>
     </div>
 </div> 
-
-<!-- Include the required CSS and JS files -->
-
 
 
 <script>

@@ -69,7 +69,7 @@
                     <div class="col-auto my-auto">
                         <div class="h-100">
                             <h5 class="mb-1">
-                                {{ session('user_name') }}
+                                {{ session('agency_name') }}
                             </h5>
                             <p class="mb-0 font-weight-bold text-sm">
                                 Administrator
@@ -100,7 +100,7 @@
                           
                               <form id="updatePasswordForm" method="POST" action="{{ route('UpdatePassword') }}">
                                 @csrf
-                                <input type="hidden" name="id" value="{{ session('user_id') }}">
+                                <input type="hidden" name="id" value="{{ session('agency_id') }}">
 
                                 <div class="mt-2 mb-2 ms-4 me-4">
                                     <label class="form-label text-dark"><strong>Enter New Password:</strong></label>
@@ -145,7 +145,7 @@
                                     @csrf
 
                                     <div class="mb-1">
-                                        <input type="hidden" name="id" value="{{ session('user_id') }}">
+                                        <input type="hidden" name="id" value="{{ session('agency_id') }}">
 
                                         <label class="form-label text-dark"><strong>Agency Name:</strong></label>
                                         <input type="text" id="agency_name" name="agency_name" class="form-control"

@@ -27,7 +27,7 @@ class AuthMiddleware
 
     protected function checkAuth()
     {
-        if (!Session::has('user_id')) {
+        if (!Session::has('admin_id')) {
             return redirect()->route('AdminLogin')->with('error', 'Please login first.');
         }
         
