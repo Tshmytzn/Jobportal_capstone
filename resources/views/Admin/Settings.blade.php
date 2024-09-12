@@ -60,7 +60,7 @@
                             <form method="POST" id="updateAdminpasswordForm">
                                 @csrf
 
-                                <input type="hidden" name="id" value="{{ session('user_id') }}"
+                                <input type="hidden" name="id" value="{{ session('admin_id') }}"
                                     placeholder="User ID">
 
                                 <div class="m-4">
@@ -104,7 +104,7 @@
                                 <form method="POST" id="updateAdminForm">
                                     @csrf
 
-                                    <input type="hidden" name="id" value="{{ session('user_id') }}"
+                                    <input type="hidden" name="id" value="{{ session('admin_id') }}"
                                         placeholder="User ID">
 
                                     <div class="mb-1">

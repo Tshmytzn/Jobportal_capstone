@@ -15,7 +15,7 @@ class AuthController extends Controller
     // AGENCY AUTHENTICATION
     protected function checkAuth()
     {
-        if (!Session::has(key: 'user_id')) {
+        if (!Session::has(key: 'agency_id')) {
             return redirect()->route(route: 'agencylogin')->with('error', 'Please login first.');
         }
     }
@@ -36,8 +36,8 @@ class AuthController extends Controller
             Auth::loginUsingId($user->id); 
 
             session([
-                'user_id' => $user->id, 
-                'user_name' => $user->agency_name, 
+                'agency_id' => $user->id, 
+                'agency_name' => $user->agency_name, 
             ]);
 
             return response()->json(['message' => 'Login successful!', 'status' => 'success']);
@@ -64,7 +64,7 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        $userId = Session::get('user_id');
+        $userId = Session::get('agency_id');
         $user = DB::table('agencies')->where('id', $userId)->first();
 
         return view('Agency.index', compact('user'));
@@ -76,7 +76,7 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        $userId = Session::get('user_id');
+        $userId = Session::get('agency_id');
         $user = DB::table('agencies')->where('id', $userId)->first();
 
         return view('Agency.notif', compact('user'));
@@ -88,7 +88,7 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        $userId = Session::get('user_id');
+        $userId = Session::get('agency_id');
         $user = DB::table('agencies')->where('id', $userId)->first();
 
         return view('Agency.settings', compact('user'));
@@ -100,7 +100,7 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        $userId = Session::get('user_id');
+        $userId = Session::get('agency_id');
         $user = DB::table('agencies')->where('id', $userId)->first();
 
         return view('Agency.jobposting', compact('user'));
@@ -113,7 +113,7 @@ class AuthController extends Controller
             return $response;
         }
 
-        $userId = Session::get('user_id');
+        $userId = Session::get('agency_id');
         $user = DB::table('agencies')->where('id', $userId)->first();
 
         return view('Agency.assessed', compact('user'));
@@ -125,7 +125,7 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        $userId = Session::get('user_id');
+        $userId = Session::get('agency_id');
         $user = DB::table('agencies')->where('id', $userId)->first();
 
         return view('Agency.submittedapplications', compact('user'));
@@ -137,7 +137,7 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-        $userId = Session::get('user_id');
+        $userId = Session::get('agency_id');
         $user = DB::table('agencies')->where('id', $userId)->first();
 
         return view('Agency.sascompleted', compact('user'));
@@ -150,7 +150,7 @@ class AuthController extends Controller
             return $response;
         }
 
-        $userId = Session::get('user_id');
+        $userId = Session::get('agency_id');
         $user = DB::table('agencies')->where('id', $userId)->first();
 
         return view('Agency.screenedapplicants', compact('user'));
@@ -163,7 +163,7 @@ class AuthController extends Controller
             return $response;
         }
 
-        $userId = Session::get('user_id');
+        $userId = Session::get('agency_id');
         $user = DB::table('agencies')->where('id', $userId)->first();
 
         return view('Agency.approvedapplications', compact('user'));
@@ -222,8 +222,8 @@ class AuthController extends Controller
             Auth::loginUsingId($user->id); 
 
             session([
-                'user_id' => $user->id, 
-                'user_name' => $user->admin_name, 
+                'admin_id' => $user->id, 
+                'admin_name' => $user->admin_name, 
             ]);
 
             return response()->json(['message' => 'Login successful!', 'status' => 'success']);
@@ -244,7 +244,4 @@ class AuthController extends Controller
     }
 
 
-
-
-    
 }

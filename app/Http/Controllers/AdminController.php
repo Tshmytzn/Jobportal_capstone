@@ -14,7 +14,7 @@ class AdminController extends Controller
 
     public function showAdminDetails()
     {
-        $user_id = session('user_id');
+        $user_id = session('admin_id');
 
         $admin = Admins::where('id', $user_id)->first();
 
@@ -23,7 +23,7 @@ class AdminController extends Controller
 
     public function showAllAdmins()
     {
-        $user_id = session('user_id');
+        $user_id = session('admin_id');
 
         $admins = Admins::where('id', '!=', $user_id)->get();
 
