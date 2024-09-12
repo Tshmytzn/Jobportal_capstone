@@ -89,3 +89,116 @@
         });
     });
 </script>
+
+<script>
+    $(document).ready(function() {
+        $('#updateJobseekerInfo').on('submit', function(event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: $(this).attr('action'),
+                type: 'POST',
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.success) {
+                        Swal.fire({
+                            title: 'Success',
+                            text: response.message,
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 2000
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Failed',
+                            text: 'Update failed. Please try again.',
+                            icon: 'error',
+                            showConfirmButton: true
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'An error occurred: ' + error,
+                        icon: 'error',
+                        showConfirmButton: true
+                    });
+                }
+
+            });
+        });
+    });
+</script>
+
+<script>
+document.getElementById('js_changePasswordForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    var currentPassword = document.getElementById('js_currentPassword').value;
+    var newPassword = document.getElementById('js_newPassword').value;
+    var confirmPassword = document.getElementById('js_confirmPassword').value;
+
+    if (newPassword !== confirmPassword) {
+        alert('New passwords do not match');
+        return;
+    }
+
+    $.ajax({
+        url: '{{ route('updateJsPassword') }}',
+        type: 'POST',
+        data: {
+            currentPassword: currentPassword,
+            newPassword: newPassword,
+            newPassword_confirmation: confirmPassword,
+            id: '{{ session('user_id') }}',
+            _token: '{{ csrf_token() }}'
+        },
+        success: function(response) {
+            alert(response.success);
+            // Clear the form fields after successful update
+            document.getElementById('js_changePasswordForm').reset();
+        },
+        error: function(xhr) {
+            var errors = xhr.responseJSON.errors;
+            var errorMessages = '';
+            if (errors) {
+                for (var key in errors) {
+                    errorMessages += errors[key] + '\n';
+                }
+            } else {
+                errorMessages = 'Current password is incorrect!';
+            }
+            alert(errorMessages);
+        }
+    });
+});
+</script>
+
+<!-- Ensure you include jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $('#resumeForm').on('submit', function(event) {
+        event.preventDefault(); 
+
+        let formData = new FormData(this); 
+        $.ajax({
+            url: '{{ route('uploadResume') }}', 
+            method: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false, 
+            success: function(response) {
+                alert(response.success);
+            },
+            error: function(xhr) {
+                alert(xhr.responseJSON.error);
+            }
+        });
+    });
+});
+</script>
+
+    

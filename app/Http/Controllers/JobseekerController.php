@@ -73,4 +73,50 @@ class JobseekerController extends Controller
         // Return a JSON response for the AJAX request
         return response()->json(['message' => 'Account created successfully!']);
     }
+    public function updateJsPassword(Request $request)
+    {
+        // Validate incoming request
+        $request->validate([
+            'currentPassword' => ['required', 'string'],
+            'newPassword' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        // Get the logged-in jobseeker
+        $jobseeker = Jobseeker::find($request->input('id'));
+
+        if (!$jobseeker) {
+            return response()->json(['error' => 'Jobseeker not found'], 404);
+        }
+
+        // Check if current password is correct
+        if (!Hash::check($request->input('currentPassword'), $jobseeker->js_password)) {
+            return response()->json(['error' => 'Current password is incorrect'], 401);
+        }
+
+        // Update the password
+        $jobseeker->js_password = Hash::make($request->input('newPassword'));
+        $jobseeker->save();
+
+        return response()->json(['success' => 'Password updated successfully']);
+    }
+
+    public function uploadResume(Request $request)
+    {
+        // Validate the file input
+        $request->validate([
+            'resume' => 'required|mimes:pdf,doc,docx|max:10240',
+        ]);
+
+        // Handle the file upload
+        if ($request->hasFile('resume')) {
+            $file = $request->file('resume');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->storeAs('jobseekerfiles', $filename, 'public'); // Store in storage/app/public/resumes
+
+            return response()->json(['success' => 'File uploaded successfully']);
+        }
+
+        return response()->json(['error' => 'No file uploaded'], 400);
+    }
+    
 }

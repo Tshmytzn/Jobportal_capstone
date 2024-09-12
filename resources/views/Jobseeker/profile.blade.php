@@ -30,21 +30,24 @@
                         <h6>Update Account Password</h6>
                     </div>
                     <div class="card-body">
-                        <div class="form-group mb-3">
-                            <label for="currentPassword">Enter Current Password</label>
-                            <input type="password" id="currentPassword" class="form-control"
-                                placeholder="Current Password">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="newPassword">Enter New Password</label>
-                            <input type="password" id="newPassword" class="form-control" placeholder="New Password">
-                        </div>
-                        <div class="form-group mb-4">
-                            <label for="confirmPassword">Confirm New Password</label>
-                            <input type="password" id="confirmPassword" class="form-control"
-                                placeholder="Confirm Password">
-                        </div>
-                        <button class="btn btn-primary w-100 mb-2">Change Password</button>
+                        <form id="js_changePasswordForm">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ session('user_id') }}" placeholder="User ID">
+                            <div class="form-group mb-3">
+                                <label for="currentPassword">Enter Current Password</label>
+                                <input type="password" id="js_currentPassword" class="form-control" placeholder="Current Password" required>
+                            </div>
+                            <div class="form-group mb-3">
+                                <label for="newPassword">Enter New Password</label>
+                                <input type="password" id="js_newPassword" class="form-control" placeholder="New Password" required>
+                            </div>
+                            <div class="form-group mb-4">
+                                <label for="confirmPassword">Confirm New Password</label>
+                                <input type="password" id="js_confirmPassword" class="form-control" placeholder="Confirm Password" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100 mb-2">Change Password</button>
+                        </form>
+                        
                     </div>
                 </div>
             </div>
@@ -136,11 +139,12 @@
                         <h6>Upload Resume</h6>
                     </div>
                     <div class="card-body">
-                        <form action="">
+                        <form id="resumeForm" method="POST" enctype="multipart/form-data">
+                            @csrf
                             <label for="resume">Resume:</label>
                             <input type="file" id="resume" name="resume" class="form-control">
-                            <button class="btn btn-primary w-100 mt-4 mb-2">Upload</button>
-                        </form>
+                            <button class="btn btn-primary w-100 mt-4 mb-2" type="submit">Upload</button>
+                        </form>                     
                     </div>
                 </div>
             </div>
@@ -148,49 +152,8 @@
     </div>
 
     @include('Jobseeker.components.footer')
-
+    @include('Jobseeker.components.jsAuthscripts')
     @include('Jobseeker.components.scripts')
-
-    <script>
-        $(document).ready(function() {
-            $('#updateJobseekerInfo').on('submit', function(event) {
-                event.preventDefault();
-
-                $.ajax({
-                    url: $(this).attr('action'),
-                    type: 'POST',
-                    data: $(this).serialize(),
-                    success: function(response) {
-                        if (response.success) {
-                            Swal.fire({
-                                title: 'Success',
-                                text: response.message,
-                                icon: 'success',
-                                showConfirmButton: false,
-                                timer: 2000
-                            });
-                        } else {
-                            Swal.fire({
-                                title: 'Failed',
-                                text: 'Update failed. Please try again.',
-                                icon: 'error',
-                                showConfirmButton: true
-                            });
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        Swal.fire({
-                            title: 'Error',
-                            text: 'An error occurred: ' + error,
-                            icon: 'error',
-                            showConfirmButton: true
-                        });
-                    }
-
-                });
-            });
-        });
-    </script>
 
 </body>
 
