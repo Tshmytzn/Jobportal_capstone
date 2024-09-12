@@ -48,7 +48,7 @@
                                         <td>{{ $admin->admin_mobile }}</td>
                                         <td>{{ $admin->created_at }}</td>
                                         <td>
-                                            <button class="btn btn-sm btn-warning">Edit</button>
+                                            <button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#editAdminModal">Edit</button>
                                             <button class="btn btn-sm btn-danger">Delete</button>
                                         </td>
                                     </tr>
