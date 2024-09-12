@@ -51,38 +51,8 @@
         </section>
     </main>
     @include('Admin.components.scripts')
-    <script>
-        function loginAdmin() {
-            var formElement = document.getElementById('adminLoginForm');
-            var formData = new FormData(formElement);
+    @include('Admin.components.adminloginscripts')
 
-            $.ajax({
-                type: "POST",
-                url: '{{ route('LoginAdmin') }}',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(response) {
-                    if (response.status === 'error') {
-                        Swal.fire('Error', response.message, 'error');
-                    } else {
-                        Swal.fire({
-                            title: 'Success',
-                            text: response.message,
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                        }).then(() => {
-                            window.location.href = '{{ route('dashboard') }}';
-                        });
-                    }
-                },
-                error: function(xhr) {
-                    console.error('AJAX Error:', xhr.responseText); // Log the error
-                    Swal.fire('Error', 'Invalid Credentials.', 'error');
-                }
-            });
-        }
-    </script>
 </body>
 
 </html>

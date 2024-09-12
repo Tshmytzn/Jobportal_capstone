@@ -133,7 +133,6 @@
 <script>
     $(document).ready(function() {
 
-        // Real-time validation for the name field (letters and spaces only)
         $('#adminFullName').on('input', function() {
             const nameValue = $(this).val();
             const validName = /^[a-zA-Z\s]*$/;
@@ -143,7 +142,6 @@
             }
         });
 
-        // Real-time validation for the mobile number (digits only, max length 10)
         $('#adminMobile').on('input', function() {
             const mobileValue = $(this).val();
             const validNumber = /^[0-9]*$/;
@@ -153,18 +151,16 @@
             }
         });
 
-        // Real-time validation for email format
         $('#adminEmail').on('blur', function() {
             const emailValue = $(this).val();
             const validEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
             if (!validEmail.test(emailValue)) {
                 alert('Please enter a valid email address.');
-                $(this).val(''); // Optionally clear the field if the email is invalid
+                $(this).val('');
             }
         });
 
-        // Real-time validation for password match
         $('#adminConfirmPassword').on('input', function() {
             const password = $('#adminPassword').val();
             const confirmPassword = $(this).val();
@@ -175,7 +171,6 @@
             }
         });
 
-        // Handle form submission
         $('#submitAdminForm').on('click', function(event) {
             event.preventDefault();
 
@@ -187,13 +182,11 @@
                 password_confirmation: $('#adminConfirmPassword').val()
             };
 
-            // Check if passwords match before submission
             if (formData.password !== formData.password_confirmation) {
                 alert('Passwords do not match!');
                 return;
             }
 
-            // Submit the form via fetch
             fetch('{{ route('createAdmin') }}', {
                     method: 'POST',
                     headers: {
@@ -216,15 +209,12 @@
                     if (data.success) {
                         alert('Admin created successfully.');
 
-                        // Clear the form fields
                         $('#adminForm')[0].reset();
 
-                        // Close the modal
                         const modal = new bootstrap.Modal(document.getElementById(
                             'addNewAdminModal'));
                         modal.hide();
 
-                        // Optionally, refresh the page or update the table of admins
                         location.reload();
                     } else {
                         alert('Error creating admin: ' + data.error);

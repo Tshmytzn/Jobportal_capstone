@@ -18,25 +18,31 @@ Route::get('/Verification/Request', function () { return view('Admin.verifiedreq
 Route::get('/Verified/Agencies', function () { return view('Admin.verifiedagencies'); })->name('verifiedagencies');
 Route::get('/Unverified/Agencies', function () { return view('Admin.unverifiedagencies'); })->name('unverifiedagencies');
 Route::get('/Admin/SkillAssessment', function () { return view('Admin.SkillAssessment'); })->name('adminskillassessment');
+Route::get('/Admin/Jobseeker', function () { return view('Admin.jobseeker'); })->name('jobseeker');
+Route::get('/Admin/JobCategory', function () { return view('Admin.jobcategory'); })->name('jobcategory');
+Route::get('/Admin/Administrators', function () { return view('Admin.admins'); })->name('administrators');
+
+//Admin view
 Route::get('/Admin/Settings', [AdminController::class, 'showAdminDetails'])->name('adminsettings');
+Route::get('/Admin/AddAdministrators', [AdminController::class, 'showAllAdmins'])->name('administrators');
+
+//Jobseekers Admin view
+Route::get('/Job/Seekers', [AdminCRUDController::class, 'getJobseekers'])->name('jobseekers');
+
+//Job Categories Admin View
+Route::get('/Job/Categories', [AdminCRUDController::class, 'getJobCategories'])->name('jobcategories');
+
+//Admin Profile Settings
 Route::post('/Admin/UpdateSettings', [AdminController::class, 'UpdateAdmin'])->name('UpdateAdmin');
 Route::post('/Admin/UpdatePassword', [AdminController::class, 'UpdateAdminPassword'])->name('UpdateAdminPassword');
 Route::post('/Admin/ProfilePic', [AdminController::class, 'UpdateAdminProfilePic'])->name('UpdateAdminProfilePic');
 
-//Jobseekers Admin view
-Route::get('/Admin/Jobseeker', function () { return view('Admin.jobseeker'); })->name('jobseeker');
-Route::get('/Job/Seekers', [AdminCRUDController::class, 'getJobseekers'])->name('jobseekers');
-
 //Job Category admin controller routes
 Route::post('/Admin/CreateJobCategory', [AdminCRUDController::class, 'CreateJobCategory'])->name('CreateJobCategory');
-Route::get('/Admin/JobCategory', function () { return view('Admin.jobcategory'); })->name('jobcategory');
 Route::delete('/Job/Categories/{id}', [AdminCRUDController::class, 'deleteJobCategory'])->name('DeleteJobCategory');
-Route::get('/Job/Categories', [AdminCRUDController::class, 'getJobCategories'])->name('jobcategories');
 
-//Administrator controller routes
-Route::get('/Admin/Administrators', [AdminController::class, 'showAllAdmins'])->name('administrators');
+//Administrator post controller routes
 Route::post('/Admin/Create', [AdminController::class, 'createAdmin'])->name('createAdmin');
-Route::get('/Admin/Administrators', function () { return view('Admin.admins'); })->name('administrators');
 
 });
 

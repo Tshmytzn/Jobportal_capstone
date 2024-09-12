@@ -45,7 +45,7 @@
 
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="createJobCategoryForm">
+                    <form method="POST" id="editJobCategoryForm">
                         @csrf
                         <div class="form-group">
                             <label for="jobcategory_image" class="col-form-label">Image:</label>
@@ -62,7 +62,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="CreateJobCategory()" class="btn bgp-gradient">Save Changes</button>
+                    <button type="button" onclick="" class="btn bgp-gradient">Save Changes</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
