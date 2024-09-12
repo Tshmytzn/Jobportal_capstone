@@ -130,6 +130,7 @@
                                     </div>
                                     <!-- Job Details Column -->
                                     <div class="col-8">
+                                         <h5 class="card-title">${item.job_title}</h5>
                                         <div class="d-block text-secondary mt-n1 text-truncate">
                                            ${truncatedDescription}
                                         </div>
