@@ -253,17 +253,15 @@
                     if (data.success) {
                         Swal.fire({
                             icon: 'success',
-                            title: 'Success',
-                            text: 'Admin created successfully.'
+                            title: 'success',
+                            text: 'Admin account successsfully added',
+                            showConfirmButton: false,
+                            timer: 1500
                         });
 
-                        $('#adminForm')[0].reset();
+                        $('#addNewAdminModal').modal('hide');
+                        $('#Admin_tbl').DataTable().ajax.reload();
 
-                        const modal = new bootstrap.Modal(document.getElementById(
-                            'addNewAdminModal'));
-                        modal.hide();
-
-                        location.reload();
                     } else {
                         Swal.fire({
                             icon: 'error',
@@ -272,6 +270,7 @@
                         });
                     }
                 })
+
                 .catch((error) => {
                     console.error('Error:', error);
                     Swal.fire({
