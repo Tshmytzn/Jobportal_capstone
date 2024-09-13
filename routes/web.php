@@ -36,7 +36,7 @@ Route::get('/Job/Categories', [AdminCRUDController::class, 'getJobCategories'])-
 
 //Get ADmin data to populate datatable
 Route::get('/Admin/Accounts', [AdminCRUDController::class, 'getAdminData'])->name('getAdminData');
-Route::get('/admin/get/{id}', [AdminCRUDController::class, 'getAdmin']);
+Route::get('/admin/get/{id}', action: [AdminCRUDController::class, 'getAdmin']);
 Route::delete('/Admin/Delete/{id}', [AdminCRUDController::class, 'deleteAdminData'])->name('deleteAdminData');
 
 
@@ -57,6 +57,13 @@ Route::post('/Admin/Create', [AdminController::class, 'createAdmin'])->name('cre
 Route::post('/LoginAdmin', [AuthController::class, 'LoginAdmin'])->name('LoginAdmin');
 Route::post('/logoutAdmin', [AuthController::class, 'logoutAdmin'])->name('logoutAdmin');
 Route::get('/Admin/Login', function () { return view('Admin.Login'); })->name('AdminLogin');
+
+//ipdate job categories
+Route::get('/admin/getjobcategory/{id}', action: [AdminCRUDController::class, 'getJobcategory']);
+// Route::post('/admin/updatejobcategory', [AdminCRUDController::class, 'updatejobcategory'])->name('updatejobcategory');
+Route::put('/job-categories/update/{id}', [AdminCRUDController::class, 'updatejobcategory'])->name('updatejobcategory');
+
+
 
 //Agency Login and Signup
 Route::post('/AgencyRegister', [AgencyController::class, 'RegisterAgency'])->name('RegisterAgency');

@@ -41,11 +41,20 @@
             align-items: center;
             color: white;
         }
+
         .bgp-table {
-            background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%);
+            background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgb(146, 43, 153) 50%, rgb(184, 114, 182) 100%);
             align-items: center;
             text-align: center;
             color: white;
         }
+
+        .bgp-danger {
+            background: linear-gradient(90deg,rgb(206, 150, 150) 0%,rgb(207, 74, 74) 50%,rgba(139, 0, 0, 1) 100%);
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
     </style>
 </head>

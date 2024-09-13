@@ -47,9 +47,16 @@
                 <div class="modal-body">
                     <form method="POST" id="editJobCategoryForm">
                         @csrf
+
+                        <input type="hidden" id="jobCategoryId" name="jobCategoryId" value="">
+
+                        <div class="form-group">
+                            <img class="img-fluid text-center" src="" id="category_image" alt="Job Category Image" style="max-width: 200px; max-height: 100px;">
+                        </div>                                           
+
                         <div class="form-group">
                             <label for="jobcategory_image" class="col-form-label">Image:</label>
-                            <input type="file" class="form-control" name="jobcategory_image" id="jobcategory_image">
+                            <input type="file" class="form-control" name="jobcategory_image_input" accept="image/*" id="jobcategory_image_input">
                         </div>
                         <div class="form-group">
                             <label for="jobcategory_name" class="col-form-label">Name:</label>
@@ -62,7 +69,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="" class="btn bgp-gradient">Save Changes</button>
+                    <button type="button" onclick="UpdateJobCategory()" class="btn bgp-gradient">Save Changes</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>

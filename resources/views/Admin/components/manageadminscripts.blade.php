@@ -34,7 +34,7 @@
                     render: function(data, type, row) {
                         return `
                     <button class="btn btn-sm bgp-table edit-btn text-center" data-bs-toggle="modal" data-bs-target="#editAdminModal" data-id="${row.id}">Edit</button>
-                    <button class="btn btn-sm btn-danger delete-btn text-center" data-id="${row.id}">Delete</button>
+                    <button class="btn btn-sm bgp-danger delete-btn text-center" data-id="${row.id}">Delete</button>
 
                 `;
                     }
@@ -42,6 +42,7 @@
             ]
         });
 
+//DISPLAY ADMINISTRATOR DATA IN MODAL
         $('#editAdminModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
             var adminId = button.data('id');
@@ -53,7 +54,6 @@
                 url: '/admin/get/' + adminId,
                 type: 'GET',
                 success: function(response) {
-
                     modal.find('#adminId').val(response.id);
                     modal.find('#newAdminFullName').val(response.admin_name);
                     modal.find('#newAdminMobile').val(response.admin_mobile);
@@ -67,6 +67,7 @@
         });
     });
 
+// DELETE ADMINISTRATOR
     $(document).on('click', '.delete-btn', function() {
         var id = $(this).data('id');
 
@@ -107,8 +108,8 @@
     });
 </script>
 
-
 <script>
+// UPDATE ADMINISTRATOR DATA
     function UpdateAdmin() {
         var form = document.getElementById('editadmindetailsForm');
         var formData = new FormData(form);
@@ -159,6 +160,7 @@
 
 
 <script>
+//ADD ADMNISTRATOR DATA
     $(document).ready(function() {
 
         $('#adminFullName').on('input', function() {

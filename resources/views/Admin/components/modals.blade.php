@@ -36,12 +36,14 @@
                 <h5 class="modal-title" id="profileModalLabel">Administrator</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+             @php
+                $adminData = App\Models\Admins::where('id',session('admin_id'))->first();
+            @endphp
             <div class="modal-body text-center">
                 <div class="avatar avatar-xl mx-auto mb-3">
-                    <img src="{{ asset('../assets/img/team-1.jpg') }}" alt="profile_image"
-                        class="w-100 border-radius-md shadow-sm">
+                    <img src="{{asset('admin_profile/'.$adminData->admin_profile)}}"alt="profile_image" class="w-100 border-radius-md shadow-sm">
                 </div>
-                <h6 class="mb-2">Kailah Leyva</h6>
+                <h6 class="mb-2">{{ $adminData->admin_name }}</h6>
                 <a href="{{ route('adminsettings') }}"> <button
                         class="btn bg-gradient-primary text-white w-100 mb-2">Settings</button></a>
                 <form action="{{ route('logoutAdmin') }}" method="POST" id="logoutadminForm">
@@ -53,4 +55,3 @@
     </div>
 </div>
 <!-- Admin Profile Modal End-->
-

@@ -21,6 +21,15 @@ class AdminController extends Controller
         return view('Admin.Settings', compact('admin'));
     } 
 
+    public function showAdmindata()
+    {
+        $user_id = session('admin_id');
+
+        $admin = Admins::where('id', $user_id)->first();
+
+        return view('Admin.components.modals', compact('admin'));
+    } 
+
     public function showAllAdmins()
     {
         $user_id = session(key: 'admin_id');
