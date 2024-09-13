@@ -122,49 +122,5 @@ class AdminController extends Controller
             'admin_profile' => $imageNameWithExtension  
         ]);    
     }
-
-    public function EditAdmin(Request $request)
-    {
-        $validated = $request->validate([
-            'id' => 'required|integer|exists:admins,id',
-            'admin_name' => 'required|string|max:255',
-            'admin_mobile' => 'required|string|max:255',
-            'admin_email' => 'required|email|max:255',
-            'admin_password' => 'nullable|string|min:6|confirmed', // New validation rule for password
-        ]);
     
-        $admin = Admins::find($validated['id']);
-        
-        $admin->admin_name = $validated['admin_name'];
-        $admin->admin_mobile = $validated['admin_mobile'];
-        $admin->admin_email = $validated['admin_email'];
-        
-        if ($request->filled('admin_password')) {
-            $admin->password = bcrypt($validated['admin_password']);
-        }
-    
-        $admin->save();
-    
-        return response()->json([
-            'message' => 'Admin details updated successfully.',
-            'admin_name' => $admin->admin_name,
-        ]);
-    }
-
-    public function DeleteAdmin(Request $request)
-    {
-        $validated = $request->validate([
-            'id' => 'required|integer|exists:admins,id',
-        ]);
-
-        $admin = Admins::find($validated['id']);
-        $admin->delete();
-
-        return response()->json([
-            'message' => 'Admin deleted successfully.',
-        ]);
-    }
-
-    
-
 }

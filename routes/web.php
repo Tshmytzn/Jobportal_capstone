@@ -25,7 +25,7 @@ Route::get('/Admin/Administrators', function () { return view('Admin.admins'); }
 //Admin view
 Route::get('/Admin/Settings', [AdminController::class, 'showAdminDetails'])->name('adminsettings');
 Route::get('/Admin/AddAdministrators', [AdminController::class, 'showAllAdmins'])->name('administrators');
-Route::post('/Admin/EditAdministrators', [AdminController::class, 'EditAdmin'])->name('EditAdmin');
+Route::post('/Admin/EditAdministrators', [AdminController::class, 'UpdateAdmin'])->name('UpdateAdmin');
 Route::delete('/Admin/DeleteAdministrator', [AdminController::class, 'DeleteAdmin'])->name('DeleteAdmin');
 
 //Jobseekers Admin view
@@ -33,6 +33,12 @@ Route::get('/Job/Seekers', [AdminCRUDController::class, 'getJobseekers'])->name(
 
 //Job Categories Admin View
 Route::get('/Job/Categories', [AdminCRUDController::class, 'getJobCategories'])->name('jobcategories');
+
+//Get ADmin data to populate datatable
+Route::get('/Admin/Accounts', [AdminCRUDController::class, 'getAdminData'])->name('getAdminData');
+Route::get('/admin/get/{id}', [AdminCRUDController::class, 'getAdmin']);
+Route::delete('/Admin/Delete/{id}', [AdminCRUDController::class, 'deleteAdminData'])->name('deleteAdminData');
+
 
 //Admin Profile Settings
 Route::post('/Admin/UpdateSettings', [AdminController::class, 'UpdateAdmin'])->name('UpdateAdmin');

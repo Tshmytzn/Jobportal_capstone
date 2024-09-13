@@ -41,5 +41,11 @@
             align-items: center;
             color: white;
         }
+        .bgp-table {
+            background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%);
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
     </style>
 </head>

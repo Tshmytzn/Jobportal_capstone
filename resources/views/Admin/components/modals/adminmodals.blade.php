@@ -11,6 +11,7 @@
                 <!-- Form Start -->
                 <form id="adminForm" action="{{ route('createAdmin') }}" method="POST">
                     @csrf <!-- CSRF protection token -->
+
                     <!-- Full Name Input -->
                     <div class="mb-3">
                         <label for="adminFullName" class="form-label"><strong>Full Name</strong></label>
@@ -69,8 +70,10 @@
             <div class="modal-body">
                 <!-- Form Start -->
                 <form method="POST" id="editadmindetailsForm">
+                    @csrf
                     <div class="modal-body">
                         <div class="mb-3">
+
                             <label for="newAdminFullName" class="form-label"><strong>Full Name</strong></label>
                             <input type="text" class="form-control" id="newAdminFullName" name="admin_name"
                                 placeholder="Enter Full Name" required>

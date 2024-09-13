@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admins;
 use Illuminate\Http\Request;
 use App\Models\JobCategory; 
 use App\Models\Jobseeker; 
@@ -64,6 +65,42 @@ class AdminCRUDController extends Controller
         return response()->json(['data' => $jobseekers]);
     }
 
+    public function getAdminData(Request $request)
+    {
+        $admins = Admins::all();
+
+        return response()->json([
+            'data' => $admins
+        ]);
+    }
+
+        public function getAdmin($id)
+    {
+        $admin = Admins::select('id', 'admin_name', 'admin_email', 'admin_mobile')
+        ->where('id', $id)
+        ->firstOrFail();
+
+        // Return the admin data as a JSON response
+        return response()->json($admin);
+    }
+
+
+    public function deleteAdminData($id)
+    {
+        try {
+            $admin = Admins::findOrFail($id);
+            $admin->delete();
+
+            return response()->json([
+                'message' => 'Admin account deleted successfully!'
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Error deleting Admin!'
+            ], 500);
+        }
+    }
+
     public function deleteJobCategory($id)
     {
         try {
@@ -80,6 +117,21 @@ class AdminCRUDController extends Controller
         }
     }
 
+    public function UpdateAdmin(Request $request)
+    {
+        $admin = Admins::find($request->id);
+        $admin->name = $request->name;
+        $admin->mobile = $request->mobile;
+        $admin->email = $request->email;
+
+        if ($request->password && $request->password === $request->confirm_password) {
+            $admin->password = bcrypt($request->password);
+        }
+
+        $admin->save();
+
+        return response()->json(['success' => 'Admin updated successfully']);
+    }
 
     
     }
