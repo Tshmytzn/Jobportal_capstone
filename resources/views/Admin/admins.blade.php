@@ -16,14 +16,13 @@
             )
             <!-- End Navbar -->
 
-            {{-- cards --}}
             <div class="container-fluid py-0 m-2">
                 <div class="row m-2" id="tabletag">
                     <a href="" data-bs-toggle="modal" data-bs-target="#addNewAdminModal">
                         <button class="btn bgp-gradient text-white">Add New Admin</button>
                     </a>
 
-                    <table id="admindatatable" class="table table-hover" style="width:100%">
+                    <table id="Admin_tbl" class="table table-hover" style="width:100%">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -32,38 +31,9 @@
                                 <th>Contact Number</th>
                                 <th>Date Added</th>
                                 <th>Action</th>
-                               
                             </tr>
                         </thead>
-                        <tbody>
-                            {{-- @if ($admins->isEmpty())
-                                <tr>
-                                    <td colspan="6" class="text-center">No admin accounts available.</td>
-                                </tr>
-                            @else
-                                @foreach ($admins as $admin)
-                                    <tr>
-                                        <td>{{ $admin->id }}</td>
-                                        <td>{{ $admin->admin_name }}</td>
-                                        <td>{{ $admin->admin_email }}</td>
-                                        <td>{{ $admin->admin_mobile }}</td>
-                                        <td>{{ $admin->created_at }}</td>
-                                        <td>
-                                            <button class="btn btn-sm btn-warning editAdminBtn"
-                                            data-id="{{ $admin->id }}"
-                                            data-name="{{ $admin->admin_name }}"
-                                            data-email="{{ $admin->admin_email }}"
-                                            data-mobile="{{ $admin->admin_mobile }}"
-                                            data-bs-toggle="modal" 
-                                            data-bs-target="#editAdminModal">Edit</button>
-                                            <button class="btn btn-sm btn-danger deleteAdminBtn" data-id="{{ $admin->id }}">Delete</button>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @endif --}}
-                        </tbody>
                     </table>
-
                 </div>
                 @include('Admin.components.footer')
             </div>
