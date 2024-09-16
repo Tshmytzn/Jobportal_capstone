@@ -54,7 +54,7 @@
         <!-- End Navbar -->
 
         <div class="container-fluid">
-            <div class="page-header min-height-100 border-radius-xl mt-4"
+            <div class="page-header min-height-150 border-radius-xl mt-4"
                 style="background-image: url('{{ asset('../assets/img/curved-images/curved0.jpg') }}'); background-position-y: 50%;">
                 <span class="mask bg-gradient-primary opacity-6"></span>
             </div>
@@ -62,14 +62,14 @@
                 <div class="row gx-4">
                     <div class="col-auto">
                         <div class="avatar avatar-xl position-relative">
-                            <img src="{{ asset('../assets/img/team-1.jpg') }}" alt="profile_image"
+                            <img id="AgencyProfileImage" src="/agency_profile/{{ $agency->agency_profile }}" alt="profile_image"
                                 class="w-100 border-radius-md shadow-sm">
                         </div>
                     </div>
                     <div class="col-auto my-auto">
                         <div class="h-100">
-                            <h5 class="mb-1">
-                                {{ session('agency_name') }}
+                            <h5 class="mb-1" id="agencyProfileName">
+                                {{ $agency->agency_name }}
                             </h5>
                             <p class="mb-0 font-weight-bold text-sm">
                                 Administrator
@@ -95,24 +95,24 @@
                         <div class="card-body p-3">
 
                             <div class="mt-2 mb-2 ms-4 me-4">
-                                <button data-bs-toggle="modal" class="btn btn-outline-primary w-100">Update Profile Picture</button>
-                              </div>
-                          
-                              <form id="updatePasswordForm" method="POST" action="{{ route('UpdatePassword') }}">
+                                <button data-bs-toggle="modal" data-bs-target="#UpdateProfilePic" class="btn btn-outline-primary w-100">Update Profile
+                                    Picture</button>
+                            </div>
+
+                            <form id="updatePasswordForm" method="POST" action="{{ route('UpdatePassword') }}">
                                 @csrf
-                                <input type="hidden" name="id" value="{{ session('agency_id') }}">
+                                <input type="hidden" name="id" value="{{ session('agency_id') }}"
+                                    placeholder="User ID">
 
-                                <div class="mt-2 mb-2 ms-4 me-4">
-                                    <label class="form-label text-dark"><strong>Enter New Password:</strong></label>
-                                    <input type="password" id="new_password" name="new_password" class="form-control"
-                                        placeholder="Enter New Password">
+                                <div class="m-4">
+                                    <input type="password" class="form-control" id="new_password" name="new_password"
+                                        placeholder="Enter New Password" aria-label="Password"
+                                        aria-describedby="Password-addon">
                                 </div>
-
-                                <div class="mt-2 mb-3 ms-4 me-4">
-                                    <label class="form-label text-dark"><strong>Confirm Password:</strong></label>
-                                    <input type="password" id="new_password_confirmation"
-                                        name="new_password_confirmation" class="form-control"
-                                        placeholder="Confirm New Password">
+                                <div class="m-4">
+                                    <input type="password" class="form-control" id="new_password_confirmation"
+                                        name="new_password_confirmation" placeholder="Confirm New Password"
+                                        aria-label="Password" aria-describedby="Password-addon">
                                 </div>
 
                                 <div class="mt-2 mb-3 ms-4 me-4 text-center">
@@ -149,18 +149,18 @@
 
                                         <label class="form-label text-dark"><strong>Agency Name:</strong></label>
                                         <input type="text" id="agency_name" name="agency_name" class="form-control"
-                                            value="{{ $user->agency_name }}">
+                                            value="{{ $agency->agency_name }}">
                                     </div>
                                     <div class="row">
                                         <div class="col-6 mb-1">
                                             <label class="form-label text-dark"><strong>Email:</strong></label>
                                             <input type="email" id="email_address" name="email_address"
-                                                class="form-control" value="{{ $user->email_address }}">
+                                                class="form-control" value="{{ $agency->email_address }}">
                                         </div>
                                         <div class="col-6 mb-1">
                                             <label class="form-label text-dark"><strong>Address:</strong></label>
                                             <input type="text" id="agency_address" name="agency_address"
-                                                class="form-control" value="{{ $user->agency_address }}">
+                                                class="form-control" value="{{ $agency->agency_address }}">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -168,14 +168,14 @@
                                             <label class="form-label text-dark"><strong>Contact
                                                     Number:</strong></label>
                                             <input type="text" id="contact_number" name="contact_number"
-                                                class="form-control" value="{{ $user->contact_number }}">
+                                                class="form-control" value="{{ $agency->contact_number }}">
                                         </div>
 
                                         <div class="col-6 mb-1">
                                             <label class="form-label text-dark"><strong>Landline
                                                     Number:</strong></label>
                                             <input type="text" id="landline_number" name="landline_number"
-                                                class="form-control" value="{{ $user->landline_number }}">
+                                                class="form-control" value="{{ $agency->landline_number }}">
                                         </div>
                                     </div>
 
@@ -184,8 +184,8 @@
                                             <label class="form-label text-dark"><strong>Geographical
                                                     Coverage:</strong></label>
                                             <select class="form-select" id="geo_coverage" name="geo_coverage">
-                                                <option selected value="{{ $user->geo_coverage }}">
-                                                    {{ $user->geo_coverage }}</option>
+                                                <option selected value="{{ $agency->geo_coverage }}">
+                                                    {{ $agency->geo_coverage }}</option>
                                                 <option value="local">Local</option>
                                                 <option value="national">National</option>
                                                 <option value="international">International</option>
@@ -196,8 +196,8 @@
                                             <label class="form-label text-dark"><strong>Number of
                                                     Employees:</strong></label>
                                             <select class="form-select" id="employee_count" name="employee_count">
-                                                <option value="{{ $user->employee_count }}">
-                                                    {{ $user->employee_count }}</option>
+                                                <option value="{{ $agency->employee_count }}">
+                                                    {{ $agency->employee_count }}</option>
                                                 <option value="11-20">11-20</option>
                                                 <option value="21-30">21-30</option>
                                                 <option value="31-40">31-40</option>
@@ -234,6 +234,7 @@
     </main>
     @include('Agency.components.scripts')
     @include('Agency.components.agencysettingscripts')
+    @include('Agency.components.modals.agencysettingsmodals')
 
 </body>
 
