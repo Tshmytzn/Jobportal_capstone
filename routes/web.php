@@ -83,7 +83,7 @@ Route::post('/UpdatePassword', [AgencyController::class, 'updatePassword'])->nam
 // Agency Protected routes
 Route::get('/Agency/Dashboard', [AuthController::class, 'dashboard'])->name('agencydashboard');
 Route::get('/Agency/Notification', [AuthController::class, 'notification'])->name('agencynotif');
-Route::get('/Agency/Settings', [AuthController::class, 'settings'])->name('agencysettings');
+// Route::get('/Agency/Settings', [AuthController::class, 'settings'])->name('agencysettings');
 Route::get('/Agency/JobPosting', [AuthController::class, 'jobposting'])->name('agencyjobposting');
 Route::get('/Agency/SkillAssessment', [AuthController::class, 'skillAssessment'])->name('agencyskillassess');
 Route::get('/Agency/SubmittedApplications', [AuthController::class, 'submittedApplications'])->name('submittedapplications');
