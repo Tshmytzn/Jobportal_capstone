@@ -58,12 +58,16 @@ Route::post('/LoginAdmin', [AuthController::class, 'LoginAdmin'])->name('LoginAd
 Route::post('/logoutAdmin', [AuthController::class, 'logoutAdmin'])->name('logoutAdmin');
 Route::get('/Admin/Login', function () { return view('Admin.Login'); })->name('AdminLogin');
 
-//ipdate job categories
+//update job categories
 Route::get('/admin/getjobcategory/{id}', action: [AdminCRUDController::class, 'getJobcategory']);
 // Route::post('/admin/updatejobcategory', [AdminCRUDController::class, 'updatejobcategory'])->name('updatejobcategory');
 Route::put('/job-categories/update/{id}', [AdminCRUDController::class, 'updatejobcategory'])->name('updatejobcategory');
 
+//ShowAgency Details in AgencySettings
+Route::get('/Agency/Settings', [AgencyController::class, 'showAgencyDetails'])->name('agencysettings');
 
+//Update Profile
+Route::post('/Agency/ProfilePic', [AgencyController::class, 'UpdateAgencyProfilePic'])->name('UpdateAgencyProfilePic');
 
 //Agency Login and Signup
 Route::post('/AgencyRegister', [AgencyController::class, 'RegisterAgency'])->name('RegisterAgency');
