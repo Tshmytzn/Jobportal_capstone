@@ -15,7 +15,18 @@
 
         {{-- cards --}}
         <div class="container-fluid py-4">
-            <div class="row">
+            <div class="row m-2">
+                <table id="contact_tbl" class="table table-hover" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Message</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                </table>
 
             </div>
             @include('Admin.components.footer')

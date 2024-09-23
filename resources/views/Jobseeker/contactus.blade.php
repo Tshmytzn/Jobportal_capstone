@@ -32,28 +32,32 @@
 
                     <form>
                         <div class="row g-3">
+                            <form id="contactform" role="form" method="POST">
+                                @csrf
                             <div class="col-lg-12 col-xl-6">
                                 <div class="form-floating">
-                                    <input type="text" class="form-control" id="name" placeholder="Your Name"
+                                    <input type="text" class="form-control" id="contact_name" name="contact_name" placeholder="Your Name"
                                         required>
                                     <label for="name">Your Name</label>
                                 </div>
                             </div>
                             <div class="col-lg-12 col-xl-6">
                                 <div class="form-floating">
-                                    <input type="email" class="form-control" id="email" placeholder="Your Email"
+                                    <input type="email" class="form-control" id="contact_email" name="contact_email" placeholder="Your Email"
                                         required>
                                     <label for="email">Your Email</label>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-floating">
-                                    <textarea class="form-control" placeholder="Your Message" id="message" style="height: 160px" required></textarea>
+                                    <textarea class="form-control" placeholder="Your Message" id="contact_message" name="contact_mesage" style="height: 160px" required></textarea>
                                     <label for="message">Your Message</label>
                                 </div>
                             </div>
+                        </form>
+
                             <div class="col-12">
-                                <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                                <button class="btn btn-primary w-100 py-3" onclick="SubmitContact()" type="button">Send Message</button>
                             </div>
                         </div>
                     </form>
@@ -106,9 +110,8 @@
 
 
     @include('Jobseeker.components.footer')
-
     @include('Jobseeker.components.scripts')
-
+    @include('Jobseeker.components.contactscripts')
 
 </body>
 
