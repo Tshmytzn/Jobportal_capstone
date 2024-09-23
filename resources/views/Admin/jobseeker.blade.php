@@ -34,6 +34,7 @@
     </main>
     @include('Admin.components.scripts')
     @include('Admin.components.jobseekerscripts')
+    @include('Admin.components.modals.jobseekermodals')
 
 </body>
 

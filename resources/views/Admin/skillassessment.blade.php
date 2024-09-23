@@ -13,7 +13,12 @@
         <!-- End Navbar -->
 
         {{-- cards --}}
-        <div class="container-fluid py-4">
+        <div class="container-fluid py-0 m-2">
+
+            <a href="" data-bs-toggle="modal" data-bs-target="#createskillassessment">
+                <button class="btn bgp-gradient ms-4 text-white">Add Skill Assessment</button>
+            </a>
+
             <div class="row">
 
             </div>
@@ -21,6 +26,8 @@
         </div>
     </main>
     @include('Admin.components.scripts')
+    @include('Admin.components.skillassessmentscripts')
+    @include('Admin.components.modals.skillassessmentmodals')
 </body>
 
 </html>
