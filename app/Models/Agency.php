@@ -27,6 +27,7 @@ class Agency extends Model
         'agency_bir_permit',
         'agency_image',
         'password',
+        'status'
     ];
 
     /**

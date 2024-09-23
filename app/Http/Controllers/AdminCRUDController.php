@@ -17,7 +17,7 @@ class AdminCRUDController extends Controller
         $validatedData = $request->validate([
             'jobcategory_name' => 'required|string|max:255',
             'job_description' => 'required|string|max:255',
-            'jobcategory_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', 
+            'jobcategory_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5048', 
         ]);
     
         try {

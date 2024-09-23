@@ -11,7 +11,7 @@
         /* Smooth transition */
     }
 </style>
-@include('Admin.components.loading')
+@include('Agency.components.loading')
 <body class="g-sidenav-show  bg-gray-100">
 
     @include('Agency.components.aside', ['active' => 'jobposting'])
