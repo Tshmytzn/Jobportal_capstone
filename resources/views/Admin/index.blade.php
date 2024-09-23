@@ -89,66 +89,28 @@
             </div>
             <div class="row my-4">
                 <div class="col-lg-12 col-md-12 mb-md-0 mb-4">
-                    <div class="card">
-                        <div class="card-header pb-0">
-                            <div class="row">
-                                <div class="col-lg-6 col-7">
-                                    <h6>Projects</h6>
-                                    <p class="text-sm mb-0">
-                                        <i class="fa fa-check text-info" aria-hidden="true"></i>
-                                        <span class="font-weight-bold ms-1">Job Applicants </span> this month
-                                    </p>
-                                </div>
 
+                    <div class="col-lg-12">
+                        <div class="card z-index-2">
+                          <div class="card-header pb-0">
+                            <h6>Monthly Overview: Jobseeker and Agency Registrations</h6>
+                            <p class="text-sm">
+                              <i class="fa fa-arrow-up text-success"></i>
+                              <span class="font-weight-bold">4% more</span> in 2024
+                            </p>
+                          </div>
+                          <div class="card-body p-3">
+                            <div class="chart">
+                              <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
                             </div>
+                          </div>
                         </div>
-                        <div class="card-body px-0 pb-2">
-                            <div class="table-responsive m-4">
-                                <table id="example" class="display table-sm " style="width:100%">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Age</th>
-                                            <th>Agency</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>61</td>
-                                            <td>ABC Agency</td>
-                                            <td>Active</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Garrett Winters</td>
-                                            <td>Accountant</td>
-                                            <td>63</td>
-                                            <td>XYZ Agency</td>
-                                            <td>Inactive</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>
-                        </div>
-                    </div>
+                      </div>
                 </div>
             </div>
             @include('Admin.components.footer')
         </div>
     </main>
-
-    <script>
-        $(document).ready(function() {
-            $('#example').DataTable();
-        });
-    </script>
 
     @include('Admin.components.scripts')
 </body>
