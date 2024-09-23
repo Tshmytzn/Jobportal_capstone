@@ -18,6 +18,7 @@
                 });
 
                 setTimeout(function() {
+
                     $('#agencyProfileName').text(response.agency_name);
                     $('#agency_name').val(response.data.agency_name);
                     $('#email_address').val(response.data.email_address);
@@ -88,7 +89,12 @@
 
 <script>
     function updateProfilePic() {
-        var formData = new FormData(document.getElementById("updateProfilePicForm"));
+
+        var formElement = document.getElementById("updateProfilePicForm");
+        var formData = new FormData(formElement);
+
+        formData.append('_token', '{{ csrf_token() }}');
+
         console.log(formData)
         $.ajax({
             url: "{{ route('UpdateAgencyProfilePic') }}",
@@ -106,7 +112,8 @@
                 });
 
                 setTimeout(function() {
-                    $('#AgencyProfileImage').attr('src', '/agency_profile/' + response.agency_profile);
+                    $('#AgencyProfileImage').attr('src', '/agency_profile/' + response
+                        .agency_profile);
                     var modalElement = document.getElementById('UpdateProfilePic');
                     var modal = bootstrap.Modal.getInstance(modalElement);
                     if (modal) {

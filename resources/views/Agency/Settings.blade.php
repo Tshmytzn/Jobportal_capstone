@@ -62,7 +62,7 @@
                 <div class="row gx-4">
                     <div class="col-auto">
                         <div class="avatar avatar-xl position-relative">
-                            <img id="AgencyProfileImage" src="/agency_profile/{{ $agency->agency_profile }}" alt="profile_image"
+                            <img id="AgencyProfileImage" src="/agency_profile/{{ $agency->agency_image }}" alt="profile_image"
                                 class="w-100 border-radius-md shadow-sm">
                         </div>
                     </div>

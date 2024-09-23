@@ -126,10 +126,8 @@ class AgencyController extends Controller
             $agency->geo_coverage = $validated['geo_coverage'];
             $agency->employee_count = $validated['employee_count'];
 
-            // Save the changes to the database
             $agency->save();
 
-            // Return a JSON response
             return response()->json(['message' => 'Agency details updated successfully.']);
         }
 
@@ -236,27 +234,32 @@ class AgencyController extends Controller
 
     public function UpdateAgencyProfilePic(Request $request)
     {
+
         $request->validate([
             'id' => 'required|integer|exists:agencies,id',
             'agency_profile' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+    
 
         $agency = Agency::find($request->id);
-
+    
         if ($request->hasFile('agency_profile')) {
+
             $imgName = $request->file('agency_profile');
-            $imageNameWithExtension =   $imgName->getClientOriginalName();
+            $imageNameWithExtension = time() . '_' . $imgName->getClientOriginalName(); 
             $request->agency_profile->move(public_path('/agency_profile/'), $imageNameWithExtension);
+    
 
-
-            $agency->agency_profile = $imageNameWithExtension;
+            $agency->agency_image = $imageNameWithExtension;
             $agency->save();
         }
+    
 
         return response()->json([
             'message' => 'Profile picture updated successfully.',
-            'agency_profile' => $imageNameWithExtension
+            'agency_profile' => $imageNameWithExtension 
         ]);
-    }
+    }    
+    
 
 }
