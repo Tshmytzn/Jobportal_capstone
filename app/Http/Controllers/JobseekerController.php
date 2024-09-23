@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Jobseeker;
+use App\Models\JobCategory;
 use Illuminate\Support\Facades\Hash;
 
 class JobseekerController extends Controller
@@ -117,6 +118,12 @@ class JobseekerController extends Controller
         }
 
         return response()->json(['error' => 'No file uploaded'], 400);
+    }
+
+    public function index()
+    {
+        $jobCategories = JobCategory::all(); 
+        return view('Jobseeker.index', compact('jobCategories'));
     }
     
 }
