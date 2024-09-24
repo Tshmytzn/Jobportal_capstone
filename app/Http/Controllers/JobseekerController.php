@@ -125,5 +125,11 @@ class JobseekerController extends Controller
         $jobCategories = JobCategory::all(); 
         return view('Jobseeker.index', compact('jobCategories'));
     }
+
+    public function jobs()
+    {
+        $jobCategories = JobCategory::all(); 
+        return view('Jobseeker.jobs', compact('jobCategories'));
+    }
     
 }
