@@ -7,6 +7,7 @@ use App\Models\Admins;
 use Illuminate\Http\Request;
 use App\Models\JobCategory; 
 use App\Models\Jobseeker; 
+use App\Models\Contact; 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
@@ -104,6 +105,12 @@ class AdminCRUDController extends Controller
         $jobseekers = Jobseeker::select('js_id', 'js_firstname','js_middlename', 'js_lastname', 'js_email', 'js_contactnumber', 'created_at')->get();
         return response()->json(['data' => $jobseekers]);
     }
+
+    public function getContacts(Request $request)
+    {
+        $contacts = Contact::select('id', 'name', 'email', 'message', 'created_at')->get();
+        return response()->json(['data' => $contacts]);
+    }    
 
     public function getAdminData(Request $request)
     {

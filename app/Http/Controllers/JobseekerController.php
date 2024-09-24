@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Jobseeker;
 use App\Models\JobCategory;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Hash;
 
 class JobseekerController extends Controller
@@ -130,6 +131,23 @@ class JobseekerController extends Controller
     {
         $jobCategories = JobCategory::all(); 
         return view('Jobseeker.jobs', compact('jobCategories'));
+    }
+
+    public function SaveContact(Request $request)
+    {
+        $validatedData = $request->validate([
+            'contact_name' => 'required|string|max:255',
+            'contact_email' => 'required|email|max:255',
+            'contact_mesage' => 'required|string',
+        ]);
+
+        Contact::create([
+            'name' => $validatedData['contact_name'],
+            'email' => $validatedData['contact_email'],
+            'message' => $validatedData['contact_mesage'],
+        ]);
+
+        return response()->json(['message' => 'Inquiry Successfully Submitted!'], 201);
     }
     
 }

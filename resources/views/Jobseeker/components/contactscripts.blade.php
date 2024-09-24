@@ -1,11 +1,14 @@
 <script>
-    function SubmitContact() {
-        var formElement = document.getElementById('contactform');
+    function SubmitContact(formID) {
+
+        var formElement = document.getElementById(formID);
         var formData = new FormData(formElement);
+
+        formData.append('_token', '{{ csrf_token() }}');
 
         $.ajax({
             type: "POST",
-            url: '{{route('404')}}',
+            url: '{{ route('SaveContact') }}',
             data: formData,
             processData: false,
             contentType: false,
@@ -20,13 +23,13 @@
                         showConfirmButton: false,
                         timer: 1500
                     }).then(() => {
-                        window.location.href = '{{ route('dashboard') }}';
+                        window.location.href = '{{ route('homepage') }}';
                     });
                 }
             },
             error: function(xhr) {
-                console.error('AJAX Error:', xhr.responseText); // Log the error
-                Swal.fire('Error', 'Invalid Credentials.', 'error');
+                console.error('AJAX Error:', xhr.responseText);
+                Swal.fire('Error', 'An error occurred while submitting the form. Please try again.', 'error');
             }
         });
     }

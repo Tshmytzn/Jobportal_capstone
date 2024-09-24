@@ -32,6 +32,10 @@ Route::delete('/Admin/DeleteAdministrator', [AdminController::class, 'DeleteAdmi
 //Jobseekers Admin view
 Route::get('/Job/Seekers', [AdminCRUDController::class, 'getJobseekers'])->name('jobseekers');
 
+// Contacts View
+Route::get('/Contact/Inquiries', [AdminCRUDController::class, 'getContacts'])->name('getContacts');
+
+
 //Job Categories Admin View
 Route::get('/Job/Categories', [AdminCRUDController::class, 'getJobCategories'])->name('jobcategories');
 
@@ -124,3 +128,5 @@ Route::post('/uploadResume', [JobseekerController::class, 'uploadResume'])->name
 
 // Jobcategory Display
 // Route::get('/job-categories', [JobseekerController::class, 'index']);
+
+Route::post('/contacts', [JobseekerController::class, 'SaveContact'])->name('SaveContact');

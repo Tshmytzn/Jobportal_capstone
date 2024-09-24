@@ -16,16 +16,21 @@
         {{-- cards --}}
         <div class="container-fluid py-4">
             <div class="row m-2">
-                <table id="contact_tbl" class="table table-hover" style="width:100%;">
+                <table id="Contacts_tbl" class="table table-hover" style="width:100%;">
                     <thead>
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Message</th>
-                            <th>Action</th>
+                            <th>Created At</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <tr>
+                            
+                        </tr>
+                    </tbody>
                 </table>
 
             </div>
@@ -34,6 +39,7 @@
     </main>
 
     @include('Admin.components.scripts')
+    @include('Admin.components.customerinquiriesscripts')
 
 </body>
 </html>

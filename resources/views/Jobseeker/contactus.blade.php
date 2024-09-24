@@ -30,9 +30,9 @@
                         Please fill out all fields in the contact form below for us to assist you.
                     </p>
 
-                    <form>
+                    <form id="contactform" role="form" method="POST">
                         <div class="row g-3">
-                            <form id="contactform" role="form" method="POST">
+                           
                                 @csrf
                             <div class="col-lg-12 col-xl-6">
                                 <div class="form-floating">
@@ -54,11 +54,12 @@
                                     <label for="message">Your Message</label>
                                 </div>
                             </div>
-                        </form>
+                     
 
                             <div class="col-12">
-                                <button class="btn btn-primary w-100 py-3" onclick="SubmitContact()" type="button">Send Message</button>
+                                <button class="btn btn-primary w-100 py-3" onclick="SubmitContact('contactform')" type="button">Send Message</button>
                             </div>
+                            
                         </div>
                     </form>
 

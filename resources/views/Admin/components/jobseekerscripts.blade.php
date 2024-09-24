@@ -3,7 +3,7 @@
         $('#Jobseeker_tbl').DataTable({
             processing: true,
             serverSide: false,
-            destroy:true, // Since we're returning all jobseekers at once, we don't need server-side processing here
+            destroy:true, 
             ajax: {
                 url: "{{route('jobseekers')}}",
                 type: 'GET',
