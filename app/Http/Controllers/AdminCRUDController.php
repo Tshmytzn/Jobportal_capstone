@@ -116,6 +116,24 @@ class AdminCRUDController extends Controller
         return response()->json(['data' => $pendingAgencies]);
     }
 
+    public function getVerifiedAgencies(Request $request)
+    {
+        $verifiedAgencies = Agency::select('id', 'agency_name', 'agency_address', 'email_address', 'contact_number', 'landline_number', 'geo_coverage', 'employee_count', 'agency_business_permit', 'agency_dti_permit', 'agency_bir_permit', 'agency_image', 'created_at', 'updated_at', 'status')
+                                  ->where('status', 'approved') 
+                                  ->get();
+        
+        return response()->json(['data' => $verifiedAgencies]);
+    }
+
+    public function getUnverifiedAgencies(Request $request)
+    {
+        $unverifiedAgencies = Agency::select('id', 'agency_name', 'agency_address', 'email_address', 'contact_number', 'landline_number', 'geo_coverage', 'employee_count', 'agency_business_permit', 'agency_dti_permit', 'agency_bir_permit', 'agency_image', 'created_at', 'updated_at', 'status')
+                                  ->where('status', 'rejected')
+                                  ->get();
+        
+        return response()->json(['data' => $unverifiedAgencies]);
+    }
+
     public function showagency($id)
     {
         $agency = Agency::find($id);

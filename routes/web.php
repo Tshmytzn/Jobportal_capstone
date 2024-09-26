@@ -38,6 +38,12 @@ Route::get('/Contact/Inquiries', [AdminCRUDController::class, 'getContacts'])->n
 //Verification Request
 Route::get('/verification-requests', [AdminCRUDController::class, 'getVerificationRequests'])->name('getpendingdata');
 
+//Verified Agencies
+Route::get('/verified-agencies', [AdminCRUDController::class, 'getVerifiedAgencies'])->name('getVerifiedAgencies');
+
+//Unverified Agencies
+Route::get('/unverified-agencies', [AdminCRUDController::class, 'getUnverifiedAgencies'])->name('getUnverifiedAgencies');
+
 //Show Agency
 Route::get('/agency/{id}', [AdminCRUDController::class, 'showagency'])->name('getagencyid');
 

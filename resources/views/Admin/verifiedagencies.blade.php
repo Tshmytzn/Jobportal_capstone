@@ -19,7 +19,7 @@
         {{-- cards --}}
         <div class="container-fluid py-4">
             <div class="row">
-                <table id="VerificationRequest_tbl" class="table table-hover" style="width:100%">
+                <table id="Verifiedagencies_tbl" class="table table-hover" style="width:100%">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -39,6 +39,7 @@
         </div>
     </main>
     @include('Admin.components.scripts')
+    @include('Admin.components.verifiedagenciesscripts')
 </body>
 
 </html>

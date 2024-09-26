@@ -115,58 +115,70 @@
             return;
         }
 
-        var formData = {
-            agency_id: agencyId,
-            status: 'Approved',
-            _token: '{{ csrf_token() }}'
-        };
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to approve this agency?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, approve it!',
+            cancelButtonText: 'No, cancel!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var formData = {
+                    agency_id: agencyId,
+                    status: 'Approved',
+                    _token: '{{ csrf_token() }}'
+                };
 
-        $.ajax({
-            url: "{{ route('approveAgency') }}",
-            type: "POST",
-            data: formData,
-            success: function(response) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: response.message,
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+                $.ajax({
+                    url: "{{ route('approveAgency') }}",
+                    type: "POST",
+                    data: formData,
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
 
-                setTimeout(function() {
-                    $('#VerificationRequest_tbl').DataTable().ajax.reload();
+                        setTimeout(function() {
+                            $('#VerificationRequest_tbl').DataTable().ajax.reload();
 
-                    $('#statusBadge').removeClass('bg-warning text-dark')
-                        .addClass('bg-success text-white')
-                        .text('Approved');
+                            $('#statusBadge').removeClass('bg-warning text-dark')
+                                .addClass('bg-success text-white')
+                                .text('Approved');
 
-                    var myModal = bootstrap.Modal.getInstance(document.getElementById(
-                        'agencyInfoModal'));
-                    myModal.hide();
-                }, 1500);
-            },
-            error: function(xhr) {
-                var errors = xhr.responseJSON.errors || {};
-                var errorMessage = '';
+                            var myModal = bootstrap.Modal.getInstance(document
+                                .getElementById('agencyInfoModal'));
+                            myModal.hide();
+                        }, 1500);
+                    },
+                    error: function(xhr) {
+                        var errors = xhr.responseJSON.errors || {};
+                        var errorMessage = '';
 
-                $.each(errors, function(key, value) {
-                    errorMessage += value + '<br>';
-                });
+                        $.each(errors, function(key, value) {
+                            errorMessage += value + '<br>';
+                        });
 
-                if (!errorMessage) {
-                    errorMessage = 'An unexpected error occurred.';
-                }
+                        if (!errorMessage) {
+                            errorMessage = 'An unexpected error occurred.';
+                        }
 
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    html: errorMessage,
-                    showConfirmButton: true
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            html: errorMessage,
+                            showConfirmButton: true
+                        });
+                    }
                 });
             }
         });
     }
+
 
     function rejectAgency() {
         var agencyId = $('#agencyIdInput').val();
@@ -181,54 +193,69 @@
             return;
         }
 
-        var formData = {
-            agency_id: agencyId,
-            status: 'Rejected',
-            _token: '{{ csrf_token() }}'
-        };
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to proceed with rejecting this agency?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, reject it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var formData = {
+                    agency_id: agencyId,
+                    status: 'Rejected',
+                    _token: '{{ csrf_token() }}'
+                };
 
-        $.ajax({
-            url: "{{ route('rejectAgency') }}",
-            type: "POST",
-            data: formData,
-            success: function(response) {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: response.message,
-                    showConfirmButton: false,
-                    timer: 1500
-                });
+                $.ajax({
+                    url: "{{ route('rejectAgency') }}",
+                    type: "POST",
+                    data: formData,
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: response.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
 
-                setTimeout(function() {
-                    $('#VerificationRequest_tbl').DataTable().ajax.reload();
+                        setTimeout(function() {
+                            $('#VerificationRequest_tbl').DataTable().ajax.reload();
 
-                    $('#statusBadge').removeClass('bg-warning text-dark')
-                        .addClass('bg-success text-white')
-                        .text('Rejected');
+                            $('#statusBadge').removeClass('bg-warning text-dark')
+                                .addClass(
+                                    'bg-danger text-white'
+                                    ) // Change to 'bg-danger' for rejected status
+                                .text('Rejected');
 
-                    var myModal = bootstrap.Modal.getInstance(document.getElementById(
-                        'agencyInfoModal'));
-                    myModal.hide();
-                }, 1500);
-            },
-            error: function(xhr) {
-                var errors = xhr.responseJSON.errors || {};
-                var errorMessage = '';
+                            var myModal = bootstrap.Modal.getInstance(document
+                                .getElementById('agencyInfoModal'));
+                            myModal.hide();
+                        }, 1500);
+                    },
+                    error: function(xhr) {
+                        var errors = xhr.responseJSON.errors || {};
+                        var errorMessage = '';
 
-                $.each(errors, function(key, value) {
-                    errorMessage += value + '<br>';
-                });
+                        $.each(errors, function(key, value) {
+                            errorMessage += value + '<br>';
+                        });
 
-                if (!errorMessage) {
-                    errorMessage = 'An unexpected error occurred.';
-                }
+                        if (!errorMessage) {
+                            errorMessage = 'An unexpected error occurred.';
+                        }
 
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    html: errorMessage,
-                    showConfirmButton: true
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            html: errorMessage,
+                            showConfirmButton: true
+                        });
+                    }
                 });
             }
         });

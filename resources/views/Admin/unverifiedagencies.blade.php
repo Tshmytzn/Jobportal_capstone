@@ -15,12 +15,28 @@
         {{-- cards --}}
         <div class="container-fluid py-4">
             <div class="row">
-
+                <table id="Unverifiedagencies_tbl" class="table table-hover" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Agency Name</th>
+                            <th>Email address</th>
+                            <th>geo_coverage</th>
+                            <th>Address</th>
+                            <th>Date Created</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
             @include('Admin.components.footer')
         </div>
     </main>
     @include('Admin.components.scripts')
+    @include('Admin.components.unverifiedagenciesscripts')
+
 </body>
 
 </html>
