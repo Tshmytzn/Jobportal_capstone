@@ -133,43 +133,47 @@
                     data-bs-parent="#sidebar-nav">
                     <li>
                         <a class="nav-link {{ $active == 'submittedapps' ? 'active' : '' }}"
-                            href="{{ route('submittedapplications') }}">
+                            href="{{ route('submittedapplications') }}"
+                            onclick="setActiveIcon(this, 'icon-submittedapps')">
                             <div
                                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-file-alt"></i>
+                                <i class="fas fa-file-alt" id="icon-submittedapps"
+                                    style="font-size: 12px; color: {{ $active == 'submittedapps' ? '#FFFFFF' : '#000000' }};"></i>
                             </div>
-                            <span class="nav-link-text ms-1">Submitted Applications
-                            </span>
+                            <span class="nav-link-text ms-1">Submitted Applications</span>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link {{ $active == 'sascompleted' ? 'active' : '' }}"
-                            href="{{ route('sascompleted') }}">
+                            href="{{ route('sascompleted') }}" onclick="setActiveIcon(this, 'icon-sascompleted')">
                             <div
                                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-file-alt"></i>
+                                <i class="fas fa-file-alt" id="icon-sascompleted"
+                                    style="font-size: 12px; color: {{ $active == 'sascompleted' ? '#FFFFFF' : '#000000' }};"></i>
                             </div>
-                            <span class="nav-link-text ms-1">Skills Assessment Completed
-                            </span>
+                            <span class="nav-link-text ms-1">Skills Assessment Completed</span>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link {{ $active == 'screenedapplicants' ? 'active' : '' }}"
-                            href="{{ route('screenedapplicants') }}">
+                            href="{{ route('screenedapplicants') }}"
+                            onclick="setActiveIcon(this, 'icon-screenedapplicants')">
                             <div
                                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-check-circle"></i>
+                                <i class="fas fa-check-circle" id="icon-screenedapplicants"
+                                    style="font-size: 12px; color: {{ $active == 'screenedapplicants' ? '#FFFFFF' : '#000000' }};"></i>
                             </div>
-                            <span class="nav-link-text ms-1">Screened Applicants
-                            </span>
+                            <span class="nav-link-text ms-1">Screened Applicants</span>
                         </a>
                     </li>
                     <li>
                         <a class="nav-link {{ $active == 'approvedapplications' ? 'active' : '' }}"
-                            href="{{ route('approvedapplications') }}">
+                            href="{{ route('approvedapplications') }}"
+                            onclick="setActiveIcon(this, 'icon-approvedapplications')">
                             <div
                                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-times-circle"></i>
+                                <i class="fas fa-times-circle" id="icon-approvedapplications"
+                                    style="font-size: 12px; color: {{ $active == 'approvedapplications' ? '#FFFFFF' : '#000000' }};"></i>
                             </div>
                             <span class="nav-link-text ms-1">Approved Applications</span>
                         </a>
@@ -214,3 +218,16 @@
         <button type="submit" class="btn bg-gradient-primary mt-3 w-100">Log out</button>
     </form>
 </aside>
+
+<script>
+    function setActiveIcon(linkElement, iconId) {
+
+        document.querySelectorAll('#agency-nav i').forEach((icon) => {
+            icon.style.color = '#000000';
+        });
+    
+
+        const activeIcon = document.getElementById(iconId);
+        activeIcon.style.color = '#FFFFFF';
+    }
+    </script>

@@ -1,4 +1,3 @@
-
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 "
     id="sidenav-main">
     <div class="sidenav-header">
@@ -40,8 +39,10 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed {{ in_array($active, ['verifiedrequests', 'verifiedagencies', 'unverifiedagencies']) ? '' : 'collapsed' }}" data-bs-target="#agency-nav" data-bs-toggle="collapse" href="#">
-                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <a class="nav-link collapsed {{ in_array($active, ['verifiedrequests', 'verifiedagencies', 'unverifiedagencies']) ? '' : 'collapsed' }}"
+                    data-bs-target="#agency-nav" data-bs-toggle="collapse" href="#">
+                    <div
+                        class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1"
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>Agency</title>
@@ -63,35 +64,50 @@
                     </div>
                     <span class="nav-link-text ms-1">Agency</span>
                     <i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="agency-nav" style="list-style: none" class="nav-content collapse {{ in_array($active, ['verifiedrequests', 'verifiedagencies', 'unverifiedagencies']) ? 'show' : '' }}" data-bs-parent="#sidebar-nav">
-                        <li>
-                            <a class="nav-link {{ $active == 'verifiedrequests' ? 'active' : '' }}" href="{{ route('verifiedrequests') }}">
-                                <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="fas fa-file-alt"></i>
-                                </div>
-                                <span class="nav-link-text ms-1">Verification Request</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="nav-link {{ $active == 'verifiedagencies' ? 'active' : '' }}" href="{{ route('verifiedagencies') }}">
-                                <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="fas fa-check-circle"></i>
-                                </div>
-                                <span class="nav-link-text ms-1">Verified Agencies</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="nav-link {{ $active == 'unverifiedagencies' ? 'active' : '' }}" href="{{ route('unverifiedagencies') }}">
-                                <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                    <i class="fas fa-times-circle"></i>
-                                </div>
-                                <span class="nav-link-text ms-1">Unverified Agencies</span>
-                            </a>
-                        </li>
-                    </ul>
+                </a>
+                <ul id="agency-nav" style="list-style: none"
+                    class="nav-content collapse {{ in_array($active, ['verifiedrequests', 'verifiedagencies', 'unverifiedagencies']) ? 'show' : '' }}"
+                    data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a class="nav-link {{ $active == 'verifiedrequests' ? 'active' : '' }}"
+                            href="{{ route('verifiedrequests') }}"
+                            onclick="setActiveIcon(this, 'icon-verifiedrequests')">
+                            <div
+                                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-file-alt" id="icon-verifiedrequests"
+                                    style="font-size: 12px; color: {{ $active == 'verifiedrequests' ? '#FFFFFF' : '#000000' }};"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Verification Request</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link {{ $active == 'verifiedagencies' ? 'active' : '' }}"
+                            href="{{ route('verifiedagencies') }}"
+                            onclick="setActiveIcon(this, 'icon-verifiedagencies')">
+                            <div
+                                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-check-circle" id="icon-verifiedagencies"
+                                    style=" font-size: 12px; color: {{ $active == 'verifiedagencies' ? '#FFFFFF' : '#000000' }};"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Verified Agencies</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link {{ $active == 'unverifiedagencies' ? 'active' : '' }}"
+                            href="{{ route('unverifiedagencies') }}"
+                            onclick="setActiveIcon(this, 'icon-unverifiedagencies')">
+                            <div
+                                class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                                <i class="fas fa-times-circle" id="icon-unverifiedagencies"
+                                    style="font-size: 12px; color: {{ $active == 'unverifiedagencies' ? '#FFFFFF' : '#000000' }};"></i>
+                            </div>
+                            <span class="nav-link-text ms-1">Unverified Agencies</span>
+                        </a>
+                    </li>
+                </ul>
+
             </li>
-            
+
 
             <li class="nav-item">
                 <a class="nav-link {{ $active == 'Jobseeker' ? 'active' : '' }}" href="{{ route('jobseeker') }}">
@@ -101,7 +117,8 @@
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>JobSeeker</title>
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF"
+                                    fill-rule="nonzero">
                                     <g transform="translate(1716.000000, 291.000000)">
                                         <g transform="translate(304.000000, 151.000000)">
                                             <polygon class="color-background opacity-6"
@@ -124,14 +141,16 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {{ $active == 'jobcategory' ? 'active' : '' }}" href="{{ route('jobcategory') }}">
+                <a class="nav-link {{ $active == 'jobcategory' ? 'active' : '' }}"
+                    href="{{ route('jobcategory') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1"
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>JobSeeker</title>
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF"
+                                    fill-rule="nonzero">
                                     <g transform="translate(1716.000000, 291.000000)">
                                         <g transform="translate(304.000000, 151.000000)">
                                             <polygon class="color-background opacity-6"
@@ -154,14 +173,16 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {{ $active == 'SkillAssessment' ? 'active' : '' }}" href="{{ route('adminskillassessment') }}">
+                <a class="nav-link {{ $active == 'SkillAssessment' ? 'active' : '' }}"
+                    href="{{ route('adminskillassessment') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1"
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>Skill Assessment</title>
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                                <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF"
+                                    fill-rule="nonzero">
                                     <g transform="translate(1716.000000, 291.000000)">
                                         <g transform="translate(304.000000, 151.000000)">
                                             <polygon class="color-background opacity-6"
@@ -191,20 +212,28 @@
                     href="{{ route('administrators') }}">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1"
+                            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>Administrators</title>
                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                              <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                                <g transform="translate(1716.000000, 291.000000)">
-                                  <g transform="translate(1.000000, 0.000000)">
-                                    <path class="color-background opacity-6" d="M45,0 L26,0 C25.447,0 25,0.447 25,1 L25,20 C25,20.379 25.214,20.725 25.553,20.895 C25.694,20.965 25.848,21 26,21 C26.212,21 26.424,20.933 26.6,20.8 L34.333,15 L45,15 C45.553,15 46,14.553 46,14 L46,1 C46,0.447 45.553,0 45,0 Z"></path>
-                                    <path class="color-background" d="M22.883,32.86 C20.761,32.012 17.324,31 13,31 C8.676,31 5.239,32.012 3.116,32.86 C1.224,33.619 0,35.438 0,37.494 L0,41 C0,41.553 0.447,42 1,42 L25,42 C25.553,42 26,41.553 26,41 L26,37.494 C26,35.438 24.776,33.619 22.883,32.86 Z"></path>
-                                    <path class="color-background" d="M13,28 C17.432,28 21,22.529 21,18 C21,13.589 17.411,10 13,10 C8.589,10 5,13.589 5,18 C5,22.529 8.568,28 13,28 Z"></path>
-                                  </g>
+                                <g transform="translate(-1717.000000, -291.000000)" fill="#FFFFFF"
+                                    fill-rule="nonzero">
+                                    <g transform="translate(1716.000000, 291.000000)">
+                                        <g transform="translate(1.000000, 0.000000)">
+                                            <path class="color-background opacity-6"
+                                                d="M45,0 L26,0 C25.447,0 25,0.447 25,1 L25,20 C25,20.379 25.214,20.725 25.553,20.895 C25.694,20.965 25.848,21 26,21 C26.212,21 26.424,20.933 26.6,20.8 L34.333,15 L45,15 C45.553,15 46,14.553 46,14 L46,1 C46,0.447 45.553,0 45,0 Z">
+                                            </path>
+                                            <path class="color-background"
+                                                d="M22.883,32.86 C20.761,32.012 17.324,31 13,31 C8.676,31 5.239,32.012 3.116,32.86 C1.224,33.619 0,35.438 0,37.494 L0,41 C0,41.553 0.447,42 1,42 L25,42 C25.553,42 26,41.553 26,41 L26,37.494 C26,35.438 24.776,33.619 22.883,32.86 Z">
+                                            </path>
+                                            <path class="color-background"
+                                                d="M13,28 C17.432,28 21,22.529 21,18 C21,13.589 17.411,10 13,10 C8.589,10 5,13.589 5,18 C5,22.529 8.568,28 13,28 Z">
+                                            </path>
+                                        </g>
+                                    </g>
                                 </g>
-                              </g>
                             </g>
-                          </svg>
+                        </svg>
                     </div>
                     <span class="nav-link-text ms-1">Administrators</span>
                 </a>
@@ -238,8 +267,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ $active == 'CustomerInquiries' ? 'active' : '' }}" href="{{ route('customerinquiries') }} "
-                    href="../pages/sign-in.html">
+                <a class="nav-link {{ $active == 'CustomerInquiries' ? 'active' : '' }}"
+                    href="{{ route('customerinquiries') }} " href="../pages/sign-in.html">
                     <div
                         class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <svg width="12px" height="12px" viewBox="0 0 40 44" version="1.1"
@@ -275,3 +304,14 @@
     </form>
     </div>
 </aside>
+
+<script>
+    function setActiveIcon(linkElement, iconId) {
+        document.querySelectorAll('#agency-nav i').forEach((icon) => {
+            icon.style.color = '#000000';
+        });
+
+        const activeIcon = document.getElementById(iconId);
+        activeIcon.style.color = '#FFFFFF';
+    }
+</script>
