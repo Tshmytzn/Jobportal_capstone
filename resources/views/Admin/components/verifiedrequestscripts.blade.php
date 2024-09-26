@@ -1,33 +1,35 @@
 <script>
     $(document).ready(function() {
-        $('#Jobseeker_tbl').DataTable({
+        $('#VerificationRequest_tbl').DataTable({
             processing: true,
             serverSide: false,
-            destroy:true, 
+            destroy: true,
             ajax: {
-                url: "{{route('jobseekers')}}",
+                url: "{{ route('getpendingdata') }}",
                 type: 'GET',
                 dataSrc: 'data',
             },
-            columns: [
-                {
-                    data: 'js_id',
-                    name: 'js_id'
+            columns: [{
+                    data: 'id',
+                    name: 'id'
                 },
                 {
                     data: null,
                     render: function(data, type, row) {
-                        const name = data.js_firstname +' '+data.js_middlename+' '+data.js_lastname
-                        return name;
+                        return row.agency_name;
                     }
                 },
                 {
-                    data: 'js_email',
-                    name: 'js_email'
+                    data: 'email_address',
+                    name: 'email_address'
                 },
                 {
-                    data: 'js_contactnumber',
-                    name: 'js_contactnumber'
+                    data: 'geo_coverage',
+                    name: 'geo_coverage'
+                },
+                {
+                    data: 'agency_address',
+                    name: 'agency_address'
                 },
                 {
                     data: 'created_at',
@@ -40,8 +42,8 @@
                     data: null,
                     render: function(data, type, row) {
                         return `
-                    <button class="btn btn-sm bgp-table delete-btn" data-bs-toggle='modal' data-bs-target='#banjobseeker' data-id="${row.js_id}">Block</button>
-                `;
+                            <button class="btn btn-sm bgp-table delete-btn" data-bs-toggle='modal' data-bs-target='#banjobseeker' data-id="${row.id}">Review</button>
+                        `;
                     }
                 }
             ]

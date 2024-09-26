@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\JobCategory; 
 use App\Models\Jobseeker; 
 use App\Models\Contact; 
+use App\Models\Agency;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
@@ -105,6 +106,16 @@ class AdminCRUDController extends Controller
         $jobseekers = Jobseeker::select('js_id', 'js_firstname','js_middlename', 'js_lastname', 'js_email', 'js_contactnumber', 'created_at')->get();
         return response()->json(['data' => $jobseekers]);
     }
+
+    public function getVerificationRequests(Request $request)
+    {
+        $pendingAgencies = Agency::select('id', 'agency_name', 'agency_address', 'email_address', 'contact_number', 'landline_number', 'geo_coverage', 'employee_count', 'agency_business_permit', 'agency_dti_permit', 'agency_bir_permit', 'agency_image', 'created_at', 'updated_at', 'status')
+                                  ->where('status', 'pending') 
+                                  ->get();
+        
+        return response()->json(['data' => $pendingAgencies]);
+    }
+    
 
     public function getContacts(Request $request)
     {

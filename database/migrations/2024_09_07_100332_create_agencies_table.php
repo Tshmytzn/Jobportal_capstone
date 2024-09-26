@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('agency_bir_permit')->nullable(); 
             $table->string('agency_image')->nullable(); 
             $table->string('password'); 
-            $table->string('status')->nullable();
+            $table->enum('status', ['pending', 'approved', 'rejected', 'suspended'])->default('pending'); 
             $table->timestamps(); 
         });
     }

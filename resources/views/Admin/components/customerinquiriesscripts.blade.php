@@ -26,6 +26,10 @@
                 },
                 {
                     data: 'created_at',
+                    render: function(data) {
+                        const date = new Date(data);
+                        return date.toLocaleString();
+                    }
                 },
                 // {
                 //     data: null,

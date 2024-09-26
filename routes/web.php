@@ -35,6 +35,8 @@ Route::get('/Job/Seekers', [AdminCRUDController::class, 'getJobseekers'])->name(
 // Contacts View
 Route::get('/Contact/Inquiries', [AdminCRUDController::class, 'getContacts'])->name('getContacts');
 
+//Verification Request
+Route::get('/verification-requests', [AdminCRUDController::class, 'getVerificationRequests'])->name('getpendingdata');
 
 //Job Categories Admin View
 Route::get('/Job/Categories', [AdminCRUDController::class, 'getJobCategories'])->name('jobcategories');
