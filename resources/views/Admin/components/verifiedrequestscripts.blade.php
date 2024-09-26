@@ -48,7 +48,7 @@
                 }
             ]
         });
-        
+
         $('#agencyInfoModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
             var agencyId = button.data('id');
@@ -61,9 +61,9 @@
 
                     var modal = $('#agencyInfoModal');
                     modal.find('#agencyIdInput').val(agency.id);
-                    document.getElementById('agencyImage').src = agency.agency_image 
-                            ? '/agencyfiles/' + agency.agency_image 
-                            : '/agencyfiles/default_image.jpg';
+                    document.getElementById('agencyImage').src = agency.agency_image ?
+                        '/agencyfiles/' + agency.agency_image :
+                        '/agencyfiles/default_image.jpg';
                     modal.find('#agencyName').val(agency.agency_name);
                     modal.find('#agencyAddress').val(agency.agency_address);
                     modal.find('#emailAddress').val(agency.email_address);
@@ -71,9 +71,12 @@
                     modal.find('#landlineNumber').val(agency.landline_number);
                     modal.find('#geoCoverage').val(agency.geo_coverage);
                     modal.find('#employeeCount').val(agency.employee_count);
-                    document.getElementById('businessPermit').src = '/agencyfiles/'+agency.agency_business_permit;
-                    document.getElementById('dtiPermit').src = '/agencyfiles/'+agency.agency_dti_permit;
-                    document.getElementById('birPermit').src = '/agencyfiles/'+agency.agency_bir_permit;
+                    document.getElementById('businessPermit').src = '/agencyfiles/' + agency
+                        .agency_business_permit;
+                    document.getElementById('dtiPermit').src = '/agencyfiles/' + agency
+                        .agency_dti_permit;
+                    document.getElementById('birPermit').src = '/agencyfiles/' + agency
+                        .agency_bir_permit;
 
                     var statusBadge = modal.find('#statusBadge');
                     statusBadge.text(agency.status.charAt(0).toUpperCase() + agency.status
@@ -96,5 +99,138 @@
                 }
             });
         });
+
     });
+
+    function approveAgency() {
+        var agencyId = $('#agencyIdInput').val();
+
+        if (!agencyId) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Agency ID is missing.',
+                showConfirmButton: true
+            });
+            return;
+        }
+
+        var formData = {
+            agency_id: agencyId,
+            status: 'Approved',
+            _token: '{{ csrf_token() }}'
+        };
+
+        $.ajax({
+            url: "{{ route('approveAgency') }}",
+            type: "POST",
+            data: formData,
+            success: function(response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: response.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+
+                setTimeout(function() {
+                    $('#VerificationRequest_tbl').DataTable().ajax.reload();
+
+                    $('#statusBadge').removeClass('bg-warning text-dark')
+                        .addClass('bg-success text-white')
+                        .text('Approved');
+
+                    var myModal = bootstrap.Modal.getInstance(document.getElementById(
+                        'agencyInfoModal'));
+                    myModal.hide();
+                }, 1500);
+            },
+            error: function(xhr) {
+                var errors = xhr.responseJSON.errors || {};
+                var errorMessage = '';
+
+                $.each(errors, function(key, value) {
+                    errorMessage += value + '<br>';
+                });
+
+                if (!errorMessage) {
+                    errorMessage = 'An unexpected error occurred.';
+                }
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    html: errorMessage,
+                    showConfirmButton: true
+                });
+            }
+        });
+    }
+
+    function rejectAgency() {
+        var agencyId = $('#agencyIdInput').val();
+
+        if (!agencyId) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Agency ID is missing.',
+                showConfirmButton: true
+            });
+            return;
+        }
+
+        var formData = {
+            agency_id: agencyId,
+            status: 'Rejected',
+            _token: '{{ csrf_token() }}'
+        };
+
+        $.ajax({
+            url: "{{ route('rejectAgency') }}",
+            type: "POST",
+            data: formData,
+            success: function(response) {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: response.message,
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+
+                setTimeout(function() {
+                    $('#VerificationRequest_tbl').DataTable().ajax.reload();
+
+                    $('#statusBadge').removeClass('bg-warning text-dark')
+                        .addClass('bg-success text-white')
+                        .text('Rejected');
+
+                    var myModal = bootstrap.Modal.getInstance(document.getElementById(
+                        'agencyInfoModal'));
+                    myModal.hide();
+                }, 1500);
+            },
+            error: function(xhr) {
+                var errors = xhr.responseJSON.errors || {};
+                var errorMessage = '';
+
+                $.each(errors, function(key, value) {
+                    errorMessage += value + '<br>';
+                });
+
+                if (!errorMessage) {
+                    errorMessage = 'An unexpected error occurred.';
+                }
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    html: errorMessage,
+                    showConfirmButton: true
+                });
+            }
+        });
+    }
 </script>

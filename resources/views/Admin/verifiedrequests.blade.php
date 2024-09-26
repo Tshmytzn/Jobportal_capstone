@@ -44,6 +44,7 @@
     <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
     <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
     <script src="../assets/js/plugins/chartjs.min.js"></script> 
+
     @include('Admin.components.verifiedrequestscripts')
     @include('Admin.components.modals.verificationrequestsmodals')
 

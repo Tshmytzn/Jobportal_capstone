@@ -41,6 +41,12 @@ Route::get('/verification-requests', [AdminCRUDController::class, 'getVerificati
 //Show Agency
 Route::get('/agency/{id}', [AdminCRUDController::class, 'showagency'])->name('getagencyid');
 
+//Approve Agency
+Route::post('/approveAgency', [AdminCRUDController::class, 'approveAgency'])->name('approveAgency');
+
+//Reject Agency
+Route::post('/rejectAgency', [AdminCRUDController::class, 'rejectAgency'])->name('rejectAgency');
+
 //Job Categories Admin View
 Route::get('/Job/Categories', [AdminCRUDController::class, 'getJobCategories'])->name('jobcategories');
 

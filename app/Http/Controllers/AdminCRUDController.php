@@ -145,6 +145,42 @@ class AdminCRUDController extends Controller
 
         return response()->json(['data' => $agency], 200);
     }
+
+    public function approveAgency(Request $request)
+    {
+        $request->validate([
+            'agency_id' => 'required|exists:agencies,id', 
+            'status' => 'required|string',
+        ]);
+    
+        $agency = Agency::find($request->agency_id);
+        if ($agency) {
+            $agency->status = $request->status;
+            $agency->save();
+    
+            return response()->json(['message' => 'Agency has been Approved successfully!']);
+        }
+    
+        return response()->json(['message' => 'Agency not found.'], 404);
+    }
+    
+    public function rejectAgency(Request $request)
+    {
+        $request->validate([
+            'agency_id' => 'required|exists:agencies,id', 
+            'status' => 'required|string',
+        ]);
+    
+        $agency = Agency::find($request->agency_id);
+        if ($agency) {
+            $agency->status = $request->status;
+            $agency->save();
+    
+            return response()->json(['message' => 'Agency has been Rejected successfully!']);
+        }
+    
+        return response()->json(['message' => 'Agency not found.'], 404);
+    }
     
 
     public function getContacts(Request $request)
