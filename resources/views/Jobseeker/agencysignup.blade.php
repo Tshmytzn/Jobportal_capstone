@@ -88,7 +88,7 @@
                                         <span class="input-group-text">+63</span>
                                         <input type="tel" id="contact_number" name="contact_number"
                                             class="form-control" placeholder="9123456789"
-                                            aria-label="Contact Number" pattern="[0-9]{10}">
+                                            aria-label="Contact Number" pattern="[0-9]{10}" maxlength="10">
                                     </div>
                                 </div>
 
@@ -98,7 +98,7 @@
                                     <div class="input-group">
                                         <input type="tel" id="landline_number" name="landline_number"
                                             class="form-control" placeholder="02-12345678"
-                                            aria-label="Landline Number" pattern="[0-9]{2}-[0-9]{8}">
+                                            aria-label="Landline Number" pattern="[0-9]{2}-[0-9]{8}" maxlength="11">
                                     </div>
                                 </div>
 

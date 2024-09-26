@@ -38,6 +38,9 @@ Route::get('/Contact/Inquiries', [AdminCRUDController::class, 'getContacts'])->n
 //Verification Request
 Route::get('/verification-requests', [AdminCRUDController::class, 'getVerificationRequests'])->name('getpendingdata');
 
+//Show Agency
+Route::get('/agency/{id}', [AdminCRUDController::class, 'showagency'])->name('getagencyid');
+
 //Job Categories Admin View
 Route::get('/Job/Categories', [AdminCRUDController::class, 'getJobCategories'])->name('jobcategories');
 

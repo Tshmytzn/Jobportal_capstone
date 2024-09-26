@@ -115,6 +115,36 @@ class AdminCRUDController extends Controller
         
         return response()->json(['data' => $pendingAgencies]);
     }
+
+    public function showagency($id)
+    {
+        $agency = Agency::find($id);
+
+        if (!$agency) {
+            return response()->json(['message' => 'Agency not found'], 404);
+        }
+
+        $agencyData = [
+            'id' => $agency->id,
+            'agency_name' => $agency->agency_name,
+            'agency_address' => $agency->agency_address,
+            'email_address' => $agency->email_address,
+            'contact_number' => $agency->contact_number,
+            'landline_number' => $agency->landline_number,
+            'geo_coverage' => $agency->geo_coverage,
+            'employee_count' => $agency->employee_count,
+            'agency_image' => $agency->agency_image ? asset('agency_profile/' . $agency->agency_image) : null,
+            'business_permit' => $agency->agency_business_permit ? asset($agency->agency_business_permit) : null,
+            'dti_permit' => $agency->agency_dti_permit ? asset($agency->agency_dti_permit) : null,
+            'bir_permit' => $agency->agency_bir_permit ? asset($agency->agency_bir_permit) : null,
+            'created_at' => $agency->created_at,
+            'updated_at' => $agency->updated_at,
+            'status' => $agency->status,
+        ];
+
+
+        return response()->json(['data' => $agency], 200);
+    }
     
 
     public function getContacts(Request $request)

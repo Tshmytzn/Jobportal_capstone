@@ -9,13 +9,31 @@
 
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
-        @include('Admin.components.navbar', ['headtitle' => 'Verified Agencies'], ['pagetitle' => 'Agency'])        <!-- End Navbar -->
+        @include(
+            'Admin.components.navbar',
+            ['headtitle' => 'Verified Agencies'],
+            ['pagetitle' => 'Agency']
+        ) <!-- End Navbar -->
         <!-- End Navbar -->
 
         {{-- cards --}}
         <div class="container-fluid py-4">
             <div class="row">
-
+                <table id="VerificationRequest_tbl" class="table table-hover" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Agency Name</th>
+                            <th>Email address</th>
+                            <th>geo_coverage</th>
+                            <th>Address</th>
+                            <th>Date Created</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
             @include('Admin.components.footer')
         </div>

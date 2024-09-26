@@ -9,7 +9,11 @@
 
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
-        @include('Admin.components.navbar', ['headtitle' => 'Verification Request'], ['pagetitle' => 'Agency'])
+        @include(
+            'Admin.components.navbar',
+            ['headtitle' => 'Verification Request'],
+            ['pagetitle' => 'Agency']
+        )
         <!-- End Navbar -->
 
         {{-- cards --}}
@@ -23,9 +27,8 @@
                             <th>Email address</th>
                             <th>geo_coverage</th>
                             <th>Address</th>
-                            <th>Date Created</th>\
+                            <th>Date Created</th>
                             <th>Action</th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -35,8 +38,15 @@
             @include('Admin.components.footer')
         </div>
     </main>
-    @include('Admin.components.scripts')
+    <!--   Core JS Files   -->
+    <script src="../assets/js/core/popper.min.js"></script>
+    <script src="../assets/js/core/bootstrap.min.js"></script>
+    <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+    <script src="../assets/js/plugins/chartjs.min.js"></script> 
     @include('Admin.components.verifiedrequestscripts')
+    @include('Admin.components.modals.verificationrequestsmodals')
+
 </body>
 
 </html>
