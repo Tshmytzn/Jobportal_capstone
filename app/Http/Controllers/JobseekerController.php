@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Jobseeker;
 use App\Models\JobCategory;
 use App\Models\Contact;
+use App\Models\JobDetails;
 use Illuminate\Support\Facades\Hash;
 
 class JobseekerController extends Controller
@@ -131,6 +132,13 @@ class JobseekerController extends Controller
     {
         $jobCategories = JobCategory::all(); 
         return view('Jobseeker.jobs', compact('jobCategories'));
+    }
+    
+    public function jobslist(Request $request)
+    {
+        $jobs = JobDetails::all();
+
+        return view('Jobseeker.jobslist', compact( 'jobs'));
     }
 
     public function SaveContact(Request $request)

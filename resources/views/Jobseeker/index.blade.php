@@ -56,17 +56,20 @@
                     <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="service-item text-center rounded p-4">
                             <div class="service-icon d-inline-block bg-light rounded p-4 mb-4">
-                                <img src="{{ asset('job_categories/' . $category->image) }}" alt="{{ $category->name }}" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
-
+                                <img src="{{ asset('job_categories/' . $category->image) }}" alt="{{ $category->name }}"
+                                    class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
                             </div>
                             <div class="service-content">
                                 <h4 class="mb-4">{{ $category->name }}</h4>
-                                <p class="mb-4">{{ Str::limit($category->description, 25, '...') }}</p> <!-- Truncate description here -->
-                                <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">See Jobs</a>
+                                <p class="mb-4">{{ Str::limit($category->description, 25, '...') }}</p>
+
+                                <a href=""
+                                    class="btn btn-light rounded-pill text-primary py-2 px-4">See Jobs</a>
                             </div>
                         </div>
                     </div>
                 @endforeach
+
             </div>
         </div>
     </div>
