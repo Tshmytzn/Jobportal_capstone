@@ -53,7 +53,7 @@
 <script>
     $(document).ready(function() {
         $('#JobCategories_tbl').DataTable({
-            processing: true,
+            processing: false,
             serverSide: true,
             ajax: {
                 url: '/Job/Categories',

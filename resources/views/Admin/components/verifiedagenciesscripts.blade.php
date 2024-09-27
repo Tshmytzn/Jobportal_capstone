@@ -1,7 +1,7 @@
 <script>
     $(document).ready(function() {
         $('#Verifiedagencies_tbl').DataTable({
-            processing: true,
+            processing: false,
             serverSide: false,
             destroy: true,
             ajax: {
