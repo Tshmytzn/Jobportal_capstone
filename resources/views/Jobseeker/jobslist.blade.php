@@ -64,7 +64,7 @@
                             <img src="{{ asset('agencyfiles/job_image/' . $job->job_image) }}" alt="{{ $job->title }}" class="img-fluid" style="width: 150px; height: 150px; object-fit: cover;">
                         </div>
                         <div class="service-content">
-                            <h4 class="mb-4">{{ $job->title }}</h4>
+                            <h4 class="mb-4">{{ $job->job_title }}</h4>
                             <p class="mb-2"><strong>Location:</strong> {{ $job->job_location }}</p>
                             <p class="mb-2"><strong>Type:</strong> {{ $job->job_type }}</p>
                             <p class="mb-4">{{ Str::limit(strip_tags($job->job_description), 30) }}</p>
