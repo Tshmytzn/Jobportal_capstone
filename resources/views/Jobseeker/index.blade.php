@@ -35,10 +35,6 @@
     </div>
     <!-- Hero Header End -->
 
-    </div>
-    <!-- Navbar & Hero End -->
-
-
     <!-- Service Start -->
     <div class="container-fluid service py-5">
         <div class="container py-5">
@@ -49,10 +45,10 @@
                     electrical work to welding, plumbing, and transportation, our platform connects you with essential
                     industries. Whether you're starting your career or seeking new opportunities, these vital roles
                     drive the workforce and offer rewarding paths in skilled trades.</p>
-
             </div>
+
             <div class="row g-4 justify-content-center">
-                @foreach ($jobCategories as $category)
+                @foreach ($jobCategories->take(8) as $category)
                     <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="service-item text-center rounded p-4">
                             <div class="service-icon d-inline-block bg-light rounded p-4 mb-4">
@@ -63,18 +59,15 @@
                                 <h4 class="mb-4">{{ $category->name }}</h4>
                                 <p class="mb-4">{{ Str::limit($category->description, 25, '...') }}</p>
 
-                                <a href=""
-                                    class="btn btn-light rounded-pill text-primary py-2 px-4">See Jobs</a>
+                                <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">See Jobs</a>
                             </div>
                         </div>
                     </div>
                 @endforeach
-
             </div>
         </div>
     </div>
     <!-- Service End -->
-
 
     <!-- Feature Start -->
     <div class="container-fluid feature overflow-hidden py-5">

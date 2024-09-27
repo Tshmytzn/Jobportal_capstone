@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Agency;
 use Illuminate\Http\Request;
 use App\Models\Jobseeker;
 use App\Models\JobCategory;
@@ -139,6 +140,13 @@ class JobseekerController extends Controller
         $jobs = JobDetails::all();
 
         return view('Jobseeker.jobslist', compact( 'jobs'));
+    }
+
+    public function agencylist(Request $request)
+    {
+        $agency = Agency::where ('status', 'approved')->get();
+
+        return view('Jobseeker.agencies', compact( 'agency'));
     }
 
     public function SaveContact(Request $request)

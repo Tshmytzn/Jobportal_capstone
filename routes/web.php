@@ -130,7 +130,11 @@ Route::get('/Login', function () { return view('Jobseeker.Login'); })->name('log
 Route::get('/jobslist', [JobseekerController::class, 'jobslist'])->name('jobslist');
 
 Route::get('/ContactUs', function () { return view('Jobseeker.contactus'); })->name('contactus');
-Route::get('/Agency', function () { return view('Jobseeker.agencies'); })->name('agencies');
+
+//Show Agencylist
+Route::get('/Agency', [JobseekerController::class, 'agencylist'])->name('agencies');
+// Route::get('/Agency', function () { return view('Jobseeker.agencies'); })->name('agencies');
+
 Route::get('/AgencyFeedback', function () { return view('Jobseeker.agencyfeedback'); })->name('agencyfeedback');
 Route::get('/ContactUs', function () { return view('Jobseeker.contactus'); })->name('contactus');
 Route::get('/404', function () { return view('Jobseeker.404'); })->name('404');
