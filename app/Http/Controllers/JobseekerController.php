@@ -138,9 +138,21 @@ class JobseekerController extends Controller
     public function jobslist(Request $request)
     {
         $jobs = JobDetails::all();
+        $jobCategories = JobCategory::all(); 
 
-        return view('Jobseeker.jobslist', compact( 'jobs'));
+        return view('Jobseeker.jobslist', compact( 'jobs','jobCategories'));
     }
+
+    public function filterJobs(Request $request)
+    {
+        $categoryId = $request->input('category');
+
+        $jobs = JobDetails::where('category_id', $categoryId)->get();
+        $jobCategories = JobCategory::all(); 
+
+        return view('Jobseeker.jobslist', compact('jobs', 'jobCategories'));
+    }
+
 
     public function agencylist(Request $request)
     {
