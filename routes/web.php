@@ -118,6 +118,9 @@ Route::post('/logoutAgency', [AuthController::class, 'logoutAgency'])->name('log
 Route::get('/Blank2', function () { return view('Jobseeker.blank'); })->name('blankpage');
 Route::get('/', [JobseekerController::class, 'index'])->name('homepage');
 Route::get('/Jobs', [JobseekerController::class, 'jobs'])->name('jobs');
+Route::get('/AgencyReview', function () {
+    return view('Jobseeker.accountReview');
+})->name('accountReview');
 
 Route::get('/About', function () { return view('Jobseeker.about'); })->name('about');
 Route::get('/SignUp', function () { return view('Jobseeker.signup'); })->name('signup');
@@ -137,6 +140,7 @@ Route::get('/ContactUs', function () { return view('Jobseeker.contactus'); })->n
 //Show Agencylist
 Route::get('/Agency', [JobseekerController::class, 'agencylist'])->name('agencies');
 // Route::get('/Agency', function () { return view('Jobseeker.agencies'); })->name('agencies');
+
 
 Route::get('/AgencyFeedback', function () { return view('Jobseeker.agencyfeedback'); })->name('agencyfeedback');
 Route::get('/ContactUs', function () { return view('Jobseeker.contactus'); })->name('contactus');
