@@ -11,7 +11,9 @@
             contentType: false,
             success: function(response) {
                 if (response.status === 'error') {
+                 
                     Swal.fire('Error', response.message, 'error');
+                    
                 } else {
                     Swal.fire({
                         title: 'Success',

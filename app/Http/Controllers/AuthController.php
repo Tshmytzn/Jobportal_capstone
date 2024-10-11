@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Models\Agency;
 
 
 class AuthController extends Controller
@@ -28,21 +29,22 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        $user = DB::table('agencies')
-            ->where('email_address', $request->input('email'))
-            ->first();
+        $user = Agency::where('email_address', $request->input('email'))->first();
+        if($user->status=='approved'){
+            if ($user && Hash::check($request->input('password'), $user->password)) {
+                Auth::loginUsingId($user->id);
 
-        if ($user && Hash::check($request->input('password'), $user->password)) {
-            Auth::loginUsingId($user->id); 
+                session([
+                    'agency_id' => $user->id,
+                    'agency_name' => $user->agency_name,
+                ]);
 
-            session([
-                'agency_id' => $user->id, 
-                'agency_name' => $user->agency_name, 
-            ]);
-
-            return response()->json(['message' => 'Login successful!', 'status' => 'success']);
-        } else {
-            return response()->json(['message' => 'Invalid credentials.', 'status' => 'error']);
+                return response()->json(['message' => 'Login successful!', 'status' => 'success']);
+            } else {
+                return response()->json(['message' => 'Invalid credentials.', 'status' => 'error']);
+            }
+        }else{
+            return response()->json(['message' => 'Invalid credentials.', 'status' => 'checking','user_id'=>$user->id]);
         }
     }
 

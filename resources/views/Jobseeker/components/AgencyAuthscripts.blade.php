@@ -12,6 +12,8 @@
             success: function(response) {
                 if (response.status === 'error') {
                     Swal.fire('Error', response.message, 'error');
+                }else if(response.status === 'checking'){
+                    window.location.replace('/AgencyReview?id='+response.user_id);
                 } else {
                     Swal.fire({
                         title: 'Success',
@@ -26,7 +28,7 @@
             },
             error: function(xhr) {
                 console.error('AJAX Error:', xhr.responseText); // Log the error
-                Swal.fire('Error', 'Invalid Credentials.', 'error');
+                
             }
         });
     }
