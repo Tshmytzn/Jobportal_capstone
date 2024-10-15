@@ -177,5 +177,30 @@ class JobseekerController extends Controller
 
         return response()->json(['message' => 'Inquiry Successfully Submitted!'], 201);
     }
+
+    public function searchfilterjobs(Request $request) {
+        // Start a query on the JobDetails model
+        $query = JobDetails::query();
+        
+        // Check if employment type is provided, and apply a filter if so
+        if (!empty($request->employmenttype)) {
+            $query->where('job_type', $request->employmenttype);
+        }
+    
+        // Check if category is provided, and apply a filter if so
+        if (!empty($request->category)) {
+            $query->where('category_id', $request->category);
+        }
+
+        if (!empty($request->joblocation)) {
+            $query->where('job_location', $request->joblocation);
+        }
+        // Execute the query and get the filtered job categories
+        $jobcategory = $query->get();
+    
+        // Return the response as JSON with status 'success' and the job data
+        return response()->json(['status' => 'success', 'data' => $jobcategory], 201);
+    }
+    
     
 }

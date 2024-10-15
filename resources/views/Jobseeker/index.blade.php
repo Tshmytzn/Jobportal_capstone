@@ -25,7 +25,7 @@
                     the economy? The Job Portal for Blue-Collar Workers by PESO connects job seekers with a wide range
                     of opportunities in skilled trades and essential industries.
                 </p>
-                <a href="#" class="btn btn-primary rounded-pill py-3 px-5 wow fadeInUp" data-wow-delay="0.7s">Get
+                <a href="#getstartedwithjobs" class="btn btn-primary rounded-pill py-3 px-5 wow fadeInUp" data-wow-delay="0.7s">Get
                     Started</a>
             </div>
             <div class="col-lg-6 wow fadeInRight" data-wow-delay="0.2s">
@@ -47,7 +47,7 @@
                     drive the workforce and offer rewarding paths in skilled trades.</p>
             </div>
 
-            <div class="row g-4 justify-content-center">
+            <div id="getstartedwithjobs" class="row g-4 justify-content-center">
                 @foreach ($jobCategories->take(8) as $category)
                     <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
                         <div class="service-item text-center rounded p-4">
@@ -59,7 +59,7 @@
                                 <h4 class="mb-4">{{ $category->name }}</h4>
                                 <p class="mb-4">{{ Str::limit($category->description, 25, '...') }}</p>
 
-                                <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">See Jobs</a>
+                                <a href="{{route('jobslist')}}?categoryid={{$category->id}}" class="btn btn-light rounded-pill text-primary py-2 px-4">See Jobs</a>
                             </div>
                         </div>
                     </div>
@@ -130,9 +130,7 @@
                     </div>
                 </div>
                 <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="my-3">
-                        <a href="#" class="btn btn-primary d-inline rounded-pill px-5 py-3">More Features</a>
-                    </div>
+
                 </div>
             </div>
 
@@ -168,9 +166,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="my-4">
-                        <a href="#" class="btn btn-primary rounded-pill py-3 px-5 mt-4">Get Started</a>
-                    </div>
+
                 </div>
             </div>
 

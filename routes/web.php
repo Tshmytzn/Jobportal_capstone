@@ -132,8 +132,12 @@ Route::get('/Login', function () { return view('Jobseeker.Login'); })->name('log
 //Show Jobs in Jobslist
 Route::get('/jobslist', [JobseekerController::class, 'jobslist'])->name('jobslist');
 
+//filter jobs 
+Route::post('/searchfilterjobs', [JobseekerController::class, 'searchfilterjobs'])->name('searchfilterjobs');
+
+
 //filter jobs by category_id
-Route::get('/jobs/filter', [JobseekerController::class, 'filterJobs'])->name('filterJobs');
+Route::get('/jobs/filter', action: [JobseekerController::class, 'filterJobs'])->name('filterJobs');
 
 Route::get('/ContactUs', function () { return view('Jobseeker.contactus'); })->name('contactus');
 

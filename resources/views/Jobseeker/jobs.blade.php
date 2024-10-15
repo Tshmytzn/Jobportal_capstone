@@ -35,7 +35,7 @@
                                     <h4 class="mb-4">{{ $category->name }}</h4>
                                     <p class="mb-4">{{ Str::limit($category->description, 25, '...') }}</p>
                                     <!-- Truncate description here -->
-                                    <a href="#" class="btn btn-light rounded-pill text-primary py-2 px-4">See
+                                    <a href="{{route('jobslist')}}?categoryid={{$category->id}}" class="btn btn-light rounded-pill text-primary py-2 px-4">See
                                         Jobs</a>
                                 </div>
                             </div>
