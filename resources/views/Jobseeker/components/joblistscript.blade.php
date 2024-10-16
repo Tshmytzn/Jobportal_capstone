@@ -1,11 +1,11 @@
 <script>
 $(document).ready(function() {
-    
+
 const urlParams = new URLSearchParams(window.location.search);
 let id = urlParams.get('categoryid'); // Get the categoryid from the URL
 
 if (id) {
-    id = parseInt(id, 10); 
+    id = parseInt(id, 10);
     // Check if id is a valid number and use it as the selected index
     if (!isNaN(id)) {
         document.getElementById('category').value = id;
@@ -17,12 +17,12 @@ if (id) {
 
 });
 function searchfilterjobs() {
-   
+
        var formElement = document.getElementById('filterForm');
         var formData = new FormData(formElement);
 
         formData.append('_token', '{{ csrf_token() }}');
-        
+
        $.ajax({
             type: "POST",
             url: '{{ route('searchfilterjobs') }}',
@@ -31,7 +31,7 @@ function searchfilterjobs() {
             contentType: false,
             success: function(response) {
 
-                const displayJobs = document.getElementById('displayJobs'); 
+                const displayJobs = document.getElementById('displayJobs');
                 // Clear the display area
                     displayJobs.innerHTML = ``;
 
@@ -40,7 +40,7 @@ function searchfilterjobs() {
                         response.data.forEach(element => {
                             // Display each job's details
                             const desc= element.job_description.substring(0, 50) + '...';
-                            
+
                             displayJobs.innerHTML += `
                                 <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
                                     <div class="service-item text-center rounded p-4">
@@ -55,7 +55,7 @@ function searchfilterjobs() {
                                             <p class="mb-2"><strong>Location:</strong> ${element.job_location}</p>
                                             <p class="mb-2"><strong>Type:</strong> ${element.job_type}</p>
                                             <p class="mb-4">${desc}</p>
-                                            <a href="" class="btn btn-light rounded-pill text-primary py-2 px-4">Job Details</a>
+                                            <a href="{{ route('jobdetails') }}" class="btn btn-light rounded-pill text-primary py-2 px-4">Job Details</a>
                                         </div>
                                     </div>
                                 </div>
@@ -65,12 +65,12 @@ function searchfilterjobs() {
                         // Display 'No Jobs Found' if there are no jobs in the data
                         displayJobs.innerHTML = `
                             <div class="col-12 text-center mb-2">
-                                <h1>No Jobs Found</h1>   
+                                <h1>No Jobs Found</h1>
                             </div>
                         `;
                     }
 
-                
+
 
             },
             error: function(xhr) {

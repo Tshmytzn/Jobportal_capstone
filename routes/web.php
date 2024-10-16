@@ -118,9 +118,7 @@ Route::post('/logoutAgency', [AuthController::class, 'logoutAgency'])->name('log
 Route::get('/Blank2', function () { return view('Jobseeker.blank'); })->name('blankpage');
 Route::get('/', [JobseekerController::class, 'index'])->name('homepage');
 Route::get('/Jobs', [JobseekerController::class, 'jobs'])->name('jobs');
-Route::get('/AgencyReview', function () {
-    return view('Jobseeker.accountReview');
-})->name('accountReview');
+Route::get('/AgencyReview', function () { return view('Jobseeker.accountReview');})->name('accountReview');
 
 Route::get('/About', function () { return view('Jobseeker.about'); })->name('about');
 Route::get('/SignUp', function () { return view('Jobseeker.signup'); })->name('signup');
@@ -132,7 +130,10 @@ Route::get('/Login', function () { return view('Jobseeker.Login'); })->name('log
 //Show Jobs in Jobslist
 Route::get('/jobslist', [JobseekerController::class, 'jobslist'])->name('jobslist');
 
-//filter jobs 
+// jobdetailsroute
+Route::get('/jobdetails', function () { return view('Jobseeker.jobdetails'); })->name('jobdetails');
+
+//filter jobs
 Route::post('/searchfilterjobs', [JobseekerController::class, 'searchfilterjobs'])->name('searchfilterjobs');
 
 
