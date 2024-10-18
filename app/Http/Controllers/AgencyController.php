@@ -62,7 +62,7 @@ class AgencyController extends Controller
         $data->landline_number = $request->landline_number;
         $data->geo_coverage = $request->geo_coverage;
         $data->employee_count = $request->employee_count;
-        $data->agency_business_permit = $request->agency_business_permit;
+        $data->agency_business_permit = $agency_business_permit;
         $data->agency_dti_permit = $agency_dti_permit;
         $data->agency_bir_permit = $agency_bir_permit;
         $data->password = Hash::make($request->password_confirmation);

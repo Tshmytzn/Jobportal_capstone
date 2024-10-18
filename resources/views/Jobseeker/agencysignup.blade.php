@@ -86,9 +86,11 @@
                                     <label for="contact_number">Contact Number: </label>
                                     <div class="input-group">
                                         <span class="input-group-text">+63</span>
-                                        <input type="tel" id="contact_number" name="contact_number"
-                                            class="form-control" placeholder="9123456789"
-                                            aria-label="Contact Number" pattern="[0-9]{10}" maxlength="10">
+                                        <input type="number" id="contact_number" name="contact_number"
+                                            class="form-control" placeholder="9123456789" aria-label="Contact Number" required
+                                            maxlength="10" pattern="9[0-9]{9}"
+                                            title="Phone number must start with 9 and be exactly 10 digits long.">
+
                                     </div>
                                 </div>
 
@@ -97,8 +99,8 @@
                                     <label for="landline_number">Landline Number: </label>
                                     <div class="input-group">
                                         <input type="tel" id="landline_number" name="landline_number"
-                                            class="form-control" placeholder="02-12345678"
-                                            aria-label="Landline Number" pattern="[0-9]{2}-[0-9]{8}" maxlength="11">
+                                            class="form-control" placeholder="02-12345678" aria-label="Landline Number"
+                                            pattern="[0-9]{2}-[0-9]{8}" maxlength="11">
                                     </div>
                                 </div>
 

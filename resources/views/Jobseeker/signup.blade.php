@@ -34,7 +34,7 @@
                                 <div class="col-3 mb-3">
                                     <label for="midname">Middle Name: </label>
                                     <input type="text" class="form-control" name="midname"
-                                        placeholder="Enter Middle Name" aria-label="Middle Name" required>
+                                        placeholder="Enter Middle Name" aria-label="Middle Name">
                                 </div>
                                 <div class="col-3 mb-3">
                                     <label for="lastname">Last Name: </label>
@@ -82,9 +82,11 @@
                                     <label for="contact">Contact Number: </label>
                                     <div class="input-group">
                                         <span class="input-group-text">+63</span>
-                                        <input type="tel" class="form-control" name="contact"
-                                            placeholder="Enter Contact Number" aria-label="Contact Number" required>
+                                        <input type="tel" class="form-control" name="contact" id="contactInput"
+                                            placeholder="Enter Contact Number" aria-label="Contact Number" required
+                                            maxlength="10" pattern="9[0-9]{9}" title="Phone number must start with 9 and be exactly 10 digits long.">
                                     </div>
+                                                                    
                                 </div>
                             </div>
 

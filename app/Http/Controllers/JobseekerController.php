@@ -32,7 +32,8 @@ class JobseekerController extends Controller
             'js_gender' => 'required|string',
             'js_address' => 'required|string',
             'js_email' => 'required|email',
-            'js_contact' => 'required|string',
+            'js_contact' => 'required|regex:/^9[0-9]{9}$/|max:10'
+
         ]);
     
         $jobseeker = Jobseeker::findOrFail($request->id);
@@ -53,7 +54,7 @@ class JobseekerController extends Controller
             'gender' => 'required|string|in:Male,Female,Other',
             'address' => 'required|string|max:255',
             'email' => 'required|email|max:100|unique:jobseeker_details,js_email',
-            'contact' => 'required|string|max:15',
+            'contact' => 'required|regex:/^9[0-9]{9}$/|max:10',
             'password' => 'required|string|min:8|confirmed', // Confirm the password
         ]);
 

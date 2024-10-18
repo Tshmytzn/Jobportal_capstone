@@ -11,9 +11,9 @@
             contentType: false,
             success: function(response) {
                 if (response.status === 'error') {
-                 
+
                     Swal.fire('Error', response.message, 'error');
-                    
+
                 } else {
                     Swal.fire({
                         title: 'Success',
@@ -45,12 +45,6 @@
                 this.value = this.value.replace(/[^A-Za-z\s-]/g, '');
             });
 
-        $('input[name="contact"]').on('input', function(e) {
-            this.value = this.value.replace(/\D/g, '');
-            if (this.value.length > 9) {
-                this.value = this.value.slice(0, 9);
-            }
-        });
 
         $('#jobseekerForm').on('submit', function(event) {
             event.preventDefault();
@@ -66,12 +60,13 @@
                         icon: 'success',
                         showConfirmButton: false,
                         timer: 1500
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            window.location.href = "{{ route('login') }}";
-                        }
+                    }).then(() => {
+                        
+                        document.getElementById('jobseekerForm').reset();
+                        window.location.href = "{{ route('login') }}";
                     });
                 },
+
                 error: function(xhr) {
                     var errors = xhr.responseJSON.errors;
                     var errorMessages = '';
@@ -133,73 +128,71 @@
 </script>
 
 <script>
-document.getElementById('js_changePasswordForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+    document.getElementById('js_changePasswordForm').addEventListener('submit', function(e) {
+        e.preventDefault();
 
-    var currentPassword = document.getElementById('js_currentPassword').value;
-    var newPassword = document.getElementById('js_newPassword').value;
-    var confirmPassword = document.getElementById('js_confirmPassword').value;
+        var currentPassword = document.getElementById('js_currentPassword').value;
+        var newPassword = document.getElementById('js_newPassword').value;
+        var confirmPassword = document.getElementById('js_confirmPassword').value;
 
-    if (newPassword !== confirmPassword) {
-        alert('New passwords do not match');
-        return;
-    }
-
-    $.ajax({
-        url: '{{ route('updateJsPassword') }}',
-        type: 'POST',
-        data: {
-            currentPassword: currentPassword,
-            newPassword: newPassword,
-            newPassword_confirmation: confirmPassword,
-            id: '{{ session('user_id') }}',
-            _token: '{{ csrf_token() }}'
-        },
-        success: function(response) {
-            alert(response.success);
-            // Clear the form fields after successful update
-            document.getElementById('js_changePasswordForm').reset();
-        },
-        error: function(xhr) {
-            var errors = xhr.responseJSON.errors;
-            var errorMessages = '';
-            if (errors) {
-                for (var key in errors) {
-                    errorMessages += errors[key] + '\n';
-                }
-            } else {
-                errorMessages = 'Current password is incorrect!';
-            }
-            alert(errorMessages);
+        if (newPassword !== confirmPassword) {
+            alert('New passwords do not match');
+            return;
         }
+
+        $.ajax({
+            url: '{{ route('updateJsPassword') }}',
+            type: 'POST',
+            data: {
+                currentPassword: currentPassword,
+                newPassword: newPassword,
+                newPassword_confirmation: confirmPassword,
+                id: '{{ session('user_id') }}',
+                _token: '{{ csrf_token() }}'
+            },
+            success: function(response) {
+                alert(response.success);
+                // Clear the form fields after successful update
+                document.getElementById('js_changePasswordForm').reset();
+            },
+            error: function(xhr) {
+                var errors = xhr.responseJSON.errors;
+                var errorMessages = '';
+                if (errors) {
+                    for (var key in errors) {
+                        errorMessages += errors[key] + '\n';
+                    }
+                } else {
+                    errorMessages = 'Current password is incorrect!';
+                }
+                alert(errorMessages);
+            }
+        });
     });
-});
 </script>
 
 <!-- Ensure you include jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script>
-$(document).ready(function() {
-    $('#resumeForm').on('submit', function(event) {
-        event.preventDefault(); 
+    $(document).ready(function() {
+        $('#resumeForm').on('submit', function(event) {
+            event.preventDefault();
 
-        let formData = new FormData(this); 
-        $.ajax({
-            url: '{{ route('uploadResume') }}', 
-            method: 'POST',
-            data: formData,
-            contentType: false,
-            processData: false, 
-            success: function(response) {
-                alert(response.success);
-            },
-            error: function(xhr) {
-                alert(xhr.responseJSON.error);
-            }
+            let formData = new FormData(this);
+            $.ajax({
+                url: '{{ route('uploadResume') }}',
+                method: 'POST',
+                data: formData,
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    alert(response.success);
+                },
+                error: function(xhr) {
+                    alert(xhr.responseJSON.error);
+                }
+            });
         });
     });
-});
 </script>
-
-    

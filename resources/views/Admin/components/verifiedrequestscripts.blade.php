@@ -46,7 +46,8 @@
                         `;
                     }
                 }
-            ]
+            ],
+            order: [[0, 'desc']]
         });
 
         $('#agencyInfoModal').on('show.bs.modal', function(event) {
