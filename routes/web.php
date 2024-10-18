@@ -133,6 +133,10 @@ Route::get('/jobslist', [JobseekerController::class, 'jobslist'])->name('jobslis
 // jobdetailsroute
 Route::get('/jobdetails', function () { return view('Jobseeker.jobdetails'); })->name('jobdetails');
 
+//show jobdetails
+Route::get('/Showjobdetails/{id}', [JobseekerController::class, 'Showjobdetails']);
+
+
 //filter jobs
 Route::post('/searchfilterjobs', [JobseekerController::class, 'searchfilterjobs'])->name('searchfilterjobs');
 

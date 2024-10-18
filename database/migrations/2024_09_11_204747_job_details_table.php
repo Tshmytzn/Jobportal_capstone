@@ -16,6 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('job_title')->nullable();
             $table->integer('category_id')->nullable();
+            $table->integer('agency_id')->nullable();
             $table->string('job_image')->nullable();
             $table->string('job_location')->nullable();
             $table->string(column: 'job_type')->nullable();

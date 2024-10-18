@@ -79,7 +79,7 @@
 
                             </div>
                             <div class="ms-auto align-self-center">
-                                <a class="btn btn-light rounded-pill py-2 px-4" href="#">See Job Listings
+                                <a href="{{route('jobslist')}}?agencyid={{$agencylist->id}}" class="btn btn-light rounded-pill py-2 px-4" href="#">See Job Listings
                                 </a>
                             </div>
                         </div>

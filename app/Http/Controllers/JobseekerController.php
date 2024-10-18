@@ -202,6 +202,16 @@ class JobseekerController extends Controller
         // Return the response as JSON with status 'success' and the job data
         return response()->json(['status' => 'success', 'data' => $jobcategory], 201);
     }
+
+    public function Showjobdetails($id) {
+
+        $job = JobDetails::find($id); // Assuming JobDetail is your model
+        if ($job) {
+            return response()->json($job);
+        } else {
+            return response()->json(['message' => 'Job not found'], 404);
+        }
+    }
     
     
 }

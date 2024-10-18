@@ -13,6 +13,11 @@
 
     <div class="container mt-5 mb-5">
         <div class="row">
+
+            <div class="mt-1 mb-3">
+                <button class="btn btn-primary w-100"> Complete PESO Registration Form</button>
+
+            </div>
             <!-- Profile Picture and Info -->
             <div class="card col-md-4">
                 <div class="text-center">

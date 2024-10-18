@@ -1,29 +1,30 @@
 <script>
-$(document).ready(function() {
+    $(document).ready(function() {
 
-const urlParams = new URLSearchParams(window.location.search);
-let id = urlParams.get('categoryid'); // Get the categoryid from the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        let id = urlParams.get('categoryid'); // Get the categoryid from the URL
 
-if (id) {
-    id = parseInt(id, 10);
-    // Check if id is a valid number and use it as the selected index
-    if (!isNaN(id)) {
-        document.getElementById('category').value = id;
-        searchfilterjobs()
-    }
-}else{
-    searchfilterjobs()
-}
+        if (id) {
+            id = parseInt(id, 10);
+            // Check if id is a valid number and use it as the selected index
+            if (!isNaN(id)) {
+                document.getElementById('category').value = id;
+                searchfilterjobs()
+            }
+        } else {
+            searchfilterjobs()
+        }
 
-});
-function searchfilterjobs() {
+    });
 
-       var formElement = document.getElementById('filterForm');
+    function searchfilterjobs() {
+
+        var formElement = document.getElementById('filterForm');
         var formData = new FormData(formElement);
 
         formData.append('_token', '{{ csrf_token() }}');
 
-       $.ajax({
+        $.ajax({
             type: "POST",
             url: '{{ route('searchfilterjobs') }}',
             data: formData,
@@ -33,15 +34,15 @@ function searchfilterjobs() {
 
                 const displayJobs = document.getElementById('displayJobs');
                 // Clear the display area
-                    displayJobs.innerHTML = ``;
+                displayJobs.innerHTML = ``;
 
-                    // Check if there are jobs in the response
-                    if (response.data.length > 0) {
-                        response.data.forEach(element => {
-                            // Display each job's details
-                            const desc= element.job_description.substring(0, 50) + '...';
+                // Check if there are jobs in the response
+                if (response.data.length > 0) {
+                    response.data.forEach(element => {
+                        // Display each job's details
+                        const desc = element.job_description.substring(0, 50) + '...';
 
-                            displayJobs.innerHTML += `
+                        displayJobs.innerHTML += `
                                 <div class="col-md-6 col-lg-4 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
                                     <div class="service-item text-center rounded p-4">
                                         <div class="service-icon d-inline-block bg-light rounded p-4 mb-4"
@@ -55,29 +56,29 @@ function searchfilterjobs() {
                                             <p class="mb-2"><strong>Location:</strong> ${element.job_location}</p>
                                             <p class="mb-2"><strong>Type:</strong> ${element.job_type}</p>
                                             <p class="mb-4">${desc}</p>
-                                            <a href="{{ route('jobdetails') }}" class="btn btn-light rounded-pill text-primary py-2 px-4">Job Details</a>
+                                            <a href="{{ route('jobdetails') }}?id=${element.id}" class="btn btn-light rounded-pill text-primary py-2 px-4">Job Details</a>
                                         </div>
                                     </div>
                                 </div>
                             `;
-                        });
-                    } else {
-                        // Display 'No Jobs Found' if there are no jobs in the data
-                        displayJobs.innerHTML = `
+                    });
+                } else {
+                    // Display 'No Jobs Found' if there are no jobs in the data
+                    displayJobs.innerHTML = `
                             <div class="col-12 text-center mb-2">
                                 <h1>No Jobs Found</h1>
                             </div>
                         `;
-                    }
+                }
 
 
 
             },
             error: function(xhr) {
                 console.error('AJAX Error:', xhr.responseText);
-                Swal.fire('Error', 'An error occurred while submitting the form. Please try again.', 'error');
+                Swal.fire('Error', 'An error occurred while submitting the form. Please try again.',
+                    'error');
             }
         });
-}
-
+    }
 </script>

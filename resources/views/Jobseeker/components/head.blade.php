@@ -48,5 +48,19 @@
         .dropdown-menu.dropdown-menu-adjust {
             margin-top: -15px;
         }
+        .bgp-gradient {
+            background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%);
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .bgp-danger {
+            background: linear-gradient(90deg, rgba(139, 0, 0, 1) 100%, rgb(207, 74, 74) 50%, rgb(206, 150, 150) 0%);
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
     </style>
 </head>

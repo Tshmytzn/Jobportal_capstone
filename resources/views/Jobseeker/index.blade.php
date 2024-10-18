@@ -57,7 +57,7 @@
                             </div>
                             <div class="service-content">
                                 <h4 class="mb-4">{{ $category->name }}</h4>
-                                <p class="mb-4">{{ Str::limit($category->description, 25, '...') }}</p>
+                                <p class="mb-4">{{ Str::limit($category->description, 50, '...') }}</p>
 
                                 <a href="{{route('jobslist')}}?categoryid={{$category->id}}" class="btn btn-light rounded-pill text-primary py-2 px-4">See Jobs</a>
                             </div>
