@@ -48,54 +48,26 @@ class AgencyController extends Controller
 
         ]);
 
-        // Handle file uploads
-        // $filePaths = [
-        //     'agency_business_permit' => null,
-        //     'agency_dti_permit' => null,
-        //     'agency_bir_permit' => null,
-        // ];
-
-        // foreach ($filePaths as $field => &$path) {
-        //     if ($request->hasFile($field)) {
-        //         try {
-        //             $fileName = time() . '-' . $field . '.' . $request->file($field)->extension();
-        //             $request->file($field)->move(public_path('agencyfiles'), $fileName);
-        //             $path = 'agencyfiles/' . $fileName;
-        //         } catch (\Exception $e) {
-        //             Log::error($field . ' upload failed: ' . $e->getMessage());
-        //             return response()->json([
-        //                 'message' => 'Failed to upload file for ' . $field,
-        //                 'status' => 'error'
-        //             ], 422);
-        //         }
-        //     }
-        // }
+        
         $agency_business_permit = $this->uploadPic($request, 'agency_business_permit', 'agencyfiles/');
         $agency_dti_permit = $this->uploadPic($request, 'agency_dti_permit', 'agencyfiles/');
         $agency_bir_permit = $this->uploadPic($request, 'agency_bir_permit', 'agencyfiles/');
 
-        // Create the agency record
-        try {
-            Agency::create([
-                'agency_name' => $validatedData['agency_name'],
-                'agency_address' => $validatedData['agency_address'],
-                'email_address' => $validatedData['email_address'],
-                'contact_number' => $validatedData['contact_number'],
-                'landline_number' => $validatedData['landline_number'],
-                'geo_coverage' => $validatedData['geo_coverage'],
-                'employee_count' => $validatedData['employee_count'],
-                'agency_business_permit' => $agency_business_permit,
-                'agency_dti_permit' => $agency_dti_permit,
-                'agency_bir_permit' => $agency_bir_permit,
-                'password' => Hash::make($validatedData['password']),
-            ]);
-        } catch (\Exception $e) {
-            Log::error('Database insert failed: ' . $e->getMessage());
-            return response()->json([
-                'message' => 'Failed to create account.',
-                'status' => 'error'
-            ], 500);
-        }
+
+        $data = new Agency();
+        $data->agency_name = $request->agency_name;
+        $data->agency_address = $request->agency_address;
+        $data->email_address = $request->email_address;
+        $data->contact_number = $request->contact_number;
+        $data->landline_number = $request->landline_number;
+        $data->geo_coverage = $request->geo_coverage;
+        $data->employee_count = $request->employee_count;
+        $data->agency_business_permit = $request->agency_business_permit;
+        $data->agency_dti_permit = $agency_dti_permit;
+        $data->agency_bir_permit = $agency_bir_permit;
+        $data->password = Hash::make($request->password_confirmation);
+        $data->status = 'pending';
+        $data->save();
 
         return response()->json([
             'message' => 'Account Created Successfully',

@@ -28,7 +28,7 @@
             },
             error: function(xhr) {
                 console.error('AJAX Error:', xhr.responseText); // Log the error
-                
+
             }
         });
     }
@@ -73,10 +73,23 @@
             },
             error: function(xhr, status, error) {
                 console.error(xhr.responseText);
+                const responseObject = JSON.parse(xhr.responseText);
+
+// Initialize an empty array to store all error messages
+const allErrorMessages = [];
+
+// Loop through the errors object and collect the messages
+for (const key in responseObject.errors) {
+    if (responseObject.errors.hasOwnProperty(key)) {
+        allErrorMessages.push(...responseObject.errors[key]);
+    }
+}
+
+const errorMessageString = allErrorMessages.join(', ');
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'An error occurred while processing your request.',
+                    text: errorMessageString,
                 });
             }
         });
