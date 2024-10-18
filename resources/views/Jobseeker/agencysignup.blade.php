@@ -86,11 +86,13 @@
                                     <label for="contact_number">Contact Number: </label>
                                     <div class="input-group">
                                         <span class="input-group-text">+63</span>
-                                        <input type="number" id="contact_number" name="contact_number"
-                                            class="form-control" placeholder="9123456789" aria-label="Contact Number" required
-                                            maxlength="10" pattern="9[0-9]{9}"
-                                            title="Phone number must start with 9 and be exactly 10 digits long.">
-
+                                        <input type="tel" id="contact_number" name="contact_number"
+                                            class="form-control" placeholder="9123456789" aria-label="Contact Number"
+                                            required pattern="^9[0-9]{9}$"
+                                            title="Phone number must start with 9 and be exactly 10 digits long."
+                                            maxlength="10"
+                                            onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);">
                                     </div>
                                 </div>
 
@@ -100,9 +102,14 @@
                                     <div class="input-group">
                                         <input type="tel" id="landline_number" name="landline_number"
                                             class="form-control" placeholder="02-12345678" aria-label="Landline Number"
-                                            pattern="[0-9]{2}-[0-9]{8}" maxlength="11">
+                                            pattern="^02-[0-9]{8}$"
+                                            title="Format: 02-12345678. Must start with 02, followed by a dash, and then 8 digits."
+                                            maxlength="11"
+                                            onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 45"
+                                            oninput="this.value = this.value.replace(/[^0-9-]/g, '').slice(0, 11);">
                                     </div>
                                 </div>
+
 
                                 <!-- Geographical Coverage Dropdown -->
                                 <div class="col-6 mb-3">

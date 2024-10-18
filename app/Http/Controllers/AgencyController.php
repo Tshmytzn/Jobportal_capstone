@@ -37,17 +37,15 @@ class AgencyController extends Controller
             'agency_name' => 'required|string|max:255',
             'agency_address' => 'required|string|max:255',
             'email_address' => 'required|string|email|max:255|unique:agencies',
-            'contact_number' => 'required|string|max:15',
-            'landline_number' => 'nullable|string|max:15',
+            'contact_number' => 'required|string|regex:/^9[0-9]{9}$/',
+            'landline_number' => 'nullable|string|regex:/^02-[0-9]{8}$/',
             'geo_coverage' => 'required|in:local,national,international',
             'employee_count' => 'required|string',
             'password' => 'required|string|min:8|confirmed',
             'agency_business_permit' => 'nullable|file|mimes:pdf,jpeg,png,jpg,gif,webp|max:2048',
             'agency_dti_permit' => 'nullable|file|mimes:pdf,jpeg,png,jpg,gif,webp|max:2048',
-            'agency_bir_permit' => 'nullable|file|mimes:pdf,jpeg,png,jpg,gif,webp|max:2048'
-
+            'agency_bir_permit' => 'nullable|file|mimes:pdf,jpeg,png,jpg,gif,webp|max:2048',
         ]);
-
         
         $agency_business_permit = $this->uploadPic($request, 'agency_business_permit', 'agencyfiles/');
         $agency_dti_permit = $this->uploadPic($request, 'agency_dti_permit', 'agencyfiles/');
