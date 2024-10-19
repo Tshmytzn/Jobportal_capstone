@@ -5,6 +5,9 @@
         var formData = new FormData(formElement);
         formData.append('_token', '{{ csrf_token() }}');
 
+        document.getElementById('loading').style.display = 'grid';
+
+
         $.ajax({
             url: "{{ route('CreateJobCategory') }}",
             type: "POST",
@@ -12,6 +15,8 @@
             processData: false,
             contentType: false,
             success: function(response) {
+                document.getElementById('loading').style.display = 'none';
+
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
@@ -32,6 +37,8 @@
             },
 
             error: function(xhr, status, error) {
+                document.getElementById('loading').style.display = 'none';
+
                 var errors = xhr.responseJSON.errors;
                 var errorMessage = '';
 
@@ -59,9 +66,15 @@
                 url: '/Job/Categories',
                 type: 'GET'
             },
-            columns: [{
-                    data: 'id',
-                    name: 'id'
+            order: [[0,'asc']],
+            columns: [
+                {
+                    data: null,
+                    name: 'index',
+                    render: function(data, type, row, meta) {
+                        return meta.row + 1;
+                    },
+                    orderable: false 
                 },
                 {
                     data: 'name',
@@ -69,7 +82,10 @@
                 },
                 {
                     data: 'description',
-                    name: 'description'
+                    name: 'description',
+                    render: function(data, type, row) {
+                        return data.length > 50 ? data.substr(0, 50) + '...' : data;
+                    }
                 },
                 {
                     data: null,
@@ -144,6 +160,9 @@
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
+
+                document.getElementById('loading').style.display = 'grid';
+
                 $.ajax({
                     url: '/Job/Categories/' + id,
                     type: 'DELETE',
@@ -151,6 +170,8 @@
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(response) {
+                        document.getElementById('loading').style.display = 'none';
+
                         Swal.fire(
                             'Deleted!',
                             response.message,
@@ -159,6 +180,8 @@
                         $('#JobCategories_tbl').DataTable().ajax.reload();
                     },
                     error: function(xhr) {
+                        document.getElementById('loading').style.display = 'none';
+
                         Swal.fire(
                             'Oops...',
                             'Something went wrong!',
@@ -183,19 +206,22 @@
         var formElement = document.getElementById("editJobCategoryForm");
         var formData = new FormData(formElement);
 
-
         formData.append('_token', '{{ csrf_token() }}');
 
+        document.getElementById('loading').style.display = 'grid';
+
         $.ajax({
-            url: "/job-categories/update/" + jobCategoryId, 
-            type: "POST",  
+            url: "/job-categories/update/" + jobCategoryId,
+            type: "POST",
             data: formData,
             processData: false,
             contentType: false,
             headers: {
-                'X-HTTP-Method-Override': 'PUT'  
+                'X-HTTP-Method-Override': 'PUT'
             },
             success: function(response) {
+                document.getElementById('loading').style.display = 'none';
+
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
@@ -215,6 +241,8 @@
                 }, 1500);
             },
             error: function(xhr, status, error) {
+                document.getElementById('loading').style.display = 'none';
+
                 var errors = xhr.responseJSON.errors;
                 var errorMessage = '';
 

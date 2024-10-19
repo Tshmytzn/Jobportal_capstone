@@ -58,7 +58,7 @@ class AdminCRUDController extends Controller
         $columns = ['id', 'name', 'description'];
     
         // Create a query to fetch the data
-        $query = JobCategory::query();
+        $query = JobCategory::orderBy('id', 'desc');
     
         // Get the total count of records before filtering
         $totalData = $query->count();
@@ -103,14 +103,19 @@ class AdminCRUDController extends Controller
 
     public function getJobseekers(Request $request)
     {
-        $jobseekers = Jobseeker::select('js_id', 'js_firstname','js_middlename', 'js_lastname', 'js_email', 'js_contactnumber', 'created_at')->get();
+        $jobseekers = Jobseeker::select('js_id', 'js_firstname', 'js_middlename', 'js_lastname', 'js_email', 'js_contactnumber', 'created_at')
+                               ->orderBy('js_id', 'desc') // Order by 'js_id' descending
+                               ->get();
+    
         return response()->json(['data' => $jobseekers]);
     }
+    
 
     public function getVerificationRequests(Request $request)
     {
         $pendingAgencies = Agency::select('id', 'agency_name', 'agency_address', 'email_address', 'contact_number', 'landline_number', 'geo_coverage', 'employee_count', 'agency_business_permit', 'agency_dti_permit', 'agency_bir_permit', 'agency_image', 'created_at', 'updated_at', 'status')
                                   ->where('status', 'pending') 
+                                  ->orderBy('id', 'desc')
                                   ->get();
         
         return response()->json(['data' => $pendingAgencies]);
@@ -120,6 +125,7 @@ class AdminCRUDController extends Controller
     {
         $verifiedAgencies = Agency::select('id', 'agency_name', 'agency_address', 'email_address', 'contact_number', 'landline_number', 'geo_coverage', 'employee_count', 'agency_business_permit', 'agency_dti_permit', 'agency_bir_permit', 'agency_image', 'created_at', 'updated_at', 'status')
                                   ->where('status', 'approved') 
+                                  ->orderBy('id', 'desc')
                                   ->get();
         
         return response()->json(['data' => $verifiedAgencies]);
@@ -129,6 +135,7 @@ class AdminCRUDController extends Controller
     {
         $unverifiedAgencies = Agency::select('id', 'agency_name', 'agency_address', 'email_address', 'contact_number', 'landline_number', 'geo_coverage', 'employee_count', 'agency_business_permit', 'agency_dti_permit', 'agency_bir_permit', 'agency_image', 'created_at', 'updated_at', 'status')
                                   ->where('status', 'rejected')
+                                  ->orderBy('id', 'desc')
                                   ->get();
         
         return response()->json(['data' => $unverifiedAgencies]);

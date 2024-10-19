@@ -9,9 +9,15 @@
                 type: 'GET',
                 dataSrc: 'data',
             },
-            columns: [{
-                    data: 'id',
-                    name: 'id'
+            order: [[0,'asc']],
+            columns: [
+                {
+                    data: null,
+                    name: 'index',
+                    render: function(data, type, row, meta) {
+                        return meta.row + 1;
+                    },
+                    orderable: false 
                 },
                 {
                     data: null,
@@ -46,8 +52,7 @@
                         `;
                     }
                 }
-            ],
-            order: [[0, 'desc']]
+            ]
         });
 
         $('#agencyInfoModal').on('show.bs.modal', function(event) {
@@ -124,6 +129,9 @@
             confirmButtonText: 'Yes, approve it!',
             cancelButtonText: 'No, cancel!',
         }).then((result) => {
+
+            document.getElementById('loading').style.display = 'grid';
+            
             if (result.isConfirmed) {
                 var formData = {
                     agency_id: agencyId,
@@ -136,6 +144,8 @@
                     type: "POST",
                     data: formData,
                     success: function(response) {
+                        document.getElementById('loading').style.display = 'none';
+
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',
@@ -157,6 +167,8 @@
                         }, 1500);
                     },
                     error: function(xhr) {
+                        document.getElementById('loading').style.display = 'none';
+
                         var errors = xhr.responseJSON.errors || {};
                         var errorMessage = '';
 
@@ -204,6 +216,8 @@
             confirmButtonText: 'Yes, reject it!',
             cancelButtonText: 'Cancel'
         }).then((result) => {
+            document.getElementById('loading').style.display = 'grid';
+
             if (result.isConfirmed) {
                 var formData = {
                     agency_id: agencyId,
@@ -216,6 +230,8 @@
                     type: "POST",
                     data: formData,
                     success: function(response) {
+                        document.getElementById('loading').style.display = 'none';
+
                         Swal.fire({
                             icon: 'success',
                             title: 'Success',
@@ -239,6 +255,8 @@
                         }, 1500);
                     },
                     error: function(xhr) {
+                        document.getElementById('loading').style.display = 'none';
+
                         var errors = xhr.responseJSON.errors || {};
                         var errorMessage = '';
 

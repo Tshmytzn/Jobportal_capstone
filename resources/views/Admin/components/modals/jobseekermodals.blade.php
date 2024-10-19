@@ -47,7 +47,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="CreateJobCategory()" class="btn bgp-gradient">Block User</button>
+                    <button type="button" data-id="USER_ID" onclick="blockUser(this)" class="btn bgp-gradient">Block User</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>

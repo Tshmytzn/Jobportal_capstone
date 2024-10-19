@@ -4,6 +4,7 @@
 @include('Admin.components.head', ['title' => 'Unverified Agencies'])
 
 <body class="g-sidenav-show  bg-gray-100">
+    @include('Admin.components.loading')
 
     @include('Admin.components.aside', ['active' => 'unverifiedagencies'])
 
@@ -36,6 +37,7 @@
     </main>
     @include('Admin.components.scripts')
     @include('Admin.components.unverifiedagenciesscripts')
+    @include('Admin.components.modals.unverifiedagenciesmodal')
 
 </body>
 
