@@ -53,6 +53,8 @@
             <div class="col-6 d-flex align-items-start">
                 <div class="details-container">
                     <h2 class="fw-semibold">Job Description</h2>
+                    {{-- <h3> {{session('user_name')}}</h3>  --}}
+
                     <div class="mt-4">
                         <p id="job_description">We are looking for a skilled individual. This position offers
                             competitive pay and benefits.</p> <!-- Dynamically populated description -->
@@ -75,12 +77,15 @@
                     </div>
                     <!-- Apply Button -->
                     <div class="mt-4">
-                        <button role="button" class="btn btn-primary btn-lg w-100 px-5 " data-bs-toggle="modal"
-                            data-bs-target="#applicationmodal">Apply Now</button>
+                        <button role="button" class="btn btn-primary btn-lg w-100 px-5 " id="applyButton"> Apply Now </button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div id="loginPrompt" style="display: none;">
+        <p>Please <a href="login.php">login first</a>.</p>
     </div>
 
     </div>
@@ -92,6 +97,7 @@
     @include('Jobseeker.components.scripts')
     @include('Jobseeker.components.jobdetailsscripts')
     @include('Jobseeker.components.jobapplicationmodal')
+    @include('Jobseeker.components.jobapplicationscripts')
 
 </body>
 
