@@ -6,6 +6,7 @@
 {{-- @include('Jobseeker.components.navbar', ['header' => 'login']) --}}
 
 <body style="background-color: #e3ddeb">
+    @include('Jobseeker.components.loading')
 
     @include('Jobseeker.components.spinner')
 
@@ -57,7 +58,7 @@
 
     @include('Jobseeker.components.scripts')
     @include('Jobseeker.components.jsAuthscripts')
-    
+
 </body>
 
 </html>

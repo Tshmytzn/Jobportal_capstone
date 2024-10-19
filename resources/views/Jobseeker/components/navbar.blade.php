@@ -67,7 +67,7 @@
                                         <a class="dropdown-item" href="#" onclick="confirmLogout(event)">Log Out</a>
                                     </li>
                                 </form>
-                                
+
 
                             </ul>
                         </div>
@@ -109,7 +109,7 @@
             <script>
                 function confirmLogout(event) {
                     event.preventDefault(); // Prevent the default action of the anchor tag
-            
+
                     Swal.fire({
                         title: 'Are you sure?',
                         text: "You will be logged out!",
@@ -121,8 +121,14 @@
                         cancelButtonText: 'Cancel'
                     }).then((result) => {
                         if (result.isConfirmed) {
+                            document.getElementById('loading').style.display = 'grid'; 
+
+                            // Form submission will trigger page reload, no need to hide the loading spinner
                             document.getElementById('logoutadminForm').submit(); // Submit the form if confirmed
+
                         }
                     });
                 }
             </script>
+
+@include('Jobseeker.components.loading')

@@ -1,5 +1,8 @@
 <script>
     function loginJobseeker() {
+
+        document.getElementById('loading').style.display='grid';
+
         var formElement = document.getElementById('jobseekerloginform');
         var formData = new FormData(formElement);
 
@@ -10,23 +13,29 @@
             processData: false,
             contentType: false,
             success: function(response) {
+
                 if (response.status === 'error') {
+                    document.getElementById('loading').style.display='none';
 
                     Swal.fire('Error', response.message, 'error');
 
                 } else {
+                    document.getElementById('loading').style.display='none';
+
                     Swal.fire({
                         title: 'Success',
                         text: response.message,
                         icon: 'success',
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 1000
                     }).then(() => {
                         window.location.href = '{{ route('homepage') }}';
                     });
                 }
             },
             error: function(xhr) {
+                document.getElementById('loading').style.display='none';
+
                 console.error('AJAX Error:', xhr.responseText);
                 Swal.fire('Error', 'Invalid Credentials.', 'error');
             }
@@ -48,26 +57,31 @@
 
         $('#jobseekerForm').on('submit', function(event) {
             event.preventDefault();
+            document.getElementById('loading').style.display='grid';
+
 
             $.ajax({
                 url: "{{ route('jobseekersCreate') }}",
                 method: 'POST',
                 data: $(this).serialize(),
                 success: function(response) {
+                    document.getElementById('loading').style.display='none';
+
                     Swal.fire({
                         title: 'Success',
                         text: response.message,
                         icon: 'success',
                         showConfirmButton: false,
-                        timer: 1500
+                        timer: 1000
                     }).then(() => {
-                        
+
                         document.getElementById('jobseekerForm').reset();
                         window.location.href = "{{ route('login') }}";
                     });
                 },
 
                 error: function(xhr) {
+                    document.getElementById('loading').style.display='none';
                     var errors = xhr.responseJSON.errors;
                     var errorMessages = '';
                     $.each(errors, function(key, value) {
@@ -91,20 +105,26 @@
         $('#updateJobseekerInfo').on('submit', function(event) {
             event.preventDefault();
 
+            document.getElementById('loading').style.display = 'grid';
+
+
             $.ajax({
                 url: $(this).attr('action'),
                 type: 'POST',
                 data: $(this).serialize(),
                 success: function(response) {
                     if (response.success) {
+                        document.getElementById('loading').style.display = 'none';
+
                         Swal.fire({
                             title: 'Success',
                             text: response.message,
                             icon: 'success',
                             showConfirmButton: false,
-                            timer: 2000
+                            timer: 1500
                         });
                     } else {
+                        document.getElementById('loading').style.display = 'none';
                         Swal.fire({
                             title: 'Failed',
                             text: 'Update failed. Please try again.',
@@ -114,6 +134,8 @@
                     }
                 },
                 error: function(xhr, status, error) {
+                    document.getElementById('loading').style.display = 'none';
+
                     Swal.fire({
                         title: 'Error',
                         text: 'An error occurred: ' + error,

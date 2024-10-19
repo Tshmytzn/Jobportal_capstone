@@ -5,6 +5,9 @@
 
 <body>
 
+    @include('Jobseeker.components.loading')
+
+
     @include('Jobseeker.components.spinner')
 
     @include('Jobseeker.components.navbar')
@@ -52,7 +55,7 @@
                             </div>
                             <button type="submit" class="btn btn-primary w-100 mb-2">Change Password</button>
                         </form>
-                        
+
                     </div>
                 </div>
             </div>
@@ -130,7 +133,7 @@
                                     <div class="input-group">
                                         <span class="input-group-text">+63</span>
                                         <input type="tel" class="form-control" name="js_contact"
-                                            value="{{ $jobseeker->js_contactnumber }}" aria-label="Contact Number"
+                                            value="{{ $jobseeker->js_contactnumber }}" aria-label="Contact Number" maxlength="10"
                                             required>
                                     </div>
                                 </div>
@@ -149,7 +152,7 @@
                             <label for="resume">Resume:</label>
                             <input type="file" id="resume" name="resume" class="form-control">
                             <button class="btn btn-primary w-100 mt-4 mb-2" type="submit">Upload</button>
-                        </form>                     
+                        </form>
                     </div>
                 </div>
             </div>

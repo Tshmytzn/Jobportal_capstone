@@ -4,6 +4,7 @@
 @include('Jobseeker.components.head', ['title' => 'Job Portal'])
 
 <body style="background-color: #e3ddeb">
+    @include('Jobseeker.components.loading')
 
     @include('Jobseeker.components.spinner')
 
@@ -86,7 +87,7 @@
                                             placeholder="Enter Contact Number" aria-label="Contact Number" required
                                             maxlength="10" pattern="9[0-9]{9}" title="Phone number must start with 9 and be exactly 10 digits long.">
                                     </div>
-                                                                    
+
                                 </div>
                             </div>
 
