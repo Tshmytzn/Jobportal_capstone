@@ -4,6 +4,7 @@
 @include('Admin.components.head', ['title' => 'Settings'])
 
 <body class="g-sidenav-show  bg-gray-100">
+    @include('Admin.components.loading')
 
     @include('Admin.components.aside', ['active' => 'Settings'])
 

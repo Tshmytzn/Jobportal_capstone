@@ -5,6 +5,8 @@
 
     <body class="g-sidenav-show  bg-gray-100">
 
+        @include('Admin.components.loading')
+
         @include('Admin.components.aside', ['active' => 'Administrators'])
 
         <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
@@ -41,6 +43,7 @@
         @include('Admin.components.modals.adminmodals')
         @include('Admin.components.scripts')
         @include('Admin.components.manageadminscripts')
+
 
     </body>
 

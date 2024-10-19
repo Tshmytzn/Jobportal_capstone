@@ -3,6 +3,8 @@
         var formElement = document.getElementById('adminLoginForm');
         var formData = new FormData(formElement);
 
+        document.getElementById('loading').style.display = 'grid';
+
         $.ajax({
             type: "POST",
             url: '{{ route('LoginAdmin') }}',
@@ -10,6 +12,8 @@
             processData: false,
             contentType: false,
             success: function(response) {
+                document.getElementById('loading').style.display = 'none';
+
                 if (response.status === 'error') {
                     Swal.fire('Error', response.message, 'error');
                 } else {
@@ -25,6 +29,8 @@
                 }
             },
             error: function(xhr) {
+                document.getElementById('loading').style.display = 'none';
+                
                 console.error('AJAX Error:', xhr.responseText); // Log the error
                 Swal.fire('Error', 'Invalid Credentials.', 'error');
             }

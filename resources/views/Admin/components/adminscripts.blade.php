@@ -2,11 +2,15 @@
     function UpdateAdmin() {
         var formData = $("#updateAdminForm").serialize();
 
+        document.getElementById('loading').style.display = 'grid';
+
         $.ajax({
             url: "{{ route('UpdateAdmin') }}",
             type: "POST",
             data: formData,
             success: function(response) {
+                document.getElementById('loading').style.display = 'none';
+
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
@@ -25,6 +29,8 @@
             },
 
             error: function(xhr, status, error) {
+                document.getElementById('loading').style.display = 'none';
+
                 var errors = xhr.responseJSON.errors;
                 var errorMessage = '';
 
@@ -47,11 +53,16 @@
     function UpdateAdminPassword() {
         var formData = $("#updateAdminpasswordForm").serialize();
 
+        document.getElementById('loading').style.display = 'grid';
+
+
         $.ajax({
             url: "{{ route('UpdateAdminPassword') }}",
             type: "POST",
             data: formData,
             success: function(response) {
+                document.getElementById('loading').style.display = 'none';
+
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
@@ -64,6 +75,8 @@
                 $('#new_password_confirmation').val('');
             },
             error: function(xhr, status, error) {
+                document.getElementById('loading').style.display = 'none';
+
                 var errors = xhr.responseJSON.errors;
                 var errorMessage = '';
 
@@ -86,6 +99,9 @@
     function updateProfilePic() {
         var formData = new FormData(document.getElementById("updateProfilePicForm"));
 
+        document.getElementById('loading').style.display = 'grid';
+
+
         $.ajax({
             url: "{{ route('UpdateAdminProfilePic') }}",
             type: "POST",
@@ -93,6 +109,8 @@
             processData: false,
             contentType: false,
             success: function(response) {
+                document.getElementById('loading').style.display = 'none';
+
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
@@ -112,6 +130,8 @@
                 }, 1500);
             },
             error: function(xhr, status, error) {
+                document.getElementById('loading').style.display = 'none';
+
                 var errors = xhr.responseJSON.errors;
                 var errorMessage = '';
 

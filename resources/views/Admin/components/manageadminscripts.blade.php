@@ -9,9 +9,15 @@
                 type: 'GET',
                 dataSrc: 'data',
             },
-            columns: [{
-                    data: 'id',
-                    name: 'id'
+            order: [[0,'asc']],
+            columns: [
+                {
+                    data: null,
+                    name: 'index',
+                    render: function(data, type, row, meta) {
+                        return meta.row + 1;
+                    },
+                    orderable: false 
                 },
                 {
                     data: 'admin_name',
@@ -27,7 +33,10 @@
                 },
                 {
                     data: 'created_at',
-                    name: 'created_at'
+                    render: function(data) {
+                        const date = new Date(data);
+                        return date.toLocaleString();
+                    }
                 },
                 {
                     data: null,
@@ -42,7 +51,7 @@
             ]
         });
 
-//DISPLAY ADMINISTRATOR DATA IN MODAL
+        //DISPLAY ADMINISTRATOR DATA IN MODAL
         $('#editAdminModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
             var adminId = button.data('id');
@@ -67,7 +76,7 @@
         });
     });
 
-// DELETE ADMINISTRATOR
+    // DELETE ADMINISTRATOR
     $(document).on('click', '.delete-btn', function() {
         var id = $(this).data('id');
 
@@ -81,6 +90,9 @@
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
+
+                document.getElementById('loading').style.display = 'grid';
+
                 $.ajax({
                     url: '/Admin/Delete/' + id,
                     type: 'DELETE',
@@ -88,6 +100,8 @@
                         _token: '{{ csrf_token() }}'
                     },
                     success: function(response) {
+                        document.getElementById('loading').style.display = 'none';
+
                         Swal.fire(
                             'Deleted!',
                             response.message,
@@ -96,6 +110,8 @@
                         $('#Admin_tbl').DataTable().ajax.reload();
                     },
                     error: function(xhr) {
+                        document.getElementById('loading').style.display = 'none';
+
                         Swal.fire(
                             'Oops...',
                             'Something went wrong!',
@@ -109,10 +125,12 @@
 </script>
 
 <script>
-// UPDATE ADMINISTRATOR DATA
+    // UPDATE ADMINISTRATOR DATA
     function UpdateAdmin() {
         var form = document.getElementById('editadmindetailsForm');
         var formData = new FormData(form);
+
+        document.getElementById('loading').style.display = 'grid';
 
         $.ajax({
             url: '/Admin/EditAdministrators',
@@ -121,6 +139,8 @@
             processData: false,
             contentType: false,
             success: function(response) {
+                document.getElementById('loading').style.display = 'none';
+
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
@@ -140,6 +160,8 @@
                 }, 1500);
             },
             error: function(xhr, status, error) {
+                document.getElementById('loading').style.display = 'none';
+
                 var errors = xhr.responseJSON.errors;
                 var errorMessage = '';
 
@@ -160,7 +182,7 @@
 
 
 <script>
-//ADD ADMNISTRATOR DATA
+    //ADD ADMNISTRATOR DATA
     $(document).ready(function() {
 
         $('#adminFullName').on('input', function() {
@@ -233,6 +255,8 @@
                 return;
             }
 
+            document.getElementById('loading').style.display = 'grid';
+
             fetch('{{ route('createAdmin') }}', {
                     method: 'POST',
                     headers: {
@@ -252,6 +276,8 @@
                     }
                 })
                 .then(data => {
+                    document.getElementById('loading').style.display = 'none';
+
                     if (data.success) {
                         Swal.fire({
                             icon: 'success',
@@ -274,6 +300,8 @@
                 })
 
                 .catch((error) => {
+                    document.getElementById('loading').style.display = 'none';
+
                     console.error('Error:', error);
                     Swal.fire({
                         icon: 'error',

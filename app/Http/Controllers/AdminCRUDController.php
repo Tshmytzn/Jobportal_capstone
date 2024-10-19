@@ -203,13 +203,16 @@ class AdminCRUDController extends Controller
 
     public function getContacts(Request $request)
     {
-        $contacts = Contact::select('id', 'name', 'email', 'message', 'created_at')->get();
+        $contacts = Contact::select('id', 'name', 'email', 'message', 'created_at')
+        ->orderBy('created_at', 'desc') 
+        ->get();
+    
         return response()->json(['data' => $contacts]);
     }    
 
     public function getAdminData(Request $request)
     {
-        $admins = Admins::all();
+        $admins = Admins::orderBy('id', 'desc')->get();
 
         return response()->json([
             'data' => $admins

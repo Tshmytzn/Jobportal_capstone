@@ -9,10 +9,16 @@
             ajax: {
                 url: "{{ route('getContacts') }}", 
                 type: 'GET',
-            }, 
+            },
+            order: [[0,'asc']],
             columns: [
                 {
-                    data: 'id',
+                    data: null,
+                    name: 'index',
+                    render: function(data, type, row, meta) {
+                        return meta.row + 1;
+                    },
+                    orderable: false 
                 },
                 {
                     data: 'name',
