@@ -135,7 +135,7 @@
             if (result.isConfirmed) {
                 var formData = {
                     agency_id: agencyId,
-                    status: 'Approved',
+                    status: 'approved',
                     _token: '{{ csrf_token() }}'
                 };
 

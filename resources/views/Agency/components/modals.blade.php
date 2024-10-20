@@ -56,7 +56,6 @@
 <!-- AGency Profile Modal End-->
 
 {{-- Create Job Post Modal --}}
-
 <div class="modal fade bd-example-modal-lg" id="jobpostmodal" tabindex="-1" role="dialog"
     aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
@@ -72,6 +71,8 @@
             <div class="modal-body">
 
                 <div class="card-body m-2">
+
+                    <input type="text" id="agencyid" name="agencyid" value="{{ session('agency_id') }}">
 
                     <div class="row">
                     <div class="col-6 form-group">
@@ -107,7 +108,7 @@
                                 <option value="Part Time">Part Time</option>
                             </select>
                         </div>
-                        
+
                     </div>
                     <div class="row">
                         <div class="col-12 form-group">
@@ -129,7 +130,7 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
 
 
 <script>

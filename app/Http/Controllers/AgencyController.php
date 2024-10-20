@@ -181,6 +181,7 @@ class AgencyController extends Controller
             $data = new JobDetails;
             $data->job_title = $request->job_title;
             $data->category_id = $request->job_category;
+            $data->agency_id = $request->agencyid;
             $data->job_image = $imageNameWithExtension;
             $data->job_location = $request->job_location;
             $data->job_type = $request->job_type;
