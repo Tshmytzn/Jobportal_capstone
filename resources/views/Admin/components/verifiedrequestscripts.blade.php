@@ -17,7 +17,7 @@
                     render: function(data, type, row, meta) {
                         return meta.row + 1;
                     },
-                    orderable: false 
+                    orderable: false
                 },
                 {
                     data: null,
@@ -68,8 +68,8 @@
                     var modal = $('#agencyInfoModal');
                     modal.find('#agencyIdInput').val(agency.id);
                     document.getElementById('agencyImage').src = agency.agency_image ?
-                        '/agencyfiles/' + agency.agency_image :
-                        '/agencyfiles/default_image.jpg';
+                        '/agency_profile/' + agency.agency_image :
+                        '/agency_profile/default.png';
                     modal.find('#agencyName').val(agency.agency_name);
                     modal.find('#agencyAddress').val(agency.agency_address);
                     modal.find('#emailAddress').val(agency.email_address);
@@ -131,7 +131,7 @@
         }).then((result) => {
 
             document.getElementById('loading').style.display = 'grid';
-            
+
             if (result.isConfirmed) {
                 var formData = {
                     agency_id: agencyId,

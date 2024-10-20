@@ -46,7 +46,7 @@ class AgencyController extends Controller
             'agency_dti_permit' => 'nullable|file|mimes:pdf,jpeg,png,jpg,gif,webp|max:2048',
             'agency_bir_permit' => 'nullable|file|mimes:pdf,jpeg,png,jpg,gif,webp|max:2048',
         ]);
-        
+
         $agency_business_permit = $this->uploadPic($request, 'agency_business_permit', 'agencyfiles/');
         $agency_dti_permit = $this->uploadPic($request, 'agency_dti_permit', 'agencyfiles/');
         $agency_bir_permit = $this->uploadPic($request, 'agency_bir_permit', 'agencyfiles/');
@@ -63,6 +63,9 @@ class AgencyController extends Controller
         $data->agency_business_permit = $agency_business_permit;
         $data->agency_dti_permit = $agency_dti_permit;
         $data->agency_bir_permit = $agency_bir_permit;
+        $data->agency_image = $request->hasFile('agency_image')
+        ? $request->file('agency_image')->store('agency_profile', 'public')
+        : 'default.png';
         $data->password = Hash::make($request->password_confirmation);
         $data->status = 'pending';
         $data->save();
