@@ -72,7 +72,7 @@
 
                 <div class="card-body m-2">
 
-                    <input type="text" id="agencyid" name="agencyid" value="{{ session('agency_id') }}">
+                    <input type="hidden" id="agencyid" name="agencyid" value="{{ session('agency_id') }}">
 
                     <div class="row">
                     <div class="col-6 form-group">
@@ -82,8 +82,14 @@
                     </div>
                     <div class="col-6 form-group">
                         <h6>Job Location</h6>
-                        <input type="text" class="form-control" name="job_location" id="job_location" placeholder="Bacolod.....">
+                        <select class="form-control" name="job_location" id="job_location">
+                            <option value="" disabled selected>Select a location...</option>
+                            <option value="Bacolod">Bacolod</option>
+                            <option value="Talisay">Talisay</option>
+                            <option value="Victorias">Victorias</option>
+                        </select>
                     </div>
+
                 </div>
                 @php
                     $category = App\Models\JobCategory::all();
