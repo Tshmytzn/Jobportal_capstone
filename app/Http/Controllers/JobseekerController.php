@@ -19,7 +19,7 @@ class JobseekerController extends Controller
         $jobseeker = Jobseeker::where('js_id', $user_id)->first();
 
         return view('Jobseeker.profile', compact('jobseeker'));
-    } 
+    }
 
     public function updateJobseeker(Request $request)
     {
@@ -35,13 +35,13 @@ class JobseekerController extends Controller
             'js_contact' => 'required|regex:/^9[0-9]{9}$/|max:10'
 
         ]);
-    
+
         $jobseeker = Jobseeker::findOrFail($request->id);
         $jobseeker->update($validated);
-    
+
         return response()->json(['success' => true, 'message' => 'Your information has been updated successfully.']);
     }
-    
+
 
     public function create(Request $request)
     {
@@ -126,20 +126,20 @@ class JobseekerController extends Controller
 
     public function index()
     {
-        $jobCategories = JobCategory::all(); 
+        $jobCategories = JobCategory::all();
         return view('Jobseeker.index', compact('jobCategories'));
     }
 
     public function jobs()
     {
-        $jobCategories = JobCategory::all(); 
+        $jobCategories = JobCategory::all();
         return view('Jobseeker.jobs', compact('jobCategories'));
     }
-    
+
     public function jobslist(Request $request)
     {
         $jobs = JobDetails::all();
-        $jobCategories = JobCategory::all(); 
+        $jobCategories = JobCategory::all();
 
         return view('Jobseeker.jobslist', compact( 'jobs','jobCategories'));
     }
@@ -149,7 +149,7 @@ class JobseekerController extends Controller
         $categoryId = $request->input('category');
 
         $jobs = JobDetails::where('category_id', $categoryId)->get();
-        $jobCategories = JobCategory::all(); 
+        $jobCategories = JobCategory::all();
 
         return view('Jobseeker.jobslist', compact('jobs', 'jobCategories'));
     }
@@ -182,12 +182,12 @@ class JobseekerController extends Controller
     public function searchfilterjobs(Request $request) {
         // Start a query on the JobDetails model
         $query = JobDetails::query();
-        
+
         // Check if employment type is provided, and apply a filter if so
         if (!empty($request->employmenttype)) {
             $query->where('job_type', $request->employmenttype);
         }
-    
+
         // Check if category is provided, and apply a filter if so
         if (!empty($request->category)) {
             $query->where('category_id', $request->category);
@@ -198,7 +198,7 @@ class JobseekerController extends Controller
         }
         // Execute the query and get the filtered job categories
         $jobcategory = $query->get();
-    
+
         // Return the response as JSON with status 'success' and the job data
         return response()->json(['status' => 'success', 'data' => $jobcategory], 201);
     }
@@ -212,6 +212,18 @@ class JobseekerController extends Controller
             return response()->json(['message' => 'Job not found'], 404);
         }
     }
-    
-    
+
+    public function searchFilterAgencyJobs(Request $request)
+    {
+        // Validate the incoming request
+        $request->validate([
+            'agencyid' => 'required|integer|exists:job_details,agency_id',
+        ]);
+
+        // Fetch job details based on the agency_id
+        $jobs = JobDetails::where('agency_id', $request->agencyid)->get();
+
+        return response()->json($jobs);
+    }
+
 }

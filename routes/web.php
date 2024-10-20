@@ -136,6 +136,10 @@ Route::get('/jobdetails', function () { return view('Jobseeker.jobdetails'); })-
 //show jobdetails
 Route::get('/Showjobdetails/{id}', [JobseekerController::class, 'Showjobdetails']);
 
+Route::get('/AgencyJobs', function () { return view('Jobseeker.agencyjobs'); })->name('agencyjobs');
+
+//filter jobs by agency
+Route::get('/searchfilteragencyjobs', [JobseekerController::class, 'searchFilterAgencyJobs'])->name('searchfilteragencyjobs');
 
 //filter jobs
 Route::post('/searchfilterjobs', [JobseekerController::class, 'searchfilterjobs'])->name('searchfilterjobs');

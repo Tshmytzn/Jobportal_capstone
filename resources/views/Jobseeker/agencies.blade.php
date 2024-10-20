@@ -19,7 +19,7 @@
             </h2>
 
         </div>
-        <form class="row g-3">
+        {{-- <form class="row g-3">
             <div class="col-md-4">
                 <input type="text" class="form-control" id="keyword" placeholder="Enter Keyword">
             </div>
@@ -47,7 +47,7 @@
             <div class="col-md-2">
                 <button type="submit" class="btn btn-primary w-100">Search</button>
             </div>
-        </form>
+        </form> --}}
     </div>
     {{-- Search bar end --}}
 
@@ -79,8 +79,7 @@
 
                             </div>
                             <div class="ms-auto align-self-center">
-                                <a href="{{route('jobslist')}}?agencyid={{$agencylist->id}}" class="btn btn-light rounded-pill py-2 px-4" href="#">See Job Listings
-                                </a>
+                                <a href="{{ route('agencyjobs') }}?agencyid={{ $agencylist->id }}" class="btn btn-light rounded-pill text-primary py-2 px-4">See Jobs</a>
                             </div>
                         </div>
                     </div>
