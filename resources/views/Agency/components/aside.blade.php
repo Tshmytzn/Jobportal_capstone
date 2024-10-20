@@ -140,7 +140,7 @@
                                 <i class="fas fa-file-alt" id="icon-submittedapps"
                                     style="font-size: 12px; color: {{ $active == 'submittedapps' ? '#FFFFFF' : '#000000' }};"></i>
                             </div>
-                            <span class="nav-link-text ms-1">Submitted Applications</span>
+                            <span class="nav-link-text ms-1">Pending Applications</span>
                         </a>
                     </li>
                     <li>
@@ -148,10 +148,10 @@
                             href="{{ route('sascompleted') }}" onclick="setActiveIcon(this, 'icon-sascompleted')">
                             <div
                                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-file-alt" id="icon-sascompleted"
+                                <i class="fas fa-user-check" id="icon-sascompleted"
                                     style="font-size: 12px; color: {{ $active == 'sascompleted' ? '#FFFFFF' : '#000000' }};"></i>
                             </div>
-                            <span class="nav-link-text ms-1">Skills Assessment Completed</span>
+                            <span class="nav-link-text ms-1"> Assessment Results </span>
                         </a>
                     </li>
                     <li>
@@ -160,10 +160,10 @@
                             onclick="setActiveIcon(this, 'icon-screenedapplicants')">
                             <div
                                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-check-circle" id="icon-screenedapplicants"
+                                <i class="fas fa-user-shield" id="icon-screenedapplicants"
                                     style="font-size: 12px; color: {{ $active == 'screenedapplicants' ? '#FFFFFF' : '#000000' }};"></i>
                             </div>
-                            <span class="nav-link-text ms-1">Screened Applicants</span>
+                            <span class="nav-link-text ms-1">Applicant Screening</span>
                         </a>
                     </li>
                     <li>
@@ -172,7 +172,7 @@
                             onclick="setActiveIcon(this, 'icon-approvedapplications')">
                             <div
                                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-times-circle" id="icon-approvedapplications"
+                                <i class="fas fa-clipboard-check" id="icon-approvedapplications"
                                     style="font-size: 12px; color: {{ $active == 'approvedapplications' ? '#FFFFFF' : '#000000' }};"></i>
                             </div>
                             <span class="nav-link-text ms-1">Approved Applications</span>
@@ -230,4 +230,4 @@
         const activeIcon = document.getElementById(iconId);
         activeIcon.style.color = '#FFFFFF';
     }
-    </script>
+</script>

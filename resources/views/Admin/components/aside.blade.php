@@ -74,7 +74,7 @@
                             onclick="setActiveIcon(this, 'icon-verifiedrequests')">
                             <div
                                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-file-alt" id="icon-verifiedrequests"
+                                <i class="fas fa-fingerprint" id="icon-verifiedrequests"
                                     style="font-size: 12px; color: {{ $active == 'verifiedrequests' ? '#FFFFFF' : '#000000' }};"></i>
                             </div>
                             <span class="nav-link-text ms-1">Verification Request</span>
@@ -98,7 +98,7 @@
                             onclick="setActiveIcon(this, 'icon-unverifiedagencies')">
                             <div
                                 class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                                <i class="fas fa-times-circle" id="icon-unverifiedagencies"
+                                <i class="fas fa-ban" id="icon-unverifiedagencies"
                                     style="font-size: 12px; color: {{ $active == 'unverifiedagencies' ? '#FFFFFF' : '#000000' }};"></i>
                             </div>
                             <span class="nav-link-text ms-1">Unverified Agencies</span>
