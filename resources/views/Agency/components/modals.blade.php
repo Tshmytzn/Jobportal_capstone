@@ -36,10 +36,14 @@
                 <h5 class="modal-title" id="profileModalLabel">Administrator</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            @php
+                $agencyData = App\Models\Agency::where('id', session('agency_id'))->first();
+            @endphp
+
             <div class="modal-body text-center">
                 <div class="avatar avatar-xl mx-auto mb-3">
-                    <img src="{{ asset('../assets/img/team-1.jpg') }}" alt="profile_image"
-                        class="w-100 border-radius-md shadow-sm">
+                    <img src="{{asset('agency_profile/'.$agencyData->agency_image)}}"alt="profile_image" class="w-100 border-radius-md shadow-sm">
+
                 </div>
 
                 <h6 class="mb-2">{{ session('user_name') }}</h6>
@@ -68,70 +72,74 @@
             </div>
             <form action="" id="jobDetailsForm" method="POST" enctype="multipart/form-data">
                 @csrf
-            <div class="modal-body">
+                <div class="modal-body">
 
-                <div class="card-body m-2">
+                    <div class="card-body m-2">
 
-                    <input type="hidden" id="agencyid" name="agencyid" value="{{ session('agency_id') }}">
+                        <input type="hidden" id="agencyid" name="agencyid" value="{{ session('agency_id') }}">
 
-                    <div class="row">
-                    <div class="col-6 form-group">
-                        <h6>Job Title</h6>
-                        <input type="text" name="process" id="" value="add" hidden>
-                        <input type="text" class="form-control" name="job_title" id="job_title" placeholder="Construction.....">
-                    </div>
-                    <div class="col-6 form-group">
-                        <h6>Job Location</h6>
-                        <select class="form-control" name="job_location" id="job_location">
-                            <option value="" disabled selected>Select a location...</option>
-                            <option value="Bacolod">Bacolod</option>
-                            <option value="Talisay">Talisay</option>
-                            <option value="Victorias">Victorias</option>
-                        </select>
+                        <div class="row">
+                            <div class="col-6 form-group">
+                                <h6>Job Title</h6>
+                                <input type="text" name="process" id="" value="add" hidden>
+                                <input type="text" class="form-control" name="job_title" id="job_title"
+                                    placeholder="Construction.....">
+                            </div>
+                            <div class="col-6 form-group">
+                                <h6>Job Location</h6>
+                                <select class="form-control" name="job_location" id="job_location">
+                                    <option value="" disabled selected>Select a location...</option>
+                                    <option value="Bacolod">Bacolod</option>
+                                    <option value="Talisay">Talisay</option>
+                                    <option value="Victorias">Victorias</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        @php
+                            $category = App\Models\JobCategory::all();
+                        @endphp
+                        <div class="row">
+                            <div class="col-6 form-group">
+                                <h6>Job Category</h6>
+                                <select class="form-select" name="job_category" id="job_category">
+                                    <option value="" disabled selected> Select Job Category </option>
+                                    <!-- You can manually add static options here -->
+                                    @foreach ($category as $cat)
+                                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="col-6 form-group">
+                                <h6>Employment Type</h6>
+                                <select class="form-select" name="job_type" id="job_type">
+                                    <option value="" disabled selected> Select Employment Type </option>
+                                    <option value="Full Time">Full Time</option>
+                                    <option value="Part Time">Part Time</option>
+                                </select>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-12 form-group">
+                                <input type="file" class="form-control" name="job_image" id="job_image"
+                                    placeholder="Image.....">
+                            </div>
+                        </div>
+                        <div class="container mb-2">
+                            <h6>Description:</h6>
+                            <textarea class="summernote" name="job_details"></textarea>
+                        </div>
+
                     </div>
 
                 </div>
-                @php
-                    $category = App\Models\JobCategory::all();
-                @endphp
-                    <div class="row">
-                        <div class="col-6 form-group">
-                            <h6>Job Category</h6>
-                            <select class="form-select" name="job_category"  id="job_category">
-                                <option value="" disabled selected> Select Job Category </option>
-                                <!-- You can manually add static options here -->
-                                @foreach ($category as $cat)
-                                    <option value="{{$cat->id}}">{{$cat->name}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-
-                        <div class="col-6 form-group">
-                            <h6>Employment Type</h6>
-                            <select class="form-select" name="job_type" id="job_type">
-                                <option value="" disabled selected> Select Employment Type </option>
-                                <option value="Full Time">Full Time</option>
-                                <option value="Part Time">Part Time</option>
-                            </select>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-12 form-group">
-                            <input type="file" class="form-control" name="job_image" id="job_image" placeholder="Image.....">
-                        </div>
-                    </div>
-                    <div class="container mb-2">
-                        <h6>Description:</h6>
-                        <textarea class="summernote" name="job_details"></textarea>
-                    </div>
-
-                </div>
-
-            </div>
             </form>
             <div class="modal-footer">
-                <button type="button" class="btn text-white" onclick="submit('jobDetailsForm',`{{route('Agency')}}`)" style="background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%);">Save changes</button>
+                <button type="button" class="btn text-white" onclick="submit('jobDetailsForm',`{{ route('Agency') }}`)"
+                    style="background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%);">Save
+                    changes</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
