@@ -56,6 +56,30 @@
             text-align: center;
             color: white;
         }
-        
+
+        .bgp-add {
+            background-color: rgb(182, 24, 127);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .bgp-remove {
+            background-color: #FF4136;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .bgp-remove:hover {
+            background-color: #C0392B;
+        }
+
     </style>
 </head>

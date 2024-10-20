@@ -6,7 +6,7 @@
         <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html "
             target="_blank">
             <img src="{{ asset('../assets/img/PESOLOGO.png') }}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">AGENCY NAME</span>
+            <span class="ms-1 font-weight-bold">AGENCY ADMIN</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -225,7 +225,7 @@
         document.querySelectorAll('#agency-nav i').forEach((icon) => {
             icon.style.color = '#000000';
         });
-    
+
 
         const activeIcon = document.getElementById(iconId);
         activeIcon.style.color = '#FFFFFF';

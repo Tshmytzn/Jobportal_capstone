@@ -23,6 +23,53 @@
     <!-- SweetAlert2  -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Summernote CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.css"  rel="stylesheet" defer>
-   
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.css" rel="stylesheet" defer>
+
+    <style>
+        .bgp-gradient {
+            background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%);
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+
+        .bgp-table {
+            background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgb(146, 43, 153) 50%, rgb(184, 114, 182) 100%);
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .bgp-danger {
+            background: linear-gradient(90deg, rgb(206, 150, 150) 0%, rgb(207, 74, 74) 50%, rgba(139, 0, 0, 1) 100%);
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+
+        .bgp-add {
+            background-color: rgb(182, 24, 127);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .bgp-remove {
+            background-color: #FF4136;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .bgp-remove:hover {
+            background-color: #C0392B;
+        }
+    </style>
+
 </head>
