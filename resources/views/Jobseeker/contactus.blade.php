@@ -4,6 +4,7 @@
 @include('Jobseeker.components.head', ['title' => 'Contact Us'])
 
 <body>
+    @include('Jobseeker.components.loading')
 
     @include('Jobseeker.components.spinner')
 
@@ -32,7 +33,7 @@
 
                     <form id="contactform" role="form" method="POST">
                         <div class="row g-3">
-                           
+
                                 @csrf
                             <div class="col-lg-12 col-xl-6">
                                 <div class="form-floating">
@@ -54,12 +55,12 @@
                                     <label for="message">Your Message</label>
                                 </div>
                             </div>
-                     
+
 
                             <div class="col-12">
                                 <button class="btn btn-primary w-100 py-3" onclick="SubmitContact('contactform')" type="button">Send Message</button>
                             </div>
-                            
+
                         </div>
                     </form>
 
