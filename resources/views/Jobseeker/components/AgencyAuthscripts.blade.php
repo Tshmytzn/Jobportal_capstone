@@ -16,8 +16,8 @@
 
                 if (response.status === 'error') {
                     Swal.fire('Error', response.message, 'error');
-                }else if(response.status === 'checking'){
-                    window.location.replace('/AgencyReview?id='+response.user_id);
+                } else if (response.status === 'checking') {
+                    window.location.replace('/AgencyReview?id=' + response.user_id);
                 } else {
                     Swal.fire({
                         title: 'Success',
@@ -47,6 +47,9 @@
         var formData = new FormData(formElement);
         formData.append('_token', '{{ csrf_token() }}'); // Append CSRF token
 
+        document.getElementById('loading').style.display = 'grid';
+
+
         // Send the AJAX request
         $.ajax({
             type: "POST",
@@ -55,6 +58,8 @@
             contentType: false,
             processData: false,
             success: function(response) {
+                document.getElementById('loading').style.display = 'none';
+
                 if (response.status === 'error') {
                     Swal.fire({
                         icon: 'warning',
@@ -78,20 +83,22 @@
                 }
             },
             error: function(xhr, status, error) {
+                document.getElementById('loading').style.display = 'none';
+
                 console.error(xhr.responseText);
                 const responseObject = JSON.parse(xhr.responseText);
 
-// Initialize an empty array to store all error messages
-const allErrorMessages = [];
+                // Initialize an empty array to store all error messages
+                const allErrorMessages = [];
 
-// Loop through the errors object and collect the messages
-for (const key in responseObject.errors) {
-    if (responseObject.errors.hasOwnProperty(key)) {
-        allErrorMessages.push(...responseObject.errors[key]);
-    }
-}
+                // Loop through the errors object and collect the messages
+                for (const key in responseObject.errors) {
+                    if (responseObject.errors.hasOwnProperty(key)) {
+                        allErrorMessages.push(...responseObject.errors[key]);
+                    }
+                }
 
-const errorMessageString = allErrorMessages.join(', ');
+                const errorMessageString = allErrorMessages.join(', ');
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',

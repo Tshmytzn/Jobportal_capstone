@@ -4,11 +4,16 @@
     function updateAgency() {
         var formData = $("#updateAgencyForm").serialize();
 
+        document.getElementById('loading').style.display = 'grid';
+
+
         $.ajax({
             url: "{{ route('UpdateAgency') }}",
             type: "POST",
             data: formData,
             success: function(response) {
+                document.getElementById('loading').style.display = 'none';
+
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
@@ -30,6 +35,8 @@
                 }, 1500);
             },
             error: function(xhr, status, error) {
+                document.getElementById('loading').style.display = 'none';
+
                 var errors = xhr.responseJSON.errors;
                 var errorMessage = '';
 
@@ -52,11 +59,16 @@
     function updatePassword() {
         var formData = $("#updatePasswordForm").serialize();
 
+        document.getElementById('loading').style.display = 'grid';
+
+
         $.ajax({
             url: "{{ route('UpdatePassword') }}",
             type: "POST",
             data: formData,
             success: function(response) {
+                document.getElementById('loading').style.display = 'none';
+
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
@@ -69,6 +81,8 @@
                 $('#new_password_confirmation').val('');
             },
             error: function(xhr, status, error) {
+                document.getElementById('loading').style.display = 'none';
+
                 var errors = xhr.responseJSON.errors;
                 var errorMessage = '';
 
@@ -95,7 +109,8 @@
 
         formData.append('_token', '{{ csrf_token() }}');
 
-        console.log(formData)
+        document.getElementById('loading').style.display = 'grid';
+
         $.ajax({
             url: "{{ route('UpdateAgencyProfilePic') }}",
             type: "POST",
@@ -103,6 +118,8 @@
             processData: false,
             contentType: false,
             success: function(response) {
+                document.getElementById('loading').style.display = 'none';
+
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
@@ -123,6 +140,8 @@
                 }, 1500);
             },
             error: function(xhr, status, error) {
+                document.getElementById('loading').style.display = 'none';
+
                 var errors = xhr.responseJSON.errors;
                 var errorMessage = '';
 
