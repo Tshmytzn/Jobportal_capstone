@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminCRUDController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AuthMiddleware;
+use App\Http\Controllers\AdminChartsController;
 
 // Admin Protected Routes
 Route::middleware([AuthMiddleware::class])->group(function () {
@@ -22,6 +23,9 @@ Route::get('/Admin/Jobseeker', function () { return view('Admin.jobseeker'); })-
 Route::get('/Admin/JobCategory', function () { return view('Admin.jobcategory'); })->name('jobcategory');
 Route::get('/Admin/Administrators', function () { return view('Admin.admins'); })->name('administrators');
 Route::get('/Admin/CustomerInquiries', function () { return view('Admin.customerinquiries'); })->name('customerinquiries');
+
+//dashboard chart
+Route::get('/api/registrations', [AdminChartsController::class, 'getMonthlyRegistrations']);
 
 //Admin view
 Route::get('/Admin/Settings', [AdminController::class, 'showAdminDetails'])->name('adminsettings');

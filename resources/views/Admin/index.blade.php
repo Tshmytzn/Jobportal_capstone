@@ -135,6 +135,8 @@
     </main>
 
     @include('Admin.components.scripts')
+    @include('Admin.components.dashboardscripts')
+
 </body>
 
 </html>
