@@ -54,6 +54,29 @@ background: linear-gradient(90deg,
     min-height: 490px;
     background-color: #fff;
     overflow: hidden;
+    max-height: 500px; /* Set a maximum height for the form */
+    overflow-y: auto;  /* Enable vertical scrolling */
+    padding-right: 0;
+    margin-right: -10px;
+}
+
+.container form::-webkit-scrollbar {
+    width: 10px; 
+}
+
+.container form::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+    border-radius: 10px;  
+}
+
+.container form::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #a445b2, #d41872); 
+    border-radius: 10px; 
+    border: 2px solid #f1f1f1; 
+}
+
+.container form::-webkit-scrollbar-thumb:hover {
+    background-color: #265df2; 
 }
 .container form .form{
     position: absolute;
@@ -170,6 +193,15 @@ form .buttons button , .backBtn{
     form .fields .input-field{
         width: calc(100% / 2 - 15px);
     }
+    .container form {
+        max-height: 400px; 
+        overflow-y: auto;  
+    }
+    .nextBtn {
+        position: relative;
+        display: block;
+    }
+
 }
 
 @media (max-width: 550px) {
@@ -177,4 +209,12 @@ form .buttons button , .backBtn{
         width: 100%;
     }
 }
+.centered-container {
+    display: flex;
+    flex-direction: column; /* Align items in a column */
+    align-items: center;    /* Center horizontally */
+    text-align: center;     /* Center text */
+    margin: 20px;          /* Optional: add some margin */
+}
+
 </style>

@@ -8,83 +8,84 @@
     @include('Jobseeker.components.spinner')
 
     <div class="container m-5">
-        <header>Registration</header>
+        <div class="centered-container">
+            <div>
+                <img src="{{asset('assets/img/PESOLOGO.png')}}" class="m-0" alt="" style="width: 15%; height: 15%">
+            </div>
+            <header class="mt-1">PESO Registration Form</header>
+        </div>
 
-        <form action="#">
+        <form id="pesoform" action="#">
             <div class="form first">
-                <div class="details personal">
-                    <span class="title">Personal Details</span>
-
-                    <div class="fields">
-                        <div class="input-field">
-                            <label>Full Name</label>
-                            <input type="text" placeholder="Enter your name" required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Date of Birth</label>
-                            <input type="date" placeholder="Enter birth date" required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Email</label>
-                            <input type="text" placeholder="Enter your email" required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Mobile Number</label>
-                            <input type="number" placeholder="Enter mobile number" required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Gender</label>
-                            <select required>
-                                <option disabled selected>Select gender</option>
-                                <option>Male</option>
-                                <option>Female</option>
-                                <option>Others</option>
-                            </select>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Occupation</label>
-                            <input type="text" placeholder="Enter your ccupation" required>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="details ID">
-                    <span class="title">Identity Details</span>
+                    <span class="title"> <strong>Jobseeker Details</strong></span>
+
 
                     <div class="fields">
                         <div class="input-field">
-                            <label>ID Type</label>
-                            <input type="text" placeholder="Enter ID type" required>
+                            <label>SRS ID</label>
+                            <input type="text" placeholder="Enter SRS ID (e.g., 1234567)" required>
                         </div>
-
+                
                         <div class="input-field">
-                            <label>ID Number</label>
-                            <input type="number" placeholder="Enter ID number" required>
+                            <label>Full Name</label>
+                            <input type="text" placeholder="Enter full name" required>
                         </div>
-
+                
                         <div class="input-field">
-                            <label>Issued Authority</label>
-                            <input type="text" placeholder="Enter issued authority" required>
+                            <label>Birthdate</label>
+                            <input type="date" placeholder="Select birthdate" required>
                         </div>
-
+                
                         <div class="input-field">
-                            <label>Issued State</label>
-                            <input type="text" placeholder="Enter issued state" required>
+                            <label>Age</label>
+                            <input type="number" placeholder="Enter age" required>
                         </div>
-
+                
                         <div class="input-field">
-                            <label>Issued Date</label>
-                            <input type="date" placeholder="Enter your issued date" required>
+                            <label>Sex</label>
+                            <select required>
+                                <option disabled selected>Choose...</option>
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>
                         </div>
-
+                
                         <div class="input-field">
-                            <label>Expiry Date</label>
-                            <input type="date" placeholder="Enter expiry date" required>
+                            <label>Street Address</label>
+                            <input type="text" placeholder="Enter street address" required>
+                        </div>
+                
+                        <div class="input-field">
+                            <label>Barangay</label>
+                            <input type="text" placeholder="Enter barangay" required>
+                        </div>
+                
+                        <div class="input-field">
+                            <label>City/Municipality</label>
+                            <input type="text" placeholder="Enter city/municipality" required>
+                        </div>
+                
+                        <div class="input-field">
+                            <label>Province</label>
+                            <input type="text" placeholder="Enter province" required>
+                        </div>
+                
+                        <div class="input-field">
+                            <label>Region</label>
+                            <input type="text" placeholder="Enter region" required>
+                        </div>
+                
+                        <div class="input-field">
+                            <label>Email</label>
+                            <input type="email" placeholder="Enter email" required>
+                        </div>
+                
+                        <div class="input-field">
+                            <label>Cellphone Number</label>
+                            <input type="tel" placeholder="Enter cellphone number" required>
                         </div>
                     </div>
 
@@ -97,74 +98,84 @@
 
             <div class="form second">
                 <div class="details address">
-                    <span class="title">Address Details</span>
-
+                    <span class="title">Employment Information</span>
+                
                     <div class="fields">
                         <div class="input-field">
-                            <label>Address Type</label>
-                            <input type="text" placeholder="Permanent or Temporary" required>
+                            <label>Employment Status</label>
+                            <select required>
+                                <option value="" disabled selected>Choose...</option>
+                                <option value="employed">Employed</option>
+                                <option value="unemployed">Unemployed</option>
+                                <option value="student">Student</option>
+                                <option value="freelancer">Freelancer</option>
+                                <!-- Add more options as needed -->
+                            </select>
                         </div>
-
+                
                         <div class="input-field">
-                            <label>Nationality</label>
-                            <input type="text" placeholder="Enter nationality" required>
+                            <label>Education Level</label>
+                            <input type="text" placeholder="e.g., High School Graduate" required>
                         </div>
-
+                
                         <div class="input-field">
-                            <label>State</label>
-                            <input type="text" placeholder="Enter your state" required>
+                            <label>Preferred Position</label>
+                            <input type="text" placeholder="Preferred Position" required>
                         </div>
-
+                
                         <div class="input-field">
-                            <label>District</label>
-                            <input type="text" placeholder="Enter your district" required>
+                            <label>Skills</label>
+                            <textarea placeholder="List your skills" required></textarea>
                         </div>
-
+                
                         <div class="input-field">
-                            <label>Block Number</label>
-                            <input type="number" placeholder="Enter block number" required>
+                            <label>Registration Date</label>
+                            <input type="date" required>
                         </div>
-
+                
                         <div class="input-field">
-                            <label>Ward Number</label>
-                            <input type="number" placeholder="Enter ward number" required>
+                            <label>Remarks</label>
+                            <textarea placeholder="Remarks"></textarea>
                         </div>
                     </div>
                 </div>
+                
 
                 <div class="details family">
-                    <span class="title">Family Details</span>
+                    <span class="title">Office Details</span>
 
                     <div class="fields">
                         <div class="input-field">
-                            <label>Father Name</label>
-                            <input type="text" placeholder="Enter father name" required>
+                            <label>Office Name</label>
+                            <input type="text" placeholder="Enter office name" required>
                         </div>
 
                         <div class="input-field">
-                            <label>Mother Name</label>
-                            <input type="text" placeholder="Enter mother name" required>
+                            <label>Area Type</label>
+                            <input type="text" placeholder="Enter area type" required>
                         </div>
 
                         <div class="input-field">
-                            <label>Grandfather</label>
-                            <input type="text" placeholder="Enter grandfther name" required>
+                            <label>Area Class</label>
+                            <input type="text" placeholder="Enter area class (e.g., 4th class)" required>
                         </div>
 
                         <div class="input-field">
-                            <label>Spouse Name</label>
-                            <input type="text" placeholder="Enter spouse name" required>
+                            <label>Program</label>
+                            <input type="text" placeholder="Enter Program" required>
                         </div>
 
                         <div class="input-field">
-                            <label>Father in Law</label>
-                            <input type="text" placeholder="Father in law name" required>
+                            <label>Event</label>
+                            <input type="text" placeholder="Enter event" required>
                         </div>
 
                         <div class="input-field">
-                            <label>Mother in Law</label>
-                            <input type="text" placeholder="Mother in law name" required>
+                            <label>Transaction</label>
+                            <input type="text" placeholder="Enter Transaction" required>
                         </div>
+                      
+                        
                     </div>
 
                     <div class="buttons">

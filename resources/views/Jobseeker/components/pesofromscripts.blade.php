@@ -1,7 +1,7 @@
 <script>
     const form = document.querySelector("form"),
-        n
-extBtn = form.querySelector(".nextBtn"),
+        
+nextBtn = form.querySelector(".nextBtn"),
         backBtn = form.querySelector(".backBtn"),
         allInput = form.querySelectorAll(".first input");
 
