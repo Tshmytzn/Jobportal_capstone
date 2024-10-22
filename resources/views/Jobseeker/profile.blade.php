@@ -14,10 +14,10 @@
 
     @include('Jobseeker.components.header', ['title' => 'Profile'])
 
-    <div class="container mt-5 mb-5">
+    <div class="container mb-5">
         <div class="row">
 
-            <div class="mt-1 mb-3">
+            <div class="mb-5">
                 <a href="{{ route('pesoform') }}">
                 <button class="btn btn-primary w-100"> Complete PESO Registration Form</button>
             </a>

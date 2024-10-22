@@ -48,6 +48,7 @@
         .dropdown-menu.dropdown-menu-adjust {
             margin-top: -15px;
         }
+
         .bgp-gradient {
             background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%);
             display: flex;
@@ -62,5 +63,57 @@
             color: white;
         }
 
+        .btn-gradient {
+            background: linear-gradient(135deg, #ff512f, #dd2476);
+            color: white;
+            border: none;
+            transition: background 0.3s ease;
+            width: 70px;
+            height: 70px;
+            font-size: 1.5rem;
+
+        }
+
+        .btn-gradient:hover {
+            background: linear-gradient(135deg, #dd2476, #ff512f);
+        }
+
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip-container button {
+            position: relative;
+            z-index: 2;
+        }
+
+        .tooltip-text {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            visibility: hidden;
+            opacity: 0;
+            background-color: #c97474;
+            color: #fff;
+            padding: 5px 12px;
+            border-radius: 5px;
+            white-space: nowrap;
+            font-size: 14px;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s;
+            z-index: 3;
+        }
+
+        .tooltip-container:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+        }
     </style>
 </head>
