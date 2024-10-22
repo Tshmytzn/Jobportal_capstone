@@ -18,8 +18,9 @@
         <div class="row">
 
             <div class="mt-1 mb-3">
+                <a href="{{ route('pesoform') }}">
                 <button class="btn btn-primary w-100"> Complete PESO Registration Form</button>
-
+            </a>
             </div>
             <!-- Profile Picture and Info -->
             <div class="card col-md-4">
