@@ -69,13 +69,25 @@
                         <i class="fas fa-envelope"></i> Contact Us
                     </a>
 
-                    <div class="tooltip-container"> 
-                        <button type="button" class="btn rounded-circle btn-gradient mt-1 me-2"
-                            style="width: 60px; height: 60px;">
-                            <i class="fas fa-clipboard-check"></i>
-                        </button>
-                        <span class="tooltip-text">Take Skill Assessment</span>
-                    </div>          
+                    @if (session()->has('user_id'))
+
+                    <a href="{{ route('contactus') }}"
+                        class="nav-item nav-link tooltip-container">
+                            <div class="rounded-circle btn-gradient d-flex justify-content-center align-items-center" style="width: 45px; height:45px; margin-top:-12px">
+                                <i class="fas fa-clipboard-check"></i>
+                                <span class="tooltip-text">Take Skill Assessment</span>
+                            </div>
+                    </a>
+                
+                @else
+                
+                    <div>
+                        <!-- You can add some content here or leave this block empty if not needed -->
+                    </div>
+                
+                @endif
+                
+
                 </div>
 
                 <!-- Check if a user is logged in -->

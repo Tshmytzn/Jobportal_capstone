@@ -163,7 +163,7 @@ Route::get('/AgencyFeedback', function () { return view('Jobseeker.agencyfeedbac
 Route::get('/ContactUs', function () { return view('Jobseeker.contactus'); })->name('contactus');
 Route::get('/404', function () { return view('Jobseeker.404'); })->name('404');
 Route::get('/Profile', function () { return view('Jobseeker.profile'); })->name('profile');
-Route::get('/Settings', function () { return view('Jobseeker.settings'); })->name('settings');
+// Route::get('/Settings', function () { return view('Jobseeker.settings'); })->name('settings');
 Route::get('/PESORegistrationForm', function () { return view('Jobseeker.pesoform'); })->name('pesoform');
 
 
@@ -172,6 +172,8 @@ Route::post('/', [JobseekerController::class, 'create'])->name('jobseekersCreate
 Route::post('/LoginJobseeker', [AuthController::class, 'LoginJobseeker'])->name('LoginJobseeker');
 Route::post('/LogoutJobseeker', [AuthController::class, 'LogoutJobseeker'])->name('LogoutJobseeker');
 Route::get('/Profile', [JobseekerController::class, 'getJobseeker'])->name('profile');
+Route::get('/Settings', [JobseekerController::class, 'getJobseeker2'])->name('settings');
+
 Route::post('/Update', [JobseekerController::class, 'updateJobseeker'])->name('updateJobseeker');
 Route::post('/updateJsPassword', [JobseekerController::class, 'updateJsPassword'])->name('updateJsPassword');
 Route::post('/uploadResume', [JobseekerController::class, 'uploadResume'])->name('uploadResume');

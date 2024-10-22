@@ -70,7 +70,7 @@
             transition: background 0.3s ease;
             width: 70px;
             height: 70px;
-            font-size: 1.5rem;
+            font-size: 1.1rem;
 
         }
 
@@ -90,7 +90,7 @@
 
         .tooltip-text {
             position: absolute;
-            bottom: 5px;
+            bottom: 1px;
             left: 50%;
             transform: translateX(-50%);
             visibility: hidden;

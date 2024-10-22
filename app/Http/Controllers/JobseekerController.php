@@ -21,6 +21,15 @@ class JobseekerController extends Controller
         return view('Jobseeker.profile', compact('jobseeker'));
     }
 
+    public function getJobseeker2()
+    {
+        $user_id = session('user_id');
+
+        $jobseeker = Jobseeker::where('js_id', $user_id)->first();
+
+        return view('Jobseeker.settings', compact('jobseeker'));
+    }
+
     public function updateJobseeker(Request $request)
     {
         // Validate and update jobseeker data here
