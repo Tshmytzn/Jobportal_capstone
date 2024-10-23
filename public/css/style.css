@@ -753,7 +753,7 @@
     overflow: hidden;
     z-index: 1;
 }
-.testimonial::after {
+/* .testimonial::after {
     content: "";
     position: absolute;
     top: 30%;
@@ -779,7 +779,7 @@
     animation: TestimonialMoveRight 100s linear infinite;
     z-index: -1;
 
-}
+} */
 
 @keyframes TestimonialMoveLeft {
     0%   {left: 0px;}

@@ -50,12 +50,12 @@
                         <a href="#"
                             class="nav-link dropdown-toggle {{ in_array($active, ['agencies', 'feedback']) ? 'active' : '' }}"
                             data-bs-toggle="dropdown">
-                            <i class="fas fa-building"></i> Agency
+                            <i class="fas fa-handshake"></i> Agency
                         </a>
                         <div class="dropdown-menu dropdown-menu-adjust">
                             <a href="{{ route('agencies') }}"
                                 class="dropdown-item {{ $active == 'agencies' ? 'active' : '' }}">
-                                <i class="fas fa-building"></i> Agencies
+                                <i class="fas fa-project-diagram"></i> Agencies
                             </a>
                             <a href="{{ route('agencyfeedback') }}"
                                 class="dropdown-item {{ $active == 'feedback' ? 'active' : '' }}">
@@ -64,9 +64,14 @@
                         </div>
                     </div>
 
+                    <a href="{{ route('faqs') }}"
+                    class="nav-item nav-link {{ $active == 'faqs' ? 'active' : '' }}">
+                    <i class="fas fa-question-circle"></i> FAQS
+                </a>
+
                     <a href="{{ route('contactus') }}"
                         class="nav-item nav-link {{ $active == 'contactus' ? 'active' : '' }}">
-                        <i class="fas fa-envelope"></i> Contact Us
+                        <i class="fas fa-comments"></i> Contact Us
                     </a>
 
                     @if (session()->has('user_id'))

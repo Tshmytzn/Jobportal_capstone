@@ -165,6 +165,7 @@ Route::get('/404', function () { return view('Jobseeker.404'); })->name('404');
 Route::get('/Profile', function () { return view('Jobseeker.profile'); })->name('profile');
 // Route::get('/Settings', function () { return view('Jobseeker.settings'); })->name('settings');
 Route::get('/PESORegistrationForm', function () { return view('Jobseeker.pesoform'); })->name('pesoform');
+Route::get('/FAQS', function () { return view('Jobseeker.faqs'); })->name('faqs');
 
 
 // Jobseeker Page Controllers

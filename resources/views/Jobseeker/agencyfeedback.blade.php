@@ -3,50 +3,6 @@
 
 @include('Jobseeker.components.head', ['title' => 'Agency Feedback'])
 
-<style>
-    body {
-        background-color: #f8f9fa;
-        font-family: 'Arial', sans-serif;
-    }
-    .feedback-card {
-        margin-bottom: 20px;
-        border: none;
-        border-radius: 12px;
-        transition: transform 0.2s, box-shadow 0.2s;
-        background: #fff;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        max-width: 300px; /* Fixed width for each card */
-    }
-    .feedback-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-    }
-    .card-title {
-        font-weight: bold;
-        font-size: 1.25rem;
-    }
-    .card-subtitle {
-        font-size: 0.9rem;
-        margin-bottom: 10px;
-    }
-    .rating {
-        color: #FFD700; /* Gold color for stars */
-    }
-    .card-img-top {
-        width: 100%;
-        height: 150px; /* Fixed height for images */
-        object-fit: cover;
-    }
-    .card-body {
-        padding: 20px;
-    }
-    .pagination {
-        justify-content: center;
-        margin-top: 20px;
-    }
-</style>
-
 <body>
 
     @include('Jobseeker.components.spinner')
@@ -55,92 +11,94 @@
 
     @include('Jobseeker.components.header', ['title' => 'Agency Feedback'])
 
-    <div class="container mb-5">
-        <div class="row justify-content-center">
-            <!-- Feedback Cards -->
-            <div class="col-md-4">
-                <div class="card feedback-card">
-                    <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Agency Logo">
-                    <div class="card-body">
-                        <h5 class="card-title">ABC Recruitment <span class="rating">⭐⭐⭐⭐⭐</span></h5>
-                        <h6 class="card-subtitle text-muted">contact@abcrecruitment.com</h6>
-                        <p class="card-text">The job portal has significantly simplified our hiring process. The quality of candidates we receive has greatly improved!</p>
+    <!-- Testimonial Start -->
+    <div class="container-fluid testimonial py-5 bg-white">
+        <div class="container py-5">
+
+            <div class="testimonial-carousel owl-carousel wow zoomInDown" data-wow-delay="0.2s">
+                <div class="testimonial-item" data-dot="<img class='img-fluid' src='img/testimonial-img-1.jpg' alt=''>">
+                    <div class="testimonial-inner text-center p-5">
+                        <div class="d-flex align-items-center justify-content-center mb-4">
+                            <div class="testimonial-inner-img border border-primary border-3 me-4"
+                                style="width: 100px; height: 100px; border-radius: 50%;">
+                                <img src="img/testimonial-img-1.jpg" class="img-fluid rounded-circle" alt="">
+                            </div>
+                            <div>
+                                <h5 class="mb-2">Acme Recruitment Agency</h5>
+                                <p class="mb-0">Bacolod, negros</p>
+                            </div>
+                        </div>
+                        <p class="fs-7">"The job portal system has streamlined our hiring process significantly. We've
+                            connected with highly qualified candidates faster than ever. The user-friendly interface and
+                            advanced search features have been game changers for our recruitment team."
+                        </p>
+                        <div class="text-center">
+                            <div class="d-flex justify-content-center">
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card feedback-card">
-                    <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Agency Logo">
-                    <div class="card-body">
-                        <h5 class="card-title">XYZ Staffing <span class="rating">⭐⭐⭐⭐</span></h5>
-                        <h6 class="card-subtitle text-muted">info@xyzstaffing.com</h6>
-                        <p class="card-text">Very user-friendly interface and great support. We appreciate the constant updates to enhance our experience.</p>
+                <div class="testimonial-item" data-dot="<img class='img-fluid' src='img/testimonial-img-2.jpg' alt=''>">
+                    <div class="testimonial-inner text-center p-5">
+                        <div class="d-flex align-items-center justify-content-center mb-4">
+                            <div class="testimonial-inner-img border border-primary border-3 me-4"
+                                style="width: 100px; height: 100px; border-radius: 50%;">
+                                <img src="img/testimonial-img-2.jpg" class="img-fluid rounded-circle" alt="">
+                            </div>
+                            <div>
+                                <h5 class="mb-2">Global Staffing Solutions</h5>
+                                <p class="mb-0">Talisay, Negros</p>
+                            </div>
+                        </div>
+                        <p class="fs-7">"Using this portal, we have cut down on recruitment time by 50%. The
+                            platform's filters make it easy to find the right candidates. We've been impressed with the
+                            ongoing updates and improvements to the system."
+                        </p>
+                        <div class="text-center">
+                            <div class="d-flex justify-content-center">
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card feedback-card">
-                    <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Agency Logo">
-                    <div class="card-body">
-                        <h5 class="card-title">Elite Hire Agency <span class="rating">⭐⭐⭐</span></h5>
-                        <h6 class="card-subtitle text-muted">hello@elitehire.com</h6>
-                        <p class="card-text">The platform is good, but it could use some additional features for better filtering of candidates.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card feedback-card">
-                    <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Agency Logo">
-                    <div class="card-body">
-                        <h5 class="card-title">Recruit Right <span class="rating">⭐⭐⭐⭐⭐</span></h5>
-                        <h6 class="card-subtitle text-muted">support@recruitright.com</h6>
-                        <p class="card-text">Exceptional service! We find the perfect candidates quickly, and the response times are fantastic.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card feedback-card">
-                    <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Agency Logo">
-                    <div class="card-body">
-                        <h5 class="card-title">Future Talent <span class="rating">⭐⭐⭐⭐</span></h5>
-                        <h6 class="card-subtitle text-muted">contact@futuretalent.com</h6>
-                        <p class="card-text">A great tool for finding skilled professionals. Would love to see more analytics features!</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card feedback-card">
-                    <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Agency Logo">
-                    <div class="card-body">
-                        <h5 class="card-title">Talent Search Co. <span class="rating">⭐⭐⭐⭐⭐</span></h5>
-                        <h6 class="card-subtitle text-muted">info@talentsearchco.com</h6>
-                        <p class="card-text">Highly recommend this portal! It has made our recruitment process more efficient and effective.</p>
+                <div class="testimonial-item" data-dot="<img class='img-fluid' src='img/testimonial-img-3.jpg' alt=''>">
+                    <div class="testimonial-inner text-center p-5">
+                        <div class="d-flex align-items-center justify-content-center mb-4">
+                            <div class="testimonial-inner-img border border-primary border-3 me-4"
+                                style="width: 100px; height: 100px; border-radius: 50%;">
+                                <img src="img/testimonial-img-3.jpg" class="img-fluid rounded-circle" alt="">
+                            </div>
+                            <div>
+                                <h5 class="mb-2">Pioneer Talent Agency</h5>
+                                <p class="mb-0">Sydney, Australia</p>
+                            </div>
+                        </div>
+                        <p class="fs-7">"The portal has made it easy for us to post jobs and review applications. The customer support has been exceptional, ensuring that any issues are resolved quickly. We are thrilled with the results so far."
+                        </p>
+                        <div class="text-center">
+                            <div class="d-flex justify-content-center">
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                                <i class="fas fa-star text-primary"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Pagination -->
-        <nav aria-label="Page navigation">
-            <ul class="pagination">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item active" aria-current="page">
-                    <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
     </div>
+    <!-- Testimonial End -->
 
     @include('Jobseeker.components.footer')
 
