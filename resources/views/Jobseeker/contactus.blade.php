@@ -83,7 +83,7 @@
                         </div>
                         <div class="ms-4">
                             <h4>Mobile</h4>
-                            <p class="mb-0">0916 645 3802</p>
+                            <p class="mb-0">+6391 6645 3802</p>
                         </div>
                     </div>
                     <div class="d-flex align-items-center mb-4">
