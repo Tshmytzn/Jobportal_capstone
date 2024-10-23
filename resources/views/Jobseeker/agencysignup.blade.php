@@ -32,7 +32,6 @@
         color: #fff;
     }
 </style>
-</style>
 
 <body style="background-color: #e3ddeb">
 
