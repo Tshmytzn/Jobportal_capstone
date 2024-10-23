@@ -5,27 +5,27 @@
 
 <style>
     .badge-placeholder {
-        width: 150px; 
-        height: 150px; 
-        border: 5px dotted red; 
-        border-radius: 50%; 
+        width: 150px;
+        height: 150px;
+        border: 5px dotted red;
+        border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: white; 
-        color: red; 
-        font-size: 2rem; 
-        margin: 30px auto; 
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
+        background-color: white;
+        color: red;
+        font-size: 2rem;
+        margin: 30px auto;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
     .card-custom {
-        background-color: white; 
-        border: 2px solid red; 
-        border-radius: 10px; 
+        background-color: white;
+        border: 2px solid red;
+        border-radius: 10px;
     }
     .card-title {
-        color: red; 
-        margin-bottom: 15px; 
+        color: red;
+        margin-bottom: 15px;
     }
     .card-text {
         margin-bottom: 20px;
@@ -81,7 +81,7 @@
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="display-7"> <strong>Profile Information</strong></h4>
                         <div>
-                            <a href="#" class="me-3" title="Edit Profile">
+                            <a href="{{ route('pesoform') }}" class="me-3" title="Edit Profile">
                                 <i style="font-size: 20px" class="fas fa-edit"></i>
                             </a>
                             <a href="#" title="Print Profile">
@@ -91,7 +91,7 @@
                     </div>
                     <img src="{{ asset('img/pf.png') }}" alt="">
                 </div>
-                
+
             </div>
         </div>
     </div>
