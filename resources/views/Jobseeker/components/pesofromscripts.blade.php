@@ -1,45 +1,50 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
+    const form = document.querySelector("form"),
+        nextBtn = form.querySelector(".nextBtn"),
+        backBtn = form.querySelector(".backBtn"),
+        allInput = form.querySelectorAll(".first input");
 
-const form = document.querySelector("form"),
-    nextBtn = form.querySelector(".nextBtn"),
-    backBtn = form.querySelector(".backBtn"),
-    allInput = form.querySelectorAll(".first input");
+    function validateForm() {
+        let valid = true;
+        allInput.forEach(input => {
 
-// Function to validate the form inputs
-function validateForm() {
-    let valid = true; // Flag to track if all inputs are valid
-    allInput.forEach(input => {
-        // Check if the input is required and not filled
-        if (input.hasAttribute('required') && input.value.trim() === "") {
-            valid = false; // Set flag to false if any required input is empty
+            if (input.hasAttribute('required') && input.value.trim() === "") {
+                valid = false;
+            }
+        });
+        return valid;
+    }
+
+    nextBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        if (validateForm()) {
+            form.classList.add('secActive');
+        } else {
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Incomplete Form',
+                text: 'Please fill in all fields to proceed.',
+                confirmButtonText: 'OK'
+            });
+
         }
     });
-    return valid; // Return the validity status
-}
 
-nextBtn.addEventListener("click", (e) => {
-    e.preventDefault(); // Prevent form submission
-
-    // Validate the form before proceeding
-    if (validateForm()) {
-        form.classList.add('secActive'); // Proceed to the next section
-    } else {
-        alert("Please fill out all required fields."); // Alert the user if validation fails
-    }
-});
-
-backBtn.addEventListener("click", () => {
-    form.classList.remove('secActive'); // Go back to the previous section
-});
+    backBtn.addEventListener("click", () => {
+        form.classList.remove('secActive');
+    });
 
 
-const skillsSelect = document.getElementById('skills');
+    const skillsSelect = document.getElementById('skills');
     const selectedSkillsDiv = document.getElementById('selected-skills');
 
     skillsSelect.addEventListener('change', () => {
         const selectedOptions = Array.from(skillsSelect.selectedOptions).map(option => option.text);
-        selectedSkillsDiv.textContent = 'Selected Skills: ' + (selectedOptions.length ? selectedOptions.join(', ') : 'None');
+        selectedSkillsDiv.textContent = 'Selected Skills: ' + (selectedOptions.length ? selectedOptions.join(
+            ', ') : 'None');
     });
 
     // const form = document.querySelector("form"),
@@ -186,18 +191,89 @@ const skillsSelect = document.getElementById('skills');
 
         // Check if the number starts with 9 and has exactly 10 digits
         if (cleanedValue.length === 10 && cleanedValue.startsWith('9')) {
-            input.style.borderColor = ''; // Reset border color if valid
+            input.style.borderColor = '';
         } else {
-            input.style.borderColor = 'red'; // Set border color to red if invalid
+            input.style.borderColor = 'red';
         }
     }
 
     document.addEventListener("DOMContentLoaded", () => {
         const today = new Date();
-        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        };
         const formattedDate = today.toLocaleDateString('en-US', options); // Format to "Month Day, Year"
 
         // Set the formatted date as the value of the input
         document.getElementById('registration-date').value = formattedDate;
     });
+</script>
+
+<script>
+    function SubmitPesoForm() {
+
+        var formElement = document.getElementById('PesoForm');
+        var formData = new FormData(formElement);
+        formData.append('_token', '{{ csrf_token() }}');
+
+        document.getElementById('loading').style.display = 'grid';
+
+
+        $.ajax({
+            type: "POST",
+            url: '{{ route('savePesoForm') }}',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                document.getElementById('loading').style.display = 'none';
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: response.success,
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        formElement.reset();
+                        form.classList.remove('secActive');
+
+                        window.location.href =
+                            '{{ route('profile') }}';
+                    }
+                });
+            },
+
+            error: function(xhr) {
+                document.getElementById('loading').style.display = 'none';
+
+                // Log the error details for debugging purposes
+                console.error('AJAX Error:', xhr.status, xhr.statusText);
+                console.error('Response Text:', xhr.responseText);
+
+                // General user-friendly error message
+                let errorMessage =
+                    'Oops! Something went wrong while processing your request. Please try again later.';
+
+                // Check for specific error messages from the server if available
+                try {
+                    const jsonResponse = JSON.parse(xhr.responseText);
+                    errorMessage = jsonResponse.message ||
+                    errorMessage; // Use a custom message if available
+                } catch (e) {
+                    console.error('Error parsing JSON:', e);
+                }
+
+                // Display the error message using SweetAlert
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: errorMessage,
+                    confirmButtonText: 'OK'
+                });
+            }
+
+        });
+    }
 </script>

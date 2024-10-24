@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Controllers\AdminChartsController;
+use App\Http\Controllers\JobseekerPesoController;
+
 
 // Admin Protected Routes
 Route::middleware([AuthMiddleware::class])->group(function () {
@@ -160,13 +162,16 @@ Route::get('/ContactUs', function () { return view('Jobseeker.contactus'); })->n
 Route::get('/Agency', [JobseekerController::class, 'agencylist'])->name('agencies');
 // Route::get('/Agency', function () { return view('Jobseeker.agencies'); })->name('agencies');
 
+// submit peso form
+Route::post('/savePesoForm', [JobseekerPesoController::class, 'savePesoForm'])->name('savePesoForm');
+Route::get('/PESORegistrationForm', function () { return view('Jobseeker.pesoform'); })->name('pesoform');
+
 
 Route::get('/AgencyFeedback', function () { return view('Jobseeker.agencyfeedback'); })->name('agencyfeedback');
 Route::get('/ContactUs', function () { return view('Jobseeker.contactus'); })->name('contactus');
 Route::get('/404', function () { return view('Jobseeker.404'); })->name('404');
 Route::get('/Profile', function () { return view('Jobseeker.profile'); })->name('profile');
 // Route::get('/Settings', function () { return view('Jobseeker.settings'); })->name('settings');
-Route::get('/PESORegistrationForm', function () { return view('Jobseeker.pesoform'); })->name('pesoform');
 Route::get('/FAQS', function () { return view('Jobseeker.faqs'); })->name('faqs');
 
 

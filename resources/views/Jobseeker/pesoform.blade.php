@@ -32,7 +32,8 @@
             <header class="mt-1">PESO Registration Form</header>
         </div>
 
-        <form id="pesoform" action="#">
+        <form id="PesoForm" method="POST">
+            @csrf
             <div class="form first">
 
                 <div class="details ID">
@@ -44,6 +45,8 @@
                             <label>SRS ID <span style="color:red"> *</span></label>
                             <input type="number" id="srs_id" name="srs_id" placeholder="Enter SRS ID (e.g., 1234567)" required>
                         </div>
+
+                        <input type="hidden" id="js_id" name="js_id" value="{{session('user_id')}}">
 
                         <div class="input-field">
                             <label for="full-name">Full Name <span style="color:red"> *</span></label>
@@ -289,7 +292,7 @@
                             <span class="btnText">Back</span>
                         </div>
 
-                        <button class="sumbit">
+                        <button type="button" onclick="SubmitPesoForm()" class="sumbit">
                             <span class="btnText">Submit</span>
                             <i class="uil uil-navigator"></i>
                         </button>
@@ -298,7 +301,6 @@
             </div>
         </form>
     </div>
-
 
 
     {{-- @include('Jobseeker.components.footer') --}}
