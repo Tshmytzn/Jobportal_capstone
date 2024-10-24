@@ -15,7 +15,6 @@ class JobseekerPesoForm extends Model
 
     protected $fillable = [
         'js_id',
-        'skill_id',
         'peso_srsid',
         'peso_fullname',
         'peso_birthdate',

@@ -40,11 +40,14 @@
 
     const skillsSelect = document.getElementById('skills');
     const selectedSkillsDiv = document.getElementById('selected-skills');
-
+    
     skillsSelect.addEventListener('change', () => {
         const selectedOptions = Array.from(skillsSelect.selectedOptions).map(option => option.text);
+        console.log(selectedOptions)
         selectedSkillsDiv.textContent = 'Selected Skills: ' + (selectedOptions.length ? selectedOptions.join(
             ', ') : 'None');
+            const skillsString = selectedOptions.join(', ');
+        document.getElementById('selectedSkill').value = skillsString
     });
 
     // const form = document.querySelector("form"),
@@ -224,6 +227,74 @@
         $.ajax({
             type: "POST",
             url: '{{ route('savePesoForm') }}',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                document.getElementById('loading').style.display = 'none';
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: response.success,
+                    confirmButtonText: 'OK'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        formElement.reset();
+                        form.classList.remove('secActive');
+
+                        window.location.href =
+                            '{{ route('profile') }}';
+                    }
+                });
+            },
+
+            error: function(xhr) {
+                document.getElementById('loading').style.display = 'none';
+
+                // Log the error details for debugging purposes
+                console.error('AJAX Error:', xhr.status, xhr.statusText);
+                console.error('Response Text:', xhr.responseText);
+
+                // General user-friendly error message
+                let errorMessage =
+                    'Oops! Something went wrong while processing your request. Please try again later.';
+
+                // Check for specific error messages from the server if available
+                try {
+                    const jsonResponse = JSON.parse(xhr.responseText);
+                    errorMessage = jsonResponse.message ||
+                    errorMessage; // Use a custom message if available
+                } catch (e) {
+                    console.error('Error parsing JSON:', e);
+                }
+
+                // Display the error message using SweetAlert
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: errorMessage,
+                    confirmButtonText: 'OK'
+                });
+            }
+
+        });
+    }
+</script>
+
+
+<script>
+    function UpdatePesoForm() {
+        const data = document.getElementById('skills').value;
+        var formElement = document.getElementById('PesoFormUpdate');
+        var formData = new FormData(formElement);
+        formData.append('_token', '{{ csrf_token() }}');
+
+        document.getElementById('loading').style.display = 'grid';
+
+
+        $.ajax({
+            type: "POST",
+            url: '{{ route('updatePesoForm') }}',
             data: formData,
             processData: false,
             contentType: false,

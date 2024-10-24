@@ -14,9 +14,8 @@ class CreatePesoTable extends Migration
     public function up()
     {
         Schema::create('jobseeker_pesoform', function (Blueprint $table) {
-            $table->id('peso_id'); // Primary Key
-            $table->integer('js_id'); // Foreign Key
-            $table->integer('skill_id')->nullable();
+            $table->id('peso_id');
+            $table->integer('js_id');
             $table->string('peso_srsid');
             $table->string('peso_fullname');
             $table->string('peso_birthdate');

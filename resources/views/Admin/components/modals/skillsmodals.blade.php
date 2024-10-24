@@ -13,17 +13,17 @@
                         @csrf
 
                         <div class="form-group">
-                            <label for="jobcategory_name" class="col-form-label">Skill:</label>
-                            <input type="text" class="form-control" name="jobcategory_name" id="jobcategory_name">
+                            <label for="skill_name" class="col-form-label">Skill:</label>
+                            <input type="text" class="form-control" name="skill_name" id="skill_name">
                         </div>
                         <div class="form-group">
-                            <label for="job_description" class="col-form-label">Description:</label>
-                            <textarea class="form-control" name="job_description" id="job_description"></textarea>
+                            <label for="skill_desc" class="col-form-label">Description:</label>
+                            <textarea class="form-control" name="skill_desc" id="skill_desc"></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="CreateJobCategory()" class="btn bgp-gradient">Save Changes</button>
+                    <button type="button" onclick="createskills()" class="btn bgp-gradient">Save Changes</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>

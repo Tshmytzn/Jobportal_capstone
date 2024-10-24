@@ -18,15 +18,18 @@
         margin: 30px auto;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
+
     .card-custom {
         background-color: white;
         border: 2px solid red;
         border-radius: 10px;
     }
+
     .card-title {
         color: red;
         margin-bottom: 15px;
     }
+
     .card-text {
         margin-bottom: 20px;
     }
@@ -44,12 +47,29 @@
 
     <div class="container mb-5">
         <div class="row">
+            {{-- <a href="{{ route('pesoform') }}">
+                <button class="btn btn-primary w-100" style="height: 150%"> Complete PESO Registration Form</button>
+            </a> --}}
+            @php
+                $userId = session('user_id');
 
-            {{-- <div class="mb-5">
-                <a href="{{ route('pesoform') }}">
-                <button class="btn btn-primary w-100"> Complete PESO Registration Form</button>
-            </a>
-            </div> --}}
+                $hasSubmitted = \App\Models\JobseekerPesoForm::where('js_id', $userId)->exists();
+            @endphp
+
+            <div class="mb-5">
+                @if (!$hasSubmitted)
+                    <a href="{{ route('pesoform') }}">
+                        <button class="btn btn-primary w-100" style="height: 150%"> Complete PESO Registration
+                            Form</button>
+                    </a>
+                @else
+                    <h5 class="text-success text-center">
+                        You have Submitted PESO Registration Form! If you’d like to edit your details, please
+                        click the edit icon beside the print icon below.
+                    </h5>
+                @endif
+            </div>
+
             <!-- Profile Picture and Info -->
             <div class="card col-md-4">
                 <div class="text-center">
@@ -77,11 +97,13 @@
 
             <!-- Update Profile Info -->
             <div class="col-lg-8">
+
+
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="display-7"> <strong>Profile Information</strong></h4>
                         <div>
-                            <a href="{{ route('pesoform') }}" class="me-3" title="Edit Profile">
+                            <a href="{{ route('pesoformupdate') }}" class="me-3" title="Edit Profile">
                                 <i style="font-size: 20px" class="fas fa-edit"></i>
                             </a>
                             <a href="#" title="Print Profile">

@@ -11,11 +11,11 @@
 @include('Jobseeker.components.pesoformstyle')
 
 <style>
-        .form-control {
+    .form-control {
         width: 100%;
-        height: 100px; 
-        overflow: auto; 
-        padding: 10px; 
+        height: 100px;
+        overflow: auto;
+        padding: 10px;
     }
 </style>
 
@@ -32,7 +32,12 @@
             <header class="mt-1">PESO Registration Form</header>
         </div>
 
-        <form id="PesoForm" method="POST">
+        @php
+            $pesoForm = \App\Models\JobseekerPesoForm::where('js_id', session('user_id'))->first();
+        @endphp
+
+
+        <form id="PesoFormUpdate" method="POST">
             @csrf
             <div class="form first">
 
@@ -43,14 +48,15 @@
                     <div class="fields">
                         <div class="input-field">
                             <label>SRS ID <span style="color:red"> *</span></label>
-                            <input type="number" id="srs_id" name="srs_id" placeholder="Enter SRS ID (e.g., 1234567)" required>
+                            <input type="number" id="srs_id" name="srs_id"
+                                placeholder="Enter SRS ID (e.g., 1234567)" value="{{ $pesoForm->peso_srsid ?? '' }}"  required>
                         </div>
 
-                        <input type="hidden" id="js_id" name="js_id" value="{{session('user_id')}}">
+                        <input type="hidden" id="js_id" name="js_id" value="{{ session('user_id') }}">
 
                         <div class="input-field">
                             <label for="full-name">Full Name <span style="color:red"> *</span></label>
-                            <input type="text" id="full_name" name="full_name" placeholder="Enter full name"
+                            <input type="text" id="full_name" name="full_name" placeholder="Enter full name" value="{{ $pesoForm->peso_fullname ?? '' }}"
                                 oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" pattern="[A-Za-z\s]+"
                                 title="Please enter letters only" required>
                         </div>
@@ -58,29 +64,30 @@
 
                         <div class="input-field">
                             <label>Birthdate <span style="color:red"> *</span></label>
-                            <input type="date" id="birthdate" name="birthdate" placeholder="Select birthdate" oninput="calculateAge()"
-                                required>
+                            <input type="date" id="birthdate" name="birthdate" placeholder="Select birthdate" value="{{ $pesoForm->peso_birthdate ?? '' }}"
+                                oninput="calculateAge()" required>
                         </div>
 
                         <div class="input-field">
                             <label>Age <span style="color:red"> *</span></label>
-                            <input type="text" id="age" name="age" placeholder="ex. 36yrs 0months" readonly required>
+                            <input type="text" id="age" name="age" placeholder="ex. 36yrs 0months" value="{{ $pesoForm->peso_age ?? '' }}" readonly
+                                required>
                         </div>
 
                         <div class="input-field">
                             <label for="jobseeker_gender">Gender<span style="color:red"> *</span></label>
                             <select id="jobseeker_gender" name="jobseeker_gender" required>
-                                <option value="" disabled selected>Select Gender</option>
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
+                                <option value="{{ $pesoForm->peso_gender ?? '' }}" hidden disabled selected>{{ $pesoForm->peso_gender ?? '' }}</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
                             </select>
                         </div>
 
                         <div class="input-field">
                             <label for="civil-status">Civil Status <span style="color:red"> *</span></label>
                             <select id="civil_status" name="civil_status" required>
-                                <option disabled selected>Select Civil Status</option>
+                                <option value="{{ $pesoForm->peso_civilstatus ?? '' }}" hidden disabled selected>{{ $pesoForm->peso_civilstatus ?? '' }}</option>
                                 <option value="single">Single</option>
                                 <option value="married">Married</option>
                                 <option value="widowed">Widowed</option>
@@ -90,19 +97,21 @@
 
                         <div class="input-field">
                             <label>City/Municipality</label>
-                            <input type="text" name="city" id="city" value="Victorias City" placeholder="Enter city/municipality" readonly>
+                            <input type="text" name="city" id="city" value="Victorias City"
+                                placeholder="Enter city/municipality" readonly>
                         </div>
 
                         <div class="input-field">
                             <label for="barangay">Barangay<span style="color:red"> *</span></label>
                             <select id="barangay" name="barangay" required>
-                                <option value="" disabled selected>Select Barangay</option>
+                                <option value="{{ $pesoForm->peso_baranggay ?? '' }}" hidden disabled selected>{{ $pesoForm->peso_baranggay ?? '' }}</option>
                             </select>
                         </div>
 
                         <div class="input-field">
                             <label>Street Address<span style="color:red"> *</span></label>
-                            <input type="text" id="street" name="street" placeholder="Enter street address" required>
+                            <input type="text" id="street" name="street" placeholder="Enter street address" value="{{ $pesoForm->peso_street ?? '' }}"
+                                required>
                         </div>
 
                     </div>
@@ -118,15 +127,16 @@
 
                         <div class="input-field">
                             <label>Email<span style="color:red"> *</span></label>
-                            <input type="email" id="jobseeker_email" name="jobseeker_email" placeholder="example@email.com" required>
+                            <input type="email" id="jobseeker_email" name="jobseeker_email" value="{{ $pesoForm->peso_email ?? '' }}"
+                                placeholder="example@email.com" required>
                         </div>
 
                         <div class="input-field">
                             <label>Telephone<span style="color:red"> *</span></label>
                             <input type="tel" id="telephone" name="telephone" placeholder="e.g. 1234-5678"
-                                   pattern="^\d{4}-\d{4}$" maxlength="9"
-                                   title="Please enter a valid telephone number in the format: 1234-5678"
-                                   required oninput="formatTelephone(this)">
+                                pattern="^\d{4}-\d{4}$" maxlength="9" value="{{ $pesoForm->peso_tel ?? '' }}"
+                                title="Please enter a valid telephone number in the format: 1234-5678" required
+                                oninput="formatTelephone(this)">
                         </div>
 
 
@@ -135,11 +145,10 @@
                             <div style="display: flex; align-items: center;">
                                 <span style="margin-right: 5px;">+63</span>
                                 <input type="tel" id="cellphone" name="cellphone" placeholder="ex. 9123456789"
-                                       pattern="^(9\d{9})$" maxlength="10"
-                                       title="Please enter a valid cellphone number (must start with 9 and 10 digits total)"
-                                       required
-                                       onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                       oninput="validateCellphone(this)">
+                                    pattern="^(9\d{9})$" maxlength="10" value="{{ $pesoForm->peso_cell ?? '' }}"
+                                    title="Please enter a valid cellphone number (must start with 9 and 10 digits total)"
+                                    required onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                    oninput="validateCellphone(this)">
                             </div>
                         </div>
                     </div>
@@ -162,16 +171,16 @@
                         <div class="input-field">
                             <label>Employment Status</label>
                             <select id="employment_status" name="employment_status" required>
-                                <option value="" disabled selected>Select Employment Status</option>
-                                <option value="employed">Employed</option>
-                                <option value="unemployed">Unemployed</option>
+                                <option value="{{ $pesoForm->peso_employment ?? '' }}" hidden disabled selected>{{ $pesoForm->peso_employment ?? '' }}</option>
+                                <option value="Employed">Employed</option> 
+                                <option value="Unemployed">Unemployed</option>
                             </select>
                         </div>
 
                         <div class="input-field">
                             <label for="education_level">Education Level</label>
                             <select id="education_level" name="education_level" required>
-                                <option value="" disabled selected>Select Education Level</option>
+                                <option value="{{ $pesoForm->peso_educ ?? '' }}" hidden disabled selected>Select Education Level</option>
                                 <option value="high-school">High School Graduate</option>
                                 <option value="associate">Associate Degree</option>
                                 <option value="bachelor">Bachelor's Degree</option>
@@ -184,13 +193,14 @@
 
                         <div class="input-field">
                             <label>Preferred Position</label>
-                            <input type="text" id="preferred_position" name="preferred_position" placeholder="Preferred Position" required>
+                            <input type="text" id="preferred_position" name="preferred_position" value="{{ $pesoForm->peso_position ?? '' }}"
+                                placeholder="Preferred Position" required>
                         </div>
 
                         <div class="input-field">
                             <label for="skills">Skills</label>
-                            <select class="form-control" id="skills" name="skills[]" multiple required>
-                                <option value="" disabled>Select your skills</option>
+                            <select class="form-control" id="skills" name="skills" multiple required>
+                                <option value="{{ $pesoForm->peso_skills ?? '' }}" hidden disabled>{{ $pesoForm->peso_skills ?? '' }}</option>
                                 <option value="plumbing">Plumbing</option>
                                 <option value="carpentry">Carpentry</option>
                                 <option value="welding">Welding</option>
@@ -215,13 +225,14 @@
 
                         <div class="input-field">
                             <label>Work Experience</label>
-                            <textarea class="form-control" id="work_experience" name="work_experience" placeholder="Enter work experience" required></textarea>
+                            <textarea class="form-control" value="{{ $pesoForm->peso_work ?? '' }}" id="work_experience" name="work_experience" placeholder="Enter work experience" value="{{ $pesoForm->peso_work ?? '' }}"
+                                required></textarea>
                         </div>
 
                         <div class="input-field">
                             <label>4P's Beneficiary</label>
                             <select id="4ps" name="4ps" required>
-                                <option disabled selected>Select Option</option>
+                                <option value="{{ $pesoForm->peso_4ps ?? '' }}" hidden disabled selected>{{ $pesoForm->peso_4ps ?? '' }}</option>
                                 <option>Yes</option>
                                 <option>No</option>
                             </select>
@@ -238,7 +249,8 @@
 
                         <div class="input-field">
                             <label for="registration_date">Registration Date</label>
-                            <input type="text" id="registration-date" name="registration_date" value="" readonly required>
+                            <input type="text" id="registration-date" name="registration_date" value=""
+                                readonly required>
                         </div>
 
                         <div class="input-field">
@@ -256,32 +268,38 @@
                     <div class="fields">
                         <div class="input-field">
                             <label>Office Name</label>
-                            <input type="text" id="office_name" name="office_name" placeholder="Enter office name" value="Victorias" required>
+                            <input type="text" id="office_name" name="office_name"
+                                placeholder="Enter office name" value="Victorias" required>
                         </div>
 
                         <div class="input-field">
                             <label>Area Type</label>
-                            <input type="text" name="area_type" id="area_type" placeholder="Enter area type" value="Component City" required>
+                            <input type="text" name="area_type" id="area_type" placeholder="Enter area type"
+                                value="Component City" required>
                         </div>
 
                         <div class="input-field">
                             <label>Area Class</label>
-                            <input type="text" id="area_class" name="area_class" placeholder="Enter area class (e.g., 4th class)" value="4th Class" required>
+                            <input type="text" id="area_class" name="area_class"
+                                placeholder="Enter area class (e.g., 4th class)" value="4th Class" required>
                         </div>
 
                         <div class="input-field">
                             <label>Program</label>
-                            <input type="text" id="program" name="program" placeholder="Enter Program" value="PESO" required>
+                            <input type="text" id="program" name="program" placeholder="Enter Program"
+                                value="PESO" required>
                         </div>
 
                         <div class="input-field">
                             <label>Event</label>
-                            <input type="text" id="event_name" name="event_name" placeholder="Enter event" required>
+                            <input type="text" id="event_name" name="event_name" placeholder="Enter event"
+                                required>
                         </div>
 
                         <div class="input-field">
                             <label>Transaction</label>
-                            <input type="text" id="trans" name="trans" placeholder="Enter Transaction" required>
+                            <input type="text" id="trans" name="trans" placeholder="Enter Transaction"
+                                required>
                         </div>
 
 
@@ -293,8 +311,8 @@
                             <span class="btnText">Back</span>
                         </div>
 
-                        <button type="button" onclick="SubmitPesoForm()" class="sumbit">
-                            <span class="btnText">Submit</span>
+                        <button type="button" onclick="UpdatePesoForm()" class="sumbit">
+                            <span class="btnText">Update</span>
                             <i class="uil uil-navigator"></i>
                         </button>
                     </div>
@@ -307,7 +325,9 @@
             <button class="btn btn-primary m-2">Back to Profile</button>
         </a>
         </div>
+
     </div>
+
 
 
     {{-- @include('Jobseeker.components.footer') --}}

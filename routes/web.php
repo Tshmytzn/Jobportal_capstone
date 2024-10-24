@@ -164,16 +164,18 @@ Route::get('/Agency', [JobseekerController::class, 'agencylist'])->name('agencie
 
 // submit peso form
 Route::post('/savePesoForm', [JobseekerPesoController::class, 'savePesoForm'])->name('savePesoForm');
-Route::get('/PESORegistrationForm', function () { return view('Jobseeker.pesoform'); })->name('pesoform');
 
+//update peso form
+Route::post('/updatePesoForm', [JobseekerPesoController::class, 'updatePesoForm'])->name('updatePesoForm');
+
+Route::get('/PESORegistrationForm', function () { return view('Jobseeker.pesoform'); })->name('pesoform');
+Route::get('/PESORegistrationFormUpdate', function () { return view('Jobseeker.pesoformupdate'); })->name('pesoformupdate');
 
 Route::get('/AgencyFeedback', function () { return view('Jobseeker.agencyfeedback'); })->name('agencyfeedback');
 Route::get('/ContactUs', function () { return view('Jobseeker.contactus'); })->name('contactus');
 Route::get('/404', function () { return view('Jobseeker.404'); })->name('404');
 Route::get('/Profile', function () { return view('Jobseeker.profile'); })->name('profile');
-// Route::get('/Settings', function () { return view('Jobseeker.settings'); })->name('settings');
 Route::get('/FAQS', function () { return view('Jobseeker.faqs'); })->name('faqs');
-
 
 // Jobseeker Page Controllers
 Route::post('/', [JobseekerController::class, 'create'])->name('jobseekersCreate');
