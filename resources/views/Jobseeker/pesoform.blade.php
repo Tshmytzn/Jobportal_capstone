@@ -10,6 +10,14 @@
 @include('Jobseeker.components.head', ['title' => 'PESO REGISTRATION'])
 @include('Jobseeker.components.pesoformstyle')
 
+<style>
+        .form-control {
+        width: 100%;
+        height: 100px; /* Increased height for better visibility */
+        overflow: auto; /* Allow scrolling */
+        padding: 10px; /* Add padding for comfort */
+    }
+</style>
 
 <body>
     @include('Jobseeker.components.loading')
@@ -34,12 +42,12 @@
                     <div class="fields">
                         <div class="input-field">
                             <label>SRS ID <span style="color:red"> *</span></label>
-                            <input type="number" placeholder="Enter SRS ID (e.g., 1234567)" required>
+                            <input type="number" id="srs_id" name="srs_id" placeholder="Enter SRS ID (e.g., 1234567)" required>
                         </div>
 
                         <div class="input-field">
                             <label for="full-name">Full Name <span style="color:red"> *</span></label>
-                            <input type="text" id="full-name" placeholder="Enter full name"
+                            <input type="text" id="full_name" name="full_name" placeholder="Enter full name"
                                 oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" pattern="[A-Za-z\s]+"
                                 title="Please enter letters only" required>
                         </div>
@@ -47,18 +55,18 @@
 
                         <div class="input-field">
                             <label>Birthdate <span style="color:red"> *</span></label>
-                            <input type="date" id="birthdate" placeholder="Select birthdate" oninput="calculateAge()"
+                            <input type="date" id="birthdate" name="birthdate" placeholder="Select birthdate" oninput="calculateAge()"
                                 required>
                         </div>
 
                         <div class="input-field">
                             <label>Age <span style="color:red"> *</span></label>
-                            <input type="text" id="age" placeholder="ex. 36yrs 0months" readonly required>
+                            <input type="text" id="age" name="age" placeholder="ex. 36yrs 0months" readonly required>
                         </div>
 
                         <div class="input-field">
-                            <label for="sex">Gender<span style="color:red"> *</span></label>
-                            <select id="sex" required>
+                            <label for="jobseeker_gender">Gender<span style="color:red"> *</span></label>
+                            <select id="jobseeker_gender" name="jobseeker_gender" required>
                                 <option value="" disabled selected>Select Gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
@@ -68,7 +76,7 @@
 
                         <div class="input-field">
                             <label for="civil-status">Civil Status <span style="color:red"> *</span></label>
-                            <select id="civil-status" required>
+                            <select id="civil_status" name="civil_status" required>
                                 <option disabled selected>Select Civil Status</option>
                                 <option value="single">Single</option>
                                 <option value="married">Married</option>
@@ -79,33 +87,23 @@
 
                         <div class="input-field">
                             <label>City/Municipality</label>
-                            <input type="text" value="Victorias City" placeholder="Enter city/municipality" readonly>
+                            <input type="text" name="city" id="city" value="Victorias City" placeholder="Enter city/municipality" readonly>
                         </div>
 
                         <div class="input-field">
                             <label for="barangay">Barangay<span style="color:red"> *</span></label>
-                            <select id="barangay" required>
+                            <select id="barangay" name="barangay" required>
                                 <option value="" disabled selected>Select Barangay</option>
                             </select>
                         </div>
 
                         <div class="input-field">
                             <label>Street Address<span style="color:red"> *</span></label>
-                            <input type="text" placeholder="Enter street address" required>
+                            <input type="text" id="street" name="street" placeholder="Enter street address" required>
                         </div>
 
                     </div>
                 </div>
-
-                {{-- <div class="input-field">
-                            <label>Province</label>
-                            <input type="text" placeholder="Enter province" required>
-                        </div>
-
-                        <div class="input-field">
-                            <label>Region</label>
-                            <input type="text" placeholder="Enter region" required>
-                        </div> --}}
 
                 {{-- contact info --}}
 
@@ -117,12 +115,12 @@
 
                         <div class="input-field">
                             <label>Email<span style="color:red"> *</span></label>
-                            <input type="email" placeholder="example@email.com" required>
+                            <input type="email" id="jobseeker_email" name="jobseeker_email" placeholder="example@email.com" required>
                         </div>
 
                         <div class="input-field">
                             <label>Telephone<span style="color:red"> *</span></label>
-                            <input type="tel" id="telephone" placeholder="e.g. 1234-5678"
+                            <input type="tel" id="telephone" name="telephone" placeholder="e.g. 1234-5678"
                                    pattern="^\d{4}-\d{4}$" maxlength="9"
                                    title="Please enter a valid telephone number in the format: 1234-5678"
                                    required oninput="formatTelephone(this)">
@@ -133,7 +131,7 @@
                             <label>Cellphone Number<span style="color:red"> *</span></label>
                             <div style="display: flex; align-items: center;">
                                 <span style="margin-right: 5px;">+63</span>
-                                <input type="tel" id="cellphone" placeholder="ex. 9123456789"
+                                <input type="tel" id="cellphone" name="cellphone" placeholder="ex. 9123456789"
                                        pattern="^(9\d{9})$" maxlength="10"
                                        title="Please enter a valid cellphone number (must start with 9 and 10 digits total)"
                                        required
@@ -141,18 +139,14 @@
                                        oninput="validateCellphone(this)">
                             </div>
                         </div>
-
-
                     </div>
-
                 </div>
 
-                {{-- contact info --}}
-
-                <button class="nextBtn">
+                <button type="button" class="nextBtn">
                     <span class="btnText">Next</span>
                     <i class="uil uil-navigator"></i>
                 </button>
+                <div id="error-message" style="color:red; display:none;"></div>
 
             </div>
 
@@ -164,7 +158,7 @@
                     <div class="fields">
                         <div class="input-field">
                             <label>Employment Status</label>
-                            <select required>
+                            <select id="employment_status" name="employment_status" required>
                                 <option value="" disabled selected>Select Employment Status</option>
                                 <option value="employed">Employed</option>
                                 <option value="unemployed">Unemployed</option>
@@ -172,8 +166,8 @@
                         </div>
 
                         <div class="input-field">
-                            <label for="education-level">Education Level</label>
-                            <select id="education-level" required>
+                            <label for="education_level">Education Level</label>
+                            <select id="education_level" name="education_level" required>
                                 <option value="" disabled selected>Select Education Level</option>
                                 <option value="high-school">High School Graduate</option>
                                 <option value="associate">Associate Degree</option>
@@ -187,21 +181,42 @@
 
                         <div class="input-field">
                             <label>Preferred Position</label>
-                            <input type="text" placeholder="Preferred Position" required>
+                            <input type="text" id="preferred_position" name="preferred_position" placeholder="Preferred Position" required>
                         </div>
 
                         <div class="input-field">
-                            <label>Skills</label>
-                            <textarea class="form-control" placeholder="List your skills" required></textarea>
+                            <label for="skills">Skills</label>
+                            <select class="form-control" id="skills" name="skills[]" multiple required>
+                                <option value="" disabled>Select your skills</option>
+                                <option value="plumbing">Plumbing</option>
+                                <option value="carpentry">Carpentry</option>
+                                <option value="welding">Welding</option>
+                                <option value="electrician">Electrical Work</option>
+                                <option value="HVAC">HVAC Installation & Repair</option>
+                                <option value="mechanics">Mechanics</option>
+                                <option value="painting">Painting</option>
+                                <option value="masonry">Masonry</option>
+                                <option value="landscaping">Landscaping</option>
+                                <option value="construction">Construction</option>
+                                <option value="heavy machinery">Heavy Machinery Operation</option>
+                                <option value="forklift">Forklift Operation</option>
+                                <option value="repair">General Repair Skills</option>
+                                <option value="installation">Installation Skills</option>
+                                <option value="safety">Safety Protocols & Practices</option>
+                            </select>
+                            <div id="selected-skills" style="margin-top: 10px;"></div>
+
                         </div>
+
+
                         <div class="input-field">
                             <label>Work Experience</label>
-                            <textarea class="form-control" placeholder="Enter work experience" required></textarea>
+                            <textarea class="form-control" id="work_experience" name="work_experience" placeholder="Enter work experience" required></textarea>
                         </div>
 
                         <div class="input-field">
                             <label>4P's Beneficiary</label>
-                            <select required>
+                            <select id="4ps" name="4ps" required>
                                 <option disabled selected>Select Option</option>
                                 <option>Yes</option>
                                 <option>No</option>
@@ -210,7 +225,7 @@
 
                         <div class="input-field">
                             <label>PWD</label>
-                            <select required>
+                            <select id="pwd" name="pwd" required>
                                 <option disabled selected>Select Option</option>
                                 <option>Yes</option>
                                 <option>No</option>
@@ -218,13 +233,13 @@
                         </div>
 
                         <div class="input-field">
-                            <label for="registration-date">Registration Date</label>
-                            <input type="text" id="registration-date" value="" readonly required>
+                            <label for="registration_date">Registration Date</label>
+                            <input type="text" id="registration-date" name="registration_date" value="" readonly required>
                         </div>
 
                         <div class="input-field">
                             <label>Remarks</label>
-                            <textarea class="form-control" placeholder="Remarks"></textarea>
+                            <textarea class="form-control" id="remarks" name="remarks" placeholder="Remarks"></textarea>
                         </div>
 
                     </div>
@@ -237,32 +252,32 @@
                     <div class="fields">
                         <div class="input-field">
                             <label>Office Name</label>
-                            <input type="text" placeholder="Enter office name" value="Victorias" required>
+                            <input type="text" id="office_name" name="office_name" placeholder="Enter office name" value="Victorias" required>
                         </div>
 
                         <div class="input-field">
                             <label>Area Type</label>
-                            <input type="text" placeholder="Enter area type" value="Component City" required>
+                            <input type="text" name="area_type" id="area_type" placeholder="Enter area type" value="Component City" required>
                         </div>
 
                         <div class="input-field">
                             <label>Area Class</label>
-                            <input type="text" placeholder="Enter area class (e.g., 4th class)" value="4th Class" required>
+                            <input type="text" id="area_class" name="area_class" placeholder="Enter area class (e.g., 4th class)" value="4th Class" required>
                         </div>
 
                         <div class="input-field">
                             <label>Program</label>
-                            <input type="text" placeholder="Enter Program" value="PESO" required>
+                            <input type="text" id="program" name="program" placeholder="Enter Program" value="PESO" required>
                         </div>
 
                         <div class="input-field">
                             <label>Event</label>
-                            <input type="text" placeholder="Enter event" required>
+                            <input type="text" id="event_name" name="event_name" placeholder="Enter event" required>
                         </div>
 
                         <div class="input-field">
                             <label>Transaction</label>
-                            <input type="text" placeholder="Enter Transaction" required>
+                            <input type="text" id="trans" name="trans" placeholder="Enter Transaction" required>
                         </div>
 
 

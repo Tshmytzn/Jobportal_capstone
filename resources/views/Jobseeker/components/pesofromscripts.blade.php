@@ -1,23 +1,65 @@
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
-    const form = document.querySelector("form"),
 
-        nextBtn = form.querySelector(".nextBtn"),
-        backBtn = form.querySelector(".backBtn"),
-        allInput = form.querySelectorAll(".first input");
+const form = document.querySelector("form"),
+    nextBtn = form.querySelector(".nextBtn"),
+    backBtn = form.querySelector(".backBtn"),
+    allInput = form.querySelectorAll(".first input");
+
+// Function to validate the form inputs
+function validateForm() {
+    let valid = true; // Flag to track if all inputs are valid
+    allInput.forEach(input => {
+        // Check if the input is required and not filled
+        if (input.hasAttribute('required') && input.value.trim() === "") {
+            valid = false; // Set flag to false if any required input is empty
+        }
+    });
+    return valid; // Return the validity status
+}
+
+nextBtn.addEventListener("click", (e) => {
+    e.preventDefault(); // Prevent form submission
+
+    // Validate the form before proceeding
+    if (validateForm()) {
+        form.classList.add('secActive'); // Proceed to the next section
+    } else {
+        alert("Please fill out all required fields."); // Alert the user if validation fails
+    }
+});
+
+backBtn.addEventListener("click", () => {
+    form.classList.remove('secActive'); // Go back to the previous section
+});
 
 
-    nextBtn.addEventListener("click", () => {
-        allInput.forEach(input => {
-            if (input.value != "") {
-                form.classList.add('secActive');
-            } else {
-                form.classList.remove('secActive');
-            }
-        })
-    })
+const skillsSelect = document.getElementById('skills');
+    const selectedSkillsDiv = document.getElementById('selected-skills');
 
-    backBtn.addEventListener("click", () => form.classList.remove('secActive'));
+    skillsSelect.addEventListener('change', () => {
+        const selectedOptions = Array.from(skillsSelect.selectedOptions).map(option => option.text);
+        selectedSkillsDiv.textContent = 'Selected Skills: ' + (selectedOptions.length ? selectedOptions.join(', ') : 'None');
+    });
+
+    // const form = document.querySelector("form"),
+
+    //     nextBtn = form.querySelector(".nextBtn"),
+    //     backBtn = form.querySelector(".backBtn"),
+    //     allInput = form.querySelectorAll(".first input");
+
+
+    // nextBtn.addEventListener("click", () => {
+    //     allInput.forEach(input => {
+    //         if (input.value != "") {
+    //             form.classList.add('secActive');
+    //         } else {
+    //             form.classList.remove('secActive');
+    //         }
+    //     })
+    // })
+
+    // backBtn.addEventListener("click", () => form.classList.remove('secActive'));
 
     function calculateAge() {
         const birthdateInput = document.getElementById('birthdate').value;

@@ -23,6 +23,8 @@ Route::get('/Admin/Jobseeker', function () { return view('Admin.jobseeker'); })-
 Route::get('/Admin/JobCategory', function () { return view('Admin.jobcategory'); })->name('jobcategory');
 Route::get('/Admin/Administrators', function () { return view('Admin.admins'); })->name('administrators');
 Route::get('/Admin/CustomerInquiries', function () { return view('Admin.customerinquiries'); })->name('customerinquiries');
+Route::get('/Admin/GeneralSkills', function () { return view('Admin.generalskills'); })->name('generalskills');
+
 
 //dashboard chart
 Route::get('/api/registrations', [AdminChartsController::class, 'getMonthlyRegistrations']);
