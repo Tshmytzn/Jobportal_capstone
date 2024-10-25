@@ -36,8 +36,9 @@
         </div>
     </div>
 
-    <!-- Header End -->
 
+
+    <!-- Header End -->
     <div class="container-fluidn m-3">
         <div class="row justify-content-center">
             <!-- Image Column -->
@@ -59,7 +60,6 @@
                         <p id="job_description">We are looking for a skilled individual. This position offers
                             competitive pay and benefits.</p> <!-- Dynamically populated description -->
                     </div>
-
                     <!-- Job Meta Information -->
                     <div class="mt-5">
                         <div class="mb-3">

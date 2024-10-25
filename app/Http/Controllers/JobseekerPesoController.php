@@ -161,17 +161,17 @@ class JobseekerPesoController extends Controller
         $jobSeeker->peso_event = $validatedData['event_name'];
         $jobSeeker->peso_transaction = $validatedData['trans'];
 
-        // try {
+        try {
             $jobSeeker->save();
             return response()->json(['success' => 'PESO Registration form successfully Updated!']);
-        // } catch (QueryException $e) {
+        } catch (QueryException $e) {
 
-        //     if ($e->errorInfo[1] == 1062) { 
-        //         return response()->json(['message' => 'This email is already registered. Please use a different email.'], 409); // Conflict
-        //     } else {
-        //         return response()->json(['message' => 'An error occurred while updating your details. Please try again later.'], 500);
-        //     }
-        // }
+            if ($e->errorInfo[1] == 1062) { 
+                return response()->json(['message' => 'This email is already registered. Please use a different email.'], 409); // Conflict
+            } else {
+                return response()->json(['message' => 'An error occurred while updating your details. Please try again later.'], 500);
+            }
+        }
     }
 
 }

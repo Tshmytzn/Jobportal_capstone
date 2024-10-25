@@ -205,32 +205,23 @@
                                 required>
                         </div>
 
-                        <div class="input-field">
-                            <label for="skills">Skills</label>
-                            <select class="form-control" id="skills" name="skills" multiple required>
-                                <option hidden disabled></option>
-                                <option value="plumbing">Plumbing</option>
-                                <option value="carpentry">Carpentry</option>
-                                <option value="welding">Welding</option>
-                                <option value="electrician">Electrical Work</option>
-                                <option value="HVAC">HVAC Installation & Repair</option>
-                                <option value="mechanics">Mechanics</option>
-                                <option value="painting">Painting</option>
-                                <option value="masonry">Masonry</option>
-                                <option value="landscaping">Landscaping</option>
-                                <option value="construction">Construction</option>
-                                <option value="heavy machinery">Heavy Machinery Operation</option>
-                                <option value="forklift">Forklift Operation</option>
-                                <option value="repair">General Repair Skills</option>
-                                <option value="installation">Installation Skills</option>
-                                <option value="safety">Safety Protocols & Practices</option>
-                            </select>
-                            <input type="text" id="selectedSkill" name="selectedSkill" hidden>
-                            <div id="selected-skills" style="margin-top: 10px;"><span style="font-weight:bold">Skills:
-                                </span>{{ $pesoForm->peso_skills ?? '' }}</div>
-
-                        </div>
-
+                        @php
+                        $pesoSkill = \App\Models\JobseekerSkill::all();
+                    @endphp
+                    
+                    <div class="input-field">
+                        <label for="skills">Skills</label>
+                        <select class="form-control" id="skills" name="skills[]" multiple required>
+                            <option value="" disabled>Select your skills</option>
+                            
+                            @foreach($pesoSkill as $skill)
+                                <option value="{{ $skill->skill_name }}">{{ $skill->skill_name }}</option>
+                            @endforeach
+                        </select>
+                        
+                        <input type="text" id="selectedSkill" name="selectedSkill" hidden>
+                        <div id="selected-skills" style="margin-top: 10px;"></div>
+                    </div>
 
                         <div class="input-field">
                             <label>Work Experience</label>

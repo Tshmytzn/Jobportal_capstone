@@ -58,7 +58,8 @@
 
                         <div class="input-field">
                             <label for="full-name">Full Name <span style="color:red"> *</span></label>
-                            <input type="text" id="full_name" name="full_name" placeholder="Enter full name" value="{{ $fullName ?? '' }}"
+                            <input type="text" id="full_name" name="full_name" placeholder="Enter full name"
+                                value="{{ $fullName ?? '' }}"
                                 oninput="this.value = this.value.replace(/[^A-Za-z\s]/g, '')" pattern="[A-Za-z\s]+"
                                 title="Please enter letters only" required>
                         </div>
@@ -91,10 +92,10 @@
                             <label for="civil-status">Civil Status <span style="color:red"> *</span></label>
                             <select id="civil_status" name="civil_status" required>
                                 <option disabled selected>Select Civil Status</option>
-                                <option value="single">Single</option>
-                                <option value="married">Married</option>
-                                <option value="widowed">Widowed</option>
-                                <option value="separated">Separated</option>
+                                <option value="Single">Single</option>
+                                <option value="Married">Married</option>
+                                <option value="Widowed">Widowed</option>
+                                <option value="Separated">Separated</option>
                             </select>
                         </div>
 
@@ -113,8 +114,8 @@
 
                         <div class="input-field">
                             <label>Street Address<span style="color:red"> *</span></label>
-                            <input type="text" id="street" name="street" placeholder="Enter street address" value="{{ $pesoForm->js_address ?? '' }}"
-                                required>
+                            <input type="text" id="street" name="street" placeholder="Enter street address"
+                                value="{{ $pesoForm->js_address ?? '' }}" required>
                         </div>
 
                     </div>
@@ -130,8 +131,8 @@
 
                         <div class="input-field">
                             <label>Email<span style="color:red"> *</span></label>
-                            <input type="email" id="jobseeker_email" name="jobseeker_email" value="{{ $pesoForm->js_email ?? '' }}"
-                                placeholder="example@email.com" required>
+                            <input type="email" id="jobseeker_email" name="jobseeker_email"
+                                value="{{ $pesoForm->js_email ?? '' }}" placeholder="example@email.com" required>
                         </div>
 
                         <div class="input-field">
@@ -147,8 +148,9 @@
                             <label>Cellphone Number<span style="color:red"> *</span></label>
                             <div style="display: flex; align-items: center;">
                                 <span style="margin-right: 5px;">+63</span>
-                                <input type="tel" id="cellphone" name="cellphone" placeholder="ex. 9123456789" value="{{ $pesoForm->js_contactnumber ?? '' }}"
-                                    pattern="^(9\d{9})$" maxlength="10"
+                                <input type="tel" id="cellphone" name="cellphone" placeholder="ex. 9123456789"
+                                    value="{{ $pesoForm->js_contactnumber ?? '' }}" pattern="^(9\d{9})$"
+                                    maxlength="10"
                                     title="Please enter a valid cellphone number (must start with 9 and 10 digits total)"
                                     required onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                                     oninput="validateCellphone(this)">
@@ -175,8 +177,8 @@
                             <label>Employment Status</label>
                             <select id="employment_status" name="employment_status" required>
                                 <option value="" disabled selected>Select Employment Status</option>
-                                <option value="employed">Employed</option>
-                                <option value="unemployed">Unemployed</option>
+                                <option value="Employed">Employed</option>
+                                <option value="Unemployed">Unemployed</option>
                             </select>
                         </div>
 
@@ -184,12 +186,12 @@
                             <label for="education_level">Education Level</label>
                             <select id="education_level" name="education_level" required>
                                 <option value="" disabled selected>Select Education Level</option>
-                                <option value="high-school">High School Graduate</option>
-                                <option value="associate">Associate Degree</option>
-                                <option value="bachelor">Bachelor's Degree</option>
-                                <option value="master">Master's Degree</option>
-                                <option value="doctorate">Doctorate Degree</option>
-                                <option value="none">No Formal Education</option>
+                                <option value="High School Graduate">High School Graduate</option>
+                                <option value="Associate Degree">Associate Degree</option>
+                                <option value="Bachelor's Degree">Bachelor's Degree</option>
+                                <option value="Master's Degree">Master's Degree</option>
+                                <option value="Doctorate Degree">Doctorate Degree</option>
+                                <option value="No Formal Education">No Formal Education</option>
                             </select>
                         </div>
 
@@ -200,30 +202,24 @@
                                 placeholder="Preferred Position" required>
                         </div>
 
-                        <div class="input-field">
-                            <label for="skills">Skills</label>
-                            <select class="form-control" id="skills" name="skills[]" multiple required>
-                                <option value="" disabled>Select your skills</option>
-                                <option value="plumbing">Plumbing</option>
-                                <option value="carpentry">Carpentry</option>
-                                <option value="welding">Welding</option>
-                                <option value="electrician">Electrical Work</option>
-                                <option value="HVAC">HVAC Installation & Repair</option>
-                                <option value="mechanics">Mechanics</option>
-                                <option value="painting">Painting</option>
-                                <option value="masonry">Masonry</option>
-                                <option value="landscaping">Landscaping</option>
-                                <option value="construction">Construction</option>
-                                <option value="heavy machinery">Heavy Machinery Operation</option>
-                                <option value="forklift">Forklift Operation</option>
-                                <option value="repair">General Repair Skills</option>
-                                <option value="installation">Installation Skills</option>
-                                <option value="safety">Safety Protocols & Practices</option>
-                            </select>
-                            <input type="text" id="selectedSkill" name="selectedSkill" hidden>
-                            <div id="selected-skills" style="margin-top: 10px;"></div>
-
-                        </div>
+                        @php
+                        $pesoSkill = \App\Models\JobseekerSkill::all();
+                    @endphp
+                    
+                    <div class="input-field">
+                        <label for="skills">Skills</label>
+                        <select class="form-control" id="skills" name="skills[]" multiple required>
+                            <option value="" disabled>Select your skills</option>
+                            
+                            @foreach($pesoSkill as $skill)
+                                <option value="{{ $skill->skill_name }}">{{ $skill->skill_name }}</option>
+                            @endforeach
+                        </select>
+                        
+                        <input type="text" id="selectedSkill" name="selectedSkill" hidden>
+                        <div id="selected-skills" style="margin-top: 10px;"></div>
+                    </div>
+                    
 
 
                         <div class="input-field">
@@ -236,8 +232,8 @@
                             <label>4P's Beneficiary</label>
                             <select id="4ps" name="4ps" required>
                                 <option disabled selected>Select Option</option>
-                                <option>Yes</option>
-                                <option>No</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
                             </select>
                         </div>
 
@@ -245,8 +241,8 @@
                             <label>PWD</label>
                             <select id="pwd" name="pwd" required>
                                 <option disabled selected>Select Option</option>
-                                <option>Yes</option>
-                                <option>No</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
                             </select>
                         </div>
 
