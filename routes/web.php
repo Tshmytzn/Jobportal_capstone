@@ -93,6 +93,8 @@ Route::put('/job-categories/update/{id}', [AdminCRUDController::class, 'updatejo
 //ShowAgency Details in AgencySettings
 Route::get('/Agency/Settings', [AgencyController::class, 'showAgencyDetails'])->name('agencysettings');
 
+Route::get('/SkillsRequirement', function () { return view('Agency.skillsrequirement'); })->name('skillsrequirement');
+
 //Update Profile
 Route::post('/Agency/ProfilePic', [AgencyController::class, 'UpdateAgencyProfilePic'])->name('UpdateAgencyProfilePic');
 
