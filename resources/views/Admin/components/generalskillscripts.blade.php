@@ -34,7 +34,7 @@
                     data: null,
                     render: function(data, type, row) {
                         return `
-                        <button class="btn btn-sm bgp-table edit-btn" data-bs-toggle="modal" data-bs-target="#editgeneralskillmodal" data-id="${row.skill_id}"> ${row.skill_id} Edit</button>
+                        <button class="btn btn-sm bgp-table edit-btn" data-bs-toggle="modal" data-bs-target="#editgeneralskillmodal" data-id="${row.skill_id}"> Edit</button>
                         <button class="btn btn-sm bgp-danger delete-btn" data-id="${row.skill_id}">Delete</button>
                     `;
                     }
