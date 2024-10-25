@@ -26,6 +26,8 @@ Route::get('/Admin/JobCategory', function () { return view('Admin.jobcategory');
 Route::get('/Admin/Administrators', function () { return view('Admin.admins'); })->name('adminadministrators');
 Route::get('/Admin/CustomerInquiries', function () { return view('Admin.customerinquiries'); })->name('customerinquiries');
 Route::get('/Admin/GeneralSkills', function () { return view('Admin.generalskills'); })->name('generalskills');
+Route::get('/Admin/PesoForms', function () { return view('Admin.pesoforms'); })->name('adminpesoforms');
+
 
 //dashboard chart
 Route::get('/api/registrations', [AdminChartsController::class, 'getMonthlyRegistrations']);
@@ -36,6 +38,9 @@ Route::post('/Admin/EditAdministrators', [AdminController::class, 'UpdateAdmin']
 Route::delete('/Admin/DeleteAdministrator', [AdminController::class, 'DeleteAdmin'])->name('DeleteAdmin');
 //Jobseekers Admin view
 Route::get('/Job/Seekers', [AdminCRUDController::class, 'getJobseekers'])->name('jobseekers');
+
+Route::get('/Job/PesoForms', [AdminCRUDController::class, 'getPesoForms'])->name('getPesoForms');
+
 // Contacts View
 Route::get('/Contact/Inquiries', [AdminCRUDController::class, 'getContacts'])->name('getContacts');
 //Verification Request

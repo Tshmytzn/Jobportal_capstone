@@ -9,6 +9,7 @@ use App\Models\JobCategory;
 use App\Models\Jobseeker; 
 use App\Models\Contact; 
 use App\Models\Agency;
+use App\Models\JobseekerPesoForm;
 use App\Models\JobseekerSkill;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -122,6 +123,44 @@ class AdminCRUDController extends Controller
         $jobseekers = Jobseeker::select('js_id', 'js_firstname', 'js_middlename', 'js_lastname', 'js_email', 'js_contactnumber', 'created_at')
                                ->orderBy('js_id', 'desc') // Order by 'js_id' descending
                                ->get();
+    
+        return response()->json(['data' => $jobseekers]);
+    }
+
+    public function getPesoForms(Request $request)
+    {
+        $jobseekers = JobseekerPesoForm::select(
+                'peso_id',
+                'peso_fullname',
+                'peso_birthdate',
+                'peso_age',
+                'peso_gender',
+                'peso_civilstatus',
+                'peso_city',
+                'peso_baranggay',
+                'peso_street',
+                'peso_email',
+                'peso_tel',
+                'peso_cell',
+                'peso_employment',
+                'peso_educ',
+                'peso_position',
+                'peso_skills',
+                'peso_work',
+                'peso_4ps',
+                'peso_pwd',
+                'peso_registration',
+                'peso_remarks',
+                'peso_office',
+                'peso_type',
+                'peso_class',
+                'peso_program',
+                'peso_event',
+                'peso_transaction',
+                'created_at'
+            )
+            ->orderBy('peso_id', 'desc') 
+            ->get();
     
         return response()->json(['data' => $jobseekers]);
     }
