@@ -57,6 +57,6 @@ class CreatePesoTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('peso');
+        Schema::dropIfExists('jobseeker_pesoform');
     }
 }

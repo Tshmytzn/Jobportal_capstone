@@ -80,7 +80,7 @@ class JobseekerPesoController extends Controller
     
         try {
             $jobSeeker->save();
-            return response()->json(['success' => 'Data saved successfully!']);
+            return response()->json(['success' => 'PESO Registration form successfully completed!']);
         } catch (QueryException $e) {
             if ($e->errorInfo[1] == 1062) { 
                 return response()->json(['message' => 'This email is already registered. Please use a different email.'], 409); // Conflict
@@ -163,7 +163,7 @@ class JobseekerPesoController extends Controller
 
         // try {
             $jobSeeker->save();
-            return response()->json(['success' => 'Data updated successfully!']);
+            return response()->json(['success' => 'PESO Registration form successfully Updated!']);
         // } catch (QueryException $e) {
 
         //     if ($e->errorInfo[1] == 1062) { 
