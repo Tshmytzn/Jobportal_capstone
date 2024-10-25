@@ -20,6 +20,7 @@
                             <label for="skill_desc" class="col-form-label">Description:</label>
                             <textarea class="form-control" name="skill_desc" id="skill_desc"></textarea>
                         </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -31,45 +32,35 @@
     </div>
     {{-- Create Skills Modal end --}}
 
-    {{-- Edit Job Categories Modal start --}}
-    <div class="modal fade" id="editjobcategories" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    {{-- Update Skills Modal end --}}
+    <div class="modal fade" id="editgeneralskillmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header bgp-gradient">
-                    <h5 class="modal-title text-white" id="exampleModalLabel">Edit Job Category</h5>
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Edit General Skills</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
                 </div>
                 <div class="modal-body">
-                    <form method="POST" id="editJobCategoryForm">
+                    <form method="POST" id="editgeneralskillsform">
                         @csrf
-
-                        <input type="hidden" id="jobCategoryId" name="jobCategoryId" value="">
-
+                        <input type="hidden" name="skillId" id="skillId" value="" readonly> 
+                        
                         <div class="form-group">
-                            <img class="img-fluid text-center" src="" id="category_image" alt="Job Category Image" style="max-width: 200px; max-height: 100px;">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="jobcategory_image" class="col-form-label">Image:</label>
-                            <input type="file" class="form-control" name="jobcategory_image_input" accept="image/*" id="jobcategory_image_input">
+                            <label for="skill_name" class="col-form-label">Skill:</label>
+                            <input type="text" class="form-control text-dark" name="skill_name" id="skill_name">
                         </div>
                         <div class="form-group">
-                            <label for="jobcategory_name" class="col-form-label">Name:</label>
-                            <input type="text" class="form-control" name="jobcategory_name" id="jobcategory_name">
-                        </div>
-                        <div class="form-group">
-                            <label for="job_description" class="col-form-label">Description:</label>
-                            <textarea class="form-control" name="job_description" id="job_description"></textarea>
+                            <label for="skill_desc" class="col-form-label">Description:</label>
+                            <textarea class="form-control" name="skill_desc" id="skill_desc"></textarea>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" onclick="UpdateJobCategory()" class="btn bgp-gradient">Save Changes</button>
+                    <button type="button" onclick="updategeneralskills()" class="btn bgp-gradient">Save Changes</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
-    {{-- Edit Job Categories Modal end --}}
+    {{-- Update Skills Modal end --}}
+

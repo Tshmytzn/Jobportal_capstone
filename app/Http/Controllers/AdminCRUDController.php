@@ -9,6 +9,7 @@ use App\Models\JobCategory;
 use App\Models\Jobseeker; 
 use App\Models\Contact; 
 use App\Models\Agency;
+use App\Models\JobseekerSkill;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 
@@ -99,6 +100,21 @@ class AdminCRUDController extends Controller
             "data" => $data
         ]);
     }
+
+    public function getGeneralSkills(Request $request) 
+    {
+        $generalskills = JobseekerSkill::select('skill_id', 'skill_name', 'skill_desc')
+                                       ->orderBy('skill_id', 'desc')
+                                       ->paginate($request->length);
+    
+        return response()->json([
+            'draw' => intval($request->draw),
+            'recordsTotal' => $generalskills->total(),
+            'recordsFiltered' => $generalskills->total(),
+            'data' => $generalskills->items(),
+        ]);
+    }
+    
     
 
     public function getJobseekers(Request $request)
@@ -206,7 +222,6 @@ class AdminCRUDController extends Controller
     
         return response()->json(['message' => 'Agency not found.'], 404);
     }
-    
 
     public function getContacts(Request $request)
     {
@@ -232,7 +247,6 @@ class AdminCRUDController extends Controller
         ->where('id', $id)
         ->firstOrFail();
 
-        // Return the admin data as a JSON response
         return response()->json($admin);
     }
 
@@ -242,7 +256,6 @@ class AdminCRUDController extends Controller
         ->where('id', $id)
         ->firstOrFail();
 
-        // Return the admin data as a JSON response
         return response()->json($jobcategory);
     }
 
@@ -277,8 +290,6 @@ class AdminCRUDController extends Controller
     }
     
     
-
-
     public function deleteAdminData($id)
     {
         try {

@@ -23,52 +23,49 @@ Route::get('/Unverified/Agencies', function () { return view('Admin.unverifiedag
 Route::get('/Admin/SkillAssessment', function () { return view('Admin.SkillAssessment'); })->name('adminskillassessment');
 Route::get('/Admin/Jobseeker', function () { return view('Admin.jobseeker'); })->name('jobseeker');
 Route::get('/Admin/JobCategory', function () { return view('Admin.jobcategory'); })->name('jobcategory');
-Route::get('/Admin/Administrators', function () { return view('Admin.admins'); })->name('administrators');
+Route::get('/Admin/Administrators', function () { return view('Admin.admins'); })->name('adminadministrators');
 Route::get('/Admin/CustomerInquiries', function () { return view('Admin.customerinquiries'); })->name('customerinquiries');
 Route::get('/Admin/GeneralSkills', function () { return view('Admin.generalskills'); })->name('generalskills');
 
-
 //dashboard chart
 Route::get('/api/registrations', [AdminChartsController::class, 'getMonthlyRegistrations']);
-
 //Admin view
 Route::get('/Admin/Settings', [AdminController::class, 'showAdminDetails'])->name('adminsettings');
 Route::get('/Admin/AddAdministrators', [AdminController::class, 'showAllAdmins'])->name('administrators');
 Route::post('/Admin/EditAdministrators', [AdminController::class, 'UpdateAdmin'])->name('UpdateAdmin');
 Route::delete('/Admin/DeleteAdministrator', [AdminController::class, 'DeleteAdmin'])->name('DeleteAdmin');
-
 //Jobseekers Admin view
 Route::get('/Job/Seekers', [AdminCRUDController::class, 'getJobseekers'])->name('jobseekers');
-
 // Contacts View
 Route::get('/Contact/Inquiries', [AdminCRUDController::class, 'getContacts'])->name('getContacts');
-
 //Verification Request
 Route::get('/verification-requests', [AdminCRUDController::class, 'getVerificationRequests'])->name('getpendingdata');
-
 //Verified Agencies
 Route::get('/verified-agencies', [AdminCRUDController::class, 'getVerifiedAgencies'])->name('getVerifiedAgencies');
-
 //Unverified Agencies
 Route::get('/unverified-agencies', [AdminCRUDController::class, 'getUnverifiedAgencies'])->name('getUnverifiedAgencies');
-
 //Show Agency
 Route::get('/agency/{id}', [AdminCRUDController::class, 'showagency'])->name('getagencyid');
-
 //Approve Agency
 Route::post('/approveAgency', [AdminCRUDController::class, 'approveAgency'])->name('approveAgency');
-
 //Reject Agency
 Route::post('/rejectAgency', [AdminCRUDController::class, 'rejectAgency'])->name('rejectAgency');
-
 //Job Categories Admin View
 Route::get('/Job/Categories', [AdminCRUDController::class, 'getJobCategories'])->name('jobcategories');
-
+//Global Skills Admin View
+Route::get('/Job/Skills', [AdminCRUDController::class, 'getGeneralSkills'])->name('getGeneralSkills');
+//Global Skills Admin Create
+Route::post('/Job/CreateSkills', [AdminController::class, 'creategeneralskill'])->name('creategeneralskill');
+//Global Skills Admin Update
+Route::post('/Job/UpdateSkills', [AdminController::class, 'updategeneralskills'])->name('updategeneralskills');
+//Global Skills Admin View
+Route::get('/Job/ViewSkills/{id}', [AdminController::class, 'getSkill']);
+//Global Skills Admin Delete
+Route::delete('/Job/DeleteSkills/{id}', [AdminController::class, 'deleteSkill'])->name('deleteSkill');
 //Get ADmin data to populate datatable
 Route::get('/Admin/Accounts', [AdminCRUDController::class, 'getAdminData'])->name('getAdminData');
 Route::get('/admin/get/{id}', action: [AdminCRUDController::class, 'getAdmin']);
 Route::delete('/Admin/Delete/{id}', [AdminCRUDController::class, 'deleteAdminData'])->name('deleteAdminData');
-
 
 //Admin Profile Settings
 Route::post('/Admin/UpdateSettings', [AdminController::class, 'UpdateAdmin'])->name('UpdateAdmin');

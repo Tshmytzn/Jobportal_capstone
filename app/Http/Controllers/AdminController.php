@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Admins; 
+use App\Models\Admins;
+use App\Models\JobseekerSkill;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\JsonResponse;
 
 
 class AdminController extends Controller
@@ -131,5 +133,73 @@ class AdminController extends Controller
             'admin_profile' => $imageNameWithExtension  
         ]);    
     }
+
+    public function creategeneralskill(Request $request)
+    {
+        try {
+
+            $validatedData = $request->validate([
+                'skill_name' => 'required|string|max:255',
+                'skill_desc' => 'required|string|max:20',
+            ]);
+    
+
+            $generalskill = new JobseekerSkill();
+            $generalskill->skill_name = $validatedData['skill_name'];
+            $generalskill->skill_desc = $validatedData['skill_desc'];
+            $generalskill->save();
+    
+            return response()->json(['success' => true, 'message' => 'Skill successfully added']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+        }
+    }
+
+    public function updategeneralskills(Request $request): JsonResponse
+    {
+        try {
+            $validatedData = $request->validate([
+                'skillId' => 'required|exists:jobseeker_skills,skill_id',
+                'skill_name' => 'required|string|max:255',
+                'skill_desc' => 'required|string|max:20',
+            ]);
+    
+            $generalskill = JobseekerSkill::findOrFail($validatedData['skillId']);
+            $generalskill->skill_name = $validatedData['skill_name'];
+            $generalskill->skill_desc = $validatedData['skill_desc'];
+            $generalskill->save();
+    
+            return response()->json(['success' => true, 'message' => 'Skill successfully updated']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+        }
+    }
+    
+
+    public function getSkill($id): JsonResponse
+    {
+        $skill = JobseekerSkill::select('skill_id', 'skill_name', 'skill_desc')
+            ->where('skill_id', $id)
+            ->first();
+    
+        if (!$skill) {
+            return response()->json(['error' => 'Skill not found'], 404);
+        }
+    
+        return response()->json($skill);
+    }
+
+    public function deleteSkill($id): JsonResponse
+    {
+        try {
+            $skill = JobseekerSkill::findOrFail($id);
+            $skill->delete();
+
+            return response()->json(['success' => true, 'message' => 'Skill successfully deleted']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => 'Failed to delete skill'], 500);
+        }
+    }
+
     
 }
