@@ -17,6 +17,7 @@
 
 <!-- Buttons for HTML5 exports (Excel, PDF) -->
 <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
 
 <script>
@@ -33,8 +34,10 @@
             order: [
                 [0, 'asc']
             ],
-            scrollY: '400px',
+            scrollY: '400px', // Fixed height for vertical scroll
+            scrollX: true,
             scrollCollapse: true,
+            paging: true,
             columns: [{
                     data: null,
                     render: (data, type, row, meta) => meta.row + 1,
@@ -125,9 +128,27 @@
 
             ],
             dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ]
+            buttons: [
+                'colvis',
+
+                {
+                    extend: 'copy'
+                },
+                {
+                    extend: 'csv'
+                },
+                {
+                    extend: 'excel'
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                }
+            ],
+            fixedHeader: true,
         });
+
     });
 </script>
