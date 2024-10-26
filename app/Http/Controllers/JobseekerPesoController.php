@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\JobseekerPesoForm; // Ensure your JobSeeker model is linked to jobseeker_pesoform table
-use Illuminate\Database\QueryException; // Import QueryException for error handling
+use App\Models\JobseekerPesoForm;
+use Illuminate\Database\QueryException;
 
 class JobseekerPesoController extends Controller
 {
     public function savePesoForm(Request $request)
     {
-        // Validate the incoming request data
+
         $validatedData = $request->validate([
             'srs_id' => 'required|numeric',
             'js_id' => 'required|numeric',
@@ -41,12 +41,12 @@ class JobseekerPesoController extends Controller
             'event_name' => 'required|string',
             'trans' => 'required|string'
         ]);
-    
+
         // Check if the jobseeker with the given js_id already exists
         if (JobseekerPesoForm::where('js_id', $validatedData['js_id'])->exists()) {
             return response()->json(['message' => 'This job seeker is already registered.'], 409); // Conflict
         }
-    
+
         // Create a new instance of the JobseekerPesoForm model
         $jobSeeker = new JobseekerPesoForm();
         $jobSeeker->peso_srsid = $validatedData['srs_id'];
@@ -77,19 +77,19 @@ class JobseekerPesoController extends Controller
         $jobSeeker->peso_program = $validatedData['program'];
         $jobSeeker->peso_event = $validatedData['event_name'];
         $jobSeeker->peso_transaction = $validatedData['trans'];
-    
+
         try {
             $jobSeeker->save();
             return response()->json(['success' => 'PESO Registration form successfully completed!']);
         } catch (QueryException $e) {
-            if ($e->errorInfo[1] == 1062) { 
+            if ($e->errorInfo[1] == 1062) {
                 return response()->json(['message' => 'This email is already registered. Please use a different email.'], 409); // Conflict
             } else {
                 return response()->json(['message' => 'An error occurred while processing your request. Please try again later.'], 500);
             }
         }
     }
-    
+
 
     public function updatePesoForm(Request $request)
 {
@@ -166,7 +166,7 @@ class JobseekerPesoController extends Controller
             return response()->json(['success' => 'PESO Registration form successfully Updated!']);
         } catch (QueryException $e) {
 
-            if ($e->errorInfo[1] == 1062) { 
+            if ($e->errorInfo[1] == 1062) {
                 return response()->json(['message' => 'This email is already registered. Please use a different email.'], 409); // Conflict
             } else {
                 return response()->json(['message' => 'An error occurred while updating your details. Please try again later.'], 500);

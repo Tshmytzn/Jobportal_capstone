@@ -1,23 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<!-- DataTables CSS -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.3.3/css/buttons.dataTables.min.css">
-
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-<!-- DataTables JS -->
-<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.3.3/js/dataTables.buttons.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.html5.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/2.3.3/js/buttons.print.min.js"></script>
-
-@include('Admin.components.head', ['title' => 'Admin Dashboard'])
+@include('Admin.components.head', ['title' => 'PESO Registration Forms'])
 @include('admin.components.loading')
 <body class="g-sidenav-show  bg-gray-100">
 
@@ -25,7 +9,7 @@
 
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
-        @include('Admin.components.navbar', ['headtitle' => 'Registration  Forms'], ['pagetitle' => 'PESO'])        
+        @include('Admin.components.navbar', ['headtitle' => 'Registration  Forms'], ['pagetitle' => 'PESO'])
         <!-- End Navbar -->
 
         {{-- cards --}}
@@ -62,7 +46,6 @@
                             <th>Event</th>
                             <th>Transaction</th>
                             <th>Created At</th>
-                            <th>Actions</th>
                         </tr>
                     </thead>
                 </table>

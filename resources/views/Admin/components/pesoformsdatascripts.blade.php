@@ -1,3 +1,24 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- DataTables JavaScript -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<!-- Buttons extension -->
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+<!-- Print button script -->
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+<!-- Other export buttons (optional) -->
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+
+<!-- JSZip for Excel export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<!-- pdfmake for PDF export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+<!-- Buttons for HTML5 exports (Excel, PDF) -->
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+
 <script>
     $(document).ready(function() {
         $('#PesoForms_tbl').DataTable({
@@ -12,13 +33,11 @@
             order: [
                 [0, 'asc']
             ],
-            scrollY: '400px', 
+            scrollY: '400px',
             scrollCollapse: true,
             columns: [{
                     data: null,
-                    render: function(data, type, row, meta) {
-                        return meta.row + 1;
-                    },
+                    render: (data, type, row, meta) => meta.row + 1,
                     orderable: false
                 },
                 {
@@ -101,37 +120,14 @@
                 },
                 {
                     data: 'created_at',
-                    render: function(data) {
-                        const date = new Date(data);
-                        return date.toLocaleString();
-                    }
+                    render: data => new Date(data).toLocaleString()
                 },
-                {
-                    data: null,
-                    render: function(data, type, row) {
-                        return `
-                            <button class="btn btn-sm bgp-table delete-btn" 
-                                    data-bs-toggle='modal' 
-                                    data-bs-target='#' 
-                                    data-id="${row.peso_id}"> View </button>
-                        `;
-                    }
-                },
+
             ],
             dom: 'Bfrtip',
-            buttons: [{
-                extend: 'print',
-                text: 'Print Table',
-                className: 'btn btn-primary',
-                exportOptions: {
-                    columns: ':visible'
-                },
-                customize: function(win) {
-                    $(win.document.body)
-                        .css('font-size', '10pt')
-                        .prepend('<h3>Registration Forms</h3>');
-                }
-            }]
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
         });
     });
 </script>
