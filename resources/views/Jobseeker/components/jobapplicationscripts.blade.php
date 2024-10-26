@@ -11,4 +11,21 @@
             $('#applicationmodal').modal('show'); 
         }
     });
+
+    $(document).ready(function() {
+
+        $('.summernote').each(function() {
+            $(this).summernote({
+                height: 200,
+                toolbar: [
+                    ['style', ['bold', 'italic', 'underline']],
+                    ['font', ['strikethrough', 'superscript', 'subscript']],
+                    ['color', ['color']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['view', ['fullscreen', 'codeview', 'help']]
+                ],
+                placeholder: 'Start typing here...'
+            });
+        });
+    });
 </script>

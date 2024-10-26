@@ -1,3 +1,6 @@
+<!-- Summernote CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.css" rel="stylesheet">
+
 @php
     $jobseekerdata = null;
     $fullName = '';
@@ -40,7 +43,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="coverLetter" class="form-label">Cover Letter</label>
-                        <textarea class="form-control" id="coverLetter" rows="4" placeholder="Write your cover letter here..." required></textarea>
+                        <textarea class="summernote" id="coverLetter" rows="4" placeholder="Write your cover letter here..." required></textarea>
                     </div>
                 </form>
                 <!-- Skill Assessment Button -->
