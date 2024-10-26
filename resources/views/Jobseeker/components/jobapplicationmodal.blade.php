@@ -1,3 +1,14 @@
+@php
+    $jobseekerdata = null;
+    $fullName = '';
+    $userId = session('user_id');
+    
+    if ($userId) {
+        $jobseekerdata = \App\Models\Jobseeker::where('js_id', $userId)->first();
+        $fullName = "{$jobseekerdata->js_firstname} {$jobseekerdata->js_middlename} {$jobseekerdata->js_lastname}";
+    }
+@endphp
+
 <!-- Modal for application -->
 <div class="modal fade" id="applicationmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
@@ -6,18 +17,11 @@
             <div class="modal-header bgp-gradient">
                 <h5 class="modal-title text-white" id="exampleModalLabel"> Job Application </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-
             </div>
             <div class="modal-body">
                 <form id="jobApplicationForm">
                     @csrf
-
-                    @php
-                        $jobseekerdata = \App\Models\Jobseeker::where('js_id', session('user_id'))->first();
-                        $fullName = "{$jobseekerdata->js_firstname} {$jobseekerdata->js_middlename} {$jobseekerdata->js_lastname}";
-                    @endphp
-
-                    <input type="hidden" id="userIdInput" placeholder="User ID" readonly />
+                    <input type="hidden" id="userIdInput" value="{{ $userId ?? '' }}" readonly />
 
                     <div class="mb-3">
                         <label for="applicantName" class="form-label">Full Name</label>
@@ -31,7 +35,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="applicantPhone" class="form-label">Phone Number</label>
-                        <input type="tel" class="form-control" id="applicantPhone" placeholder="09634728364"
+                        <input type="text" class="form-control" id="applicantPhone" placeholder="09634728364" maxlength="12"
                             value="+63{{ $jobseekerdata->js_contactnumber ?? '' }}" required>
                     </div>
                     <div class="mb-3">
@@ -41,35 +45,28 @@
                 </form>
                 <!-- Skill Assessment Button -->
                 <div class="text-center m-2">
-                    <button type="button" class="btn btn-primary w-100" id="skillAssessmentBtn">Skill
-                        Assessment Required</button>
+                    <button type="button" class="btn btn-primary w-100" id="skillAssessmentBtn">Skill Assessment Required</button>
                 </div>
 
                 @php
-                    $userId = session('user_id');
-
-                    $hasSubmitted = \App\Models\JobseekerPesoForm::where('js_id', $userId)->exists();
+                    $hasSubmitted = $userId ? \App\Models\JobseekerPesoForm::where('js_id', $userId)->exists() : false;
                 @endphp
 
                 <div class="text-center m-2">
                     @if (!$hasSubmitted)
-                    <p class="text-info text-center">
-                        To apply for this job, please complete the PESO Registration Form.
-                    </p>
-                    <a href="{{ route('pesoform') }}">
-                        <button class="btn btn-primary w-100" style="height: 150%">Complete PESO Registration Form</button>
-                    </a>
-                @else
-                    <p class="text-success text-center">
-                        Your PESO Registration Form is complete and will be automatically submitted to agencies when you apply.
-                    </p>
-                    <a href="{{ route('profile') }}" class="text-decoration-underline">Go to Profile</a> to edit PESO Registration form.                @endif
-                
-                
+                        <small class="text-info text-center">
+                            To apply for this job, please complete the PESO Registration Form.
+                        </small>
+                        <a href="{{ route('pesoform') }}">
+                            <button class="btn btn-primary w-100" style="height: 150%">Complete PESO Registration Form</button>
+                        </a>
+                    @else
+                        <small class="text-success text-center">
+                            Your PESO Registration Form is complete and will be automatically submitted to agencies when you apply.
+                        </small>
+                        <a href="{{ route('profile') }}" class="text-decoration-underline">Go to Profile</a> to edit PESO Registration form.
+                    @endif
                 </div>
-                {{-- <div class="text-center mt-2">
-                    <button type="button" class="btn btn-primary w-100" id="skillAssessmentBtn">Upload Resume</button>
-                </div> --}}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn bgp-gradient" data-bs-dismiss="modal">Close</button>
