@@ -4,28 +4,30 @@
         const userId = {{ session('user_id') ?? 'null' }};
 
         if (!isLoggedIn) {
-            event.preventDefault(); 
-            $('#loginPromptModal').modal('show'); 
+            event.preventDefault();
+            $('#loginPromptModal').modal('show');
         } else {
             document.getElementById('userIdInput').value = userId;
-            $('#applicationmodal').modal('show'); 
+            $('#applicationmodal').modal('show');
         }
     });
+</script>
 
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.js"></script>
+<script>
     $(document).ready(function() {
-
-        $('.summernote').each(function() {
-            $(this).summernote({
-                height: 200,
-                toolbar: [
-                    ['style', ['bold', 'italic', 'underline']],
-                    ['font', ['strikethrough', 'superscript', 'subscript']],
-                    ['color', ['color']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['view', ['fullscreen', 'codeview', 'help']]
-                ],
-                placeholder: 'Start typing here...'
-            });
+        $('.summernote').summernote({
+            height: 200,
+            toolbar: [
+                ['style', ['bold', 'italic', 'underline']],
+                ['font', ['strikethrough', 'superscript', 'subscript']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ],
+            placeholder: 'Start typing here...'
         });
     });
 </script>

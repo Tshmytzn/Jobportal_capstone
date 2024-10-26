@@ -1,5 +1,4 @@
-<!-- Summernote CSS -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote-bs4.min.css" rel="stylesheet">
+
 
 @php
     $jobseekerdata = null;
@@ -15,7 +14,7 @@
 <!-- Modal for application -->
 <div class="modal fade" id="applicationmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog modal-dialog-scrollable custom-modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header bgp-gradient">
                 <h5 class="modal-title text-white" id="exampleModalLabel"> Job Application </h5>
@@ -45,6 +44,7 @@
                         <label for="coverLetter" class="form-label">Cover Letter</label>
                         <textarea class="summernote" id="coverLetter" rows="4" placeholder="Write your cover letter here..." required></textarea>
                     </div>
+                    
                 </form>
                 <!-- Skill Assessment Button -->
                 <div class="text-center m-2">
