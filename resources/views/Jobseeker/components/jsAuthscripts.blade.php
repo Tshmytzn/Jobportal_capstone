@@ -195,26 +195,3 @@
 
 <!-- Ensure you include jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<script>
-    $(document).ready(function() {
-        $('#resumeForm').on('submit', function(event) {
-            event.preventDefault();
-
-            let formData = new FormData(this);
-            $.ajax({
-                url: '{{ route('uploadResume') }}',
-                method: 'POST',
-                data: formData,
-                contentType: false,
-                processData: false,
-                success: function(response) {
-                    alert(response.success);
-                },
-                error: function(xhr) {
-                    alert(xhr.responseJSON.error);
-                }
-            });
-        });
-    });
-</script>

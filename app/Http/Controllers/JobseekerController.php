@@ -114,25 +114,6 @@ class JobseekerController extends Controller
         return response()->json(['success' => 'Password updated successfully']);
     }
 
-    public function uploadResume(Request $request)
-    {
-        // Validate the file input
-        $request->validate([
-            'resume' => 'required|mimes:pdf,doc,docx|max:10240',
-        ]);
-
-        // Handle the file upload
-        if ($request->hasFile('resume')) {
-            $file = $request->file('resume');
-            $filename = time() . '.' . $file->getClientOriginalExtension();
-            $file->storeAs('jobseekerfiles', $filename, 'public'); // Store in storage/app/public/resumes
-
-            return response()->json(['success' => 'File uploaded successfully']);
-        }
-
-        return response()->json(['error' => 'No file uploaded'], 400);
-    }
-
     public function index()
     {
         $jobCategories = JobCategory::all();

@@ -172,6 +172,9 @@ Route::post('/savePesoForm', [JobseekerPesoController::class, 'savePesoForm'])->
 //update peso form
 Route::post('/updatePesoForm', [JobseekerPesoController::class, 'updatePesoForm'])->name('updatePesoForm');
 
+//Upload Resume
+Route::post('/JobseekerResume', [JobseekerPesoController::class, 'uploadResume'])->name('uploadResume');
+
 Route::get('/PESORegistrationForm', function () { return view('Jobseeker.pesoform'); })->name('pesoform');
 Route::get('/PESORegistrationFormUpdate', function () { return view('Jobseeker.pesoformupdate'); })->name('pesoformupdate');
 
@@ -190,7 +193,6 @@ Route::get('/Settings', [JobseekerController::class, 'getJobseeker2'])->name('se
 
 Route::post('/Update', [JobseekerController::class, 'updateJobseeker'])->name('updateJobseeker');
 Route::post('/updateJsPassword', [JobseekerController::class, 'updateJsPassword'])->name('updateJsPassword');
-Route::post('/uploadResume', [JobseekerController::class, 'uploadResume'])->name('uploadResume');
 
 // Jobcategory Display
 // Route::get('/job-categories', [JobseekerController::class, 'index']);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\JobseekerPesoForm;
 use Illuminate\Database\QueryException;
+use App\Models\Jobseeker;
 
 class JobseekerPesoController extends Controller
 {
@@ -173,5 +174,46 @@ class JobseekerPesoController extends Controller
             }
         }
     }
+
+    public function uploadResume(Request $request)
+    {
+        $request->validate([
+            'js_id' => 'required|integer|exists:jobseeker_details,js_id',
+            'js_resume' => 'required|file|mimes:pdf,doc,docx,rtf|max:2048',
+        ]);
+
+        $jobseeker = Jobseeker::find($request->js_id);
+
+        if ($request->hasFile('js_resume')) {
+            $resumeFile = $request->file('js_resume');
+            $resumeNameWithExtension = time() . '_' . $resumeFile->getClientOriginalName();
+
+            // Move the file to the jobseeker_resume folder in the public directory
+            $resumeFile->move(public_path('jobseeker_resume/'), $resumeNameWithExtension);
+
+            // Save the file name/path to the jobseeker's resume field
+            $jobseeker->js_resume = $resumeNameWithExtension;
+            $jobseeker->save();
+
+            // Check if the jobseeker was updated
+            if ($jobseeker->wasChanged('js_resume')) {
+                return response()->json([
+                    'message' => 'Resume uploaded successfully.',
+                    'resume_file' => $resumeNameWithExtension
+                ]);
+            } else {
+                return response()->json([
+                    'message' => 'No changes made to resume.',
+                    'error' => 'Nothing inserted.'
+                ], 400); // Return a 400 Bad Request
+            }
+        }
+
+        return response()->json([
+            'message' => 'No file uploaded.',
+            'error' => 'Nothing inserted.'
+        ], 400); // Return a 400 Bad Request
+    }
+
 
 }

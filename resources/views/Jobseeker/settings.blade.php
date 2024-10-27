@@ -26,13 +26,15 @@
                             <i class="fas fa-user"></i> Profile Information
                         </button>
                     </li>
+
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="pills-resume-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-resume" type="button" role="tab" aria-controls="pills-resume"
                             aria-selected="false">
-                            <i class="fas fa-file-upload"></i> Upload Resume
+                            <i class="fas fa-file-upload"></i> Resume Submission
                         </button>
                     </li>
+
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="pills-password-tab" data-bs-toggle="pill"
                             data-bs-target="#pills-password" type="button" role="tab"
@@ -40,7 +42,6 @@
                             <i class="fas fa-key"></i> Account Password
                         </button>
                     </li>
-
                 </ul>
 
                 <!-- Pills content -->
@@ -132,21 +133,42 @@
                             </div>
                         </div>
                     </div>
+                    {{-- Upload Resume --}}
                     <div class="tab-pane fade" id="pills-resume" role="tabpanel" aria-labelledby="pills-resume-tab">
                         <div class="p-3 bg-light">
                             <div class="modal-header">
-                                <h4>Upload Resume</h4>
+                                <h4>Upload and View Your Resume
+                                </h4>
                             </div>
                             <div class="card-body">
-                                <form id="resumeForm" method="POST" enctype="multipart/form-data">
-                                    @csrf
-                                    <label for="resume">Resume:</label>
-                                    <input type="file" id="resume" name="resume" class="form-control">
-                                    <button class="btn btn-primary w-100 mt-4 mb-2" type="submit">Upload</button>
-                                </form>
+
+                                @php
+                                    $pesoForm = \App\Models\Jobseeker::where('js_id', session('user_id'))->first();
+
+                                @endphp
+
+                                <div id="uploadedResume" class="mt-3"
+                                    style="{{ $pesoForm && $pesoForm->js_resume ? 'display: block;' : 'display: none;' }}">
+                                    <strong>Uploaded Resume:</strong>
+                                    <span id="resumeFilename">
+                                        @if ($pesoForm && $pesoForm->js_resume)
+                                            <a href="{{ asset('jobseeker_resume/' . $pesoForm->js_resume) }}"
+                                                target="_blank">
+                                                {{ $pesoForm->js_resume }}
+                                            </a>
+                                        @else
+                                            No resume uploaded
+                                        @endif
+                                    </span>
+                                </div>
+                                <button type="button" class="btn btn-primary w-100 mt-4 mb-2" data-bs-toggle="modal"
+                                    data-bs-target="#Uploadresumemodal">
+                                    Upload Resume
+                                </button>
                             </div>
                         </div>
                     </div>
+                    {{-- Upload Resume --}}
                     <div class="tab-pane fade" id="pills-password" role="tabpanel"
                         aria-labelledby="pills-password-tab">
                         <div class="p-3 bg-light">
@@ -154,23 +176,23 @@
                                 <h4>Account Password</h4>
                             </div>
                             <div class="card-body">
-                                <form id="js_changePasswordForm">
+                                <form id="js_changePasswordForm" method="POST">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ session('user_id') }}"
                                         placeholder="User ID">
                                     <div class="form-group mb-3">
                                         <label for="currentPassword">Enter Current Password</label>
-                                        <input type="password" id="js_currentPassword" class="form-control"
+                                        <input type="password" id="js_currentPassword" name="currentPassword" class="form-control"
                                             placeholder="Current Password" required>
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="newPassword">Enter New Password</label>
-                                        <input type="password" id="js_newPassword" class="form-control"
+                                        <input type="password" id="js_newPassword" name="newPassword" class="form-control"
                                             placeholder="New Password" required>
                                     </div>
                                     <div class="form-group mb-4">
                                         <label for="confirmPassword">Confirm New Password</label>
-                                        <input type="password" id="js_confirmPassword" class="form-control"
+                                        <input type="password" id="js_confirmPassword" name="newPassword_confirmation" class="form-control"
                                             placeholder="Confirm Password" required>
                                     </div>
                                     <button type="submit" class="btn btn-primary w-100 mb-2">Change Password</button>
@@ -189,6 +211,8 @@
     @include('Jobseeker.components.footer')
     @include('Jobseeker.components.jsAuthscripts')
     @include('Jobseeker.components.scripts')
+    @include('Jobseeker.components.resumemodal')
+    @include('Jobseeker.components.resumescripts')
 
 
 </body>
