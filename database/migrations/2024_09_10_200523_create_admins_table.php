@@ -28,7 +28,7 @@ return new class extends Migration
             [
                 'admin_name' => 'Gutsy Pasuelo',
                 'admin_email' => 'gutsy@admin.com',
-                'admin_mobile' => '09987654321',
+                'admin_mobile' => '9987654321',
                 'admin_password' => Hash::make('12345678'),
                 'admin_profile' => null,
                 'created_at' => now(),
@@ -37,7 +37,7 @@ return new class extends Migration
             [
                 'admin_name' => 'Kailah Leyva',
                 'admin_email' => 'kailah@admin.com',
-                'admin_mobile' => '09123456789',
+                'admin_mobile' => '9123456789',
                 'admin_password' => Hash::make('12345678'),
                 'admin_profile' => null,
                 'created_at' => now(),

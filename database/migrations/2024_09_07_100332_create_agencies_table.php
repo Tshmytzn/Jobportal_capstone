@@ -73,7 +73,7 @@ return new class extends Migration
                 'agency_name' => 'Quick Hire Solutions',
                 'agency_address' => '456 jobs ave',
                 'email_address' => 'quickhire@solutions.com',
-                'contact_number' => '09123456789',
+                'contact_number' => '9123456789',
                 'landline_number' => null,
                 'geo_coverage' => 'international',
                 'employee_count' => '51-100',
