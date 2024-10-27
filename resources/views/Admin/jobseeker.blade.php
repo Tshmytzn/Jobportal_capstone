@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- FixedHeader CSS -->
+<link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.3.2/css/fixedHeader.dataTables.min.css">
+
+<!-- FixedHeader JS -->
+<script src="https://cdn.datatables.net/fixedheader/3.3.2/js/dataTables.fixedHeader.min.js"></script>
 
 @include('Admin.components.head', ['title' => 'Jobseeker'])
 
