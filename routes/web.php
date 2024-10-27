@@ -10,6 +10,7 @@ use App\Http\Middleware\AuthMiddleware;
 use App\Http\Controllers\AdminChartsController;
 use App\Http\Controllers\JobseekerPesoController;
 use App\Http\Controllers\JobApplicationController;
+use App\Http\Controllers\SkillAssessmentController;
 
 
 // Admin Protected Routes
@@ -28,6 +29,15 @@ Route::get('/Admin/Administrators', function () { return view('Admin.admins'); }
 Route::get('/Admin/CustomerInquiries', function () { return view('Admin.customerinquiries'); })->name('customerinquiries');
 Route::get('/Admin/GeneralSkills', function () { return view('Admin.generalskills'); })->name('generalskills');
 Route::get('/Admin/PesoForms', function () { return view('Admin.pesoforms'); })->name('adminpesoforms');
+
+//create general skill assessment
+Route::post('/assessments', [SkillAssessmentController::class, 'store'])->name('assessments.store');
+
+//display general skill assessment
+Route::get('/viewassessments', [SkillAssessmentController::class, 'fetchAssessments']);
+
+//delete general skill assessments
+Route::delete('/api/assessments/{id}', [SkillAssessmentController::class, 'destroy'])->name('assessments.destroy');
 
 
 //dashboard chart
