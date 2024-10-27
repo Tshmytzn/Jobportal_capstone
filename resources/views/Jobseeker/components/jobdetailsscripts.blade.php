@@ -15,6 +15,8 @@
                     type: 'GET',
                     success: function(response) {
                         if (response) {
+                            
+                            $('#jobIdInput').val(id); // Set the job ID in the hidden input field
 
                             $('#job_title').text(response.job_title);
                             $('#job_overview').text(
@@ -23,7 +25,7 @@
                             $('#job_description').html(response.job_description);
                             $('#job_location').text(response.job_location);
                             $('#job_type').text(response.job_type);
-                            
+
                             const options = {
                                 year: 'numeric',
                                 month: 'long',
@@ -33,10 +35,6 @@
                                 .toLocaleDateString(undefined, options));
                             $('#job_updated_date').text(new Date(response.updated_at)
                                 .toLocaleDateString(undefined, options));
-
-                            // $('#job_title').text(response.job_title);
-                            // $('#job_location').text(response.job_location);
-                            // $('#job_type').text(response.job_type);
 
                             $('#job_image').attr('src',
                                 `/agencyfiles/job_image/${response.job_image}`);

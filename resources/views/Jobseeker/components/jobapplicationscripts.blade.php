@@ -31,3 +31,56 @@
         });
     });
 </script>
+
+
+  <script>
+    function SubmitJobApplication() {
+        var formElement = document.getElementById('jobApplicationForm');
+        var formData = new FormData(formElement);
+        formData.append('_token', '{{ csrf_token() }}');
+
+        document.getElementById('loading').style.display = 'grid';
+
+        $.ajax({
+            type: "POST",
+            url: '{{ route('job.application.submit') }}',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                document.getElementById('loading').style.display = 'none';
+
+                $('#jobApplicationForm')[0].reset();
+                $('#applicationmodal').modal('hide');
+
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: response.success,
+                    confirmButtonText: 'OK'
+                });
+            },
+            error: function(xhr) {
+                document.getElementById('loading').style.display = 'none';
+
+                console.error('AJAX Error:', xhr.status, xhr.statusText);
+                console.error('Response Text:', xhr.responseText);
+
+                let errorMessage = 'Oops! Something went wrong while processing your request. Please try again later.';
+                try {
+                    const jsonResponse = JSON.parse(xhr.responseText);
+                    errorMessage = jsonResponse.message || errorMessage;
+                } catch (e) {
+                    console.error('Error parsing JSON:', e);
+                }
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: errorMessage,
+                    confirmButtonText: 'OK'
+                });
+            }
+        });
+    }
+</script>

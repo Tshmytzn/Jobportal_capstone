@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('jobseeker_application', function (Blueprint $table) {
             $table->id();
             $table->integer('js_id');
+            $table->integer('job_id');
             $table->integer('peso_form_id')->nullable();
             $table->integer('skill_results_id')->nullable();
             $table->string('applicant_name', 100);

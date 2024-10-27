@@ -9,6 +9,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Middleware\AuthMiddleware;
 use App\Http\Controllers\AdminChartsController;
 use App\Http\Controllers\JobseekerPesoController;
+use App\Http\Controllers\JobApplicationController;
 
 
 // Admin Protected Routes
@@ -144,6 +145,9 @@ Route::get('/jobslist', [JobseekerController::class, 'jobslist'])->name('jobslis
 
 // jobdetailsroute
 Route::get('/jobdetails', function () { return view('Jobseeker.jobdetails'); })->name('jobdetails');
+
+//submit application
+Route::post('/job-application', [JobApplicationController::class, 'submitApplication'])->name('job.application.submit');
 
 //show jobdetails
 Route::get('/Showjobdetails/{id}', [JobseekerController::class, 'Showjobdetails']);

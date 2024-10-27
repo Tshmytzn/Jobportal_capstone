@@ -21,7 +21,9 @@
             <div class="modal-body">
                 <form id="jobApplicationForm">
                     @csrf
-                    <input type="hidden" id="userIdInput" value="{{ $userId ?? '' }}" readonly />
+                    <input type="hidden" id="userIdInput" name="userIdInput" value="{{ $userId ?? '' }}" readonly />
+                    <input type="hidden" id="jobIdInput" name="jobId" value="">
+                    <input type="hidden" id="skillIdInput" name="skillIdInput" value="">
 
                     <div class="mb-3">
                         <label for="applicantName" class="form-label">Full Name</label>
@@ -45,6 +47,10 @@
                             placeholder="Write your cover letter here..." required></textarea>
                     </div>
 
+                    <input type="hidden" id="resumeFileInput" name="resumeFileInput"
+                        value="{{ $jobseekerdata->js_resume ?? '' }}" />
+
+
                     <div class="mb-3">
                         <label class="form-label">Review Resume</label>
                         <div class="border p-2 form-control">
@@ -62,12 +68,10 @@
                             @endif
                         </div>
                     </div>
-
                     @php
                         // Check if the user has submitted the PESO form
-                        $hasSubmitted = $userId
-                            ? \App\Models\JobseekerPesoForm::where('js_id', $userId)->exists()
-                            : false;
+                        $pesoForm = $userId ? \App\Models\JobseekerPesoForm::where('js_id', $userId)->first() : null;
+                        $hasSubmitted = $pesoForm !== null; // Check if a PESO form entry exists
                     @endphp
 
                     <div class="mt-2 mb-2">
@@ -82,14 +86,18 @@
                                 <strong>Note: </strong>PESO Registration Form will be submitted automatically upon
                                 application.
                             </small>
+                            <input type="hidden" name="peso_form_id" id="peso_form_id"
+                                value="{{ $pesoForm->peso_id }}">
                         @endif
                     </div>
+
 
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn bgp-gradient" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn bgp-danger">Submit Application</button>
+                <button type="button" onclick="SubmitJobApplication()" class="btn bgp-danger">Submit
+                    Application</button>
             </div>
         </div>
     </div>
