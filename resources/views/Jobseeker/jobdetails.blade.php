@@ -50,18 +50,17 @@
         </div>
     </div>
 
-
-
     <!-- Header End -->
-    <div class="container-fluidn m-3">
+    <div class="container-fluid m-3">
         <div class="row justify-content-center">
             <!-- Image Column -->
             <div class="col-6">
                 <div class="image-container"
-                    style="width: 90%; margin: 0 auto; border: 2px solid #ccc; border-radius: 10px; overflow: hidden;">
-                    <img id="job_image" src="" alt="Job Image" class="img-fluid"
-                        style="width: 100%; height: auto; object-fit: cover;"> <!-- Dynamically populated image -->
-                </div>
+                style="width: 90%; height: 400px; margin: 0 auto; border: 2px solid #ccc; border-radius: 10px; overflow: hidden;">
+                <img id="job_image" src="" alt="Job Image" class="img-fluid"
+                    style="width: 100%; height: 100%; object-fit: cover;"> <!-- Dynamically populated image -->
+            </div>
+            
             </div>
 
             <!-- Job Details Column -->
@@ -75,22 +74,32 @@
                             competitive pay and benefits.</p> <!-- Dynamically populated description -->
                     </div>
                     <!-- Job Meta Information -->
-                    <div class="mt-5">
-                        <div class="mb-3">
-                            <i class="bi bi-geo-alt-fill text-primary"></i> Location: <span
-                                id="job_location">Location</span>
+                    <div class="mt-4 p-3 me-4 border rounded shadow-sm" style="background-color: #f8f9fa;">                    
+                        <div class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-geo-alt-fill text-primary me-2" style="font-size: 1.5rem;"></i>
+                            <h6 class="mb-0">Location:</h6>
+                            <span id="job_location" class="ms-2 fw-bold text-secondary">Location</span>
                         </div>
-                        <div class="mb-3">
-                            <i class="bi bi-briefcase-fill text-primary"></i> Job Type: <span id="job_type"></span>
+                    
+                        <div class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-briefcase-fill text-primary me-2" style="font-size: 1.5rem;"></i>
+                            <h6 class="mb-0">Job Type:</h6>
+                            <span id="job_type" class="ms-2 fw-bold text-secondary"></span>
+                        </div>
+                    
+                        <div class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-tools text-primary me-2" style="font-size: 1.5rem;"></i>
+                            <h6 class="mb-0">Skills required:</h6>
+                            <span id="skill_required" class="ms-2 fw-bold text-secondary"></span>
                         </div>
                     </div>
-
+                    
                     <!-- Job Dates -->
                     <div class="mt-4 text-muted">
                         <p class="m-0">Date Posted: <span id="job_posted_date">2024-09-12</span></p>
                     </div>
                     <!-- Apply Button -->
-                    <div class="mt-4">
+                    <div class="mt-2 me-2 mb-2">
                         <button role="button" class="btn btn-primary btn-lg w-100 px-5 " id="applyButton"> Apply Now </button>
                     </div>
                 </div>

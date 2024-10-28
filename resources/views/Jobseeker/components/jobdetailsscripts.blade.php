@@ -3,20 +3,22 @@
         const urlParams = new URLSearchParams(window.location.search);
         let id = urlParams.get('id'); // Get the job ID from the URL
 
+        console.log('Retrieved Job ID from URL:', id);
+
         if (id) {
             id = parseInt(id, 10);
-            // Check if id is a valid number
+
             if (!isNaN(id)) {
-                console.log('Job ID:', id); // Log the job ID to the console
+                console.log('Job ID:', id); 
 
                 // AJAX request to fetch the job details by ID
                 $.ajax({
-                    url: `/Showjobdetails/${id}`, // Your route to fetch job details
+                    url: `/Showjobdetails/${id}`, 
                     type: 'GET',
                     success: function(response) {
                         if (response) {
                             
-                            $('#jobIdInput').val(id); // Set the job ID in the hidden input field
+                            $('#jobIdInput').val(id); 
 
                             $('#job_title').text(response.job_title);
                             $('#job_overview').text(
@@ -25,6 +27,7 @@
                             $('#job_description').html(response.job_description);
                             $('#job_location').text(response.job_location);
                             $('#job_type').text(response.job_type);
+                            $('#skill_required').text(response.skills_required && response.skills_required.length > 0 ? response.skills_required : 'No skills required.');
 
                             const options = {
                                 year: 'numeric',
