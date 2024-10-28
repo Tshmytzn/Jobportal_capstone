@@ -199,7 +199,7 @@ class AgencyController extends Controller
 
             return response()->json(['data' => $jobs, 'status' => 'success']);
         } else if ($request->process == 'update') {
-            if ($request->job_title == '' || $request->job_category == '' || $request->job_location == '' || $request->job_type == '' || $request->job_details == '' || $request->job_image == '') {
+            if ($request->job_title == '' || $request->job_category == '' || $request->job_location == '' || $request->job_type == '' || $request->input('skills') == '' || $request->job_details == '' || $request->job_image == '') {
                 return response()->json(['message' => 'Please fill in all required  fields.', 'status' => 'error']);
             }
             $job = JobDetails::where('id', $request->id)->first();
@@ -228,6 +228,7 @@ class AgencyController extends Controller
                 'job_category' => $request->job_category,
                 'job_location' => $request->job_location,
                 'job_type' => $request->job_type,
+                'skills_required' => implode(',', $request->input('skills')),
                 'job_description' => $request->job_details,
                 'job_image' => $imageNameWithExtension,
             ]);

@@ -120,6 +120,7 @@
                             <img src="{{ asset('img/unDraw_select-option_w7yy45h.svg') }}"
                                 style="height: 250px; width: auto;" alt="">
                                 </div>`;
+                    console.log(response.data)
                     response.data.forEach(function(item, index) {
                         var maxLength = 15; // Set the desired maximum length for the description
 
@@ -129,14 +130,15 @@
                             item.job_description;
 
                         var cardHtml = `
-                        <div class="list-group-item list-group-item-action custom-hover" onclick="display('get','${item.id}','${item.job_title}','${item.job_description}','${item.job_location}','${item.job_type}','${item.name}','${item.category_id}')">
+                        <div class="list-group-item list-group-item-action custom-hover" onclick="display('get','${item.id}','${item.job_title}','${item.job_description}','${item.job_location}','${item.job_type}','${item.name}','${item.category_id}','${item.skills_required}')">
                                 <div class="row align-items-center">
                                     <!-- Image Column -->
                                     <div class="col-4">
-                                            <span class="avatar" style=" width: 100%;">
-                                                <img src="{{ asset('agencyfiles/job_image/${item.job_image}') }}" alt="">
-                                            </span>
+                                        <span class="avatar" style="width: 100%; height: 80px; overflow: hidden;">
+                                            <img src="{{ asset('agencyfiles/job_image/${item.job_image}') }}" alt="" style="width: 100%; height: auto; object-fit: cover;">
+                                        </span>
                                     </div>
+
                                     <!-- Job Details Column -->
                                     <div class="col-8">
                                          <h5 class="card-title">${item.job_title}</h5>
@@ -160,32 +162,49 @@
         });
     }
 
-    function display(process, id, title, description, location, type, cat_name, cat_id) {
+    function display(process, id, title, description, location, type, cat_name, cat_id, skill) {
         var cardsContainer = document.getElementById('job_detail');
         if (process == 'get') {
+            let data = skill;
+            let uniqueDataArray = [...new Set(data.split(","))];
+            let formattedData = uniqueDataArray.join("<br>");
             cardsContainer.innerHTML = `
              <div class="row">
-                <div class="col text-start">
-                <button class="btn btn-secondary btn-sm" type="button" onclick="display('edit','${id}','${title}','${description}','${location}','${type}','${cat_name}','${cat_id}')">Update</button>
-              </div>
-              <div class="col text-end">
-                <button class="btn btn-primary btn-sm" type="button" onclick="deletejobdetails('${id}')">Delete</button>
-              </div>
-            </div>
-            <br>
-            <div class="row mb-3">
-            <div class="col-md-6">
-                <h5 class="card-title">${title}</h5>
-                <p class="card-text">${description}</p>
-            </div>
-            <div class="col-md-6">
-                <h5 class="card-title">Key Details</h5>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><strong>Location: </strong>${location}</li>
-                    <li class="list-group-item"><strong>Category: </strong>${cat_name}</li>
-                    <li class="list-group-item"><strong>Job Type: </strong>${type}</li>
-                </ul>
-            </div>
+                <div class="card mb-4 border-light shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h3 class="card-title">${title}</h3>
+                            <div>
+                                <button class="btn btn-sm text-white" style="background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%);" type="button" onclick="display('edit','${id}','${title}','${description}','${location}','${type}','${cat_name}','${cat_id}','${skill}')">Update</button>
+                                <button class="btn btn-sm btn-danger" type="button" onclick="deletejobdetails('${id}')">Delete</button>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <p class="text-muted">${description}</p>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <h6 class="text-primary">Job Details</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item p-1"><strong>Location:</strong> ${location}</li>
+                                    <li class="list-group-item p-1"><strong>Category:</strong> ${cat_name}</li>
+                                    <li class="list-group-item p-1"><strong>Job Type:</strong> ${type}</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-primary">Required Skills</h6>
+                                <ul class="list-inline">
+                    ${formattedData == 'null' || formattedData.trim() === '' ? 'No skills available.' : formattedData}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         `;
         } else if (process == 'edit') {
@@ -227,9 +246,30 @@
                             </div>
                             </div>
                             <div class="row">
-                            <div class="col-12 form-group">
-                                <input type="file" class="form-control" name="job_image" id="" placeholder="Image.....">
-                            </div>
+                                <div class="col-6 form-group">
+                                    <h6>Job Image</h6>
+                                    <input type="file" class="form-control" name="job_image" id="job_image"
+                                        placeholder="Image.....">
+                                </div>
+
+                                <div class="col-6 form-group">
+                                    <h6>Required Skills</h6>
+                                
+                                    @php
+                                        $pesoSkill = \App\Models\JobseekerSkill::all();
+                                    @endphp
+                                
+                                    <div id="skill_req">
+                                        @foreach ($pesoSkill as $skill)
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="skills[]" id="skill_{{ $skill->id }}" value="{{ $skill->skill_name }}">
+                                                <label class="form-check-label" for="skill_{{ $skill->id }}">
+                                                    {{ $skill->skill_name }}
+                                                </label>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
                             </div>
                             <div class="container mb-2">
                             <h6>Description:</h6>
