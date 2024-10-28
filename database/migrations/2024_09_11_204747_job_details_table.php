@@ -28,8 +28,8 @@ return new class extends Migration
             // Skilled Trades Jobs
             [
                 'job_title' => 'Electrician',
-                'category_id' => 1, // Assuming 1 is the ID for 'Skilled Trades'
-                'agency_id' => 1, // Replace with actual agency ID
+                'category_id' => 1, 
+                'agency_id' => 2,
                 'job_image' => 'default.jpg',
                 'job_location' => 'Bacolod',
                 'job_type' => 'Full Time',
@@ -40,7 +40,7 @@ return new class extends Migration
             [
                 'job_title' => 'Plumber',
                 'category_id' => 1,
-                'agency_id' => 1,
+                'agency_id' => 2,
                 'job_image' => 'default.jpg',
                 'job_location' => 'Victorias',
                 'job_type' => 'Part Time',
@@ -75,7 +75,7 @@ return new class extends Migration
             [
                 'job_title' => 'Machine Operator',
                 'category_id' => 3,
-                'agency_id' => 3,
+                'agency_id' => 2,
                 'job_image' => 'default.jpg',
                 'job_location' => 'Talisay',
                 'job_type' => 'Full Time',
@@ -86,7 +86,7 @@ return new class extends Migration
             [
                 'job_title' => 'Assembly Line Worker',
                 'category_id' => 3,
-                'agency_id' => 3,
+                'agency_id' => 2,
                 'job_image' => 'default.jpg',
                 'job_location' => 'Talisay',
                 'job_type' => 'Part Time',
@@ -98,7 +98,7 @@ return new class extends Migration
             [
                 'job_title' => 'Truck Driver',
                 'category_id' => 4,
-                'agency_id' => 3,
+                'agency_id' => 2,
                 'job_image' => 'default.jpg',
                 'job_location' => 'Talisay',
                 'job_type' => 'Part Time',
