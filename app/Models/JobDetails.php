@@ -18,6 +18,7 @@ class JobDetails extends Model
         'job_image',
         'job_location',
         'job_type',
+        'skills_required',
         'job_description',
     ];
 

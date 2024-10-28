@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('job_details', function (Blueprint $table) {
             $table->id();
             $table->string('job_title')->nullable();
-            $table->integer('category_id')->nullable(); // foreign key to job_categories
-            $table->integer('agency_id')->nullable(); // foreign key to agencies
+            $table->integer('category_id')->nullable();
+            $table->integer('agency_id')->nullable(); 
             $table->string('job_image')->nullable();
             $table->string('job_location')->nullable();
-            $table->string('job_type')->nullable(); // e.g. full-time, part-time
+            $table->string('job_type')->nullable();
+            $table->string('skills_required')->nullable();
             $table->longText('job_description')->nullable();
             $table->timestamps();
         });
@@ -33,6 +34,7 @@ return new class extends Migration
                 'job_image' => 'default.jpg',
                 'job_location' => 'Bacolod',
                 'job_type' => 'Full Time',
+                'skills_required' => null,
                 'job_description' => 'Install, maintain, and repair electrical systems and components.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -44,6 +46,7 @@ return new class extends Migration
                 'job_image' => 'default.jpg',
                 'job_location' => 'Victorias',
                 'job_type' => 'Part Time',
+                'skills_required' => null,
                 'job_description' => 'Install and repair piping systems, fixtures, and plumbing systems.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -56,6 +59,7 @@ return new class extends Migration
                 'job_image' => 'default.jpg',
                 'job_location' => 'Bacolod',
                 'job_type' => 'Full Time',
+                'skills_required' => null,
                 'job_description' => 'Perform various tasks at construction sites such as material handling and site clean-up.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -67,6 +71,7 @@ return new class extends Migration
                 'job_image' => 'default.jpg',
                 'job_location' => 'Bacolod',
                 'job_type' => 'Full Time',
+                'skills_required' => null,
                 'job_description' => 'Oversee daily operations at construction sites and ensure safety protocols are followed.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -79,6 +84,7 @@ return new class extends Migration
                 'job_image' => 'default.jpg',
                 'job_location' => 'Talisay',
                 'job_type' => 'Full Time',
+                'skills_required' => null,
                 'job_description' => 'Operate and maintain production machinery on the assembly line.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -90,6 +96,7 @@ return new class extends Migration
                 'job_image' => 'default.jpg',
                 'job_location' => 'Talisay',
                 'job_type' => 'Part Time',
+                'skills_required' => null,
                 'job_description' => 'Perform tasks on the assembly line for manufacturing products.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -102,6 +109,7 @@ return new class extends Migration
                 'job_image' => 'default.jpg',
                 'job_location' => 'Talisay',
                 'job_type' => 'Part Time',
+                'skills_required' => null,
                 'job_description' => 'Drive trucks to transport goods across locations, ensuring timely delivery.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -113,6 +121,7 @@ return new class extends Migration
                 'job_image' => 'default.jpg',
                 'job_location' => 'Victorias',
                 'job_type' => 'Part Time',
+                'skills_required' => null,
                 'job_description' => 'Oversee warehouse operations, including inventory management and logistics.',
                 'created_at' => now(),
                 'updated_at' => now(),

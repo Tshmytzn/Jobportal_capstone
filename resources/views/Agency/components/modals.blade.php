@@ -42,7 +42,8 @@
 
             <div class="modal-body text-center">
                 <div class="avatar avatar-xl mx-auto mb-3">
-                    <img src="{{asset('agency_profile/'.$agencyData->agency_image)}}"alt="profile_image" class="w-100 border-radius-md shadow-sm">
+                    <img src="{{ asset('agency_profile/' . $agencyData->agency_image) }}"alt="profile_image"
+                        class="w-100 border-radius-md shadow-sm">
 
                 </div>
 
@@ -119,13 +120,35 @@
                                     <option value="Part Time">Part Time</option>
                                 </select>
                             </div>
-
                         </div>
                         <div class="row">
-                            <div class="col-12 form-group">
+                            <div class="col-6 form-group">
+                                <h6>Job Image</h6>
                                 <input type="file" class="form-control" name="job_image" id="job_image"
                                     placeholder="Image.....">
                             </div>
+
+                            <div class="col-6 form-group">
+                                <h6>Required Skills</h6>
+                            
+                                @php
+                                    $pesoSkill = \App\Models\JobseekerSkill::all();
+                                @endphp
+                            
+                                <div id="skill_req">
+                                    @foreach ($pesoSkill as $skill)
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="skills[]" id="skill_{{ $skill->id }}" value="{{ $skill->skill_name }}">
+                                            <label class="form-check-label" for="skill_{{ $skill->id }}">
+                                                {{ $skill->skill_name }}
+                                            </label>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                            
+
+
                         </div>
                         <div class="container mb-2">
                             <h6>Description:</h6>
@@ -137,7 +160,8 @@
                 </div>
             </form>
             <div class="modal-footer">
-                <button type="button" class="btn text-white" onclick="submit('jobDetailsForm',`{{ route('Agency') }}`)"
+                <button type="button" class="btn text-white"
+                    onclick="submit('jobDetailsForm',`{{ route('Agency') }}`)"
                     style="background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%);">Save
                     changes</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

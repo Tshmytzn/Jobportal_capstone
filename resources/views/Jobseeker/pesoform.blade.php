@@ -203,24 +203,22 @@
                         </div>
 
                         @php
-                        $pesoSkill = \App\Models\JobseekerSkill::all();
-                    @endphp
-                    
-                    <div class="input-field">
-                        <label for="skills">Skills</label>
-                        <select class="form-control" id="skills" name="skills[]" multiple required>
-                            <option value="" disabled>Select your skills</option>
-                            
-                            @foreach($pesoSkill as $skill)
-                                <option value="{{ $skill->skill_name }}">{{ $skill->skill_name }}</option>
-                            @endforeach
-                        </select>
-                        
-                        <input type="text" id="selectedSkill" name="selectedSkill" hidden>
-                        <div id="selected-skills" style="margin-top: 10px;"></div>
-                    </div>
-                    
+                            $pesoSkill = \App\Models\JobseekerSkill::all();
+                        @endphp
 
+                        <div class="input-field">
+                            <label for="skills">Skills</label>
+                            <select class="form-control" id="skills" name="skills[]" multiple required>
+                                <option value="" disabled>Select your skills</option>
+
+                                @foreach ($pesoSkill as $skill)
+                                    <option value="{{ $skill->skill_name }}">{{ $skill->skill_name }}</option>
+                                @endforeach
+                            </select>
+
+                            <input type="text" id="selectedSkill" name="selectedSkill" hidden>
+                            <div id="selected-skills" style="margin-top: 10px;"></div>
+                        </div>
 
                         <div class="input-field">
                             <label>Work Experience</label>
