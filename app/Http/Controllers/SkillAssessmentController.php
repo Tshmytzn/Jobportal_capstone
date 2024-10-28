@@ -81,9 +81,102 @@ class SkillAssessmentController extends Controller
 
             if ($assessment) {
                 $assessment->delete();
-                return response()->json(['message' => 'Assessment deleted successfully.'], Response::HTTP_OK);
+                return response()->json(['message' => 'Assessment deleted successfully.']);
             } else {
-                return response()->json(['message' => 'Assessment not found.'], Response::HTTP_NOT_FOUND);
+                return response()->json(['error' => 'Assessment not found.'], 404);
             }
         }
+
+            // Method to fetch a single assessment by ID
+            public function show($id)
+            {
+                try {
+                    $assessment = Assessment::with(['sections.questions.options'])->findOrFail($id);
+            
+                    return response()->json([
+                        'id' => $assessment->id,
+                        'title' => $assessment->title,
+                        'description' => $assessment->description,
+                        'createdAt' => $assessment->created_at,
+                        'sections' => $assessment->sections->map(function ($section) {
+                            return [
+                                'id' => $section->id,
+                                'title' => $section->title,
+                                'description' => $section->description,
+                                'questions' => $section->questions->map(function ($question) {
+                                    return [
+                                        'id' => $question->id,
+                                        'question_text' => $question->question_text,
+                                        'question_type' => $question->question_type,
+                                        'options' => $question->options->map(function ($option) {
+                                            return [
+                                                'id' => $option->id,
+                                                'option_text' => $option->option_text,
+                                            ];
+                                        }),
+                                    ];
+                                }),
+                            ];
+                        }),
+                    ]);
+                } catch (\Exception $e) {
+                    return response()->json(['error' => 'Assessment not found'], 404);
+                }
+            }
+            
+    // public function update(Request $request, $id)
+    // {
+    //     $validated = $request->validate([
+    //         'title' => 'required|string|max:255',
+    //         'description' => 'nullable|string',
+    //     ]);
+
+    //     try {
+    //         $assessment = Assessment::findOrFail($id);
+    //         $assessment->update([
+    //             'title' => $validated['title'],
+    //             'description' => $validated['description'],
+    //         ]);
+
+    //         return response()->json([
+    //             'success' => true,
+    //             'message' => 'Assessment updated successfully!',
+    //         ], 200);
+    //     } catch (\Exception $e) {
+    //         return response()->json(['error' => 'Could not update assessment'], 500);
+    //     }
+    // }
+
+    public function saveAssessment(Request $request)
+    {
+        // Validate incoming data
+        $request->validate([
+            'selectedAnswers' => 'required|string', 
+            'assessmentId' => 'required|integer|exists:assessments,id', 
+            'title' => 'required|string|max:255', 
+            'description' => 'nullable|string', 
+        ]);
+
+        // Decode JSON string of selected answers
+        $selectedAnswers = json_decode($request->input('selectedAnswers'), true);
+
+        // Process each answer
+        foreach ($selectedAnswers as $questionId => $optionId) {
+            // Find the question by ID
+            $question = Question::find($questionId);
+
+            if ($question) {
+
+                $question->answer = $optionId; 
+                $question->save();
+            }
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Assessment answers saved successfully!',
+        ], 200);
+    }
+
+        
     }

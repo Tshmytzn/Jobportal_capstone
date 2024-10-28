@@ -13,6 +13,7 @@ class Question extends Model
         'section_id',
         'question_text',
         'question_type',
+        'answer',
     ];
 
     public function section()

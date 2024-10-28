@@ -39,6 +39,14 @@ Route::get('/viewassessments', [SkillAssessmentController::class, 'fetchAssessme
 //delete general skill assessments
 Route::delete('/api/assessments/{id}', [SkillAssessmentController::class, 'destroy'])->name('assessments.destroy');
 
+// Route to fetch a single assessment by ID
+Route::get('/showassessments/{id}', [SkillAssessmentController::class, 'show']);
+
+// Route to update an assessment by ID
+// Route::put('/updateassessments/{id}', [SkillAssessmentController::class, 'update']);
+
+// Route to set answers
+Route::post('/saveAssessment', [SkillAssessmentController::class, 'saveAssessment'])->name('saveAssessment');
 
 //dashboard chart
 Route::get('/api/registrations', [AdminChartsController::class, 'getMonthlyRegistrations']);
@@ -94,6 +102,7 @@ Route::delete('/Job/Categories/{id}', [AdminCRUDController::class, 'deleteJobCat
 
 //Administrator post controller routes
 Route::post('/Admin/Create', [AdminController::class, 'createAdmin'])->name('createAdmin');
+
 });
 
 //Admin Login and Logouts

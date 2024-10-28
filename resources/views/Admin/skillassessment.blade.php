@@ -43,7 +43,7 @@
         <!-- End Navbar -->
 
         {{-- cards --}}
-        <div class="container-fluid py-0 m-2">
+        <div class="container-fluid py-0 mb-2 mt-2">
 
             <div class="row">
                 <div class="container">
@@ -53,9 +53,9 @@
                         New Assessment</button>
                     <button class="btn btn-secondary" id="exportAssessmentsBtn">Export Assessments</button>
 
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <input type="text" id="searchInput" class="form-control" placeholder="Search assessments...">
-                    </div>
+                    </div> --}}
 
                     <table id="assessmentsTable" class="table table-striped">
                         <thead>
@@ -100,6 +100,7 @@
     @include('Admin.components.scripts')
     @include('Admin.components.modals.skillassessmentmodals')
     @include('Admin.components.skillassessmentscripts')
+    @include('Admin.components.skillassessmentscrudscripts')
 
 </body>
 
