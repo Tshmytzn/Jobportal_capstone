@@ -203,6 +203,10 @@ Route::get('/PESORegistrationFormUpdate', function () { return view('Jobseeker.p
 
 Route::get('/AgencyFeedback', function () { return view('Jobseeker.agencyfeedback'); })->name('agencyfeedback');
 Route::get('/ContactUs', function () { return view('Jobseeker.contactus'); })->name('contactus');
+
+//skill assessment
+Route::get('/SkillAssessment', function () { return view('Jobseeker.skillassessment'); })->name('skillassessment');
+
 Route::get('/404', function () { return view('Jobseeker.404'); })->name('404');
 Route::get('/Profile', function () { return view('Jobseeker.profile'); })->name('profile');
 Route::get('/FAQS', function () { return view('Jobseeker.faqs'); })->name('faqs');
