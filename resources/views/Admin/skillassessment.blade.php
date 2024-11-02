@@ -51,7 +51,7 @@
                         style="background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%);"
                         data-bs-toggle="modal" data-bs-target="#createskillassessment" id="createAssessmentBtn">Create
                         New Assessment</button>
-                    <button class="btn btn-secondary" id="exportAssessmentsBtn">Export Assessments</button>
+                    {{-- <button class="btn btn-secondary" id="exportAssessmentsBtn">Export Assessments</button> --}}
 
                     {{-- <div class="mb-3">
                         <input type="text" id="searchInput" class="form-control" placeholder="Search assessments...">
@@ -94,7 +94,7 @@
                     </div>
                 </div>
             </div> --}}
-            
+
             @include('Admin.components.footer')
         </div>
     </main>

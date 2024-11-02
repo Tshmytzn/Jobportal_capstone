@@ -1,12 +1,37 @@
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- DataTables JavaScript -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<!-- Buttons extension -->
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/dataTables.buttons.min.js"></script>
+<!-- Print button script -->
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+<!-- Other export buttons (optional) -->
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+
+<!-- JSZip for Excel export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+<!-- pdfmake for PDF export -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+<!-- Buttons for HTML5 exports (Excel, PDF) -->
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.print.min.js"></script>
+
 <script>
     $(document).ready(function() {
-        // Initialize DataTable and configure it to use AJAX
+
         const table = $('#assessmentsTable').DataTable({
             ajax: {
-                url: '/viewassessments', // This endpoint should return the JSON data for assessments
-                dataSrc: '', // Set to '' if the data is a direct array
+                url: '/viewassessments',
+                dataSrc: '',
+                processing: false,
+                serverSide: false,
+                destroy: true,
                 error: function(xhr, error, code) {
-                    // Show error alert if data fetching fails
+
                     Swal.fire({
                         icon: 'error',
                         title: 'Error!',
@@ -45,6 +70,32 @@
                         <button class="btn text-white btn-sm" style="            background: linear-gradient(90deg,rgb(206, 150, 150) 0%,rgb(207, 74, 74) 50%,rgba(139, 0, 0, 1) 100%);
 " onclick="deleteAssessment(${id})">Delete</button>
                     `;
+                    }
+                }
+            ],
+            dom: 'Bfrtip',
+            buttons: [
+                'colvis',
+
+                {
+                    extend: 'copy'
+                },
+                {
+                    extend: 'csv'
+                },
+                {
+                    extend: 'excel'
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':visible'
                     }
                 }
             ]
