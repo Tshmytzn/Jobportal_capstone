@@ -23,5 +23,6 @@ class JobseekerApplication extends Model
         'applicant_phone',
         'cover_letter',
         'resume_file',
+        'js_status',
     ];
 }

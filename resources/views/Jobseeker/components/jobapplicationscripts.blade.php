@@ -33,7 +33,7 @@
 </script>
 
 
-  <script>
+<script>
     function SubmitJobApplication() {
         var formElement = document.getElementById('jobApplicationForm');
         var formData = new FormData(formElement);
@@ -63,23 +63,43 @@
             error: function(xhr) {
                 document.getElementById('loading').style.display = 'none';
 
-                console.error('AJAX Error:', xhr.status, xhr.statusText);
-                console.error('Response Text:', xhr.responseText);
+                if (xhr.status === 422) { // Validation error
+                    let errors = xhr.responseJSON.errors;
+                    let message = xhr.responseJSON.message;
 
-                let errorMessage = 'Oops! Something went wrong while processing your request. Please try again later.';
-                try {
-                    const jsonResponse = JSON.parse(xhr.responseText);
-                    errorMessage = jsonResponse.message || errorMessage;
-                } catch (e) {
-                    console.error('Error parsing JSON:', e);
+                    if (message === 'Please fill in all required fields.') {
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Incomplete Submission',
+                            text: message,
+                        });
+                    } else {
+                        // Display individual validation errors in a list using Swal2
+                        let errorMessages = '<ul>';
+                        $.each(errors, function(key, value) {
+                            errorMessages += `<li>${value[0]}</li>`;
+                        });
+                        errorMessages += '</ul>';
+
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Validation Errors',
+                            html: errorMessages, // Render HTML for the list of errors
+                        });
+                    }
+                } else if (xhr.status === 409) { // Application already exists
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'Duplicate Application',
+                        text: xhr.responseJSON.message,
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops!',
+                        text: 'An error occurred. Please try again.',
+                    });
                 }
-
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: errorMessage,
-                    confirmButtonText: 'OK'
-                });
             }
         });
     }

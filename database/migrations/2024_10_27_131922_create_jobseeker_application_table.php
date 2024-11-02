@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('applicant_phone', 15);
             $table->longtext('cover_letter');
             $table->string('resume_file', 255)->nullable();
+            $table->string('js_status', 50)->nullable();
             $table->timestamps();
         });
     }

@@ -13,26 +13,43 @@ class JobApplicationController extends Controller
     public function submitApplication(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'userIdInput' => 'required|integer',
-            'jobId' => 'required|integer',
+            'userIdInput' => 'nullable|integer',
+            'jobId' => 'nullable|integer',
             'peso_form_id' => 'nullable|integer',
             'skillIdInput' => 'nullable|integer',
-            'applicantName' => 'required|string|max:100',
-            'applicantEmail' => 'required|email|max:100',
-            'applicantPhone' => 'required|string|max:13',
-            'coverLetter' => 'required|string',
+            'applicantName' => 'nullable|string|max:100',
+            'applicantEmail' => 'nullable|email|max:100',
+            'applicantPhone' => 'nullable|string|max:13',
+            'coverLetter' => 'nullable|string',
             'resume_file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Validation errors',
-                'errors' => $validator->errors(),
-            ], 422);
+    // Custom validation for either 'peso_form_id' or 'resume_file'
+    $validator->after(function ($validator) use ($request) {
+        if (empty($request->peso_form_id) && !$request->hasFile('resume_file')) {
+            $validator->errors()->add('peso_form_or_resume', 'To complete your application, please upload your resume or provide your PESO form ID.');
         }
+    });
 
-            // Check if the user has already submitted an application for this job
-            $existingApplication = JobseekerApplication::where('js_id', $request->userIdInput)
+    // Check if validation failed
+    if ($validator->fails()) {
+        return response()->json([
+            'message' => 'Validation errors',
+            'errors' => $validator->errors(),
+        ], 422);
+    }
+
+
+            // Ensure that either peso_form_id or resume_file is provided
+            if (empty($request->peso_form_id) && !$request->hasFile('resume_file')) {
+                return response()->json([
+                    'message' => 'To complete your application, please upload your resume or provide your PESO form ID.',
+                ], 422);
+            }
+
+
+        // Check if the user has already submitted an application for this job
+        $existingApplication = JobseekerApplication::where('js_id', $request->userIdInput)
             ->where('job_id', $request->jobId)
             ->first();
 
@@ -60,8 +77,10 @@ class JobApplicationController extends Controller
             'applicant_phone' => $request->applicantPhone,
             'cover_letter' => $request->coverLetter,
             'resume_file' => $resumePath,
+            'js_status' => 'pending',
         ]);
 
         return response()->json(['success' => 'Job application submitted successfully!']);
     }
+
 }
