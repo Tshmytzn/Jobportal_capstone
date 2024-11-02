@@ -18,7 +18,7 @@ class CreateSkillAssessmentTables extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->timestamps(); // This will create created_at and updated_at columns
+            $table->timestamps();
         });
 
         // Create sections table
@@ -36,6 +36,7 @@ class CreateSkillAssessmentTables extends Migration
             $table->foreignId('section_id')->constrained()->onDelete('cascade');
             $table->text('question_text');
             $table->enum('question_type', ['text', 'radio', 'checkbox']);
+            $table->text('answer')->nullable();
             $table->timestamps();
         });
 
