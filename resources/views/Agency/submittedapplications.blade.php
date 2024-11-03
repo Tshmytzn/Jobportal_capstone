@@ -65,7 +65,7 @@
                             <div class="text-center mt-4">
                                 <a href="{{ asset('application_resume/' . $application->js_resume) }}" target="_blank"
                                     class="btn btn-primary btn-md">
-                                    View Resume
+                                    Review
                                 </a>
                             </div>
                         </div>

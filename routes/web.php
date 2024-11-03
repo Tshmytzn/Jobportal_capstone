@@ -153,6 +153,9 @@ Route::get('/', [JobseekerController::class, 'index'])->name('homepage');
 Route::get('/Jobs', [JobseekerController::class, 'jobs'])->name('jobs');
 Route::get('/AgencyReview', function () { return view('Jobseeker.accountReview');})->name('accountReview');
 
+//jobseeker feedback
+Route::get('/Feedback', function () { return view('Agency.Agencyfeedback'); })->name('Agencyfeedback');
+
 Route::get('/About', function () { return view('Jobseeker.about'); })->name('about');
 Route::get('/SignUp', function () { return view('Jobseeker.signup'); })->name('signup');
 Route::get('/AgencySignUp', function () { return view('Jobseeker.agencysignup'); })->name('agencysignup');
