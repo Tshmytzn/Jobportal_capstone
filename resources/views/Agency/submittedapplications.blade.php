@@ -17,35 +17,60 @@
         <!-- End Navbar -->
 
         {{-- cards --}}
-        <div class="container-fluid py-4">
+        <div class="container-fluid py-0">
             <div class="row mb-5 ms-5 me-5">
-                
-                <div class="card" style="width: 18rem; height: auto; padding: 10px; margin: 10px;">
-                    <img src="{{ asset('admin_profile/default.jpg') }}" class="card-img-top mx-auto" alt="Job Seeker"
-                        style="height:8rem; width:8rem; margin-bottom: 10px;">
-                    <div class="card-body">
-                        <h5 class="card-title text-center"
-                            style="font-size: 1.5rem; background: linear-gradient(to right, purple, #8A2BE2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                            John Doe
-                        </h5>
-                        <hr class="mt-3 mb-3"
-                            style="border: none; height: 2px; background-image: linear-gradient(to right, rgb(128, 0, 0), #7a0000);">
-                        <p class="card-text" style="font-size: 0.9rem;"><strong>Position:</strong> Electrician </p>
-                        <p class="card-text" style="font-size: 0.9rem;"><strong>Application Date:</strong> 2024-10-20
-                        </p>
-                        <p class="card-text" style="font-size: 0.9rem;">
-                            <strong>Status:</strong>
-                            <span style="color: orange; font-weight: bold;">
-                                <i class="fas fa-hourglass-half ms-2" style="margin-right: 5px;"></i>
-                                Under Review
-                            </span>
-                        </p>
-                        <p class="card-text" style="font-size: 0.9rem;"><strong>Email:</strong> johndoe@example.com</p>
-                        <div class="text-center mt-4">
-                            <a href="#" class="btn btn-primary btn-md">View Resume</a>
+
+                @php
+                    // Fetch all applications
+                    $applications = \App\Models\JobseekerApplication::all();
+                @endphp
+
+                @foreach ($applications as $application)
+                    @php
+                        $job = \App\Models\JobDetails::where('id', $application->job_id)->first();
+                        $jobName = $job->job_title ?? 'No job name found';
+                    @endphp
+
+                    <div class="card m-2" style="width: 15rem; height: auto; ">
+                        <img src="{{ asset('admin_profile/default.jpg') }}" class="card-img-top mx-auto mt-2"
+                            alt="Job Seeker" style="height:5rem; width:5rem;">
+                        <div class="card-body">
+                            <h5 class="card-title text-center"
+                                style="font-size: 1rem; background: linear-gradient(to right, purple, #8A2BE2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                                {{ $application->applicant_name }}
+                            </h5>
+                            <hr class="mt-3 mb-3"
+                                style="border: none; height: 2px; background-image: linear-gradient(to right, rgb(128, 0, 0), #7a0000);">
+                            <p class="card-text" style="font-size: 0.7rem;"><strong>Position:</strong>
+                                {{ $jobName }}</p>
+                            <p class="card-text" style="font-size: 0.7rem;"><strong>Application Date:</strong>
+                                {{ $application->created_at->format('Y-m-d') }}
+                            </p>
+                            <p class="card-text" style="font-size: 0.7rem;">
+                                <strong>Status:</strong>
+                                <span
+                                    style="color:
+                                    @if ($application->js_status === 'pending') orange
+                                    @elseif($application->js_status === 'Approved') green
+                                    @elseif($application->js_status === 'Rejected') red
+                                    @else gray @endif; font-weight: bold;">
+                                    <i class="fas fa-hourglass-half ms-2" style="margin-right: 5px;"></i>
+                                    {{ $application->js_status ?? 'No Status' }}
+                                </span>
+                            </p>
+
+                            <p class="card-text" style="font-size: 0.7rem;"><strong>Email:</strong>
+                                {{ $application->applicant_email }}
+                            </p>
+                            <div class="text-center mt-4">
+                                <a href="{{ asset('application_resume/' . $application->js_resume) }}" target="_blank"
+                                    class="btn btn-primary btn-md">
+                                    View Resume
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
 
 
 
