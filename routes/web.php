@@ -11,6 +11,7 @@ use App\Http\Controllers\AdminChartsController;
 use App\Http\Controllers\JobseekerPesoController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\SkillAssessmentController;
+use App\Http\Controllers\AssessmentResultsController;
 
 
 // Admin Protected Routes
@@ -206,6 +207,9 @@ Route::get('/ContactUs', function () { return view('Jobseeker.contactus'); })->n
 
 //skill assessment
 Route::get('/SkillAssessment', function () { return view('Jobseeker.skillassessment'); })->name('skillassessment');
+
+//answer submission
+Route::post('/assessment/submit', [AssessmentResultsController::class, 'submitAssessment'])->name('assessment.submit');
 
 Route::get('/404', function () { return view('Jobseeker.404'); })->name('404');
 Route::get('/Profile', function () { return view('Jobseeker.profile'); })->name('profile');

@@ -27,14 +27,13 @@
 
         @php
         $skillassessment = \App\Models\Assessment::with('sections.questions.options')->first();
-        $title = $skillassessment->title; // Access the 'title' column
-        $desc = $skillassessment->description; // Access the 'description' column
-        @endphp
+    @endphp
 
+    @if ($skillassessment)
         <div class="container text-center py-1" style="max-width: 900px;">
-            <h3 class="h1 mb-1 wow fadeInDown" data-wow-delay="0.1s">{{ $title }}</h3>
+            <h3 class="h1 mb-1 wow fadeInDown" data-wow-delay="0.1s">{{ $skillassessment->title }}</h3>
             <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
-                <li class="breadcrumb-item"><a href="{{ route('homepage') }}">{{ $desc }}</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('homepage') }}">{{ $skillassessment->description }}</a></li>
             </ol>
         </div>
 
@@ -62,9 +61,38 @@
                 </div>
             @endforeach
 
-            <button class="btn bgp-gradient"> Submit Assessment </button>
+            <button id="submitAssessment" class="btn bgp-gradient">Submit Assessment</button>
         </div>
+    @else
+        <div class="container text-center my-5">
+            <h5>No assessment available at this time.</h5>
+            <p>Please check back later or contact support for assistance.</p>
+        </div>
+    @endif
 
+
+<script>
+    document.getElementById('submitAssessment').addEventListener('click', function () {
+        let formData = new FormData(document.getElementById('assessmentForm'));
+
+        fetch('{{ route("assessment.submit") }}', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert('Assessment submitted successfully!');
+            } else {
+                alert('There was an error submitting your assessment.');
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    });
+    </script>
 
 
 
