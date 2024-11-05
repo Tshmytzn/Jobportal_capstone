@@ -26,6 +26,8 @@ return new class extends Migration
             $table->string('js_resume', 100)->nullable();
             $table->string('js_contactnumber', 15); // Contact number with length constraint
             $table->string('js_password', 255); // Password (hashed)
+            $table->string('js_accstatus', 255)->nullable();
+
 
             // Timestamps
             $table->timestamps(); // Automatically adds created_at and updated_at fields
