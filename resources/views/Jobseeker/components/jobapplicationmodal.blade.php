@@ -56,10 +56,13 @@
                         <div class="border p-2 form-control">
                             @if ($userId)
                                 @if ($jobseekerdata && $jobseekerdata->js_resume)
-                                    <a href="{{ asset('path/to/resumes/' . $jobseekerdata->js_resume) }}"
+                                    <a href="{{ asset('jobseeker_resume/' . $jobseekerdata->js_resume) }}"
                                         target="_blank" class="text-decoration-none">
                                         {{ $jobseekerdata->js_resume }}
                                     </a>
+                                    <script>
+                                        let jsResume = @json($jobseekerdata->js_resume);
+                                    </script>
                                 @else
                                     <small class="text-danger">No resume uploaded</small>
                                 @endif
@@ -68,6 +71,8 @@
                             @endif
                         </div>
                     </div>
+
+                    
                     @php
                         // Check if the user has submitted the PESO form
                         $pesoForm = $userId ? \App\Models\JobseekerPesoForm::where('js_id', $userId)->first() : null;

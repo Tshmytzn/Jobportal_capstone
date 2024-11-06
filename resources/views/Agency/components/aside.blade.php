@@ -5,8 +5,11 @@
             aria-hidden="true" id="iconSidenav"></i>
         <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html "
             target="_blank">
-            <img src="{{ asset('../assets/img/PESOLOGO.png') }}" class="navbar-brand-img h-100" alt="main_logo">
-            <span class="ms-1 font-weight-bold">AGENCY ADMIN</span>
+            @php
+            $agencyData = App\Models\Agency::where('id', session('agency_id'))->first();
+        @endphp
+            <img src="{{ asset('agency_profile/' . $agencyData->agency_image) }}" class="navbar-brand-img h-100" alt="main_logo">
+            <span class="ms-1 font-weight-bold">{{ session('agency_name') }}</span>
         </a>
     </div>
     <hr class="horizontal dark mt-0">
@@ -66,7 +69,7 @@
                             </g>
                         </svg>
                     </div>
-                    <span class="nav-link-text ms-1">Skills Requirement</span>
+                    <span class="nav-link-text ms-1">Skills Assessment</span>
                 </a>
             </li>
             <li class="nav-item">

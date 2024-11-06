@@ -47,7 +47,7 @@
 
                 </div>
 
-                <h6 class="mb-2">{{ session('user_name') }}</h6>
+                <h6 class="mb-2">{{ session('agency_name') }}</h6>
                 <a href="{{ route('agencysettings') }}"> <button
                         class="btn bg-gradient-primary text-white w-100 mb-2">Settings</button></a>
                 <form action="{{ route('logoutAgency') }}" method="POST" id="logoutForm">
@@ -73,7 +73,7 @@
             </div>
             <form action="" id="jobDetailsForm" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="modal-body">
+                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
 
                     <div class="card-body m-2">
 
@@ -84,12 +84,12 @@
                                 <h6>Job Title</h6>
                                 <input type="text" name="process" id="" value="add" hidden>
                                 <input type="text" class="form-control" name="job_title" id="job_title"
-                                    placeholder="Construction.....">
+                                    placeholder="Enter Job Title">
                             </div>
                             <div class="col-6 form-group">
                                 <h6>Job Location</h6>
                                 <select class="form-control" name="job_location" id="job_location">
-                                    <option value="" disabled selected>Select a location...</option>
+                                    <option value="" disabled selected>Select Job location</option>
                                     <option value="Bacolod">Bacolod</option>
                                     <option value="Talisay">Talisay</option>
                                     <option value="Victorias">Victorias</option>
@@ -126,19 +126,37 @@
                                 <h6>Job Image</h6>
                                 <input type="file" class="form-control" name="job_image" id="job_image"
                                     placeholder="Image.....">
+
+                                <div class="row mt-3">
+                                    <div class="col-12 form-group">
+                                        <h6>Job Vacancy</h6>
+                                        <input type="number" class="form-control" name="job_vacancy" id="job_vacancy"
+                                            placeholder="Enter number of hires">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12 form-group">
+                                        <h6>Other Skill Requirement</h6>
+                                        <input type="text" class="form-control" name="other_skills" id="other_skills"
+                                            placeholder="Enter other skill requirement">
+                                    </div>
+                                </div>
+
                             </div>
 
                             <div class="col-6 form-group">
                                 <h6>Required Skills</h6>
-                            
+
                                 @php
                                     $pesoSkill = \App\Models\JobseekerSkill::all();
                                 @endphp
-                            
-                                <div id="skill_req">
+
+                                <div class="mt-3" id="skill_req">
                                     @foreach ($pesoSkill as $skill)
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="skills[]" id="skill_{{ $skill->id }}" value="{{ $skill->skill_name }}">
+                                            <input class="form-check-input" type="checkbox" name="skills[]"
+                                                id="skill_{{ $skill->id }}" value="{{ $skill->skill_name }}">
                                             <label class="form-check-label" for="skill_{{ $skill->id }}">
                                                 {{ $skill->skill_name }}
                                             </label>
@@ -146,12 +164,9 @@
                                     @endforeach
                                 </div>
                             </div>
-                            
-
-
                         </div>
                         <div class="container mb-2">
-                            <h6>Description:</h6>
+                            <h6>Job Description:</h6>
                             <textarea class="summernote" name="job_details"></textarea>
                         </div>
 

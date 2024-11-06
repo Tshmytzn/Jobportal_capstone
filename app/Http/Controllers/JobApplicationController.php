@@ -21,31 +21,31 @@ class JobApplicationController extends Controller
             'applicantEmail' => 'nullable|email|max:100',
             'applicantPhone' => 'nullable|string|max:13',
             'coverLetter' => 'nullable|string',
-            'resume_file' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
+            'resume_file' => 'nullable|file|mimes:pdf,doc,docx|max:2048', 
         ]);
 
-    // Custom validation for either 'peso_form_id' or 'resume_file'
-    $validator->after(function ($validator) use ($request) {
-        if (empty($request->peso_form_id) && !$request->hasFile('resume_file')) {
-            $validator->errors()->add('peso_form_or_resume', 'To complete your application, please upload your resume or provide your PESO form ID.');
-        }
-    });
-
-    // Check if validation failed
-    if ($validator->fails()) {
-        return response()->json([
-            'message' => 'Validation errors',
-            'errors' => $validator->errors(),
-        ], 422);
-    }
-
-
-            // Ensure that either peso_form_id or resume_file is provided
+        // Custom validation for either 'peso_form_id' or 'resume_file'
+        $validator->after(function ($validator) use ($request) {
             if (empty($request->peso_form_id) && !$request->hasFile('resume_file')) {
-                return response()->json([
-                    'message' => 'To complete your application, please upload your resume or provide your PESO form ID.',
-                ], 422);
+                $validator->errors()->add('peso_form_or_resume', 'To complete your application, please upload your resume or provide your PESO form ID.');
             }
+        });
+
+        // Check if validation failed
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation errors',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+
+        // Ensure that either peso_form_id or resume_file is provided
+        if (empty($request->peso_form_id) && !$request->hasFile('resume_file')) {
+            return response()->json([
+                'message' => 'To complete your application, please upload your resume or provide your PESO form ID.',
+            ], 422);
+        }
 
 
         // Check if the user has already submitted an application for this job
@@ -57,13 +57,25 @@ class JobApplicationController extends Controller
             return response()->json(['message' => 'You have already submitted an application for this job.'], 409);
         }
 
-        // Handle the uploaded file
+        // Handle the uploaded resume file
         $resumePath = null;
+
+        // If resume file is provided
         if ($request->hasFile('resume_file')) {
-            $resumePath = $request->file('resume_file')->store('application_resume', 'public');
+            // Get the file extension
+            $extension = $request->file('resume_file')->getClientOriginalExtension();
+
+            // Generate a unique file name
+            $fileName = uniqid('resume_') . '.' . $extension;
+
+            // Store the file in the public directory under 'resumes' folder
+            $request->file('resume_file')->move(public_path('application_resumes'), $fileName);
+
+            // Set the resume path to the location in the public directory
+            $resumePath = 'application_resumes/' . $fileName;
         } else {
-            // If the resume file is not uploaded, use the existing resume path
-            $resumePath = $request->resumeFileInput ?: null; // Use the hidden input value if it exists
+            // If no file uploaded, use the existing resume path from hidden input (if available)
+            $resumePath = $request->resumeFileInput ?: null; // Use existing path if available
         }
 
         // Create the application record

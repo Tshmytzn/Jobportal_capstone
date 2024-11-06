@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('job_location')->nullable();
             $table->string('job_type')->nullable();
             $table->string('skills_required')->nullable();
+            $table->string('job_vacancy')->nullable();
+            $table->string('other_skills')->nullable();
             $table->longText('job_description')->nullable();
             $table->timestamps();
         });
@@ -35,6 +37,8 @@ return new class extends Migration
                 'job_location' => 'Bacolod',
                 'job_type' => 'Full Time',
                 'skills_required' => null,
+                'job_vacancy' => 2,
+                'other_skills' => null,
                 'job_description' => 'Install, maintain, and repair electrical systems and components.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -47,6 +51,8 @@ return new class extends Migration
                 'job_location' => 'Victorias',
                 'job_type' => 'Part Time',
                 'skills_required' => null,
+                'job_vacancy' => 1,
+                'other_skills' => null,
                 'job_description' => 'Install and repair piping systems, fixtures, and plumbing systems.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -60,6 +66,8 @@ return new class extends Migration
                 'job_location' => 'Bacolod',
                 'job_type' => 'Full Time',
                 'skills_required' => null,
+                'job_vacancy' => 2,
+                'other_skills' => null,
                 'job_description' => 'Perform various tasks at construction sites such as material handling and site clean-up.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -72,6 +80,8 @@ return new class extends Migration
                 'job_location' => 'Bacolod',
                 'job_type' => 'Full Time',
                 'skills_required' => null,
+                'job_vacancy' => 2,
+                'other_skills' => null,
                 'job_description' => 'Oversee daily operations at construction sites and ensure safety protocols are followed.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -85,6 +95,8 @@ return new class extends Migration
                 'job_location' => 'Talisay',
                 'job_type' => 'Full Time',
                 'skills_required' => null,
+                'job_vacancy' => 2,
+                'other_skills' => null,
                 'job_description' => 'Operate and maintain production machinery on the assembly line.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -97,6 +109,8 @@ return new class extends Migration
                 'job_location' => 'Talisay',
                 'job_type' => 'Part Time',
                 'skills_required' => null,
+                'job_vacancy' => 2,
+                'other_skills' => null,
                 'job_description' => 'Perform tasks on the assembly line for manufacturing products.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -110,6 +124,8 @@ return new class extends Migration
                 'job_location' => 'Talisay',
                 'job_type' => 'Part Time',
                 'skills_required' => null,
+                'job_vacancy' => 2,
+                'other_skills' => null,
                 'job_description' => 'Drive trucks to transport goods across locations, ensuring timely delivery.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -122,6 +138,8 @@ return new class extends Migration
                 'job_location' => 'Victorias',
                 'job_type' => 'Part Time',
                 'skills_required' => null,
+                'job_vacancy' => 2,
+                'other_skills' => null,
                 'job_description' => 'Oversee warehouse operations, including inventory management and logistics.',
                 'created_at' => now(),
                 'updated_at' => now(),

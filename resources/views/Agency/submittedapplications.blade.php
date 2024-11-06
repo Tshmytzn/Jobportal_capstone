@@ -15,13 +15,34 @@
             ['pagetitle' => 'Agency']
         )
         <!-- End Navbar -->
-
         {{-- cards --}}
         <div class="container-fluid py-0">
+            @php
+                $agencyId = session('agency_id');
+                $jobposts = \App\Models\JobDetails::where('agency_id', $agencyId)->get();
+            @endphp
+
+            <div class="mb-3 ms-5 me-5" style="overflow-x: auto; white-space: nowrap;">
+                @foreach ($jobposts as $job)
+                    @php
+                        // Get the count of applications for the current job
+                        $applicationCount = \App\Models\JobseekerApplication::where('job_id', $job->id)->count();
+                    @endphp
+
+                    <div class="card d-inline-block border-success mb-3"
+                        style="max-width: 18rem; margin-right: 10px; display: inline-block;">
+                        <div class="card-body">
+                            <h6 class="card-title">{{ $job->job_title }}</h6>
+                            <p class="card-text">Applications: {{ $applicationCount }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+
             <div class="row mb-5 ms-5 me-5">
 
                 @php
-                    // Fetch all applications
                     $applications = \App\Models\JobseekerApplication::all();
                 @endphp
 
@@ -63,15 +84,19 @@
                                 {{ $application->applicant_email }}
                             </p>
                             <div class="text-center mt-4">
-                                <a href="{{ asset('application_resume/' . $application->js_resume) }}" target="_blank"
-                                    class="btn btn-primary btn-md">
+                                <a href="" data-bs-target="#" data-bs-toggle="modal" class="btn btn-primary btn-sm">
                                     Review
                                 </a>
+
+                                {{-- <a href="{{ asset('jobseeker_resume/' . $application->resume_file) }}" target="_blank"
+                                    class="btn btn-primary btn-md">
+                                    Review Resume
+                                </a> --}}
+
                             </div>
                         </div>
                     </div>
                 @endforeach
-
 
 
             </div>

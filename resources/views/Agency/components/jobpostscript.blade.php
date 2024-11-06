@@ -198,7 +198,7 @@
                             <div class="col-md-6">
                                 <h6 class="text-primary">Required Skills</h6>
                                 <ul class="list-inline">
-                    ${formattedData == 'null' || formattedData.trim() === '' ? 'No skills available.' : formattedData}
+                    ${formattedData == 'null' || formattedData.trim() === '' ? 'No Specific Skills Required.' : formattedData}
                                 </ul>
                             </div>
                         </div>
@@ -250,6 +250,21 @@
                                     <h6>Job Image</h6>
                                     <input type="file" class="form-control" name="job_image" id="job_image"
                                         placeholder="Image.....">
+                                                                        <div class="row mt-3">
+                                    <div class="col-12 form-group">
+                                        <h6>Job Vacancy</h6>
+                                        <input type="number" class="form-control" name="job_vacancy" id="job_vacancy"
+                                            placeholder="Enter number of hires">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12 form-group">
+                                        <h6>Other Skill Requirement</h6>
+                                        <input type="text" class="form-control" name="other_skills" id="other_skills"
+                                            placeholder="Enter other skill requirement">
+                                    </div>
+                                </div>
                                 </div>
 
                                 <div class="col-6 form-group">
@@ -271,6 +286,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="container mb-2">
                             <h6>Description:</h6>
                             <textarea id="job_details" class="summernote" name="job_details">${description}</textarea>
@@ -302,9 +318,27 @@
     }
 
     function deletejobdetails(id) {
-        document.getElementById('jobid').value = id
-        submit('deletejobdetail', "{{ route('Agency') }}")
+        // Set the job ID in a hidden form input
+        document.getElementById('jobid').value = id;
+
+        // Show SweetAlert2 confirmation dialog
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You are about to delete this job post. This action cannot be undone.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33', // Red color for confirmation
+            cancelButtonColor: '#3085d6', // Blue color for cancel
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // If the user confirmed, submit the form
+                submit('deletejobdetail', "{{ route('Agency') }}");
+            }
+        });
     }
+
     $(document).ready(function() {
         getJobDetails()
     });

@@ -27,11 +27,7 @@ class CreateSkillsTable extends Migration
                     ['skill_name' => 'Physical Fitness', 'skill_desc' => 'Strength and stamina for hands-on tasks'],
                     ['skill_name' => 'Attention to Detail', 'skill_desc' => 'Careful approach to avoid errors and ensure quality'],
                     ['skill_name' => 'Safety Awareness', 'skill_desc' => 'Knowledge of safety practices and use of protective gear'],
-                    ['skill_name' => 'Problem-Solving', 'skill_desc' => 'Ability to troubleshoot and find solutions quickly'],
-                    ['skill_name' => 'Communication', 'skill_desc' => 'Clear communication with supervisors and teammates'],
                     ['skill_name' => 'Time Management', 'skill_desc' => 'Efficient work habits and ability to meet deadlines'],
-                    ['skill_name' => 'Teamwork', 'skill_desc' => 'Cooperative attitude and ability to work with others'],
-                    ['skill_name' => 'Customer Service', 'skill_desc' => 'Professional and respectful interactions with clients'],
                     ['skill_name' => 'Basic Math', 'skill_desc' => 'Ability to measure and calculate as needed for tasks'],
                 ]);
     }

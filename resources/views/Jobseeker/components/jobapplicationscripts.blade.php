@@ -36,8 +36,42 @@
 <script>
     function SubmitJobApplication() {
         var formElement = document.getElementById('jobApplicationForm');
-        var formData = new FormData(formElement);
+
+        // Check if all required fields are filled
+        var requiredFields = formElement.querySelectorAll('[required]');
+        var allFilled = true;
+        var emptyFields = [];
+
+        requiredFields.forEach(function(field) {
+            if (!field.value.trim()) {
+                allFilled = false;
+                emptyFields.push(field.name || field.id);
+            }
+        });
+
+        if (typeof jsResume === 'undefined' || !jsResume) {
+            allFilled = false;
+            emptyFields.push('Resume');
+        }
+
+        // If there are empty fields, show a warning and prevent submission
+        if (!allFilled) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Incomplete Submission',
+                text: 'Please fill in all required fields, including uploading your resume.',
+            });
+            return; // Prevent form submission
+        }
+
+        var formData = new FormData(document.getElementById('jobApplicationForm'));
         formData.append('_token', '{{ csrf_token() }}');
+
+        if (typeof jsResume !== 'undefined' && jsResume) {
+            formData.append('js_resume', jsResume);
+        } else {
+            formData.append('js_resume', ''); 
+        }
 
         document.getElementById('loading').style.display = 'grid';
 
