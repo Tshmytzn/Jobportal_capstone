@@ -173,7 +173,9 @@ class JobseekerController extends Controller
         // Start a query on the JobDetails model
         $query = JobDetails::query()
         ->join('agencies', 'job_details.agency_id', '=', 'agencies.id')
-        ->where('agencies.status', 'approved'); // Only include jobs from approved agencies
+        ->where('agencies.status', 'approved')
+        ->select('job_details.id as job_id', 'job_details.job_title', 'job_details.job_location', 'job_details.job_type', 'job_details.job_description', 'job_details.job_image'); 
+    
 
         // Check if employment type is provided, and apply a filter if so
         if (!empty($request->employmenttype)) {

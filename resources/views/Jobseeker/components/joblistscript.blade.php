@@ -56,7 +56,7 @@
                                             <p class="mb-2"><strong>Location:</strong> ${element.job_location}</p>
                                             <p class="mb-2"><strong>Type:</strong> ${element.job_type}</p>
                                             <p class="mb-4">${desc}</p>
-                                            <a href="{{ route('jobdetails') }}?id=${element.id}" class="btn btn-light rounded-pill text-primary py-2 px-4">Job Details</a>
+                                        <a href="{{ route('jobdetails') }}?id=${element.job_id}" class="btn btn-light rounded-pill text-primary py-2 px-4"> Job Details</a>
                                         </div>
                                     </div>
                                 </div>
