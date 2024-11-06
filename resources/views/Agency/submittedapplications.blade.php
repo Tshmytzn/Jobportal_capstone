@@ -84,7 +84,7 @@
                                 {{ $application->applicant_email }}
                             </p>
                             <div class="text-center mt-4">
-                                <a href="" data-bs-target="#" data-bs-toggle="modal" class="btn btn-primary btn-sm">
+                                <a href="" data-bs-target="#reviewapplication" data-bs-toggle="modal" class="btn btn-primary btn-sm">
                                     Review
                                 </a>
 
