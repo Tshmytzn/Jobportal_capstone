@@ -23,6 +23,7 @@
             <li></li>
             <li></li>
         </ul>
+    </div>
         <!-- Assessment Title and Description -->
 
         <form id="assessmentForm" method="POST" action="">
@@ -67,7 +68,7 @@
                             </div>
                         </div>
                     @endforeach
-                    <button id="submitAssessment" type="button" onclick="submitAssessment()">Submit Assessment</button>
+                    <button type="button" onclick="submitAssessment()">Submit Assessment</button>
                 </div>
             @else
                 <div class="container text-center my-5">
@@ -76,18 +77,16 @@
                 </div>
             @endif
         </form>
-
         <script>
             document.addEventListener('DOMContentLoaded', function() {
                 console.log('Page loaded');
-
-                // Define the submitAssessment function inside DOMContentLoaded to ensure the DOM is fully loaded
-                window.submitAssessment = function() {
+                
+            });
+            function submitAssessment(){
                     var form = document.getElementById('assessmentForm');
                     console.log('Button clicked!');
                     form.submit();  // Submit the form
                 }
-            });
         </script>
 
         @include('Jobseeker.components.footer')

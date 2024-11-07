@@ -33,6 +33,37 @@
     .card-text {
         margin-bottom: 20px;
     }
+
+    .center-container {
+        display: flex;
+        flex-direction: column;   
+        justify-content: center; 
+        align-items: center;      
+    }
+
+    .upload-icon {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        color: #ff6600;
+        font-size: 16px;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    #file-upload {
+        display: none;
+    }
+
+    #image-preview {
+        display: none;
+        margin-bottom: 10px; 
+        width: 110px;
+        height: 110px;
+        object-fit: cover;     /
+        border-radius: 5px;
+    }
+
 </style>
 
 <body>
@@ -74,8 +105,17 @@
             <div class="card col-md-4">
                 <div class="text-center">
                     <div class="card-body">
-                        <img src="{{ asset('../assets/img/team-1.jpg') }}" alt="profile_image"
-                            class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px;">
+
+                        <div class="center-container">
+                            <img id="image-preview" src="" alt="Image preview" />
+                            <label for="file-upload" class="upload-icon">
+                                <i class="fas fa-upload"></i> Upload Image
+                                <input type="file" id="file-upload" accept="image/*" onchange="previewImage(event)" />
+                            </label>
+                            <button id="submit-btn" onclick="uploadImage()">Submit</button>
+                        </div>                        
+                        
+
                         <h5 class="card-title">{{ $jobseeker->js_firstname . ' ' . $jobseeker->js_lastname }}</h5>
                         <!-- Replace with dynamic jobseeker name -->
                         <p class="text-muted">Job Seeker</p>
@@ -121,6 +161,7 @@
     @include('Jobseeker.components.footer')
     @include('Jobseeker.components.jsAuthscripts')
     @include('Jobseeker.components.scripts')
+    @include('Jobseeker.components.profileupdatescripts')
 
 </body>
 
