@@ -228,6 +228,10 @@ Route::get('/Settings', [JobseekerController::class, 'getJobseeker2'])->name('se
 Route::post('/Update', [JobseekerController::class, 'updateJobseeker'])->name('updateJobseeker');
 Route::post('/updateJsPassword', [JobseekerController::class, 'updateJsPassword'])->name('updateJsPassword');
 
+//update jobseeker imageprofile
+Route::post('/upload-image', [JobseekerController::class, 'uploadImage']);
+
+
 // Jobcategory Display
 // Route::get('/job-categories', [JobseekerController::class, 'index']);
 
