@@ -28,7 +28,7 @@ class AssessmentResultsController extends Controller
 
         // Save each answer
         foreach ($answers as $questionId => $optionId) {
-            JobseekerAnswer::create([
+            JobseekerSkillAnswers::create([
                 'jobseeker_id' => $jobseekerId,
                 'question_id' => $questionId,
                 'option_id' => $optionId,
