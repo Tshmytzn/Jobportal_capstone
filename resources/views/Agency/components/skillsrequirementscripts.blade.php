@@ -1,235 +1,52 @@
 <script>
-    $(document).ready(function() {
-        $('#Skills_tbl').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-                url: '/Job/Skills',
-                type: 'GET'
-            },
-            order: [
-                [0, 'asc']
-            ],
-            columns: [{
-                    data: null,
-                    name: 'index',
-                    render: function(data, type, row, meta) {
-                        return meta.row + 1 + meta.settings
-                        ._iDisplayStart; // Adjust row index with page offset
-                    },
-                    orderable: false
-                },
-                {
-                    data: 'skill_name',
-                    name: 'skill_name'
-                },
-                {
-                    data: 'skill_desc',
-                    name: 'skill_desc',
-                    render: function(data, type, row) {
-                        return data.length > 50 ? data.substr(0, 50) + '...' : data;
-                    }
-                },
-                {
-                    data: null,
-                    render: function(data, type, row) {
-                        return `
-                        <button class="btn btn-sm bgp-table edit-btn" data-bs-toggle="modal" data-bs-target="#editgeneralskillmodal" data-id="${row.skill_id}"> Edit</button>
-                        <button class="btn btn-sm bgp-danger delete-btn" data-id="${row.skill_id}">Delete</button>
-                    `;
-                    }
-                }
-            ]
-        });
+  let incrementID = 0;
 
-        $('#editgeneralskillmodal').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget);
-            var skillId = button.data('id');
+function addQuestion() {
+    const body = document.getElementById('questionBody');
+    const questionID = `question${Date.now()}`;
+    body.innerHTML += `
+    <div class="col-12 m-2 border border-primary p-2 rounded" id="question${incrementID}">
+        <div class="input-group">
+            <input type="text" class="form-control" name="${questionID}" placeholder="Enter option">
+            <div class="input-group-append">
+                <button class="btn btn-success" onclick="addOption('ans${incrementID}','${questionID}')">Add Option</button>
+            </div>
+        </div>
+        <div class="mt-2" id="ans${incrementID}">
+            <!-- Options will be added here -->
+        </div>
+        <!-- Remove Question Button -->
+        <button class="btn btn-danger mt-2" onclick="removeQuestion('question${incrementID}')">Remove Question</button>
+    </div>
+    `;
+    incrementID++;
+}
 
-            $.ajax({
-                url: `/Job/ViewSkills/${skillId}`,
-                type: 'GET',
-                success: function(skill) {
+function addOption(id,id2) {
+    const body = document.getElementById(id);
+    const optionID = `option${Date.now()}`; // Unique ID for each option
+    
+    body.innerHTML += `
+    <div class="d-flex mb-2" id="${optionID}">
+        <input type="text" class="form-control" placeholder="Option" name="${id2}">
+        <!-- Remove option button beside the input -->
+        <button class="btn btn-danger btn-sm ml-2" onclick="removeOption('${optionID}')">Remove</button>
+    </div>
+    `;
+}
 
-                    var modal = $('#editgeneralskillmodal');
-                    modal.find('#skillId').val(skill.skill_id);
-                    modal.find('#skill_name').val(skill.skill_name);
-                    modal.find('#skill_desc').val(skill.skill_desc);
-
-                },
-                error: function(xhr) {
-
-                    console.error('Error fetching agency data:', xhr);
-                }
-            });
-        });
-
-    });
-
-    function createskills() {
-
-        var formElement = document.getElementById("createskillsform");
-        var formData = new FormData(formElement);
-        formData.append('_token', '{{ csrf_token() }}');
-
-        document.getElementById('loading').style.display = 'grid';
-
-
-        $.ajax({
-            url: "{{ route('creategeneralskill') }}",
-            type: "POST",
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(response) {
-                document.getElementById('loading').style.display = 'none';
-
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: response.message,
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-
-                setTimeout(function() {
-                    var modalElement = document.getElementById('createskillsmodal');
-                    var modal = bootstrap.Modal.getInstance(modalElement);
-                    if (modal) {
-                        modal.hide();
-                    }
-                    $('#Skills_tbl').DataTable().ajax.reload();
-                    $('#createskillsform')[0].reset();
-                }, 1500);
-            },
-
-            error: function(xhr, status, error) {
-                document.getElementById('loading').style.display = 'none';
-
-                var errors = xhr.responseJSON.errors;
-                var errorMessage = '';
-
-                $.each(errors, function(key, value) {
-                    errorMessage += value + '<br>';
-                });
-
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    html: errorMessage,
-                    showConfirmButton: true
-                });
-            }
-        });
+function removeQuestion(id) {
+    const questionElement = document.getElementById(id);
+    if (questionElement) {
+        questionElement.remove();
     }
+}
 
-    function updategeneralskills() {
-
-        var formElement = document.getElementById("editgeneralskillsform");
-        var formData = new FormData(formElement);
-        formData.append('_token', '{{ csrf_token() }}');
-
-        document.getElementById('loading').style.display = 'grid';
-
-
-        $.ajax({
-            url: "{{ route('updategeneralskills') }}",
-            type: "POST",
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function(response) {
-                document.getElementById('loading').style.display = 'none';
-
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: response.message,
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-
-                setTimeout(function() {
-                    var modalElement = document.getElementById('editgeneralskillmodal');
-                    var modal = bootstrap.Modal.getInstance(modalElement);
-                    if (modal) {
-                        modal.hide();
-                    }
-                    $('#Skills_tbl').DataTable().ajax.reload();
-                    $('#editgeneralskillsform')[0].reset();
-                }, 1500);
-            },
-
-            error: function(xhr, status, error) {
-                document.getElementById('loading').style.display = 'none';
-
-                var errors = xhr.responseJSON.errors;
-                var errorMessage = '';
-
-                $.each(errors, function(key, value) {
-                    errorMessage += value + '<br>';
-                });
-
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    html: errorMessage,
-                    showConfirmButton: true
-                });
-            }
-        });
+function removeOption(id) {
+    const optionElement = document.getElementById(id);
+    if (optionElement) {
+        optionElement.remove();
     }
+}
 
-    $(document).on('click', '.delete-btn', function() {
-        var skillId = $(this).data('id');
-        var url = "{{ route('deleteSkill', ':id') }}".replace(':id', skillId);
-
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "This action cannot be undone!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url: url,
-                    type: 'DELETE',
-                    data: {
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Deleted!',
-                                text: response.message,
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-
-                            $('#Skills_tbl').DataTable().ajax.reload();
-                        } else {
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Error!',
-                                text: response.error,
-                                showConfirmButton: true
-                            });
-                        }
-                    },
-                    error: function(xhr) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error!',
-                            text: 'Failed to delete skill.',
-                            showConfirmButton: true
-                        });
-                    }
-                });
-            }
-        });
-    });
 </script>

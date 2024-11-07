@@ -65,6 +65,44 @@
                 </div>
             </div> --}}
 
+            <div class="modal fade" id="createskillassessment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row border m-4 p-2 rounded border-success">
+            <div class="col-6">
+                <label for="">Title</label>
+                <input type="text" name="title" id="" class="form-control">
+            </div>
+            <div class="col-6">
+                <label for="">Description</label>
+                <textarea type="text" name="desc" id="" class="form-control"></textarea>
+            </div>
+        </div>
+        <div class="row border m-4 p-2 rounded border-success align-items-center justify-content-between">
+            <div class="col-auto">
+                <label for="">Question</label>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-success" onclick="addQuestion()">Add Question</button>
+            </div>
+            <div class="row" id="questionBody">
+                
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
             @include('Agency.components.footer')
         </div>
     </main>
