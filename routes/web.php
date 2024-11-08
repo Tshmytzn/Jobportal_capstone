@@ -232,6 +232,11 @@ Route::post('/updateJsPassword', [JobseekerController::class, 'updateJsPassword'
 //update jobseeker imageprofile
 Route::post('/upload-image', [JobseekerController::class, 'uploadImage']);
 
+//update jobseeker imageprofile
+Route::post('/update-jobseeker-profile-pic', [JobSeekerController::class, 'updateImage'])->name('UpdateJobseekerProfilePic');
+
+//Application status page
+Route::get('/ApplicationStatus', function () { return view('Jobseeker.applicationstatus'); })->name('applicationstatus');
 
 // Jobcategory Display
 // Route::get('/job-categories', [JobseekerController::class, 'index']);

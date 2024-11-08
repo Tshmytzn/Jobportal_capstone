@@ -108,19 +108,24 @@
                         <ul class="dropdown-menu" aria-labelledby="profileDropdown">
                             <li>
                                 <a class="dropdown-item" href="{{ route('profile') }}">
-                                    <i class="fas fa-user"></i> Profile
+                                    <i class="fas fa-user-circle"></i> &nbsp; Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('applicationstatus') }}">
+                                    <i class="fas fa-tasks"></i> &nbsp; Applications
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{{ route('settings') }}">
-                                    <i class="fas fa-cog"></i> Settings
+                                    <i class="fas fa-cog"></i> &nbsp; Settings
                                 </a>
                             </li>
                             <form action="{{ route('LogoutJobseeker') }}" method="POST" id="logoutadminForm">
                                 @csrf
                                 <li>
                                     <a class="dropdown-item" href="#" onclick="confirmLogout(event)">
-                                        <i class="fas fa-sign-out-alt"></i> Log Out
+                                        <i class="fas fa-sign-out-alt"></i> &nbsp; Log Out
                                     </a>
                                 </li>
                             </form>

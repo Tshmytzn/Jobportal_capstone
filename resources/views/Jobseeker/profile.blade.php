@@ -108,15 +108,19 @@
 
                         <form id="UploadProfileForm" enctype="multipart/form-data">
                             @csrf
-                        <div class="center-container">
-                            <img id="image-preview" src="" alt="Image preview" />
-                            <label for="file-upload" class="upload-icon">
-                                <i class="fas fa-upload"></i> Upload Image
-                                <input type="file" id="file-upload" accept="image/*" onchange="previewImage(event)" />
-                            </label>
-                            <button class="btn btn-sm bgp-gradient" id="submit-btn" onclick="uploadImage()">Submit</button>
-                        </div>
-                    </form>
+                            <!-- Hidden field to store the jobseeker ID -->
+                            <input type="hidden" id="jobseekerId" name="jobseekerId" value="{{session('user_id')}}"> <!-- Set the jobseekerId dynamically -->
+                        
+                            <div class="center-container mb-2">
+                                <img class="img-fluid rounded-circle" id="image-preview" src="{{ session('user_id') ? asset('jobseeker_profile/' . App\Models\JobSeeker::find(session('user_id'))->js_image) : '' }}" alt="Image preview" style="{{ session('user_id') && App\Models\JobSeeker::find(session('user_id'))->js_image ? 'display:block;' : 'display:none;' }}" />
+                                <label for="file-upload" class="upload-icon">
+                                    <i class="fas fa-upload"></i> Upload Image
+                                    <input type="file" id="file-upload" accept="image/*" onchange="previewImage(event)" />
+                                </label>
+                                <button class="btn btn-sm bgp-gradient" id="submit-btn" style="display:none;" type="button">Submit</button>
+                            </div>
+                        </form>
+                        {{-- update profile --}}
 
                         <h5 class="card-title">{{ $jobseeker->js_firstname . ' ' . $jobseeker->js_lastname }}</h5>
                         <!-- Replace with dynamic jobseeker name -->

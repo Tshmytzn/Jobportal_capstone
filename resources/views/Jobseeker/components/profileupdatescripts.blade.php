@@ -1,103 +1,83 @@
 <script>
-    function previewImage(event) {
-    const file = event.target.files[0];
-    const reader = new FileReader();
+        function previewImage(event) {
+        const file = event.target.files[0];
+        const reader = new FileReader();
 
-    reader.onload = function() {
-        const image = document.getElementById('image-preview');
-        image.src = reader.result;
-        image.style.display = 'block'; // Show the image after upload
-    };
+        reader.onload = function() {
+            const image = document.getElementById('image-preview');
+            const submitBtn = document.getElementById('submit-btn');
+            image.src = reader.result;
+            image.style.display = 'block'; // Show the image after upload
+            submitBtn.style.display = 'inline-block'; // Show the submit button
+        };
 
-    if (file) {
-        reader.readAsDataURL(file); // Read the file as a data URL
+        if (file) {
+            reader.readAsDataURL(file); // Read the file as a data URL
+        }
     }
-}
 
-function uploadImage() {
-        var formData = new FormData(document.getElementById("UploadProfileForm"));
-        console.log(formData);
+    // AJAX Request to submit form data
+    $(document).ready(function() {
+        $('#submit-btn').click(function(e) {
+            e.preventDefault();
 
+            // Create FormData object
+            let formData = new FormData();
+            formData.append('_token', $('input[name=_token]').val()); 
+            formData.append('image', $('#file-upload')[0].files[0]);
 
-        // document.getElementById('loading').style.display = 'grid';
+            // Add jobseekerId to formData
+            formData.append('jobseekerId', $('#jobseekerId').val()); 
 
+            // Send AJAX request
+            $.ajax({
+                url: "{{ route('UpdateJobseekerProfilePic') }}", 
+                type: "POST",
+                data: formData,
+                processData: false, 
+                contentType: false, 
+                success: function(response) {
 
-        // $.ajax({
-        //     url: "{{ route('UpdateAdminProfilePic') }}",
-        //     type: "POST",
-        //     data: formData,
-        //     processData: false,
-        //     contentType: false,
-        //     success: function(response) {
-        //         document.getElementById('loading').style.display = 'none';
+                    $('#submit-btn').hide();
 
-        //         Swal.fire({
-        //             icon: 'success',
-        //             title: 'Success',
-        //             text: response.message,
-        //             showConfirmButton: false,
-        //             timer: 1500
-        //         });
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: response.message,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
 
-        //         setTimeout(function() {
-        //             $('#adminProfileImage').attr('src', '/admin_profile/' + response.admin_profile);
-        //             var modalElement = document.getElementById('UpdateProfilePic');
-        //             var modal = bootstrap.Modal.getInstance(modalElement);
-        //             if (modal) {
-        //                 modal.hide();
-        //             }
-        //             $('#updateProfilePicForm')[0].reset();
-        //         }, 1500);
-        //     },
-        //     error: function(xhr, status, error) {
-        //         document.getElementById('loading').style.display = 'none';
+                    setTimeout(function() {
+                        $('#jobseekerProfileImage').attr('src', '/jobseeker_profile/' + response.jobseeker_profile);
+                        var modalElement = document.getElementById('UpdateProfilePic');
+                        var modal = bootstrap.Modal.getInstance(modalElement);
+                        if (modal) {
+                            modal.hide(); 
+                        }
+                        $('#UploadProfileForm')[0].reset(); 
 
-        //         var errors = xhr.responseJSON.errors;
-        //         var errorMessage = '';
+                    }, 1500);
+                },
+                error: function(xhr, status, error) {
 
-        //         $.each(errors, function(key, value) {
-        //             errorMessage += value + '<br>';
-        //         });
+                    $('#submit-btn').prop('disabled', false);
 
-        //         Swal.fire({
-        //             icon: 'error',
-        //             title: 'Oops...',
-        //             html: errorMessage,
-        //             showConfirmButton: true
-        //         });
-        //     }
-        // });
-    }
-// function uploadImage() {
-//     const fileInput = document.getElementById('file-upload');
-//     const file = fileInput.files[0];
+                    var errors = xhr.responseJSON.errors;
+                    var errorMessage = '';
 
-//     if (!file) {
-//         alert('Please select an image to upload.');
-//         return;
-//     }
+                    $.each(errors, function(key, value) {
+                        errorMessage += value + '<br>';
+                    });
 
-//     const formData = new FormData();
-//     formData.append('image', file); // Append the file to FormData
-
-//     // Send AJAX request to Laravel route
-//     axios.post('/upload-image', formData, {
-//         headers: {
-//             'Content-Type': 'multipart/form-data'
-//         }
-//     })
-//     .then(response => {
-//         if (response.data.success) {
-//             alert('Image uploaded successfully!');
-//             // Optionally, you can show the uploaded image or take further actions
-//         } else {
-//             alert('Error: ' + response.data.error);
-//         }
-//     })
-//     .catch(error => {
-//         console.error('There was an error uploading the image:', error);
-//         alert('An error occurred while uploading the image.');
-//     });
-// }
-
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        html: errorMessage,
+                        showConfirmButton: true
+                    });
+                }
+            });
+        });
+    });
 </script>

@@ -25,6 +25,7 @@ class Agency extends Model
         'agency_business_permit',
         'agency_dti_permit',
         'agency_bir_permit',
+        'mayors_permit',
         'agency_image',
         'password',
         'status'

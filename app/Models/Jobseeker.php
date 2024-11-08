@@ -29,6 +29,7 @@ class Jobseeker extends Model
         'js_contactnumber',
         'js_password',
         'js_accstatus',
+        'js_image',
     ];
 
     public function setPasswordAttribute($value)

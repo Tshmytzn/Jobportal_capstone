@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('js_contactnumber', 15); // Contact number with length constraint
             $table->string('js_password', 255); // Password (hashed)
             $table->string('js_accstatus', 255)->nullable();
+            $table->string('js_image', 255)->nullable();
 
 
             // Timestamps
@@ -45,6 +46,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9487161185',
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -59,6 +62,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9707208998',
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -73,6 +78,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9346552350',
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -87,6 +94,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9502606713',
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -101,6 +110,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9603960300',
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -115,6 +126,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9456345645',
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -129,6 +142,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9632188553',
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -143,6 +158,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9108789174',
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -157,6 +174,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9488164859',
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -171,6 +190,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9074676445',
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -185,6 +206,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9667387359',
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -199,6 +222,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9852106804',
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -213,6 +238,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9561669093',
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -227,6 +254,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9458092878',
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -241,6 +270,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9154917029',
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -255,6 +286,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9631715171',
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -269,6 +302,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9098466157',
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -283,6 +318,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456789', // generated dummy number starting with 9
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -297,6 +334,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9153207517', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -311,6 +350,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456781', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -325,6 +366,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9452811462', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -339,6 +382,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9155211314', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -353,6 +398,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9567415383', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -367,6 +414,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456782', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -381,6 +430,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456783', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -395,6 +446,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456784', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -409,6 +462,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456785', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -423,6 +478,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456786', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -437,6 +494,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456787', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -451,6 +510,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456788', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -465,6 +526,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456789', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -479,6 +542,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456790', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -493,6 +558,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456791', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -507,6 +574,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9464015041', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -521,6 +590,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9957468300', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -535,6 +606,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9965029305', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -549,6 +622,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9066584452', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -563,6 +638,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9218161628', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -577,6 +654,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9668307292', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -591,6 +670,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9452848887', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -605,6 +686,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456792', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -619,6 +702,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456793', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -633,6 +718,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456794', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -647,6 +734,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9465739211', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -661,6 +750,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9109718272', // removed starting 0 and dash
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -675,6 +766,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456795', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -689,6 +782,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456796', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -703,6 +798,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9396548391', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -717,6 +814,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9163572275', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -731,6 +830,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9064823254', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -745,6 +846,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9071189558', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -759,6 +862,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9952697916', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -773,6 +878,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456797', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -787,6 +894,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9454688525', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -801,6 +910,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456798', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -815,6 +926,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9071732765', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -829,6 +942,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9519739806', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -843,6 +958,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9105385614', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -857,6 +974,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9677637893', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -871,6 +990,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9519739810', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -885,6 +1006,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9677637893', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -899,6 +1022,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456799', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -913,6 +1038,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9512834662', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -927,6 +1054,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9082298565', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -941,6 +1070,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9126841805', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -955,6 +1086,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9306637657', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -969,6 +1102,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9152412414', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -983,6 +1118,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456789', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -997,6 +1134,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9318264223', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -1011,6 +1150,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9050741172', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -1025,6 +1166,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9952711997', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -1039,6 +1182,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9505355103', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -1053,6 +1198,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9816479567', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -1067,6 +1214,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '963036828', // adjusted format, removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -1081,6 +1230,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9666341609', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -1095,6 +1246,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9480382931', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -1109,6 +1262,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456789', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -1123,6 +1278,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9455136028', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -1137,6 +1294,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9123456789', // generated dummy number
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -1151,6 +1310,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9101568774', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -1165,6 +1326,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9560866743', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -1179,6 +1342,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9703653073', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -1193,6 +1358,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9343993246', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -1207,6 +1374,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9301516027', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -1221,6 +1390,8 @@ return new class extends Migration
                 'js_resume' => null,
                 'js_contactnumber' => '9850531796', // removed starting 0
                 'js_password' => bcrypt('12345678'),
+                'js_accstatus' => null,
+                'js_image' => null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
