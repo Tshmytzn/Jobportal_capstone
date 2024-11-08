@@ -46,9 +46,10 @@
                 <div class="card card-plain mt-2">
                     <div class="card-header pb-0 text-center bg-transparent" style="border: none">
                         <div class="text-center mb-2 mr-5">
-                            <!-- Use 'img-fluid' to make the image responsive and 'w-50' to set width -->
+
                             <img src="{{ asset('../assets/svg/undraw_Hello_re_3evm.png') }}" class="img-fluid w-50"
                                 alt="Hello Image">
+
                         </div>
                         <h2 class="font-weight-bolder text-info text-gradient-primary ">Welcome Agency!</h2>
                         <p class="mb-3">Please fill in the information below to create an account</p>
@@ -136,23 +137,30 @@
 
                             <div class="row">
                                 <!-- Agency Business Permit -->
-                                <div class="col-4 mb-3">
+                                <div class="col-3 mb-3">
                                     <label for="agency_business_permit">Agency Business Permit:</label>
                                     <input type="file" id="agency_business_permit" name="agency_business_permit"
                                         class="form-control">
                                 </div>
 
                                 <!-- Agency DTI Permit -->
-                                <div class="col-4 mb-3">
+                                <div class="col-3 mb-3">
                                     <label for="agency_dti_permit">Agency DTI Permit:</label>
                                     <input type="file" id="agency_dti_permit" name="agency_dti_permit"
                                         class="form-control">
                                 </div>
 
                                 <!-- Agency BIR Permit -->
-                                <div class="col-4 mb-3">
+                                <div class="col-3 mb-3">
                                     <label for="agency_bir_permit">Agency BIR Permit:</label>
                                     <input type="file" id="agency_bir_permit" name="agency_bir_permit"
+                                        class="form-control">
+                                </div>
+
+                                <!-- Agency Mayors Permit -->
+                                <div class="col-3 mb-3">
+                                    <label for="agency_mayors_permit">Agency Mayors Permit:</label>
+                                    <input type="file" id="agency_mayors_permit" name="agency_mayors_permit"
                                         class="form-control">
                                 </div>
 

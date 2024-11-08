@@ -64,7 +64,7 @@
                                         let jsResume = @json($jobseekerdata->js_resume);
                                     </script>
                                 @else
-                                    <small class="text-danger">No resume uploaded</small>
+                                <small class="text-info">No resume uploaded. <small class="text-primary"> <a href="/Settings#pills-resume"> Go to Settings </a> </small> and update your resume.</small>
                                 @endif
                             @else
                                 <strong>Please log in to view your resume.</strong>

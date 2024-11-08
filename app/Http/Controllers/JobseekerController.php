@@ -220,4 +220,38 @@ class JobseekerController extends Controller
         return response()->json($jobs);
     }
 
+    public function updateImage(Request $request) {
+        try {
+
+            $request->validate([
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5048',
+                'jobseekerId' => 'required|exists:jobseeker_details,js_id'
+            ]);
+    
+            $jobseeker = JobSeeker::findOrFail($request->jobseekerId);
+    
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('jobseeker_profile'), $imageName); 
+    
+                $jobseeker->js_image = $imageName;
+                $jobseeker->save(); 
+            }
+    
+            return response()->json([
+                'message' => 'Profile picture updated successfully!',
+                'jobseeker_profile' => $imageName
+            ]);
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'message' => 'An error occurred.',
+                'error' => $e->getMessage()
+            ], 500); 
+        }
+    }
+    
+    
+
 }

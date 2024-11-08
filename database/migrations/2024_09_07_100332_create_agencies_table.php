@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('agency_business_permit')->nullable();
             $table->string('agency_dti_permit')->nullable();
             $table->string('agency_bir_permit')->nullable();
+            $table->string('agency_mayors_permit')->nullable();
             $table->string('agency_image')->nullable();
             $table->string('password');
             $table->string('status');
@@ -46,6 +47,7 @@ return new class extends Migration
                 'agency_business_permit' => 'PGCWcAC9S3X5dMwxbgGjz03hSkN0rP.png',
                 'agency_dti_permit' => '9kQsSkiKFSXJEx82HGJu5G6PsFEmwy.png',
                 'agency_bir_permit' => 'bU7FlrF9CYgpefQnm7ixliqiV71Fod.png',
+                'agency_mayors_permit' => 'bU7FlrF9CYgpefQnm7ixliqiV71Fod.png',
                 'agency_image' => 'default.png',
                 'password' => Hash::make('12345678'),
                 'status' => 'Rejected',
@@ -63,6 +65,7 @@ return new class extends Migration
                 'agency_business_permit' => '7hsXJd3aAkJfLsnEpW9tj4MwF1Xp2o.png',
                 'agency_dti_permit' => 'Aj5hfLgTfXJkplEh4Ft3sDFy7A8Gp.png',
                 'agency_bir_permit' => 'QZ8hfXJfplT4rFgXt2Gh6hfFJsDhRf.png',
+                'agency_mayors_permit' => 'bU7FlrF9CYgpefQnm7ixliqiV71Fod.png',
                 'agency_image' => 'default.png',
                 'password' => Hash::make('12345678'),
                 'status' => 'approved',
@@ -80,6 +83,7 @@ return new class extends Migration
                 'agency_business_permit' => 'Eh7fhJ8sAKTflY7PmgQsAp6hfX0s4A.png',
                 'agency_dti_permit' => 'Dj6flRhWtOpAsT7h5GfL6fgFpJf5xT.png',
                 'agency_bir_permit' => 'Rh4j8gDfTsAkTfl8Xs2P4mGpFJhRtD.png',
+                'agency_mayors_permit' => 'bU7FlrF9CYgpefQnm7ixliqiV71Fod.png',
                 'agency_image' => 'default.png',
                 'password' => Hash::make('12345678'),
                 'status' => 'pending',

@@ -87,7 +87,7 @@
             }
 
             // Check if age is below 18
-            if (age < 18) {
+            if (age < 15) {
                 ageInput.value = '';
                 ageInput.style.borderColor = 'red';
 
@@ -95,11 +95,11 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Age Restriction',
-                    text: 'You must be at least 18 years old to proceed.',
+                    text: 'You must be at least 15 years old to proceed.',
                     confirmButtonText: 'OK'
                 });
 
-                ageInput.title = "You must be at least 18 years old.";
+                ageInput.title = "You must be at least 15 years old.";
             } else {
                 // Format the age as "XXyrs and XXmonths"
                 const formattedAge = `${age}yrs and ${monthDifference}months`;
