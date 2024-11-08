@@ -2,6 +2,12 @@
 <html lang="en">
 
 @include('Agency.components.head', ['title' => 'Skills Requirement'])
+<!-- jQuery -->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<!-- DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js" defer></script>
+
 
 <body class="g-sidenav-show  bg-gray-100">
 
@@ -27,18 +33,17 @@
                         <input type="text" id="searchInput" class="form-control" placeholder="Search assessments...">
                     </div> --}}
 
-                    <table id="assessmentsTable" class="table table-striped">
+                    <table id="assessmentsDataTable" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Assessment Title</th>
                                 <th>Description</th>
-                                <th>Number of Sections</th>
-                                <th>Created At</th>
+                                <th>Job Title</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody id="assessmentsTableBody">
-                            <!-- Assessment rows will be dynamically populated here -->
+                        <tbody id="">
+
                         </tbody>
                     </table>
 
@@ -65,15 +70,27 @@
                 </div>
             </div> --}}
 
-            <div class="modal fade" id="createskillassessment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="createskillassessment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add Skill Assessment</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <form action="" id="questionForm">
         <div class="row border m-4 p-2 rounded border-success">
+            <div class="col-12 mb-2">
+                @php
+                    $jobD = App\Models\JobDetails::where('agency_id',session('agency_id'))->get();
+                @endphp
+                <label for="">Job Title</label>
+                <select name="jd_id" id="" class="form-control" required>
+                @foreach ($jobD as $job)
+                    <option value="{{$job->id}}">{{$job->job_title}}</option>
+                @endforeach
+                </select>
+            </div>
             <div class="col-6">
                 <label for="">Title</label>
                 <input type="text" name="title" id="" class="form-control">
@@ -88,16 +105,17 @@
                 <label for="">Question</label>
             </div>
             <div class="col-auto">
-                <button class="btn btn-success" onclick="addQuestion()">Add Question</button>
+                <button type="button" class="btn btn-success" onclick="addQuestion()">Add Question</button>
             </div>
             <div class="row" id="questionBody">
                 
             </div>
         </div>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" onclick="saveSkillAssessment()">Save changes</button>
       </div>
     </div>
   </div>

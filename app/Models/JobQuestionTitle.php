@@ -12,6 +12,7 @@ class JobQuestionTitle extends Model
 
     // Define the fillable fields
     protected $fillable = [
+        'agency_id',
         'jd_id',
         'title',
     ];
