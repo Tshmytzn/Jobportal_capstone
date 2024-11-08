@@ -12,7 +12,8 @@ use App\Http\Controllers\JobseekerPesoController;
 use App\Http\Controllers\JobApplicationController;
 use App\Http\Controllers\SkillAssessmentController;
 use App\Http\Controllers\AssessmentResultsController;
-
+use App\Http\Controllers\JobQuestion;
+use App\Http\Controllers\JobQuestionController;
 
 // Admin Protected Routes
 Route::middleware([AuthMiddleware::class])->group(function () {
@@ -236,3 +237,8 @@ Route::post('/upload-image', [JobseekerController::class, 'uploadImage']);
 // Route::get('/job-categories', [JobseekerController::class, 'index']);
 
 Route::post('/contacts', [JobseekerController::class, 'SaveContact'])->name('SaveContact');
+
+
+//JobQuestion
+Route::post('/AddQuestion', [JobQuestionController::class, 'AddQuestion'])->name('AddQuestion');
+Route::get('/GetAssessment', [JobQuestionController::class, 'GetAssessment'])->name('GetAssessment');
