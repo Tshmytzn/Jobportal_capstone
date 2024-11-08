@@ -214,13 +214,18 @@ function deleteAssessment(id) {
     }).then((result) => {
         if (result.isConfirmed) {
             // Perform your delete action here (e.g., make an AJAX call to delete the record)
+            const formData = new FormData();
+            formData.append('_token', '{{ csrf_token() }}');
+            formData.append('id', id);
             $.ajax({
-                url: `/deleteAssessment/${id}`,  // Replace with your delete URL
-                method: 'DELETE',
+                url: `{{route('DeleteAssessment')}}`,  // Replace with your delete URL
+                method: 'POST',
+                data: formData,
+                processData: false, // Prevent jQuery from automatically transforming the data into a query string
+                contentType: false, // Let the browser set the content type (for file uploads)
                 success: function(response) {
                     console.log('Record deleted successfully:', response);
-                    // Optionally, reload or refresh the DataTable after deletion
-                    $('#assessmentsDataTable').DataTable().ajax.reload();
+                    getAssessment();
                     Swal.fire('Deleted!', 'Your record has been deleted.', 'success');  // Show success alert
                 },
                 error: function(xhr, status, error) {
