@@ -247,3 +247,4 @@ Route::post('/contacts', [JobseekerController::class, 'SaveContact'])->name('Sav
 //JobQuestion
 Route::post('/AddQuestion', [JobQuestionController::class, 'AddQuestion'])->name('AddQuestion');
 Route::get('/GetAssessment', [JobQuestionController::class, 'GetAssessment'])->name('GetAssessment');
+Route::post('/DeleteAssessment', [JobQuestionController::class, 'DeleteAssessment'])->name('DeleteAssessment');
