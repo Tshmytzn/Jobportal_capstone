@@ -101,5 +101,14 @@ class JobQuestionController extends Controller
         return response()->json($data);
     }
 
-
+    public function DeleteAssessment(request $request){
+        $data = JobQuestionTitle::where('id',$request->id)->first();
+        $questions = JobQuestion::where('jqt_id', $data->id)->get();
+        foreach($questions as $question){
+            JobQuestionAnswer::where('jq_id', $question->id)->delete();
+            $question->delete();
+        }
+        $data->delete();
+        return response()->json(['status' => 'success']);
+    }
 }

@@ -168,28 +168,69 @@ function processAssessmentData() {
                 const answers = q.answers.map(a => `- ${a.answer} (${a.status})`).join('<br>'); // Indent each answer
                 return `${questionText}<br>${answers}`;  // Join question and answers with line breaks
             }).join('<hr>'),  // Separate each question with a horizontal line for clarity
+            id: item.title.id,  // Include the ID for delete action
         };
     });
 
     // Initialize DataTable
-   $('#assessmentsDataTable').DataTable({
-    data: tableData,
-    columns: [
-        { data: 'title', title: 'Title' },
-        { data: 'job_title', title: 'Job Title' },
-        { data: 'questions', title: 'Questions & Answers' },
-    ],
-    destroy: true,
-    autoWidth: false,  // Prevents auto-sizing columns based on content
-    responsive: true,  // Enables responsiveness if desired
-    "createdRow": function(row, data, dataIndex) {
-        $('td:eq(2)', row).html(data.questions);
-    }
-});
-
+    $('#assessmentsDataTable').DataTable({
+        data: tableData,
+        columns: [
+            { data: 'title', title: 'Title' },
+            { data: 'job_title', title: 'Job Title' },
+            { data: 'questions', title: 'Questions & Answers' },
+            { 
+                data: 'id',
+                title: 'Actions',
+                render: function(data, type, row) {
+                    // Only the Delete button is included
+                    return `
+                        <button class="btn btn-danger" onclick="deleteAssessment(${data})">Delete</button>
+                    `;
+                }
+            }
+        ],
+        destroy: true,  // Allows re-initializing the table if this function is called multiple times
+        autoWidth: false,  // Prevents auto-sizing columns based on content
+        responsive: true,  // Enables responsiveness if desired
+        "createdRow": function(row, data, dataIndex) {
+            // Allows HTML inside the questions column for better formatting
+            $('td:eq(2)', row).html(data.questions);
+        }
+    });
 }
 
-
+// Function for handling the Delete button click
+function deleteAssessment(id) {
+    // Use SweetAlert2 for confirmation
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this action!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Perform your delete action here (e.g., make an AJAX call to delete the record)
+            $.ajax({
+                url: `/deleteAssessment/${id}`,  // Replace with your delete URL
+                method: 'DELETE',
+                success: function(response) {
+                    console.log('Record deleted successfully:', response);
+                    // Optionally, reload or refresh the DataTable after deletion
+                    $('#assessmentsDataTable').DataTable().ajax.reload();
+                    Swal.fire('Deleted!', 'Your record has been deleted.', 'success');  // Show success alert
+                },
+                error: function(xhr, status, error) {
+                    console.log('Error deleting record:', error);
+                    Swal.fire('Error!', 'An error occurred while deleting the record.', 'error');  // Show error alert
+                }
+            });
+        }
+    });
+}
 
 $(document).ready(function() {
 getAssessment();
