@@ -83,6 +83,8 @@
                         .agency_dti_permit;
                     document.getElementById('birPermit').src = '/agencyfiles/' + agency
                         .agency_bir_permit;
+                        document.getElementById('mayorsPermit').src = '/agencyfiles/' + agency
+                        .agency_mayors_permit;
 
                     var statusBadge = modal.find('#statusBadge');
                     statusBadge.text(agency.status.charAt(0).toUpperCase() + agency.status

@@ -55,23 +55,30 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-4 mb-1">
-                            <label for="businessPermit" class="form-label">Business Permit</label>
+                        <div class="col-6 mb-1">
+                            <label for="businessPermit" class="form-label">Business Permit</label> <br>
                             <img id="businessPermit" src="" alt="Business Permit" class="img-fluid"
                                 style="height: 200px; width: 200px; object-fit: cover; cursor: pointer;"
-                                data-bs-toggle="modal" data-bs-target="#imageModal" onclick="viewImage(this.src)" />
+                                onclick="printImage('businessPermit')" />
                         </div>
-                        <div class="col-4 mb-1">
-                            <label for="dtiPermit" class="form-label">DTI Permit</label>
+                        <div class="col-6 mb-1">
+                            <label for="dtiPermit" class="form-label">DTI Permit</label> <br>
                             <img id="dtiPermit" src="" alt="DTI Permit" class="img-fluid"
                                 style="height: 200px; width: 200px; object-fit: cover; cursor: pointer;"
-                                data-bs-toggle="modal" data-bs-target="#imageModal" onclick="viewImage(this.src)" />
+                                onclick="printImage('dtiPermit')" />
                         </div>
-                        <div class="col-4 mb-1">
-                            <label for="birPermit" class="form-label">BIR Permit</label>
+                        
+                        <div class="col-6 mb-1">
+                            <label for="birPermit" class="form-label">BIR Permit</label> <br>
                             <img id="birPermit" src="" alt="BIR Permit" class="img-fluid"
                                 style="height: 200px; width: 200px; object-fit: cover; cursor: pointer;"
-                                data-bs-toggle="modal" data-bs-target="#imageModal" onclick="viewImage(this.src)" />
+                                onclick="printImage('birPermit')" />
+                        </div>
+                        <div class="col-6 mb-1">
+                            <label for="mayorsPermit" class="form-label">Mayor's Permit</label> <br>
+                            <img id="mayorsPermit" src="" alt="Mayors Permit" class="img-fluid"
+                                style="height: 200px; width: 200px; object-fit: cover; cursor: pointer;"
+                                onclick="printImage('mayorsPermit')" />
                         </div>
                     </div>
 
@@ -85,22 +92,22 @@
     </div>
 </div>
 
-<!-- Modal for full-screen view -->
-<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header bgp-gradient">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <img id="modalImage" src="" alt="Full Image" class="img-fluid w-100" />
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
-    function viewImage(src) {
-        document.getElementById('modalImage').src = src;
+    // Function to trigger the print dialog
+    function printImage(imgId) {
+        // Get the image element by ID
+        var img = document.getElementById(imgId);
+        
+        // Create a hidden div to hold the image for printing
+        var printWindow = window.open('', '', 'width=600,height=600');
+        printWindow.document.write('<html><head><title>Print Image</title></head><body>');
+        printWindow.document.write('<img src="' + img.src + '" style="max-width:100%; height:auto;" />');
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+
+        // Wait for the image to load and then trigger the print dialog
+        printWindow.onload = function () {
+            printWindow.print(); // This triggers the print dialog
+        };
     }
 </script>
