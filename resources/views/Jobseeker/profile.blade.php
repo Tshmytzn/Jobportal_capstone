@@ -36,9 +36,9 @@
 
     .center-container {
         display: flex;
-        flex-direction: column;   
-        justify-content: center; 
-        align-items: center;      
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     .upload-icon {
@@ -57,7 +57,7 @@
 
     #image-preview {
         display: none;
-        margin-bottom: 10px; 
+        margin-bottom: 10px;
         width: 110px;
         height: 110px;
         object-fit: cover;     /
@@ -106,15 +106,17 @@
                 <div class="text-center">
                     <div class="card-body">
 
+                        <form id="UploadProfileForm" enctype="multipart/form-data">
+                            @csrf
                         <div class="center-container">
                             <img id="image-preview" src="" alt="Image preview" />
                             <label for="file-upload" class="upload-icon">
                                 <i class="fas fa-upload"></i> Upload Image
                                 <input type="file" id="file-upload" accept="image/*" onchange="previewImage(event)" />
                             </label>
-                            <button id="submit-btn" onclick="uploadImage()">Submit</button>
-                        </div>                        
-                        
+                            <button class="btn btn-sm bgp-gradient" id="submit-btn" onclick="uploadImage()">Submit</button>
+                        </div>
+                    </form>
 
                         <h5 class="card-title">{{ $jobseeker->js_firstname . ' ' . $jobseeker->js_lastname }}</h5>
                         <!-- Replace with dynamic jobseeker name -->
