@@ -3,11 +3,6 @@
 
 @include('Agency.components.head', ['title' => 'Skills Requirement'])
 <!-- jQuery -->
-<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
-<!-- DataTables JS -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js" defer></script>
-<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js" defer></script>
-
 
 <body class="g-sidenav-show  bg-gray-100">
 

@@ -7,6 +7,7 @@ use App\Models\JobQuestion;
 use App\Models\JobQuestionAnswer;
 use App\Models\JobQuestionTitle;
 use App\Models\JobseekerAssessmentResult;
+use App\Models\Jobseeker;
 class JobQuestionController extends Controller
 {
     public function AddQuestion(Request $request)
@@ -172,5 +173,20 @@ class JobQuestionController extends Controller
         return response()->json(['status' => 'success']);
     }
 
+    public function AssessmentList(request $request){
+        $titles = JobQuestionTitle::join('job_details', 'job_question_title.jd_id', '=', 'job_details.id')
+        ->where('job_details.agency_id', session('agency_id'))
+        ->select('job_question_title.*', 'job_details.job_title') // Select all columns from job_question_title and only job_title from job_details
+        ->get();
+        $data = [];
+        foreach($titles as $title){
+            $data[]=[
+                'test'=>$title,
+                'result'=> $result = JobseekerAssessmentResult::where('assessment_id', $title->id)->first(),
+                'user'=>$jobseeker = Jobseeker::where('js_id', $result->jobseeker_id)->first(),
+            ];
+        }
+        return response()->json(['data' => $data]);
+    }
 
 }

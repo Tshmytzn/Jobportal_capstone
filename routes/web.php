@@ -254,3 +254,4 @@ Route::get('/GetAssessment', [JobQuestionController::class, 'GetAssessment'])->n
 Route::post('/DeleteAssessment', [JobQuestionController::class, 'DeleteAssessment'])->name('DeleteAssessment');
 Route::get('/LoadTestAssessment', [JobQuestionController::class, 'LoadTestAssessment'])->name('LoadTestAssessment');
 Route::post('/SubmitAssessmentTest', [JobQuestionController::class, 'SubmitAssessmentTest'])->name('SubmitAssessmentTest');
+Route::get('/AssessmentList', [JobQuestionController::class, 'AssessmentList'])->name('AssessmentList');
