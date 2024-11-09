@@ -77,7 +77,7 @@ class JobseekerController extends Controller
         $jobseeker->js_address = $request->input('address');
         $jobseeker->js_email = $request->input('email');
         $jobseeker->js_contactnumber = $request->input('contact'); // Ensure this is correct
-
+        $jobseeker->js_accstatus = 'pending'; 
         // Hash the password before saving
         $jobseeker->js_password = Hash::make($request->input('password'));
 
