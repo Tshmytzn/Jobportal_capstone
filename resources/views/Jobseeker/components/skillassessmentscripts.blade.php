@@ -64,3 +64,40 @@
     }
 
 </script>
+
+<script>
+    function showResults() {
+        // Hide the initial "Well done!" message and prompt to view results
+        document.querySelector('.modal-body.text-center.p-4').style.display = 'none';
+
+        // Show the "Results" section inside the modal
+        document.getElementById('assessmentResults').style.display = 'block';
+
+        // Make an AJAX request to get the assessment results
+        $.ajax({
+            type: "GET",
+            url: '{{ route('getAssessmentResults') }}', // Route to get results
+            success: function(response) {
+                if (response.status === 'success') {
+                    // Populate the results in the modal
+                    $('#scoreResult span').text(response.score);
+                    $('#passStatus span').text(response.passed);
+                    $('#scorePercentage span').text(response.percentage + '%');
+
+                } else {
+                    // Show error message in case no results were found
+                    $('#scoreResult span').text('N/A');
+                    $('#passStatus span').text('No result found');
+                    $('#scorePercentage span').text('N/A'); // No percentage if no result
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Error fetching results:", error);
+                // Handle errors if needed
+                $('#scoreResult span').text('Error');
+                $('#passStatus span').text('Unable to fetch result');
+                $('#scorePercentage span').text('Error'); // Show error if fetch fails
+            }
+        });
+    }
+</script>

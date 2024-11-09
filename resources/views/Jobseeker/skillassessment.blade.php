@@ -86,7 +86,7 @@
                         </div>
                     @endforeach
         
-                    <button class="btn bgp-gradient" type="button" onclick="submitAssessment()">Submit Assessment</button>
+                    <button class="btn bgp-gradient btn-lg" type="button" onclick="submitAssessment()">Submit Assessment</button>
                 </div>
             @else
                 <div class="container text-center my-5">

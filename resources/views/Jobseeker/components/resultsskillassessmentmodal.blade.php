@@ -15,13 +15,15 @@
             <!-- Results Section (hidden initially) -->
             <div class="modal-body text-center p-4" id="assessmentResults" style="display: none;">
                 <h4>Your Assessment Results</h4>
-                <p id="scoreResult">Your score: <span></span>%</p>
+                <p id="scoreResult">Your score: <span></span></p>
+                <p id="scorePercentage">Your percentage: <span></span></p> <!-- New line for percentage -->
                 <p id="passStatus">Status: <span></span></p>
             </div>
+            
             <div class="modal-footer justify-content-center border-0">
-                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                <a href="#" class="btn btn-success" id="viewResultsBtn" onclick="showResults()">View Results</a>
+                <a href="javascript:void(0);" class="btn btn-success" id="viewResultsBtn" onclick="showResults()">View Results</a>
             </div>
+            
         </div>
     </div>
 </div>

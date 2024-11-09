@@ -165,13 +165,27 @@
                     <div class="card card-custom mb-4">
                         <div class="card-body text-center">
                             <h5 class="card-title">Skill Assessment Badge</h5>
-                            <p class="card-text">Your assessment badge will be displayed here.</p>
-                            <div class="badge-placeholder">
-                                <span>Badge</span>
+                <hr>
+                            <div class="badge">
+                                @if (session('user_id') && App\Models\JobSeeker::find(session('user_id'))->js_badge)
+                                    <!-- If js_badge exists, display the badge image -->
+                                    <img class="img-fluid rounded" id="badge-preview"
+                                         src="{{ asset('img/' . App\Models\JobSeeker::find(session('user_id'))->js_badge) }}"
+                                         alt="Skill Assessment Badge" style="display: block; width: 150px; height: auto;">
+                                @else
+                                <div class="badge-placeholder">
+
+                                    <span class="badge-message"></span>
+                                </div>
+
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
+                
+                
+
             </div>
 
             <!-- Update Profile Info -->
@@ -274,8 +288,8 @@
                                     <div class="col-md-6">
                                         <label for="jobseeker_gender">Gender</label>
                                         <input type="text" id="jobseeker_gender" name="jobseeker_gender"
-                                            class="form-control" value="{{ $pesoForm ? $pesoForm->peso_gender : '' }}"
-                                            readonly>
+                                            class="form-control"
+                                            value="{{ $pesoForm ? $pesoForm->peso_gender : '' }}" readonly>
                                     </div>
 
                                     <div class="col-md-6">
