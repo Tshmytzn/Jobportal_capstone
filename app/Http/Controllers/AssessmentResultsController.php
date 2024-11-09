@@ -8,6 +8,8 @@ use App\Models\Jobseeker;
 use App\Models\JobseekerSkillAnswers;
 use App\Models\AssessmentResult;
 use App\Models\Question;
+use App\Models\JobseekerGlobalAnswer;
+
 
 class AssessmentResultsController extends Controller
 {
@@ -67,4 +69,35 @@ class AssessmentResultsController extends Controller
             'passed' => $passed,
         ]);
     }
+
+
+       public function submit(Request $request)
+    {
+        $jobseekerId = $request->input('js_id');
+
+        foreach ($request->all() as $key => $value) {
+            if (str_starts_with($key, 'q')) {
+                $questionId = (int) str_replace('q', '', $key);
+                $answer = new JobseekerGlobalAnswer();
+                $answer->js_id = $jobseekerId;
+                $answer->question_id = $questionId;
+
+                if (is_array($value)) {
+                    // Handle checkbox type questions
+                    foreach ($value as $optionId) {
+                        $answer->option_id = $optionId;
+                        $answer->save();
+                    }
+                } else {
+                    // Handle radio or text type questions
+                    $answer->option_id = $value ? $value : null; // For radio questions
+                    $answer->answer_text = is_string($value) ? $value : null; // For text questions
+                    $answer->save();
+                }
+            }
+        }
+
+        return response()->json(['status' => 'success', 'message' => 'Assessment submitted successfully!']);
+    }
+
 }

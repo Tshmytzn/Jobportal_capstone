@@ -62,6 +62,7 @@
         height: 110px;
         object-fit: cover;/ border-radius: 5px;
     }
+
     @media print {
 
         .print-btn {
@@ -71,9 +72,12 @@
         body * {
             visibility: hidden;
         }
-        #printableContent, #printableContent * {
+
+        #printableContent,
+        #printableContent * {
             visibility: visible;
         }
+
         #printableContent {
             position: absolute;
             left: 0;
@@ -87,8 +91,6 @@
             margin: 10px 0;
         }
     }
-
-    
 </style>
 
 <body>
@@ -191,19 +193,52 @@
                     </div>
 
                     <!-- Print pesoform -->
-                    <div class="container me-5" id="printableDiv" >
-                        <div class="centered-container text-center">
-                            <div class="mt-2">
-                                <img src="{{ asset('assets/img/PESOLOGO.png') }}" class="m-0" alt="PESO Logo" style="max-width: 10%; max-height: 10%; width: auto; height: auto;">
-                            </div>
-                            <header class="mt-3">
-                                <h4>PESO Registration Form</h4>
-                            </header>
-                        </div>
+                    <div class="container me-5" id="printableDiv">
 
                         @php
-                            $pesoForm = \App\Models\JobseekerPesoform::where('js_id', session('user_id'))->first();
+                            $pesoForm = null;
+                            if (session()->has('user_id')) {
+                                $pesoForm = \App\Models\JobseekerPesoform::where('js_id', session('user_id'))->first();
+                            }
                         @endphp
+
+                        @if (!$pesoForm)
+                            <!-- Message if no pesoForm exists -->
+                            <div class="alert alert-warning m-2">
+                                <strong>Warning!</strong> You have not completed your personal information form. Please
+                                fill out the form completely.
+                            </div>
+                        @else
+                            <div class="centered-container text-center">
+                                <div class="mt-2">
+                                    <img src="{{ asset('assets/img/PESOLOGO.png') }}" class="m-0" alt="PESO Logo"
+                                        style="max-width: 10%; max-height: 10%; width: auto; height: auto;">
+                                </div>
+                                <header class="mt-3">
+                                    <h4>PESO Registration Form</h4>
+                                </header>
+                            </div>
+
+                            @php
+                                $pesoForm = null; // Initialize with null in case no user is logged in.
+                                if (session()->has('user_id')) {
+                                    $pesoForm = \App\Models\JobseekerPesoform::where(
+                                        'js_id',
+                                        session('user_id'),
+                                    )->first();
+                                }
+                            @endphp
+
+                            @php
+                                $pesoForm = null;
+                                if (session()->has('user_id')) {
+                                    $pesoForm = \App\Models\JobseekerPesoform::where(
+                                        'js_id',
+                                        session('user_id'),
+                                    )->first();
+                                }
+                            @endphp
+
                             <!-- Personal Information Section -->
                             <div class="form-section">
                                 <div class="section-header mb-2">
@@ -215,55 +250,57 @@
                                     <div class="col-md-6">
                                         <label>SRS ID</label>
                                         <input type="number" id="srs_id" name="srs_id" class="form-control"
-                                            value="{{ $pesoForm->peso_srsid }}" readonly>
+                                            value="{{ $pesoForm ? $pesoForm->peso_srsid : '' }}" readonly>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label for="full_name">Full Name</label>
                                         <input type="text" id="full_name" name="full_name" class="form-control"
-                                            value="{{ $pesoForm->peso_fullname }}" readonly>
+                                            value="{{ $pesoForm ? $pesoForm->peso_fullname : '' }}" readonly>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label>Birthdate</label>
                                         <input type="date" id="birthdate" name="birthdate" class="form-control"
-                                            value="{{ $pesoForm->peso_birthdate }}" readonly>
+                                            value="{{ $pesoForm ? $pesoForm->peso_birthdate : '' }}" readonly>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label>Age</label>
                                         <input type="text" id="age" name="age" class="form-control"
-                                            value="{{ $pesoForm->peso_age }}" readonly>
+                                            value="{{ $pesoForm ? $pesoForm->peso_age : '' }}" readonly>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label for="jobseeker_gender">Gender</label>
                                         <input type="text" id="jobseeker_gender" name="jobseeker_gender"
-                                            class="form-control" value="{{ $pesoForm->peso_gender }}" readonly>
+                                            class="form-control" value="{{ $pesoForm ? $pesoForm->peso_gender : '' }}"
+                                            readonly>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label for="civil_status">Civil Status</label>
                                         <input type="text" id="civil_status" name="civil_status"
-                                            class="form-control" value="{{ $pesoForm->peso_civilstatus }}" readonly>
+                                            class="form-control"
+                                            value="{{ $pesoForm ? $pesoForm->peso_civilstatus : '' }}" readonly>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label>City/Municipality</label>
                                         <input type="text" name="city" id="city" class="form-control"
-                                            value="{{ $pesoForm->peso_city }}" readonly>
+                                            value="{{ $pesoForm ? $pesoForm->peso_city : '' }}" readonly>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label for="barangay">Barangay</label>
                                         <input type="text" id="barangay" name="barangay" class="form-control"
-                                            value="{{ $pesoForm->peso_baranggay }}" readonly>
+                                            value="{{ $pesoForm ? $pesoForm->peso_baranggay : '' }}" readonly>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label>Street Address</label>
                                         <input type="text" id="street" name="street" class="form-control"
-                                            value="{{ $pesoForm->peso_street }}" readonly>
+                                            value="{{ $pesoForm ? $pesoForm->peso_street : '' }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -279,19 +316,20 @@
                                     <div class="col-md-6">
                                         <label>Email</label>
                                         <input type="email" id="jobseeker_email" name="jobseeker_email"
-                                            class="form-control" value="{{ $pesoForm->peso_email }}" readonly>
+                                            class="form-control" value="{{ $pesoForm ? $pesoForm->peso_email : '' }}"
+                                            readonly>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label>Telephone</label>
                                         <input type="tel" id="telephone" name="telephone" class="form-control"
-                                            value="{{ $pesoForm->peso_tel }}" readonly>
+                                            value="{{ $pesoForm ? $pesoForm->peso_tel : '' }}" readonly>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label>Cellphone Number</label>
                                         <input type="tel" id="cellphone" name="cellphone" class="form-control"
-                                            value="{{ $pesoForm->peso_cell }}" readonly>
+                                            value="{{ $pesoForm ? $pesoForm->peso_cell : '' }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -307,42 +345,45 @@
                                     <div class="col-md-6">
                                         <label>Employment Status</label>
                                         <input type="text" id="employment_status" name="employment_status"
-                                            class="form-control" value="{{ $pesoForm->peso_employment }}" readonly>
+                                            class="form-control"
+                                            value="{{ $pesoForm ? $pesoForm->peso_employment : '' }}" readonly>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label for="education_level">Education Level</label>
                                         <input type="text" id="education_level" name="education_level"
-                                            class="form-control" value="{{ $pesoForm->peso_educ }}" readonly>
+                                            class="form-control" value="{{ $pesoForm ? $pesoForm->peso_educ : '' }}"
+                                            readonly>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label for="preferred_position">Preferred Position</label>
                                         <input type="text" id="preferred_position" name="preferred_position"
-                                            class="form-control" value="{{ $pesoForm->peso_position }}" readonly>
+                                            class="form-control"
+                                            value="{{ $pesoForm ? $pesoForm->peso_position : '' }}" readonly>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label for="skills">Skills</label>
                                         <input type="text" class="form-control" id="skills" name="skills"
-                                            value="{{ $pesoForm->peso_skills }}" readonly>
+                                            value="{{ $pesoForm ? $pesoForm->peso_skills : '' }}" readonly>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label>Work Experience</label>
-                                        <textarea class="form-control" id="work_experience" name="work_experience" readonly>{{ $pesoForm->peso_work }}</textarea>
+                                        <textarea class="form-control" id="work_experience" name="work_experience" readonly>{{ $pesoForm ? $pesoForm->peso_work : '' }}</textarea>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label>4P's Beneficiary</label>
                                         <input type="text" id="4ps" name="4ps" class="form-control"
-                                            value="{{ $pesoForm->peso_4ps }}" readonly>
+                                            value="{{ $pesoForm ? $pesoForm->peso_4ps : '' }}" readonly>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label>PWD</label>
                                         <input type="text" id="pwd" name="pwd" class="form-control"
-                                            value="{{ $pesoForm->peso_pwd }}" readonly>
+                                            value="{{ $pesoForm ? $pesoForm->peso_pwd : '' }}" readonly>
                                     </div>
                                 </div>
                             </div>
@@ -358,34 +399,36 @@
                                     <div class="col-md-6">
                                         <label for="office">Office</label>
                                         <input type="text" id="office" name="office" class="form-control"
-                                            value="{{ $pesoForm->peso_office }}" readonly>
+                                            value="{{ $pesoForm ? $pesoForm->peso_office : '' }}" readonly>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label for="transaction">Transaction</label>
                                         <input type="text" id="transaction" name="transaction"
-                                            class="form-control" value="{{ $pesoForm->peso_transaction }}" readonly>
+                                            class="form-control"
+                                            value="{{ $pesoForm ? $pesoForm->peso_transaction : '' }}" readonly>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label for="remarks">Remarks</label>
-                                        <textarea class="form-control" id="remarks" name="remarks" readonly>{{ $pesoForm->peso_remarks }}</textarea>
+                                        <textarea class="form-control" id="remarks" name="remarks" readonly>{{ $pesoForm ? $pesoForm->peso_remarks : '' }}</textarea>
                                     </div>
                                 </div>
                             </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <script>
         function printDiv(divId) {
             var divContent = document.getElementById(divId).innerHTML;
 
             var printWindow = window.open('', '', 'height=400,width=600');
             printWindow.document.write('<html><head><title>Print Content</title>');
-            printWindow.document.write('<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">');
+            printWindow.document.write(
+                '<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">');
             printWindow.document.write('<style>@media print {.col-md-6 { display: inline-block; width: 49%; } }</style>');
             printWindow.document.write('</head><body>');
             printWindow.document.write('<div class="container me-5">' + divContent + '</div>');

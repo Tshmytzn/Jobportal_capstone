@@ -1,36 +1,41 @@
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function () {
-        if (typeof submitAssessment === "function") {
-            console.log("submitAssessment function is available.");
-        } else {
-            console.error("submitAssessment function is not defined.");
-        }
+    function submitAssessment() {
+        // document.getElementById('loading').style.display = 'grid';
 
-        function submitAssessment() {
+        var formElement = document.getElementById('assessmentForm');
+        var formData = new FormData(formElement);
 
-            console.log('clicked'); 
-            var formData = new FormData($('#assessmentForm')[0]);
+        $.ajax({
+            type: "POST",
+            url: '{{ route('submitassessment') }}',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                document.getElementById('loading').style.display = 'none';
 
-            $.ajax({
-                url: '{{ route("assessment.submit") }}',
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                success: function(data) {
-                    if (data.status === 'success') {
-                        alert('Assessment submitted successfully!');
-                    } else {
-                        alert('There was an error submitting your assessment.');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Error:', error);
-                    alert('An error occurred, please try again later.');
+                if (response.status === 'error') {
+                    Swal.fire('Error', response.message, 'error');
+                } else {
+                    Swal.fire({
+                        title: 'Success',
+                        text: response.message,
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1000
+                    }).then(() => {
+                        window.location.href = '{{ route('homepage') }}';
+                    });
                 }
-            });
-        }
-    });
+            },
+            error: function(xhr) {
+                document.getElementById('loading').style.display = 'none';
+
+                console.error('AJAX Error:', xhr.responseText);
+                Swal.fire('Error', 'An error occurred while submitting the assessment.', 'error');
+            }
+        });
+    }
 </script>
+
+{{--  --}}
