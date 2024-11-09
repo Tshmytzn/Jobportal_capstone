@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\JobQuestion;
 use App\Models\JobQuestionAnswer;
 use App\Models\JobQuestionTitle;
+use App\Models\JobseekerAssessmentResult;
 class JobQuestionController extends Controller
 {
     public function AddQuestion(Request $request)
@@ -111,4 +112,65 @@ class JobQuestionController extends Controller
         $data->delete();
         return response()->json(['status' => 'success']);
     }
+
+    public function LoadTestAssessment(request $request){
+        $titles = JobQuestionTitle::where('jd_id',$request->id)->first();
+        $questions = JobQuestion::where('jqt_id', $titles->id)->get();
+        $data = [];
+        foreach($questions as $question){
+            $answers = JobQuestionAnswer::where('jq_id', $question->id)->get();
+            $data[] = [
+                'id'=>$titles->id,
+                'question_id'=>$question->id,
+                'question' => $question->question,
+                'answer'=> $answers
+            ];
+        }
+        return response()->json(['data' => $data]);
+    }
+    public function SubmitAssessmentTest(Request $request)
+    {
+        // Retrieve `question_id` and `flexRadioDefault` arrays from the request
+        $questionIds = $request->input('question_id');
+        $answers = $request->input('flexRadioDefault');
+
+        // Initialize score counter
+        $score = 0;
+
+        // Loop through each question's answer and check if it is correct
+        foreach ($questionIds as $index => $questionArray) {
+            // Each question has a single ID in the array
+            $questionId = $questionArray[0]; // Access the question ID
+
+            // Get the answer for this question
+            if (isset($answers[$index][0]) && $answers[$index][0] === 'Correct') {
+                $score++; // Increment score if answer is correct
+            }
+        }
+
+        // Determine the passing score based on the number of questions
+        $totalQuestions = count($questionIds);
+        if ($totalQuestions == 2) {
+            $passingScore = $totalQuestions * 0.50; // 50% passing score for 2 questions
+        } elseif ($totalQuestions > 3) {
+            $passingScore = $totalQuestions * 0.75; // 75% passing score for more than 3 questions
+        } else {
+            $passingScore = $totalQuestions; // Default passing score for 3 or fewer questions (e.g., 100% for 3 questions)
+        }
+
+        // Set the passed status based on the score
+        $passed = $score >= $passingScore ? 'pass' : 'not pass';
+
+        // Save the assessment result in the database
+        $data = new JobseekerAssessmentResult();
+        $data->jobseeker_id = session('user_id');
+        $data->assessment_id = $request->assId;
+        $data->score = $score;
+        $data->passed = $passed;
+        $data->save();
+
+        return response()->json(['status' => 'success']);
+    }
+
+
 }

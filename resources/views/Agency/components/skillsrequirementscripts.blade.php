@@ -104,9 +104,9 @@ function saveSkillAssessment(){
     const form = document.getElementById('questionForm')
     const formData = new FormData(form);
     formData.append('_token', '{{ csrf_token() }}');
-    formData.forEach((value, key) => {
-    console.log(`${key}: ${value}`);
-});
+//     formData.forEach((value, key) => {
+//     console.log(`${key}: ${value}`);
+// });
 
 $.ajax({
         url: `{{route('AddQuestion')}}`, // The URL to which the request will be sent

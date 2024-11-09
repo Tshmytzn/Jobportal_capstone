@@ -137,4 +137,112 @@
             }
         });
     }
+const urlParams = new URLSearchParams(window.location.search);
+
+// Retrieve a specific parameter by name
+let id = urlParams.get('id'); 
+let count = 1;
+function LoadAssessmentTest() {
+    $.ajax({
+        url: `{{ route('LoadTestAssessment') }}?id=` + id,  // Blade syntax for the route and id
+        method: 'GET',  // HTTP method
+        dataType: 'json',  // Expected data type from the server
+        success: function(response) {
+            const body = document.getElementById('assessmentModalBody');
+            body.innerHTML = '<input type="text" name="assId" id="assId" hidden>';  // Clear any existing content
+            let assId = ''
+            response.data.forEach(element => {
+                assId = element.id;
+                // Create the question container
+                const questionDiv = document.createElement("div");
+                questionDiv.classList.add("col-12", "p-2");
+                questionDiv.id = element.question_id;
+
+                // Create the input field
+                const inputField = document.createElement("input");
+                inputField.type = "text";
+                inputField.classList.add("form-control");
+                inputField.value = element.question;
+                inputField.readOnly = true;
+
+                const inputField2 = document.createElement("input");
+                inputField2.type = "text";
+                inputField2.classList.add("form-control");
+                inputField2.value = element.question_id;
+                inputField2.name = `question_id[${count}][]`
+                inputField2.readOnly = true;
+                inputField2.hidden = true;
+
+                // Append the input field to the question container
+                questionDiv.appendChild(inputField);
+                questionDiv.appendChild(inputField2);
+                // Create and append the answers
+                element.answer.forEach((item, index) => {
+                    const formCheckDiv = document.createElement("div");
+                    formCheckDiv.classList.add("form-check");
+
+                    const radioInput = document.createElement("input");
+                    radioInput.classList.add("form-check-input");
+                    radioInput.type = "radio";
+                    radioInput.name = `flexRadioDefault[${count}][]`;
+                    radioInput.id = `flexRadioDefault${count}_${index}`;
+                    radioInput.value = item.status  // Unique ID
+
+                    const label = document.createElement("label");
+                    label.classList.add("form-check-label");
+                    label.htmlFor = `flexRadioDefault${count}_${index}`;
+                    label.textContent = item.answer;
+
+                    formCheckDiv.appendChild(radioInput);
+                    formCheckDiv.appendChild(label);
+
+                    questionDiv.appendChild(formCheckDiv);
+                });
+
+                // Append the question container to the body
+                body.appendChild(questionDiv);
+
+                count++;  // Increment count for each question
+            });
+            document.getElementById('assId').value=assId
+        },
+        error: function(xhr, status, error) {
+            // Code to run if there's an error
+            console.error("Error:", error);
+        }
+    });
+}
+function submitAsessmentTestForm(){
+    const form = document.getElementById("submitAssessmentForm");
+    const formData = new FormData(form);
+    for (let [key, value] of formData.entries()) {
+    console.log(`${key}: ${value}`);
+}
+formData.append('_token', '{{ csrf_token() }}');
+$.ajax({
+        url: `{{route('SubmitAssessmentTest')}}`, // The URL to which the request will be sent
+        type: 'POST', // The type of request
+        data: formData, // Pass the FormData object
+        processData: false, // Prevent jQuery from automatically transforming the data into a query string
+        contentType: false, // Let the browser set the content type (for file uploads)
+        success: function(response) {
+            Swal.fire({
+                    icon: "success",
+                    title: "Test SuccessFully Submited",
+                    showConfirmButton: false,
+                    timer: 1500
+                    });
+            location.reload();
+        },
+             error: function(xhr, status, error) {
+            // This function is executed if there is an error in the request
+            console.error('Error:', error);
+            // You can handle the error here
+        }
+    });
+
+}
+$(document).ready(function() {
+LoadAssessmentTest();
+});
 </script>
