@@ -207,7 +207,7 @@
                         <select id="preferred_position" name="preferred_position" required>
                             <option value="">Select Preferred Position</option>
                             @foreach($jobs as $job)
-                                <option value="{{ $job->job_id }}">{{ $job->job_title }}</option>
+                                <option value="{{ $job->job_title }}">{{ $job->job_title }}</option>
                             @endforeach
                         </select>
                     </div>

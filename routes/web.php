@@ -213,7 +213,11 @@ Route::get('/ContactUs', function () { return view('Jobseeker.contactus'); })->n
 Route::get('/SkillAssessment', function () { return view('Jobseeker.skillassessment'); })->name('skillassessment');
 
 //answer submission
-Route::post('/assessment/submit', [AssessmentResultsController::class, 'submitAssessment'])->name('assessment.submit');
+Route::post('/assessment/submit', [AssessmentResultsController::class, 'submit'])->name('submitassessment');
+
+//results assessment display
+Route::get('/assessment/results/{jobseekerId}/{assessmentId}', [AssessmentResultsController::class, 'showResults'])
+    ->name('assessment.results');
 
 Route::get('/404', function () { return view('Jobseeker.404'); })->name('404');
 Route::get('/Profile', function () { return view('Jobseeker.profile'); })->name('profile');

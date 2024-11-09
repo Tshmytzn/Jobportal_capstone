@@ -26,12 +26,19 @@
     </div>
         <!-- Assessment Title and Description -->
 
-        <form id="assessmentForm" method="POST" action="">
+        <div id="loading" style="display: none;">Loading...</div>
+
+        <form id="assessmentForm" method="POST">
             @csrf
+        
+            <input type="hidden" name="js_id" value="{{ session('user_id') }}">
         
             @php
                 $skillassessment = \App\Models\Assessment::with('sections.questions.options')->first();
             @endphp
+
+<input type="hidden" name="assessment_id" value="{{ $skillassessment->id }}"> <!-- Add assessment_id -->
+
         
             @if ($skillassessment)
                 <div class="container text-center py-1" style="max-width: 900px;">
@@ -53,14 +60,24 @@
                                 @foreach ($section->questions as $question)
                                     <div class="mb-3">
                                         <h6 class="font-weight-bold">{{ $question->question_text }}</h6>
+                                        
                                         @foreach ($question->options as $option)
                                             <div class="form-check">
-                                                <input class="form-check-input" type="radio"
-                                                       name="q{{ $question->id }}"
-                                                       id="q{{ $question->id }}_{{ $option->id }}"
-                                                       value="{{ $option->id }}">
+                                                @if ($question->question_type == 'multiple') <!-- Handle multi-select questions -->
+                                                    <input class="form-check-input" type="checkbox"
+                                                           name="q{{ $question->id }}[]"
+                                                           id="q{{ $question->id }}_{{ $option->option_text }}"
+                                                           value="{{ $option->option_text }}">
+                                                @else
+                                                    <input class="form-check-input" type="radio"
+                                                           name="q{{ $question->id }}"
+                                                           id="q{{ $question->id }}_{{ $option->option_text }}"
+                                                           value="{{ $option->option_text }}">
+                                                @endif
                                                 <label class="form-check-label"
-                                                       for="q{{ $question->id }}_{{ $option->id }}">{{ $option->option_text }}</label>
+                                                       for="q{{ $question->id }}_{{ $option->option_text }}">
+                                                    {{ $option->option_text }}
+                                                </label>
                                             </div>
                                         @endforeach
                                     </div>
@@ -68,7 +85,8 @@
                             </div>
                         </div>
                     @endforeach
-                    <button type="button" onclick="submitAssessment()">Submit Assessment</button>
+        
+                    <button class="btn bgp-gradient" type="button" onclick="submitAssessment()">Submit Assessment</button>
                 </div>
             @else
                 <div class="container text-center my-5">
@@ -77,20 +95,15 @@
                 </div>
             @endif
         </form>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                console.log('Page loaded');
-                
-            });
-            function submitAssessment(){
-                    var form = document.getElementById('assessmentForm');
-                    console.log('Button clicked!');
-                    form.submit();  // Submit the form
-                }
-        </script>
+        
+
+        
 
         @include('Jobseeker.components.footer')
         @include('Jobseeker.components.scripts')
+        @include('Jobseeker.components.skillassessmentscripts')
+        @include('Jobseeker.components.resultsskillassessmentmodal')
+
 
 </body>
 

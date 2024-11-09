@@ -196,13 +196,22 @@
                                 <option value="No Formal Education">No Formal Education</option>
                             </select>
                         </div>
-
+                        
+                    @php
+                        $jobs = \App\Models\JobDetails::join('agencies','job_details.agency_id','=','agencies.id')
+                            ->where('agencies.status', 'approved')
+                            ->select('job_details.id as job_id','job_details.job_title')
+                            ->get(); 
+                    @endphp
 
                         <div class="input-field">
-                            <label>Preferred Position</label>
-                            <input type="text" id="preferred_position" name="preferred_position"
-                                value="{{ $pesoForm->peso_position ?? '' }}" placeholder="Preferred Position"
-                                required>
+                            <label for="preferred_position">Preferred Position</label>
+                            <select id="preferred_position" name="preferred_position" required>
+                                <option value="">Select Preferred Position</option>
+                                @foreach($jobs as $job)
+                                    <option value="{{ $job->job_title }}">{{ $job->job_title }}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         @php
