@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('js_password', 255); // Password (hashed)
             $table->string('js_accstatus', 255)->nullable();
             $table->string('js_image', 255)->nullable();
+            $table->string('js_badge', 255)->nullable();
 
 
             // Timestamps
@@ -48,6 +49,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
+                'js_badge' => null,                
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -64,6 +66,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
+                'js_badge' => null,                
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -80,6 +83,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
+                'js_badge' => null,                
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -96,7 +100,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -112,7 +116,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -128,7 +132,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -144,7 +148,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -160,7 +164,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -176,7 +180,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -192,7 +196,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -208,7 +212,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -224,7 +228,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -240,7 +244,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -256,7 +260,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -272,7 +276,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -288,7 +292,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -304,7 +308,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -320,7 +324,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -336,7 +340,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -352,7 +356,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -368,7 +372,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -384,7 +388,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -400,7 +404,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -416,7 +420,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -432,7 +436,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -448,7 +452,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -464,7 +468,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -480,7 +484,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -496,7 +500,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -512,7 +516,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -528,7 +532,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -544,7 +548,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -560,7 +564,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -576,7 +580,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -592,7 +596,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -608,7 +612,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -624,7 +628,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -640,7 +644,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -656,7 +660,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -672,7 +676,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -688,7 +692,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -704,7 +708,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -720,7 +724,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -736,7 +740,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -752,7 +756,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -768,7 +772,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -784,7 +788,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -800,7 +804,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -816,7 +820,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -832,7 +836,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -848,7 +852,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -864,7 +868,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -880,7 +884,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -896,7 +900,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -912,7 +916,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -928,7 +932,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -944,7 +948,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -960,7 +964,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -976,7 +980,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -992,7 +996,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1008,7 +1012,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1024,7 +1028,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1040,7 +1044,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1056,7 +1060,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1072,7 +1076,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1088,7 +1092,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1104,7 +1108,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1120,7 +1124,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1136,7 +1140,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1152,7 +1156,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1168,7 +1172,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1184,7 +1188,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1200,7 +1204,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1216,7 +1220,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1232,7 +1236,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1248,7 +1252,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1264,7 +1268,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1280,7 +1284,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1296,7 +1300,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1312,7 +1316,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1328,7 +1332,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1344,7 +1348,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1360,7 +1364,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1376,7 +1380,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
             [
@@ -1392,7 +1396,7 @@ return new class extends Migration
                 'js_password' => bcrypt('12345678'),
                 'js_accstatus' => 'pending',
                 'js_image' => null,
-                'created_at' => now(),
+                'js_badge' => null,                'created_at' => now(),
                 'updated_at' => now(),
             ],
 

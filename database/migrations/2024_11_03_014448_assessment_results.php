@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('jobseeker_id')->constrained('jobseeker_details', 'js_id')->onDelete('cascade');
             $table->foreignId('assessment_id')->constrained()->onDelete('cascade');
+            $table->integer('correct_answers')->default(0); 
+            $table->integer('total_questions')->default(0); 
             $table->integer('score')->nullable();
-            $table->boolean('passed')->nullable();
+            $table->string('passed')->nullable();
             $table->timestamps();
         });
     }

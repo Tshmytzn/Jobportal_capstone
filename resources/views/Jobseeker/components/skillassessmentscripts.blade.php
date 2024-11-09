@@ -48,25 +48,10 @@
                         timer: 1000
                     }).then(() => {
 
-                        var jobseekerId = response.result.js_id;
-                        var assessmentId = response.result.assessment_id;
-                        var score = response.result
-                            .score; 
-                        var passed = response.result.passed; 
-
-                        var resultsUrl =
-                            '{{ route('assessment.results', ['jobseekerId' => '__jobseeker_id__', 'assessmentId' => '__assessment_id__']) }}';
-                        resultsUrl = resultsUrl.replace('__jobseeker_id__', jobseekerId);
-                        resultsUrl = resultsUrl.replace('__assessment_id__', assessmentId);
-
-                        document.getElementById('viewResultsBtn').setAttribute('href', resultsUrl);
-
+            
                         var myModal = new bootstrap.Modal(document.getElementById(
                             'assessmentModal'));
                         myModal.show();
-
-                        document.getElementById('assessmentResults').style.display =
-                            'none'; // Hide results initially
                     });
                 }
             },
@@ -78,4 +63,41 @@
         });
     }
 
+</script>
+
+<script>
+    function showResults() {
+        // Hide the initial "Well done!" message and prompt to view results
+        document.querySelector('.modal-body.text-center.p-4').style.display = 'none';
+
+        // Show the "Results" section inside the modal
+        document.getElementById('assessmentResults').style.display = 'block';
+
+        // Make an AJAX request to get the assessment results
+        $.ajax({
+            type: "GET",
+            url: '{{ route('getAssessmentResults') }}', // Route to get results
+            success: function(response) {
+                if (response.status === 'success') {
+                    // Populate the results in the modal
+                    $('#scoreResult span').text(response.score);
+                    $('#passStatus span').text(response.passed);
+                    $('#scorePercentage span').text(response.percentage + '%');
+
+                } else {
+                    // Show error message in case no results were found
+                    $('#scoreResult span').text('N/A');
+                    $('#passStatus span').text('No result found');
+                    $('#scorePercentage span').text('N/A'); // No percentage if no result
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Error fetching results:", error);
+                // Handle errors if needed
+                $('#scoreResult span').text('Error');
+                $('#passStatus span').text('Unable to fetch result');
+                $('#scorePercentage span').text('Error'); // Show error if fetch fails
+            }
+        });
+    }
 </script>

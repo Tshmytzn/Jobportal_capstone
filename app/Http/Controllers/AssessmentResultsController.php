@@ -53,46 +53,85 @@ class AssessmentResultsController extends Controller
     {
         // Fetch the sections associated with the assessment
         $sections = Section::where('assessment_id', $assessmentId)->get();
-
+    
         // Fetch all the questions belonging to these sections
         $questions = Question::whereIn('section_id', $sections->pluck('id'))->get();
-
+    
         // Fetch the jobseeker's answers
         $jobseekerAnswers = JobseekerGlobalAnswer::where('js_id', $jobseekerId)->get();
-
+    
         $correctAnswersCount = 0;
         $totalQuestions = $questions->count();
-
+    
         // Loop through each question and compare answers
         foreach ($questions as $question) {
             // Find the jobseeker's answer for this question
             $jobseekerAnswer = $jobseekerAnswers->firstWhere('question_id', $question->id);
-
+    
             if ($jobseekerAnswer) {
-                // Compare the jobseeker's answer to the correct answer
-                if ($jobseekerAnswer->answer_text == $question->answer) {
-                    $correctAnswersCount++;
+                // Compare the jobseeker's selected option_id with the stored correct option_id
+                $correctOptionId = $question->answer; // This stores option_id as the correct answer
+    
+                if ($jobseekerAnswer->option_id == $correctOptionId) {
+                    $correctAnswersCount++; // Increment correct answer count
                 }
             }
         }
-
-        // Calculate the score percentage
-        $score = ($correctAnswersCount / $totalQuestions) * 100;
-
-        // Determine if the jobseeker passed (70% or above)
-        $passed = $score >= 70 ? true : false;
-
+    
+        // Determine if the jobseeker passed or failed (70% or higher correct answers)
+        $passed = $correctAnswersCount >= ($totalQuestions * 0.7) ? 'Passed' : 'Failed';
+    
         // Save the result in the assessment_results table
-        AssessmentResult::create([
+        $assessmentResult = AssessmentResult::create([
             'jobseeker_id' => $jobseekerId,
             'assessment_id' => $assessmentId,
-            'score' => $score,
-            'passed' => $passed,
+            'correct_answers' => $correctAnswersCount, // Store the correct answer count
+            'total_questions' => $totalQuestions, // Store the total questions count
+            'score' => $correctAnswersCount, // Store the number of correct answers as the score
+            'passed' => $passed, // Store 'Passed' or 'Failed'
         ]);
-
-        return $score;
+    
+        // If the jobseeker passed, set the badge image
+        if ($passed == 'Passed') {
+            // Update the jobseeker's js_badge field with the path to the badge image
+            $jobseeker = Jobseeker::find($jobseekerId);
+            $jobseeker->js_badge = 'badge.png';
+            $jobseeker->save();
+        }
+    
+        return $correctAnswersCount;
     }
 
+    public function getAssessmentResults(Request $request)
+    {
+        $jobseekerId = session('user_id');
+        
+        $result = AssessmentResult::where('jobseeker_id', $jobseekerId)->latest()->first(); 
+    
+        if ($result) {
+
+            $percentage = ($result->correct_answers / $result->total_questions) * 100;
+    
+            return response()->json([
+                'status' => 'success',
+                'score' => $result->correct_answers,  
+                'percentage' => number_format($percentage, 2),  
+                'passed' => $result->passed,  
+                'total_questions' => $result->total_questions,
+                'correct_answers' => $result->correct_answers
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'No assessment results found for this user.'
+            ]);
+        }
+    }
+    
+
+    
+    
+    
     
 
     //     public function calculateResults($jobseekerId, $assessmentId)
