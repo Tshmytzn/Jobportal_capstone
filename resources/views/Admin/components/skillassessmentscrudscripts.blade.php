@@ -227,13 +227,13 @@
                                 const isChecked = (question.answer === option.option_text) ?
                                     'checked' : '';
                                 optionDiv.innerHTML = `
-                                <input type="radio" name="question_${question.id}" value="${option.id}" ${isChecked}> ${option.option_text}
+                                <input type="radio" name="question_${question.id}" value="${option.option_text}" ${isChecked}> ${option.option_text}
                             `;
 
                                 // Listen for changes on radio button selections
                                 optionDiv.querySelector('input').addEventListener('change',
                                     function() {
-                                        window.selectedAnswers[question.id] = option.id;
+                                        window.selectedAnswers[question.id] = option.option_text;
                                         console.log("Updated selectedAnswers:", window
                                             .selectedAnswers); // Debug selected answers
                                     });

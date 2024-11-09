@@ -12,6 +12,8 @@ class AssessmentResult extends Model
     protected $fillable = [
         'jobseeker_id',
         'assessment_id',
+        'correct_answers', // Add this
+        'total_questions', // Add this
         'score',
         'passed',
     ];

@@ -48,25 +48,10 @@
                         timer: 1000
                     }).then(() => {
 
-                        var jobseekerId = response.result.js_id;
-                        var assessmentId = response.result.assessment_id;
-                        var score = response.result
-                            .score; 
-                        var passed = response.result.passed; 
-
-                        var resultsUrl =
-                            '{{ route('assessment.results', ['jobseekerId' => '__jobseeker_id__', 'assessmentId' => '__assessment_id__']) }}';
-                        resultsUrl = resultsUrl.replace('__jobseeker_id__', jobseekerId);
-                        resultsUrl = resultsUrl.replace('__assessment_id__', assessmentId);
-
-                        document.getElementById('viewResultsBtn').setAttribute('href', resultsUrl);
-
+            
                         var myModal = new bootstrap.Modal(document.getElementById(
                             'assessmentModal'));
                         myModal.show();
-
-                        document.getElementById('assessmentResults').style.display =
-                            'none'; // Hide results initially
                     });
                 }
             },
