@@ -215,6 +215,10 @@ Route::get('/SkillAssessment', function () { return view('Jobseeker.skillassessm
 //answer submission
 Route::post('/assessment/submit', [AssessmentResultsController::class, 'submit'])->name('submitassessment');
 
+//results assessment display
+Route::get('/assessment/results/{jobseekerId}/{assessmentId}', [AssessmentResultsController::class, 'showResults'])
+    ->name('assessment.results');
+
 Route::get('/404', function () { return view('Jobseeker.404'); })->name('404');
 Route::get('/Profile', function () { return view('Jobseeker.profile'); })->name('profile');
 Route::get('/FAQS', function () { return view('Jobseeker.faqs'); })->name('faqs');
