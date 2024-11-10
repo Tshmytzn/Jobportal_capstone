@@ -22,7 +22,7 @@
         </div>
 
     <div class="d-flex justify-content-center">
-        <p class="mb-4 text-muted">Your account is currently under review. Please check back later.</p>
+        <p class="mb-4 text-muted">Your account is currently under review. Please check back here in 1 to 2 business days.</p>
     </div>
 
         @else

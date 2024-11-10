@@ -1,4 +1,4 @@
-@php
+{{-- @php
     $jobseekerdata = null;
     $fullName = '';
     $userId = session('user_id');
@@ -10,6 +10,21 @@
     $id = request()->query('id');
     $check = App\Models\JobQuestionTitle::where('jd_id',$id)->first();
     $check2 = App\Models\JobseekerAssessmentResult::where('jobseeker_id',$userId)->where('assessment_id',$check->id)->first();
+@endphp --}}
+
+@php
+    $jobseekerdata = null;
+    $fullName = '';
+    $userId = session('user_id');
+
+    if ($userId) {
+        $jobseekerdata = \App\Models\Jobseeker::where('js_id', $userId)->first();
+        $fullName = "{$jobseekerdata->js_firstname} {$jobseekerdata->js_middlename} {$jobseekerdata->js_lastname}";
+    }
+
+    $id = request()->query('id');
+    $check = App\Models\JobQuestionTitle::where('jd_id', $id)->first();
+    $check2 = $check ? App\Models\JobseekerAssessmentResult::where('jobseeker_id', $userId)->where('assessment_id', $check->id)->first() : null;
 @endphp
 
 <!-- Modal for application -->
@@ -22,7 +37,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                
+
                 <form id="jobApplicationForm">
                     @csrf
                     <input type="hidden" id="userIdInput" name="userIdInput" value="{{ $userId ?? '' }}" readonly />
@@ -76,7 +91,7 @@
                         </div>
                     </div>
 
-                    
+
                     @php
                         // Check if the user has submitted the PESO form
                         $pesoForm = $userId ? \App\Models\JobseekerPesoForm::where('js_id', $userId)->first() : null;
@@ -105,7 +120,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn bgp-gradient" data-bs-dismiss="modal">Close</button>
-                @if ($check && !$check2) 
+                @if ($check && !$check2)
                 <button type="button" class="btn bgp-danger" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#assessmentTestModal">
                         Take Assessment Test
                     </button>
@@ -113,7 +128,7 @@
                       <button type="button" onclick="SubmitJobApplication()" class="btn bgp-danger">Submit
                     Application</button>
                 @endif
-                
+
             </div>
         </div>
     </div>
@@ -129,9 +144,9 @@
             <div class="modal-body">
                 <form action="" id="submitAssessmentForm">
                <div class="row" id="assessmentModalBody">
-                
 
-                
+
+
                </div>
                </form>
             </div>
