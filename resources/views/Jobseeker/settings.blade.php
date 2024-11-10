@@ -9,7 +9,7 @@
     @include('Jobseeker.components.navbar')
     @include('Jobseeker.components.header', ['title' => 'Settings'])
 
-    <div class="container mb-5 ms-5 me-5" style="margin-top: -5%">
+    <div class="container mb-5 ms-5 me-5 align-items-center" style="margin-top: -5%">
         <!-- Pills navigation -->
         <div class="row">
             <div class="col-1">
@@ -137,6 +137,45 @@
                     <div class="tab-pane fade" id="pills-resume" role="tabpanel" aria-labelledby="pills-resume-tab">
                         <div class="p-3 bg-light">
                             <div class="modal-header">
+                                <h4>Upload and View Your Resume</h4>
+                            </div>
+                            <div class="card-body">
+                                @php
+                                    $jobseeker = \App\Models\Jobseeker::where('js_id', session('user_id'))->first();
+                                @endphp
+
+                                <div id="uploadedResume" class="mt-3" style="{{ $jobseeker && $jobseeker->js_resume ? 'display: block;' : 'display: none;' }}">
+                                    <strong>Uploaded Resume:</strong>
+                                    <span id="resumeFilename">
+                                        @if ($jobseeker && $jobseeker->js_resume)
+                                            <a href="{{ asset('jobseeker_resume/' . $jobseeker->js_resume) }}" target="_blank">
+                                                {{ $jobseeker->js_resume }}
+                                            </a>
+                                        @else
+                                            No resume uploaded
+                                        @endif
+                                    </span>
+
+                                    <!-- Resume Preview (only for PDF files) -->
+                                    <iframe id="resumeViewer" src="{{ $jobseeker && Str::endsWith($jobseeker->js_resume, '.pdf') ? asset('jobseeker_resume/' . $jobseeker->js_resume) : '' }}"
+                                            style="width: 100%; height: 400px; border: 1px solid #ddd; {{ $jobseeker && Str::endsWith($jobseeker->js_resume, '.pdf') ? 'display: block;' : 'display: none;' }}">
+                                    </iframe>
+
+                                    <!-- Print Button -->
+                                    <button type="button" class="btn btn-secondary mt-3" onclick="printResume()">Print Resume</button>
+                                </div>
+
+                                <button type="button" class="btn btn-primary w-100 mt-4 mb-2" data-bs-toggle="modal" data-bs-target="#Uploadresumemodal">
+                                    Upload Resume
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {{-- <div class="tab-pane fade" id="pills-resume" role="tabpanel" aria-labelledby="pills-resume-tab">
+                        <div class="p-3 bg-light">
+                            <div class="modal-header">
                                 <h4>Upload and View Your Resume
                                 </h4>
                             </div>
@@ -167,7 +206,7 @@
                                 </button>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     {{-- Upload Resume --}}
                     <div class="tab-pane fade" id="pills-password" role="tabpanel"
                         aria-labelledby="pills-password-tab">

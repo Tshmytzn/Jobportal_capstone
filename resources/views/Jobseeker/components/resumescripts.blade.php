@@ -15,12 +15,24 @@
 
                 $('#uploadResumeForm')[0].reset();
                 $('#Uploadresumemodal').modal('hide');
-                document.getElementById('uploadedResume').style.display =
-                'block'; // Show the filename container
-                document.getElementById('resumeFilename').textContent = response
-                .resume_file; // Set the filename
+                document.getElementById('uploadedResume').style.display = 'block';
 
+                // Update filename and link
+                document.getElementById('resumeFilename').innerHTML =
+                    `<a href="{{ asset('jobseeker_resume/') }}/${response.resume_file}" target="_blank">
+                        ${response.resume_file}
+                    </a>`;
 
+                // Set iframe src if PDF
+                const resumeViewer = document.getElementById('resumeViewer');
+                if (response.resume_file.endsWith('.pdf')) {
+                    resumeViewer.src = `{{ asset('jobseeker_resume/') }}/${response.resume_file}`;
+                    resumeViewer.style.display = 'block';
+                } else {
+                    resumeViewer.style.display = 'none';
+                }
+
+                // Show success message
                 Swal.fire({
                     icon: 'success',
                     title: 'Success',
@@ -33,7 +45,6 @@
                 document.getElementById('loading').style.display = 'none';
 
                 var errorMessage = xhr.responseJSON.message || 'An unexpected error occurred.';
-
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
@@ -43,4 +54,16 @@
             }
         });
     }
+
+    function printResume() {
+        const resumeViewer = document.getElementById('resumeViewer');
+        if (resumeViewer && resumeViewer.contentWindow) {
+            // Access the document inside the iframe and print it
+            resumeViewer.contentWindow.focus();
+            resumeViewer.contentWindow.print();
+        } else {
+            alert('No PDF resume to print.');
+        }
+    }
+    
 </script>
