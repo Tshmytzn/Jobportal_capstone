@@ -6,11 +6,9 @@
 
     $userId = session('user_id');
     $assessmentId = $skillassessment ? $skillassessment->id : null;
-    $existingResult = $assessmentId
-        ? AssessmentResult::where('jobseeker_id', $userId)->where('assessment_id', $assessmentId)->first()
-        : null;
-
-        $percentage = ($existingResult->score / $existingResult->total_questions) * 100;
+    $existingResult = \App\Models\AssessmentResult::where('jobseeker_id', session('user_id'))
+                            ->where('assessment_id', $skillassessment->id) 
+                            ->first();
 
 @endphp
 
@@ -41,6 +39,10 @@
 
     @if ($skillassessment)
         @if ($existingResult)
+
+        @php
+        $percentage = ($existingResult->score / $existingResult->total_questions) * 100;
+    @endphp
             <!-- Display existing result if the assessment has already been submitted -->
             <div class="container text-center my-5">
                 <h3 class="mb-4">Assessment Already Submitted</h3>
