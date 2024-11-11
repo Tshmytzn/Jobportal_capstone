@@ -227,8 +227,8 @@
                                             <div class="modal-footer">
 
                                                 <button type="button" class="btn bgp-gradient"
-                                                    onclick="qualifyjobseeker('Applicationform')">Approve
-                                                    Agency</button>
+                                                    onclick="qualifyjobseeker('Applicationform')">Qualify
+                                                    Jobseeker</button>
 
                                                 <button type="button" class="btn btn-danger"
                                                     onclick="disqualifyJobseeker('Applicationform')"

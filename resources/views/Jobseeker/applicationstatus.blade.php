@@ -139,132 +139,63 @@
     <!-- Header End -->
 
     <!-- Progress Bar for Job Application -->
-    <div class="row px-3">
-        <div class="col-1"></div>
-        <div class="col-10">
-            <div class="progress">
-                <!-- Adjust the width of .progress-bar based on the stage -->
-                <div class="progress-bar" role="progressbar" style="width: 66%;" aria-valuenow="66" aria-valuemin="0"
-                    aria-valuemax="100"></div>
-            </div>
-            <ul id="progressbar">
-                <li class="step0 active" id="step1">
-                  <i class="fas fa-search step-icon"></i> Job Search
-                </li>
-                <li class="step0 active" id="step2">
-                  <i class="fas fa-paper-plane step-icon"></i> Applied
-                </li>
-                <li class="step0 text-center" id="step3">
-                  <i class="fas fa-comments step-icon"></i> Interviewing
-                </li>
-                <li class="step0 text-muted text-right" id="step4">
-                  <i class="fas fa-check-circle step-icon"></i> Hired
-                </li>
-              </ul>
-        </div>
-        <div class="col-1"></div>
 
-    </div>
     <div class="container my-5">
         <div class="row mb-2">
+
+
+
             <!-- Card 1 - Submitted -->
-            <div class="card col-4 mx-auto" style="width: 400px;">
+            @php
+            use App\Models\JobseekerApplication;
+        
+            // Query to get applications for the current user with job and agency details
+            $applications = JobseekerApplication::where('js_id', session('user_id'))
+                ->with(['job.agency']) // Eager load the agency through the job relation
+                ->get();
+        @endphp
+        
+        @foreach ($applications as $application)
+            <div class="card col-4 mx-auto mb-5" style="width: 400px;">
                 <div class="card-header">
                     <div>
-                        <div class="job-title">Electrician</div>
-                        <div class="company-name">HandyWorks Corp.</div>
+                        <div class="job-title">{{ $application->job->job_title ?? 'Job Title Not Found' }}</div>
+                        <div class="company-name">{{ $application->job->agency->agency_name ?? 'Agency Name Not Found' }}</div>
                     </div>
                     <span class="status-icon">⚡</span>
                 </div>
                 <div class="card-body">
-                    <p>Location: <strong>Bacolod </strong></p>
-                    <p>Applied on: <strong>Oct 25, 2024</strong></p>
+                    <p>Location: <strong>{{ $application->job->job_location ?? 'Location Not Available' }}</strong></p>
+                    <p>Applied on: <strong>{{ $application->created_at->format('M d, Y') }}</strong></p>
                     <div class="timeline">
-                        <div class="timeline-step active">
-                            <div class="circle"></div>
-                            <span class="step-label">Submitted</span>
-                        </div>
-                        <div class="timeline-step">
-                            <div class="circle"></div>
-                            <span class="step-label">Under Review</span>
-                        </div>
-                        <div class="timeline-step">
-                            <div class="circle"></div>
-                            <span class="step-label">Interview Scheduled</span>
-                        </div>
-                        <div class="timeline-step">
-                            <div class="circle"></div>
-                            <span class="step-label">Decision Pending</span>
-                        </div>
-                    </div>
+                {{-- Pending Application --}}
+                <div class="timeline-step {{ $application->js_status == 'pending' ? 'active' : '' }}">
+                    <div class="circle"></div>
+                    <span class="step-label">Pending Application</span>
                 </div>
-            </div>
+                
+                {{-- Screening --}}
+                <div class="timeline-step {{ $application->js_status == 'qualified' ? 'active' : '' }}">
+                    <div class="circle"></div>
+                    <span class="step-label">Screening</span>
+                </div>
+                
+                {{-- Hired --}}
+                <div class="timeline-step {{ $application->js_status == 'hired' ? 'active' : '' }}">
+                    <div class="circle"></div>
+                    <span class="step-label">Hired</span>
+                </div>
 
-            <!-- Card 2 - Under Review -->
-            <div class="card col-4 mx-auto" style="width: 400px;">
-                <div class="card-header">
-                    <div>
-                        <div class="job-title">Plumber</div>
-                        <div class="company-name">WaterWorks Inc.</div>
-                    </div>
-                    <span class="status-icon">🔧</span>
+                   {{-- Disqualified --}}
+                   <div class="timeline-step {{ $application->js_status == 'rejected' ? 'active' : '' }}">
+                    <div class="circle"></div>
+                    <span class="step-label">Disqualified</span>
                 </div>
-                <div class="card-body">
-                    <p>Location: <strong>Talisay</strong></p>
-                    <p>Applied on: <strong>Oct 20, 2024</strong></p>
-                    <div class="timeline">
-                        <div class="timeline-step active">
-                            <div class="circle"></div>
-                            <span class="step-label">Submitted</span>
-                        </div>
-                        <div class="timeline-step active">
-                            <div class="circle"></div>
-                            <span class="step-label">Under Review</span>
-                        </div>
-                        <div class="timeline-step">
-                            <div class="circle"></div>
-                            <span class="step-label">Interview Scheduled</span>
-                        </div>
-                        <div class="timeline-step">
-                            <div class="circle"></div>
-                            <span class="step-label">Decision Pending</span>
-                        </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Card 3 - Interview Scheduled -->
-            <div class="card col-4 mx-auto" style="width: 400px;">
-                <div class="card-header">
-                    <div>
-                        <div class="job-title">Carpenter</div>
-                        <div class="company-name">BuildIt LLC</div>
-                    </div>
-                    <span class="status-icon">🪚</span>
-                </div>
-                <div class="card-body">
-                    <p>Location: <strong>Victorias</strong></p>
-                    <p>Applied on: <strong>Oct 15, 2024</strong></p>
-                    <div class="timeline">
-                        <div class="timeline-step active">
-                            <div class="circle"></div>
-                            <span class="step-label">Submitted</span>
-                        </div>
-                        <div class="timeline-step active">
-                            <div class="circle"></div>
-                            <span class="step-label">Under Review</span>
-                        </div>
-                        <div class="timeline-step active">
-                            <div class="circle"></div>
-                            <span class="step-label">Interview Scheduled</span>
-                        </div>
-                        <div class="timeline-step">
-                            <div class="circle"></div>
-                            <span class="step-label">Decision Pending</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        @endforeach
+        
 
         </div>
     </div>

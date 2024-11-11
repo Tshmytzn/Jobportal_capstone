@@ -138,22 +138,69 @@ class JobApplicationController extends Controller
         return response()->json(['status' => 'success', 'message' => 'Jobseeker Application Successfully Disqualified.']);
     }
 
-        public function getScreenedApplicants(Request $request)
-        {
-            $screenedApplicants = JobseekerApplication::select(
+    public function getScreenedApplicants(Request $request)
+    {
+        $searchValue = $request->input('search.value', '');
+    
+        $orderColumn = $request->input('order.0.column', 0); 
+        $orderDirection = $request->input('order.0.dir', 'asc'); 
+    
+        $start = $request->input('start', 0); 
+        $length = $request->input('length', 10); 
+    
+        $columns = [
+            'applicant_name', 'job_name', 'applicant_email', 'applicant_phone', null
+        ];
+    
+        $query = JobseekerApplication::select(
+                'jobseeker_application.id', 
                 'applicant_name',
                 'applicant_email',
                 'applicant_phone',
-                'jobs.name as job_title'  
+                'job_details.job_title as job_name'
             )
-            ->join('jobs', 'jobseeker_application.job_id', '=', 'jobs.id')  
-            ->where('js_status', 'qualified')  
-            ->orderBy('created_at', 'desc')
-            ->get();
+            ->join('job_details', 'jobseeker_application.job_id', '=', 'job_details.id')
+            ->where('js_status', 'qualified');
     
-            return response()->json([
-                'data' => $screenedApplicants
-            ]);
+        if ($searchValue) {
+            $query->where(function($query) use ($searchValue) {
+                $query->where('applicant_name', 'like', "%$searchValue%")
+                    ->orWhere('applicant_email', 'like', "%$searchValue%")
+                    ->orWhere('applicant_phone', 'like', "%$searchValue%")
+                    ->orWhere('job_details.job_title', 'like', "%$searchValue%");
+            });
         }
+    
+        if (isset($columns[$orderColumn])) {
+            $query->orderBy($columns[$orderColumn], $orderDirection);
+        }
+    
+        $totalRecords = $query->count();
+        $applicants = $query->skip($start)->take($length)->get();
+    
+        return response()->json([
+            'draw' => $request->input('draw'),
+            'recordsTotal' => $totalRecords,
+            'recordsFiltered' => $totalRecords, 
+            'data' => $applicants
+        ]);
+    }
+    
+    public function hireJobSeeker(Request $request)
+    {
 
+        $request->validate([
+            'id' => 'required|exists:jobseeker_application,id',  
+            'js_status' => 'required|in:hired',  
+        ]);
+
+        $jobSeeker = JobseekerApplication::find($request->id);
+
+        $jobSeeker->js_status = $request->js_status;
+        $jobSeeker->save();
+
+        return response()->json(['success' => true]);
+    }
+    
+    
 }

@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('js_lastname', 30);
             $table->string('js_suffix', 10)->nullable(); // Suffix is optional
             $table->string('js_gender', 12);
-            $table->integer('js_age', 2);
+            $table->integer('js_age');
             $table->string('js_address', 255); // Address with maximum length
             $table->string('js_email', 100)->unique(); // Email with unique constraint
             $table->string('js_resume', 100)->nullable();

@@ -138,6 +138,11 @@ Route::post('/qualify-jobseeker', [JobApplicationController::class, 'qualifyjobs
 
 Route::post('/disqualify-jobseeker', [JobApplicationController::class, 'disqualifyJobseeker'])->name('disqualifyJobseeker');
 
+//hire jobseeker
+// Add this route in your routes/web.php or routes/api.php depending on how you're handling AJAX requests
+Route::post('/hire-job-seeker', [JobApplicationController::class, 'hireJobSeeker'])->name('hireJobSeeker');
+
+
 // routes/api.php
 Route::get('/screened-applicants', [JobApplicationController::class, 'getScreenedApplicants'])->name('getScreened');
 
