@@ -128,11 +128,16 @@
                                     placeholder="Image.....">
 
                                 <div class="row mt-3">
-                                    <div class="col-12 form-group">
+                                    <div class="col-6 form-group">
                                         <h6>Job Vacancy</h6>
                                         <input type="number" class="form-control" name="job_vacancy" id="job_vacancy"
                                             placeholder="Enter number of hires">
                                     </div>
+                                        <div class="col-6 form-group">
+                                            <h6>Salary</h6>
+                                            <input type="number" class="form-control" name="job_salary" id="job_salary"
+                                                placeholder="Enter Salary in PHP">
+                                        </div>
                                 </div>
 
                                 <div class="row">
@@ -142,6 +147,7 @@
                                             placeholder="Enter other skill requirement">
                                     </div>
                                 </div>
+
 
                             </div>
 

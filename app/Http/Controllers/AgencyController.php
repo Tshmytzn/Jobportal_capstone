@@ -161,7 +161,7 @@ class AgencyController extends Controller
     public function Agency(request $request)
     {
         if ($request->process == 'add') {
-            if ($request->job_title == '' || $request->job_category == '' || $request->job_location == '' || $request->job_type == '' || $request->input('skills') == '' || $request->job_details == '' || $request->job_image == ''|| $request->job_vacancy == ''|| $request->other_skills == '') {
+            if ($request->job_title == '' || $request->job_category == '' || $request->job_location == '' || $request->job_type == '' || $request->input('skills') == '' || $request->job_details == '' || $request->job_image == ''|| $request->job_vacancy == ''|| $request->job_salary == ''|| $request->other_skills == '') {
                 return response()->json(['message' => 'Please fill in all required  fields.', 'status' => 'error']);
             }
             $image = $request->file(key: 'job_image');
@@ -188,13 +188,14 @@ class AgencyController extends Controller
             $data->job_location = $request->job_location;
             $data->job_type = $request->job_type;
             $data->job_vacancy = $request->job_vacancy;
+            $data->job_salary = $request->job_salary;
             $data->other_skills = $request->other_skills;
             $data->skills_required = implode(',', $request->input('skills'));
             $data->job_description = $request->job_details;
             $data->save();
 
             return response()->json(['message' => 'Job Details successfully added.', 'modal' => 'jobpostmodal', 'form' => 'jobDetailsForm', 'reload' => 'getJobDetails', 'status' => 'success']);
-        
+
         } else if ($request->process == 'get') {
             $jobs = JobDetails::join('job_categories', 'job_details.category_id', '=', 'job_categories.id')
                 ->select('job_details.*', 'job_categories.name')
@@ -233,6 +234,7 @@ class AgencyController extends Controller
                 'job_location' => $request->job_location,
                 'job_type' => $request->job_type,
                 'job_vacancy' => $request->job_vacancy,
+                'job_salary' => $request->job_salary,
                 'other_skills' => $request->other_skills,
                 'skills_required' => implode(',', $request->input('skills')),
                 'job_description' => $request->job_details,

@@ -21,6 +21,7 @@ class JobDetails extends Model
         'skills_required',
         'job_vacancy',
         'other_skills',
+        'job_salary',
         'job_description',
     ];
 

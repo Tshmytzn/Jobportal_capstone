@@ -202,6 +202,22 @@
                                 </ul>
                             </div>
                         </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <h6 class="text-primary">Job Vacancy</h6>
+                                <ul class="list-inline">
+                    ${formattedData == 'null' || formattedData.trim() === '' ? 'No Specific Skills Required.' : formattedData}
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <h6 class="text-primary">Job Salary</h6>
+                                <ul class="list-inline">
+                    ${formattedData == 'null' || formattedData.trim() === '' ? 'No Specific Skills Required.' : formattedData}
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -209,7 +225,7 @@
         `;
         } else if (process == 'edit') {
             cardsContainer.innerHTML = `
-     <form id="updatejobDetailsForm" method="POST" enctype="multipart/form-data">  
+     <form id="updatejobDetailsForm" method="POST" enctype="multipart/form-data">
         @csrf
                             <div class="row">
                                 <div class="col-6 form-group">
@@ -269,11 +285,11 @@
 
                                 <div class="col-6 form-group">
                                     <h6>Required Skills</h6>
-                                
+
                                     @php
                                         $pesoSkill = \App\Models\JobseekerSkill::all();
                                     @endphp
-                                
+
                                     <div id="skill_req">
                                         @foreach ($pesoSkill as $skill)
                                             <div class="form-check">
@@ -286,7 +302,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <div class="container mb-2">
                             <h6>Description:</h6>
                             <textarea id="job_details" class="summernote" name="job_details">${description}</textarea>
@@ -299,7 +315,7 @@
                             style="background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%);">
                             Update
                             </button>
-                            </div> 
+                            </div>
      `;
 
             $('.summernote').summernote({
