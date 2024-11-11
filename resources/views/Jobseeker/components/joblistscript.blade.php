@@ -53,6 +53,7 @@
                                         </div>
                                         <div class="service-content">
                                             <h4 class="mb-4">${element.job_title}</h4>
+                                            <p class="mb-2"><strong>Salary:</strong> ${element.job_salary}</p>
                                             <p class="mb-2"><strong>Location:</strong> ${element.job_location}</p>
                                             <p class="mb-2"><strong>Type:</strong> ${element.job_type}</p>
                                             <p class="mb-4">${desc}</p>

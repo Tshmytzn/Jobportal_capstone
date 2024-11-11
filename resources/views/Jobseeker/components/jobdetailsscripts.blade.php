@@ -27,6 +27,8 @@
                             $('#job_description').html(response.job_description);
                             $('#job_location').text(response.job_location);
                             $('#job_type').text(response.job_type);
+                            $('#job_salary').text(response.job_salary);
+                            $('#job_vacancy').text(response.job_vacancy);
                             $('#skill_required').text(response.skills_required && response.skills_required.length > 0 ? response.skills_required : 'No skills required.');
 
                             const options = {

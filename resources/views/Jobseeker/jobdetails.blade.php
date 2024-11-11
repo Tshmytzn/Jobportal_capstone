@@ -56,7 +56,7 @@
             <!-- Image Column -->
             <div class="col-6">
                 <div class="image-container"
-                style="width: 90%; height: 400px; margin: 0 auto; border: 2px solid #ccc; border-radius: 10px; overflow: hidden;">
+                style="width: 90%; height: 510px; margin: 0 auto; border: 2px solid #ccc; border-radius: 10px; overflow: hidden;">
                 <img id="job_image" src="" alt="Job Image" class="img-fluid"
                     style="width: 100%; height: 100%; object-fit: cover;"> <!-- Dynamically populated image -->
             </div>
@@ -75,6 +75,19 @@
                     </div>
                     <!-- Job Meta Information -->
                     <div class="mt-4 p-3 me-4 border rounded shadow-sm" style="background-color: #f8f9fa;">                    
+                        <div class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-credit-card-fill text-primary me-2" style="font-size: 1.5rem;"></i>
+                            <h6 class="mb-0">Salary:</h6>
+                            <span id="job_salary" class="ms-2 fw-bold text-secondary">Salary</span>
+                        </div>
+                        
+                        <div class="mb-3 d-flex align-items-center">
+                            <i class="bi bi-person-plus-fill text-primary me-2" style="font-size: 1.5rem;"></i>
+                            <h6 class="mb-0">Job Vacancy:</h6>
+                            <span id="job_vacancy" class="ms-2 fw-bold text-secondary">Vacancy</span>
+                        </div>
+                        
+
                         <div class="mb-3 d-flex align-items-center">
                             <i class="bi bi-geo-alt-fill text-primary me-2" style="font-size: 1.5rem;"></i>
                             <h6 class="mb-0">Location:</h6>
