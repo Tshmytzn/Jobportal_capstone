@@ -25,4 +25,10 @@ class JobseekerApplication extends Model
         'resume_file',
         'js_status',
     ];
+
+    public function job()
+    {
+        return $this->belongsTo(JobDetails::class, 'job_id', 'id');
+    }
+
 }

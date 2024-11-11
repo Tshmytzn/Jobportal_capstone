@@ -95,4 +95,65 @@ class JobApplicationController extends Controller
         return response()->json(['success' => 'Job application submitted successfully!']);
     }
 
+    public function qualifyjobseeker(Request $request)
+    {
+        $validated = $request->validate([
+            'applicationId' => 'required|exists:jobseeker_application,id',
+        ]);
+    
+        $application = JobseekerApplication::find($validated['applicationId']);
+    
+        if (!$application) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Application not found.',
+            ], 404);
+        }
+    
+        $application->js_status = 'qualified';
+        $application->save();
+    
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Jobseeker Application Successfully Qualified.',
+        ], 200);
+    }
+
+        public function disqualifyJobseeker(Request $request)
+    {
+        $validated = $request->validate([
+            'applicationId' => 'required|exists:jobseeker_application,id',  
+            'status' => 'required|string|in:rejected',  
+        ]);
+
+        $application = JobseekerApplication::find($validated['applicationId']);
+
+        if (!$application) {
+            return response()->json(['status' => 'error', 'message' => 'Application not found.'], 404);
+        }
+
+        $application->js_status = 'rejected';
+        $application->save();
+
+        return response()->json(['status' => 'success', 'message' => 'Jobseeker Application Successfully Disqualified.']);
+    }
+
+        public function getScreenedApplicants(Request $request)
+        {
+            $screenedApplicants = JobseekerApplication::select(
+                'applicant_name',
+                'applicant_email',
+                'applicant_phone',
+                'jobs.name as job_title'  
+            )
+            ->join('jobs', 'jobseeker_application.job_id', '=', 'jobs.id')  
+            ->where('js_status', 'qualified')  
+            ->orderBy('created_at', 'desc')
+            ->get();
+    
+            return response()->json([
+                'data' => $screenedApplicants
+            ]);
+        }
+
 }

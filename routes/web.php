@@ -133,6 +133,15 @@ Route::post('/UpdateAgency', [AgencyController::class, 'UpdateAgency'])->name('U
 //Agency Job details creation done, update $ delete: pending
 Route::post('/Agency', [AgencyController::class, 'Agency'])->name('Agency');
 
+//Qualify Agency
+Route::post('/qualify-jobseeker', [JobApplicationController::class, 'qualifyjobseeker'])->name('qualifyjobseeker');
+
+Route::post('/disqualify-jobseeker', [JobApplicationController::class, 'disqualifyJobseeker'])->name('disqualifyJobseeker');
+
+// routes/api.php
+Route::get('/screened-applicants', [JobApplicationController::class, 'getScreenedApplicants'])->name('getScreened');
+
+
 //Agency update password: pending
 Route::post('/UpdatePassword', [AgencyController::class, 'updatePassword'])->name('UpdatePassword');
 
@@ -183,7 +192,6 @@ Route::get('/searchfilteragencyjobs', [JobseekerController::class, 'searchFilter
 
 //filter jobs
 Route::post('/searchfilterjobs', [JobseekerController::class, 'searchfilterjobs'])->name('searchfilterjobs');
-
 
 //filter jobs by category_id
 Route::get('/jobs/filter', action: [JobseekerController::class, 'filterJobs'])->name('filterJobs');
