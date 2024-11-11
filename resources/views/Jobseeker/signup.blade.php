@@ -31,43 +31,55 @@
                                     <label for="firstname">First Name: </label>
                                     <input type="text" class="form-control" name="firstname"
                                         placeholder="Enter First Name" aria-label="First Name" required>
+                                    <small class="text-danger d-none">First name is required*</small>
                                 </div>
                                 <div class="col-3 mb-3">
                                     <label for="midname">Middle Name: </label>
-                                    <input type="text" class="form-control" name="midname"
-                                        placeholder="Enter Middle Name" aria-label="Middle Name">
+                                    <input onfocus="detectInput(this)" type="text" class="form-control"
+                                        name="midname" placeholder="Enter Middle Name" aria-label="Middle Name">
+                                    <small class="text-danger d-none">Middle name is required*</small>
                                 </div>
                                 <div class="col-3 mb-3">
                                     <label for="lastname">Last Name: </label>
-                                    <input type="text" class="form-control" name="lastname"
-                                        placeholder="Enter Last Name" aria-label="Last Name" required>
+                                    <input type="text" class="form-control"
+                                        name="lastname" onfocus="detectInput(this)" placeholder="Enter Last Name" aria-label="Last Name" required>
+                                    <small class="text-danger d-none">Last name is required*</small>
                                 </div>
                                 <div class="col-3 mb-3">
                                     <label for="suffix">Suffix: </label>
-                                    <input type="text" class="form-control" name="suffix"
-                                        placeholder="Enter Suffix (e.g., Jr., Sr.)" aria-label="Suffix" optional>
+                                    <input onfocus="detectInput(this)" type="text" class="form-control"
+                                        name="suffix" placeholder="Enter Suffix (e.g., Jr., Sr.)" aria-label="Suffix">
                                 </div>
+
                             </div>
 
-                            <label>Gender: </label>
-                            <div class="mb-3">
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="gender" id="male"
-                                        value="Male" required>
-                                    <label class="form-check-label" for="male">Male</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label>Gender: </label>
+                                    <div class="mb-3">
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" id="male"
+                                                value="Male" required>
+                                            <label class="form-check-label" for="male">Male</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" id="female"
+                                                value="Female">
+                                            <label class="form-check-label" for="female">Female</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" id="other"
+                                                value="Other">
+                                            <label class="form-check-label" for="other">Other</label>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="gender" id="female"
-                                        value="Female">
-                                    <label class="form-check-label" for="female">Female</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="gender" id="other"
-                                        value="Other">
-                                    <label class="form-check-label" for="other">Other</label>
+                                <div class="col-6">
+                                    <label for="age" class="mb-2">Age </label>
+                                        <input type="number" class="form-control" id="age" name="age"
+                                            placeholder="Enter Age" aria-label="Age" required>
                                 </div>
                             </div>
-
                             <label for="address">Home Address: </label>
                             <div class="mb-3">
                                 <input type="text" class="form-control" name="address"
@@ -85,7 +97,8 @@
                                         <span class="input-group-text">+63</span>
                                         <input type="tel" class="form-control" name="contact" id="contactInput"
                                             placeholder="Enter Contact Number" aria-label="Contact Number" required
-                                            maxlength="10" pattern="9[0-9]{9}" title="Phone number must start with 9 and be exactly 10 digits long.">
+                                            maxlength="10" pattern="9[0-9]{9}"
+                                            title="Phone number must start with 9 and be exactly 10 digits long.">
                                     </div>
 
                                 </div>
@@ -120,6 +133,7 @@
         </div>
     </div>
 
+    <script src="/js/validationscript.js"></script>
     @include('Jobseeker.components.scripts')
     @include('Jobseeker.components.jsAuthscripts')
 

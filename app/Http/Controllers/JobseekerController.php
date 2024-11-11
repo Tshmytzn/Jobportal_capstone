@@ -65,6 +65,7 @@ class JobseekerController extends Controller
             'email' => 'required|email|max:100|unique:jobseeker_details,js_email',
             'contact' => 'required|regex:/^9[0-9]{9}$/|max:10',
             'password' => 'required|string|min:8|confirmed', // Confirm the password
+            'age'=> 'required|integer'
         ]);
 
         // Create a new Jobseeker instance and fill it with form data
@@ -74,10 +75,11 @@ class JobseekerController extends Controller
         $jobseeker->js_lastname = $request->input('lastname');
         $jobseeker->js_suffix = $request->input('suffix');
         $jobseeker->js_gender = $request->input('gender');
+        $jobseeker->js_age = $request->age;
         $jobseeker->js_address = $request->input('address');
         $jobseeker->js_email = $request->input('email');
         $jobseeker->js_contactnumber = $request->input('contact'); // Ensure this is correct
-        $jobseeker->js_accstatus = 'pending'; 
+        $jobseeker->js_accstatus = 'pending';
         // Hash the password before saving
         $jobseeker->js_password = Hash::make($request->input('password'));
 
@@ -174,8 +176,8 @@ class JobseekerController extends Controller
         $query = JobDetails::query()
         ->join('agencies', 'job_details.agency_id', '=', 'agencies.id')
         ->where('agencies.status', 'approved')
-        ->select('job_details.id as job_id', 'job_details.job_title', 'job_details.job_location', 'job_details.job_type', 'job_details.job_vacancy','job_details.job_salary', 'job_details.job_description', 'job_details.job_image'); 
-    
+        ->select('job_details.id as job_id', 'job_details.job_title', 'job_details.job_location', 'job_details.job_type', 'job_details.job_vacancy','job_details.job_salary', 'job_details.job_description', 'job_details.job_image');
+
 
         // Check if employment type is provided, and apply a filter if so
         if (!empty($request->employmenttype)) {
@@ -227,18 +229,18 @@ class JobseekerController extends Controller
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5048',
                 'jobseekerId' => 'required|exists:jobseeker_details,js_id'
             ]);
-    
+
             $jobseeker = JobSeeker::findOrFail($request->jobseekerId);
-    
+
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $imageName = time() . '.' . $image->getClientOriginalExtension();
-                $image->move(public_path('jobseeker_profile'), $imageName); 
-    
+                $image->move(public_path('jobseeker_profile'), $imageName);
+
                 $jobseeker->js_image = $imageName;
-                $jobseeker->save(); 
+                $jobseeker->save();
             }
-    
+
             return response()->json([
                 'message' => 'Profile picture updated successfully!',
                 'jobseeker_profile' => $imageName
@@ -248,10 +250,10 @@ class JobseekerController extends Controller
             return response()->json([
                 'message' => 'An error occurred.',
                 'error' => $e->getMessage()
-            ], 500); 
+            ], 500);
         }
     }
-    
-    
+
+
 
 }
