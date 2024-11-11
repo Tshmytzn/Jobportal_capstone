@@ -47,7 +47,7 @@
                     use App\Models\JobseekerApplication;
                     use App\Models\Jobseeker;
 
-                    $applications = JobseekerApplication::all();
+                    $applications = JobseekerApplication::where('js_status', 'pending')->get();
 
                 @endphp
 
@@ -127,22 +127,24 @@
                                             <div class="modal-body">
                                                 <form id="Applicationform">
                                                     @csrf
-                                                    <input type="hidden" id="applicationId" readonly />
+                                                    <input type="hidden" id="applicationId" name="applicationId"
+                                                        readonly value="{{ $application->id }}" />
 
                                                     <div class="mb-0 text-center">
                                                         @foreach ($applications as $application)
-                                                        @php
-                                                            $jobseeker = Jobseeker::find($application->js_id);
-                                                        @endphp
+                                                            @php
+                                                                $jobseeker = Jobseeker::find($application->js_id);
+                                                            @endphp
 
-                                                        @if ($jobseeker && $jobseeker->js_image)
-                                                            <img src="{{ asset('jobseeker_profile/' . $jobseeker->js_image) }}"
-                                                                class="card-img-top mx-auto mt-2" alt="Jobseeker Image" style="max-height: 150px; width: auto; border: 2px solid #007bff;" />
-
-                                                        @else
-                                                            <p>No image available</p>
-                                                        @endif
-                                                    @endforeach
+                                                            @if ($jobseeker && $jobseeker->js_image)
+                                                                <img src="{{ asset('jobseeker_profile/' . $jobseeker->js_image) }}"
+                                                                    class="card-img-top mx-auto mt-2"
+                                                                    alt="Jobseeker Image"
+                                                                    style="max-height: 150px; width: auto; border: 2px solid #007bff;" />
+                                                            @else
+                                                                <p>No image available</p>
+                                                            @endif
+                                                        @endforeach
 
                                                         <div class="m-2">
                                                             <label class="form-label">Job Position:</label>
@@ -223,22 +225,19 @@
 
 
                                             <div class="modal-footer">
+
                                                 <button type="button" class="btn bgp-gradient"
-                                                    onclick="approveAgency()" id="approveButton">Qualify</button>
+                                                    onclick="qualifyjobseeker('Applicationform')">Approve
+                                                    Agency</button>
+
                                                 <button type="button" class="btn btn-danger"
-                                                    onclick="rejectAgency()" id="rejectButton">Disqualify</button>
+                                                    onclick="disqualifyJobseeker('Applicationform')"
+                                                    id="rejectButton">Disqualify</button>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
-
-
-                                {{-- <a href="{{ asset('jobseeker_resume/' . $application->resume_file) }}" target="_blank"
-                                    class="btn btn-primary btn-md">
-                                    Review Resume
-                                </a> --}}
 
                             </div>
                         </div>
