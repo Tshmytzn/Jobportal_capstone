@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('job_vacancy')->nullable();
             $table->string('other_skills')->nullable();
             $table->string('job_salary')->nullable();
+            $table->string('salary_frequency')->nullable();
             $table->longText('job_description')->nullable();
             $table->timestamps();
         });
@@ -41,6 +42,7 @@ return new class extends Migration
                 'job_vacancy' => 2,
                 'other_skills' => null,
                 'job_salary' => '₱ 12000.00',
+                'salary_frequency' => 'monthly',
                 'job_description' => 'Install, maintain, and repair electrical systems and components.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -56,6 +58,7 @@ return new class extends Migration
                 'job_vacancy' => 1,
                 'other_skills' => null,
                 'job_salary' => '₱ 15000.00',
+                'salary_frequency' => 'monthly',
                 'job_description' => 'Install and repair piping systems, fixtures, and plumbing systems.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -72,6 +75,7 @@ return new class extends Migration
                 'job_vacancy' => 2,
                 'other_skills' => null,
                 'job_salary' => '₱ 25000.00',
+                'salary_frequency' => 'monthly',
                 'job_description' => 'Perform various tasks at construction sites such as material handling and site clean-up.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -87,6 +91,7 @@ return new class extends Migration
                 'job_vacancy' => 2,
                 'other_skills' => null,
                 'job_salary' => '₱ 25000.00',
+                'salary_frequency' => 'monthly',
                 'job_description' => 'Oversee daily operations at construction sites and ensure safety protocols are followed.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -103,6 +108,7 @@ return new class extends Migration
                 'job_vacancy' => 2,
                 'other_skills' => null,
                 'job_salary' => '₱ 30000.00',
+                'salary_frequency' => 'monthly',
                 'job_description' => 'Operate and maintain production machinery on the assembly line.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -118,6 +124,7 @@ return new class extends Migration
                 'job_vacancy' => 2,
                 'other_skills' => null,
                 'job_salary' => '₱ 35000.00',
+                'salary_frequency' => 'monthly',
                 'job_description' => 'Perform tasks on the assembly line for manufacturing products.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -134,6 +141,7 @@ return new class extends Migration
                 'job_vacancy' => 2,
                 'other_skills' => null,
                 'job_salary' => '₱ 26000.00',
+                'salary_frequency' => 'monthly',
                 'job_description' => 'Drive trucks to transport goods across locations, ensuring timely delivery.',
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -149,6 +157,7 @@ return new class extends Migration
                 'job_vacancy' => 2,
                 'other_skills' => null,
                 'job_salary' => '₱ 35000.00',
+                'salary_frequency' => 'monthly',
                 'job_description' => 'Oversee warehouse operations, including inventory management and logistics.',
                 'created_at' => now(),
                 'updated_at' => now(),

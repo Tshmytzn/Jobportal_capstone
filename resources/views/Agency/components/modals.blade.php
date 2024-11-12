@@ -84,11 +84,15 @@
                                 <h6>Job Title</h6>
                                 <input type="text" name="process" id="" value="add" hidden>
                                 <input type="text" class="form-control" name="job_title" id="job_title"
-                                    placeholder="Enter Job Title">
+                                    placeholder="Enter Job Title"
+                                     oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '');" required>
+
                             </div>
+
+
                             <div class="col-6 form-group">
                                 <h6>Job Location</h6>
-                                <select class="form-control" name="job_location" id="job_location">
+                                <select class="form-select" name="job_location" id="job_location">
                                     <option value="" disabled selected>Select Job location</option>
                                     <option value="Bacolod">Bacolod</option>
                                     <option value="Talisay">Talisay</option>
@@ -128,23 +132,43 @@
                                     placeholder="Image.....">
 
                                 <div class="row mt-3">
+
                                     <div class="col-6 form-group">
-                                        <h6>Job Vacancy</h6>
-                                        <input type="number" class="form-control" name="job_vacancy" id="job_vacancy"
-                                            placeholder="Enter number of hires">
+                                        <h6>Salary Frequency</h6>
+                                        <select class="form-select" name="salary_frequency" id="salary_frequency" required>
+                                            <option value="" disabled selected>Select frequency</option>
+                                            <option value="monthly">Monthly</option>
+                                            <option value="fortnight">Fortnight</option>
+                                            <option value="daily">Daily</option>
+                                        </select>
                                     </div>
-                                        <div class="col-6 form-group">
-                                            <h6>Salary</h6>
-                                            <input type="number" class="form-control" name="job_salary" id="job_salary"
-                                                placeholder="Enter Salary in PHP">
-                                        </div>
+
+                                    <div class="col-6 form-group">
+                                        <h6>Salary Amount</h6>
+                                        <input type="text" class="form-control" name="job_salary" id="job_salary"
+                                            placeholder="Enter Salary Amount in PHP"
+                                            oninput="
+                                                let value = this.value.replace(/[^0-9]/g, '');
+                                                if (value) {
+                                                    value = Number(value).toLocaleString('en-PH');
+                                                }
+                                                this.value = '₱ ' + value;" required>
+                                    </div>
+
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-12 form-group">
+                                    <div class="col-6 form-group">
                                         <h6>Other Skill Requirement</h6>
                                         <input type="text" class="form-control" name="other_skills" id="other_skills"
-                                            placeholder="Enter other skill requirement">
+                                        placeholder="Enter other skill requirement"
+                                        oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '');" required>
+                                    </div>
+                                    <div class="col-6 form-group">
+                                        <h6>Job Vacancy</h6>
+                                        <input type="number" class="form-control" name="job_vacancy" id="job_vacancy"
+                                            placeholder="Enter number of hires"
+                                            oninput="this.value=this.value.replace(/[^0-9]/g, '');" required>
                                     </div>
                                 </div>
 
@@ -205,7 +229,14 @@
                     ['para', ['ul', 'ol', 'paragraph']],
                     ['view', ['fullscreen', 'codeview', 'help']]
                 ],
-                placeholder: 'Start typing here...'
+                placeholder: 'Enter Job Description here...',
+                callbacks: {
+                    onKeydown: function(e) {
+                        if ((e.which >= 48 && e.which <= 57) || (e.which >= 96 && e.which <= 105)) { // Block numbers (0-9 and numpad numbers)
+                            e.preventDefault();
+                        }
+                    }
+                }
             });
         });
     });

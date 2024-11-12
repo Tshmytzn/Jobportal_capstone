@@ -161,7 +161,7 @@ class AgencyController extends Controller
     public function Agency(request $request)
     {
         if ($request->process == 'add') {
-            if ($request->job_title == '' || $request->job_category == '' || $request->job_location == '' || $request->job_type == '' || $request->input('skills') == '' || $request->job_details == '' || $request->job_image == ''|| $request->job_vacancy == ''|| $request->job_salary == ''|| $request->other_skills == '') {
+            if ($request->job_title == '' || $request->job_category == '' || $request->job_location == '' || $request->job_type == '' || $request->input('skills') == '' || $request->job_details == '' || $request->job_image == ''|| $request->job_vacancy == ''|| $request->salary_frequency == ''|| $request->job_salary == ''|| $request->other_skills == '') {
                 return response()->json(['message' => 'Please fill in all required  fields.', 'status' => 'error']);
             }
             $image = $request->file(key: 'job_image');
@@ -188,6 +188,7 @@ class AgencyController extends Controller
             $data->job_location = $request->job_location;
             $data->job_type = $request->job_type;
             $data->job_vacancy = $request->job_vacancy;
+            $data->salary_frequency = $request->salary_frequency;
             $data->job_salary = $request->job_salary;
             $data->other_skills = $request->other_skills;
             $data->skills_required = implode(',', $request->input('skills'));
@@ -234,6 +235,7 @@ class AgencyController extends Controller
                 'job_location' => $request->job_location,
                 'job_type' => $request->job_type,
                 'job_vacancy' => $request->job_vacancy,
+                'salary_frequency' => $request->salary_frequency,
                 'job_salary' => $request->job_salary,
                 'other_skills' => $request->other_skills,
                 'skills_required' => implode(',', $request->input('skills')),
