@@ -187,7 +187,7 @@
                 </div>
 
                    {{-- Disqualified --}}
-                   <div class="timeline-step {{ $application->js_status == 'rejected' ? 'active' : '' }}">
+                   <div class="timeline-step {{ $application->js_status == 'disqualified' ? 'active' : '' }}">
                     <div class="circle"></div>
                     <span class="step-label">Disqualified</span>
                 </div>

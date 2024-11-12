@@ -132,7 +132,7 @@ class JobApplicationController extends Controller
             return response()->json(['status' => 'error', 'message' => 'Application not found.'], 404);
         }
 
-        $application->js_status = 'rejected';
+        $application->js_status = 'disqualified';
         $application->save();
 
         return response()->json(['status' => 'success', 'message' => 'Jobseeker Application Successfully Disqualified.']);
@@ -188,19 +188,54 @@ class JobApplicationController extends Controller
     
     public function hireJobSeeker(Request $request)
     {
-
         $request->validate([
-            'id' => 'required|exists:jobseeker_application,id',  
-            'js_status' => 'required|in:hired',  
+            'id' => 'required|exists:jobseeker_application,id',
+            'js_status' => 'required|in:hired',
+        ]);
+    
+        $jobSeeker = JobseekerApplication::find($request->id);
+    
+        $jsId = $jobSeeker->js_id;
+    
+        $existingHired = JobseekerApplication::where('js_id', $jsId)
+                                              ->where('js_status', 'hired')
+                                              ->exists();
+    
+        if ($existingHired) {
+
+            JobseekerApplication::where('js_id', $jsId)
+            ->where('js_status', '!=', 'hired')  
+            ->update(['js_status' => 'declined']);
+
+            return response()->json([
+                'success' => false,
+                'message' => 'This jobseeker has already been hired for another position.'
+            ]);
+        } else {
+
+            $jobSeeker->js_status = 'hired';
+            $jobSeeker->save();
+        
+            return response()->json(['success' => true]);
+
+        }
+        
+    }
+
+    public function declineJobSeeker(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:jobseeker_application,id',
+            'js_status' => 'required|in:declined',
         ]);
 
         $jobSeeker = JobseekerApplication::find($request->id);
 
-        $jobSeeker->js_status = $request->js_status;
+        $jobSeeker->js_status = 'declined';
         $jobSeeker->save();
 
         return response()->json(['success' => true]);
     }
-    
-    
+
+      
 }

@@ -78,8 +78,8 @@
                             style="background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%); height: 50px; display: flex; align-items: center;">
                             <h5 class="card-title text-white">Job Details</h5>
                         </div>
-                        <div class="card-body ms-3 me-3" id="job_detail">
-                        <!-- Job Overview -->
+                        <div class="card-body ms-3 me-3" id="job_detail" style="max-height: 500px; overflow-y: auto;">
+                            <!-- Job Overview -->
                         
                         </div>
 

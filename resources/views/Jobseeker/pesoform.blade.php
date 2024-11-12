@@ -303,9 +303,11 @@
                             <select id="event_name" name="event_name" required>
                                 <option value="" disabled selected>Select an event</option>
                                 <option value="Job Fair">Job Fair</option>
-                                <option value="Skills Training">Skills Training</option>
-                                <option value="Referral Program">Referral Program</option>
-                                <option value="Community Job Drives">Community Job Drives</option>
+                                <option value="AYOS">AYOS</option>
+                                <option value="DILP">DILP</option>
+                                <option value="SPES">SPES</option>
+                                <option value="TUPAD">TUPAD</option>
+
                             </select>
                         </div>
 
