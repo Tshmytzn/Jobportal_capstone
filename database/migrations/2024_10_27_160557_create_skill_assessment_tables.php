@@ -63,6 +63,7 @@ class CreateSkillAssessmentTables extends Migration
             'assessment_id' => $assessmentId,
             'title' => 'Basic Literacy and Communication Skills',
             'description' => 'Assesses language skills, grammar, and clarity in communication.',
+            'job_category'=> 3,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -71,6 +72,7 @@ class CreateSkillAssessmentTables extends Migration
             'assessment_id' => $assessmentId,
             'title' => 'Safety Awareness',
             'description' => 'Evaluates knowledge of basic safety practices in a work environment.',
+            'job_category'=> 2,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
