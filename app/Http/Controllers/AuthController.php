@@ -66,11 +66,17 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
+    
         $userId = Session::get('agency_id');
         $user = DB::table('agencies')->where('id', $userId)->first();
-
-        return view('Agency.index', compact('user'));
+    
+        // Count jobseekers and agencies
+        $jobseekerCount = DB::table('jobseeker_details')->count();
+        $agencyCount = DB::table('agencies')->count();
+    
+        return view('Agency.index', compact('user', 'jobseekerCount', 'agencyCount'));
     }
+    
 
     public function notification(Request $request)
     {

@@ -57,7 +57,8 @@ Route::get('/showassessments/{id}', [SkillAssessmentController::class, 'show']);
 Route::post('/saveAssessment', [SkillAssessmentController::class, 'saveAssessment'])->name('saveAssessment');
 
 //dashboard chart
-Route::get('/api/registrations', [AdminChartsController::class, 'getMonthlyRegistrations']);
+Route::get('/api/registrations', [AdminChartsController::class, 'getRegistrationsData']);
+
 //Admin view
 Route::get('/Admin/Settings', [AdminController::class, 'showAdminDetails'])->name('adminsettings');
 Route::get('/Admin/AddAdministrators', [AdminController::class, 'showAllAdmins'])->name('administrators');
@@ -118,6 +119,9 @@ Route::post('/LoginAdmin', [AuthController::class, 'LoginAdmin'])->name('LoginAd
 Route::post('/logoutAdmin', [AuthController::class, 'logoutAdmin'])->name('logoutAdmin');
 Route::get('/Admin/Login', function () { return view('Admin.Login'); })->name('AdminLogin');
 
+//dashboard chart
+Route::get('/api/hiredjobseekers', [AdminChartsController::class, 'getHiredJobseekersData']);
+
 //update job categories
 Route::get('/admin/getjobcategory/{id}', action: [AdminCRUDController::class, 'getJobcategory']);
 // Route::post('/admin/updatejobcategory', [AdminCRUDController::class, 'updatejobcategory'])->name('updatejobcategory');
@@ -159,6 +163,7 @@ Route::post('/UpdatePassword', [AgencyController::class, 'updatePassword'])->nam
 
 // Agency Protected routes
 Route::get('/Agency/Dashboard', [AuthController::class, 'dashboard'])->name('agencydashboard');
+
 Route::get('/Agency/Notification', [AuthController::class, 'notification'])->name('agencynotif');
 // Route::get('/Agency/Settings', [AuthController::class, 'settings'])->name('agencysettings');
 Route::get('/Agency/JobPosting', [AuthController::class, 'jobposting'])->name('agencyjobposting');
