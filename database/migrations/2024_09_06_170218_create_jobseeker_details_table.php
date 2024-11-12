@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('js_lastname', 30);
             $table->string('js_suffix', 10)->nullable();
             $table->string('js_gender', 12);
-            $table->integer('js_age');
+            $table->string('js_age');
             $table->string('js_province', 255)->nullable();
             $table->string('js_city', 255)->nullable();
             $table->string('js_baranggay', 255)->nullable();

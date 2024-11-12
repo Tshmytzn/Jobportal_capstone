@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
 @include('Jobseeker.components.head', ['title' => 'Job Portal'])
 
@@ -74,10 +75,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <label for="age" class="mb-2">Age </label>
-                                        <input type="number" class="form-control" id="age" name="age"
-                                            placeholder="Enter Age" aria-label="Age" required>
+                                <div class="col-3">
+                                    <label for="age" class="mb-2">Select Birthdate </label>
+                                        <input type="date" class="form-control" id="birthdate" name="birthdate" oninput="calculateAge()"
+                                            placeholder="Enter birthdate" aria-label="birthdate" required>
+                                </div>
+                                <div class="col-3">
+                                    <label for="age" class="mb-2"> Age </label>
+                                        <input type="text" class="form-control" id="age" name="age"
+                                        placeholder="0yrs 0months" aria-label="Age" required>
                                 </div>
                             </div>
 
