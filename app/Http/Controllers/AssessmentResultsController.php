@@ -9,6 +9,7 @@ use App\Models\JobseekerSkillAnswers;
 use App\Models\AssessmentResult;
 use App\Models\Question;
 use App\Models\Section;
+use App\Models\JobDetails;
 use App\Models\JobseekerGlobalAnswer;
 use App\Models\JobseekerSkillAssessmentResult;
 
@@ -238,5 +239,22 @@ class AssessmentResultsController extends Controller
 
     //     return response()->json(['status' => 'success', 'message' => 'Assessment submitted successfully!']);
     // }
+
+    public function recommendedJob(){
+        $result = JobseekerSkillAssessmentResult::where('jobseeker_id', session('user_id'))->get();
+        $categories = [];
+        foreach($result as $res){
+            $section = Section::where('id', $res->section_id)->first();
+            $assessmentResult = JobseekerSkillAssessmentResult::where('section_id', $res->section_id)->first();
+            if($assessmentResult->percentage > 75){
+                $categories[] = $section->job_category;
+            }
+        }
+
+        $joblist = JobDetails::whereIn('category_id', $categories)->get();
+
+        return response()->json(['data'=> $joblist]);
+
+    }
 
 }

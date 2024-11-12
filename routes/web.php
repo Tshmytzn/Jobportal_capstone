@@ -228,6 +228,7 @@ Route::get('/SkillAssessment', function () { return view('Jobseeker.skillassessm
 
 //answer submission
 Route::post('/assessment/submit', [AssessmentResultsController::class, 'submit'])->name('submitassessment');
+Route::get('/recommended-jobs-for-you', [AssessmentResultsController::class, 'recommendedJob']);
 
 //results assessment display
 Route::get('/getAssessmentResults', [AssessmentResultsController::class, 'getAssessmentResults'])
