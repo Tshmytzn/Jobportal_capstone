@@ -10,6 +10,7 @@ use App\Models\AssessmentResult;
 use App\Models\Question;
 use App\Models\Section;
 use App\Models\JobseekerGlobalAnswer;
+use App\Models\JobseekerSkillAssessmentResult;
 
 
 class AssessmentResultsController extends Controller
@@ -62,22 +63,50 @@ class AssessmentResultsController extends Controller
 
         $correctAnswersCount = 0;
         $totalQuestions = $questions->count();
-        
+
+
 
         // Loop through each question and compare answers
         foreach ($questions as $question) {
             // Find the jobseeker's answer for this question
             $jobseekerAnswer = $jobseekerAnswers->firstWhere('question_id', $question->id);
 
+            $checkResult = JobseekerSkillAssessmentResult::where('section_id', $question->section_id)
+                            ->where('jobseeker_id', $jobseekerId)->first();
+
+
+            if(!$checkResult){
+                $newResult = new JobseekerSkillAssessmentResult();
+                $newResult->jobseeker_id = $jobseekerId;
+                $newResult->section_id = $question->section_id;
+                $newResult->score = 0;
+                $newResult->total_items = Question::where('section_id', $question->section_id)->get()->count();
+                $newResult->percentage = 0;
+                $newResult->save();
+            }
             if ($jobseekerAnswer) {
                 // Compare the jobseeker's selected option_id with the stored correct option_id
                 $correctOptionId = $question->answer; // This stores option_id as the correct answer
 
                 if ($jobseekerAnswer->option_id == $correctOptionId) {
                     $correctAnswersCount++; // Increment correct answer count
+                    if($checkResult){
+                        $checkResult->update([
+                            'score'=> $checkResult->score + 1,
+                            'percentage' => (($checkResult->score + 1) / $checkResult->total_items) * 100
+                        ]);
+
+                    }else{
+                        $newResult->update([
+                            'score'=> $newResult->score + 1,
+                            'percentage' => (($newResult->score + 1) / $newResult->total_items) * 100
+                        ]);
+                    }
                 }
             }
         }
+
+
 
         // Determine if the jobseeker passed or failed (70% or higher correct answers)
         $passed = $correctAnswersCount >= ($totalQuestions * 0.7) ? 'Passed' : 'Failed';
