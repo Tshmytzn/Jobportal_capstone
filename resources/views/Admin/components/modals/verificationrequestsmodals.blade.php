@@ -95,21 +95,21 @@
 
 
 <script>
-    // Function to trigger the print dialog
-    function printImage(imgId) {
-        // Get the image element by ID
-        var img = document.getElementById(imgId);
 
-        // Create a hidden div to hold the image for printing
-        var printWindow = window.open('', '', 'width=600,height=600');
+function printImage(imgId) {
+
+    var img = document.getElementById(imgId);
+
+
+    var printWindow = window.open('', '', 'width=600,height=600');
         printWindow.document.write('<html><head><title>Print Image</title></head><body>');
         printWindow.document.write('<img src="' + img.src + '" style="max-width:100%; height:auto;" />');
         printWindow.document.write('</body></html>');
         printWindow.document.close();
 
-        // Wait for the image to load and then trigger the print dialog
+
         printWindow.onload = function () {
-            printWindow.print(); // This triggers the print dialog
+            printWindow.print(); 
         };
     }
 </script>

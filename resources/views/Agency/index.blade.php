@@ -59,8 +59,8 @@
                                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Pending Applications
                                         </p>
                                         <h5 class="font-weight-bolder mb-0">
-                                            {{ \App\Models\Jobseeker::count() }}
-                                    </div>
+                                            {{ \App\Models\JobseekerApplication::where('js_status', 'pending')->count() }}
+                                </div>
                                 </div>
                                 <div class="col-4 text-end">
                                     <div
@@ -81,7 +81,7 @@
                                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Screened
                                         </p>
                                         <h5 class="font-weight-bolder mb-0">
-                                            {{ \App\Models\Agency::count() }}
+                                            {{ \App\Models\JobseekerApplication::where('js_status', 'qualified')->count() }}
                                             {{-- <span class="text-danger text-sm font-weight-bolder">-2%</span> --}}
                                         </h5>
                                     </div>
@@ -105,8 +105,8 @@
                                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Hired
                                         </p>
                                         <h5 class="font-weight-bolder mb-0">
-                                            {{ \App\Models\Agency::where('status', 'approved')->count() }}
-                                            {{-- <span class="text-success text-sm font-weight-bolder">+55%</span> --}}
+                                            {{ \App\Models\JobseekerApplication::where('js_status', 'hired')->count() }}
+
                                         </h5>
                                     </div>
                                 </div>
