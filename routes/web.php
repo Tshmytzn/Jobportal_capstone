@@ -32,6 +32,11 @@ Route::get('/Admin/CustomerInquiries', function () { return view('Admin.customer
 Route::get('/Admin/GeneralSkills', function () { return view('Admin.generalskills'); })->name('generalskills');
 Route::get('/Admin/PesoForms', function () { return view('Admin.pesoforms'); })->name('adminpesoforms');
 
+//Job Post Management
+Route::get('/Admin/Jobpost', function () { return view('Admin.jobpostrequest'); })->name('jobpostrequest');
+Route::get('/Admin/JobpostApproved', function () { return view('Admin.jobpostapproved'); })->name('jobpostapproved');
+Route::get('/Admin/JobpostDeclined', function () { return view('Admin.jobpostdeclined'); })->name('jobpostdeclined');
+
 //create general skill assessment
 Route::get('/fetch-job-categories', [SkillAssessmentController::class, 'getJobCategories']);
 Route::post('/assessments', [SkillAssessmentController::class, 'store'])->name('assessments.store');
