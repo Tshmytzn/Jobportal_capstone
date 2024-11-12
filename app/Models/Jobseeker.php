@@ -9,13 +9,13 @@ class Jobseeker extends Model
 {
     use HasFactory;
 
-    protected $table = 'jobseeker_details'; 
+    protected $table = 'jobseeker_details';
 
-    protected $primaryKey = 'js_id'; 
+    protected $primaryKey = 'js_id';
 
-    public $incrementing = true; 
+    public $incrementing = true;
 
-    public $timestamps = true; 
+    public $timestamps = true;
 
     protected $fillable = [
         'js_firstname',
@@ -23,6 +23,9 @@ class Jobseeker extends Model
         'js_lastname',
         'js_suffix',
         'js_gender',
+        'js_province',
+        'js_city',
+        'js_baranggay',
         'js_address',
         'js_email',
         'js_resume',

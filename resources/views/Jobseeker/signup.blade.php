@@ -80,11 +80,50 @@
                                             placeholder="Enter Age" aria-label="Age" required>
                                 </div>
                             </div>
-                            <label for="address">Home Address: </label>
+
+                            <div class="row mt-3">
+                                <div class="col-3 mb-3">
+                                    <label for="province">Province: </label>
+                                    <select class="form-select" id="province" name="province" aria-label="province" required>
+                                        <option value="" disabled selected>Select Province</option>
+                                        <option value="Aklan">Aklan</option>
+                                        <option value="Antique">Antique</option>
+                                        <option value="Capiz">Capiz</option>
+                                        <option value="Guimaras">Guimaras</option>
+                                        <option value="Iloilo">Iloilo</option>
+                                        <option value="Negros Occidental">Negros Occidental</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-3 mb-3">
+                                    <label for="city">City: </label>
+                                    <select class="form-select" id="city" name="city" aria-label="city" required>
+                                        <option value="" disabled selected>Select City</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-3 mb-3">
+                                    <label for="baranggay">Barangay: </label>
+                                    <select class="form-select" id="baranggay" name="baranggay" aria-label="baranggay" required>
+                                        <option value="" disabled selected>Select Barangay</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-3 mb-3">
+                                    <label for="street">Street: </label>
+                                    <input type="text" class="form-control" name="address"
+                                    placeholder="Enter Street" aria-label="Home Address" required>
+                                </div>
+                            </div>
+
+
+                            {{-- <label for="address">Home Address: </label>
                             <div class="mb-3">
                                 <input type="text" class="form-control" name="address"
                                     placeholder="Enter Home Address" aria-label="Home Address" required>
-                            </div>
+                            </div> --}}
+
+
                             <div class="row">
                                 <div class="col-6 mb-3">
                                     <label for="email">Email Address: </label>

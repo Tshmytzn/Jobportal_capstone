@@ -196,12 +196,12 @@
                                 <option value="No Formal Education">No Formal Education</option>
                             </select>
                         </div>
-                        
+
                     @php
                         $jobs = \App\Models\JobDetails::join('agencies','job_details.agency_id','=','agencies.id')
                             ->where('agencies.status', 'approved')
                             ->select('job_details.id as job_id','job_details.job_title')
-                            ->get(); 
+                            ->get();
                     @endphp
 
                         <div class="input-field">
@@ -217,17 +217,17 @@
                         @php
                         $pesoSkill = \App\Models\JobseekerSkill::all();
                     @endphp
-                    
+
                     <div class="input-field">
                         <label for="skills">Skills</label>
                         <select class="form-control" id="skills" name="skills[]" multiple required>
                             <option value="" disabled>Select your skills</option>
-                            
+
                             @foreach($pesoSkill as $skill)
                                 <option value="{{ $skill->skill_name }}">{{ $skill->skill_name }}</option>
                             @endforeach
                         </select>
-                        
+
                         <input type="text" id="selectedSkill" name="selectedSkill" hidden>
                         <div id="selected-skills" style="margin-top: 10px;"></div>
                     </div>
@@ -303,10 +303,17 @@
                         </div>
 
                         <div class="input-field">
-                            <label>Event</label>
-                            <input type="text" id="event_name" name="event_name" placeholder="Enter event"
-                                value="{{ $pesoForm->peso_event ?? '' }}" required>
+                            <label for="event_name">Event</label>
+                            <select id="event_name" name="event_name" required>
+                                <option value="" disabled selected>Select an event</option>
+                                <option value="Job Fair" {{ $pesoForm->peso_event == 'Job Fair' ? 'selected' : '' }}>Job Fair</option>
+                                <option value="Skills Training" {{ $pesoForm->peso_event == 'Skills Training' ? 'selected' : '' }}>Skills Training</option>
+                                <option value="Referral Program" {{ $pesoForm->peso_event == 'Referral Program' ? 'selected' : '' }}>Referral Program</option>
+                                <option value="Community Job Drives" {{ $pesoForm->peso_event == 'Community Job Drives' ? 'selected' : '' }}>Community Job Drives</option>
+                            </select>
                         </div>
+
+
 
                         <div class="input-field">
                             <label>Transaction</label>

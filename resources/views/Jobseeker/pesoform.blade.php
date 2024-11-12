@@ -199,9 +199,9 @@
                         $jobs = \App\Models\JobDetails::join('agencies','job_details.agency_id','=','agencies.id')
                             ->where('agencies.status', 'approved')
                             ->select('job_details.id as job_id','job_details.job_title')
-                            ->get(); 
+                            ->get();
                     @endphp
-                    
+
                     <div class="input-field">
                         <label for="preferred_position">Preferred Position</label>
                         <select id="preferred_position" name="preferred_position" required>
@@ -211,7 +211,7 @@
                             @endforeach
                         </select>
                     </div>
-                    
+
 
                         @php
                             $pesoSkill = \App\Models\JobseekerSkill::all();
@@ -299,10 +299,16 @@
                         </div>
 
                         <div class="input-field">
-                            <label>Event</label>
-                            <input type="text" id="event_name" name="event_name" placeholder="Enter event"
-                                required>
+                            <label for="event_name">Event</label>
+                            <select id="event_name" name="event_name" required>
+                                <option value="" disabled selected>Select an event</option>
+                                <option value="Job Fair">Job Fair</option>
+                                <option value="Skills Training">Skills Training</option>
+                                <option value="Referral Program">Referral Program</option>
+                                <option value="Community Job Drives">Community Job Drives</option>
+                            </select>
                         </div>
+
 
                         <div class="input-field">
                             <label>Transaction</label>

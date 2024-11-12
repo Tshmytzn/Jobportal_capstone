@@ -73,7 +73,7 @@
                     data: null,
                     render: function(data, type, row) {
                         return `
-                    <button class="btn btn-sm bgp-table delete-btn" data-bs-toggle='modal' data-bs-target='#banjobseeker' data-id="${row.js_id}">Block</button>
+                    <button class="btn btn-sm bgp-table delete-btn" data-bs-toggle='modal' data-bs-target='#banjobseeker' data-id="${row.js_id}">Restrict</button>
                 `;
                     }
                 }
@@ -92,7 +92,7 @@
                     extend: 'excel'
                 },
                 {
-                    extend: 'pdf', 
+                    extend: 'pdf',
                     exportOptions: {
                         columns: ':visible'
                     }

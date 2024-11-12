@@ -61,6 +61,9 @@ class JobseekerController extends Controller
             'lastname' => 'required|string|max:30',
             'suffix' => 'nullable|string|max:10',
             'gender' => 'required|string|in:Male,Female,Other',
+            'province' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'baranggay' => 'required|string|max:255',
             'address' => 'required|string|max:255',
             'email' => 'required|email|max:100|unique:jobseeker_details,js_email',
             'contact' => 'required|regex:/^9[0-9]{9}$/|max:10',
@@ -76,6 +79,9 @@ class JobseekerController extends Controller
         $jobseeker->js_suffix = $request->input('suffix');
         $jobseeker->js_gender = $request->input('gender');
         $jobseeker->js_age = $request->age;
+        $jobseeker->js_province = $request->input('province');
+        $jobseeker->js_city = $request->input('city');
+        $jobseeker->js_baranggay = $request->input('baranggay');
         $jobseeker->js_address = $request->input('address');
         $jobseeker->js_email = $request->input('email');
         $jobseeker->js_contactnumber = $request->input('contact'); // Ensure this is correct
