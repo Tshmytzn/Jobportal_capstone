@@ -64,14 +64,43 @@
                                 <div class="col-12 mb-3">
                                     <label for="agency_name">Agency Name: </label>
                                     <input type="text" id="agency_name" name="agency_name" class="form-control"
-                                        placeholder="Enter Agency Name" aria-label="Agency Name">
+                                        placeholder="Enter Agency Name" aria-label="Agency Name" >
                                 </div>
 
                                 <!-- Agency Address -->
-                                <div class="col-12 mb-3">
-                                    <label for="agency_address">Agency Address: </label>
+                                <div class="col-3 mb-3">
+                                    <label for="province">Province: </label>
+                                    <select class="form-select" id="agency_province" name="agency_province"
+                                        aria-label="agency_province" required>
+                                        <option value="" disabled selected>Select Province</option>
+                                        <option value="Aklan">Aklan</option>
+                                        <option value="Antique">Antique</option>
+                                        <option value="Capiz">Capiz</option>
+                                        <option value="Guimaras">Guimaras</option>
+                                        <option value="Iloilo">Iloilo</option>
+                                        <option value="Negros Occidental">Negros Occidental</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-3 mb-3">
+                                    <label for="city">City: </label>
+                                    <select class="form-select" id="agency_city" name="agency_city"
+                                        aria-label="agency_city" required>
+                                        <option value="" disabled selected>Select City</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-3 mb-3">
+                                    <label for="baranggay">Barangay: </label>
+                                    <select class="form-select" id="agency_baranggay" name="agency_baranggay"
+                                        aria-label="agency_baranggay" required>
+                                        <option value="" disabled selected>Select Barangay</option>
+                                    </select>
+                                </div>
+                                <div class="col-3 mb-3">
+                                    <label for="agency_address">Street: </label>
                                     <input type="text" id="agency_address" name="agency_address" class="form-control"
-                                        placeholder="Enter Agency Address" aria-label="Agency Address">
+                                        placeholder="Enter Agency Address" aria-label="Agency Address" required>
                                 </div>
 
                                 <!-- Email Address -->
@@ -101,12 +130,11 @@
                                     <label for="landline_number">Landline Number: </label>
                                     <div class="input-group">
                                         <input type="tel" id="landline_number" name="landline_number"
-                                            class="form-control" placeholder="02-12345678" aria-label="Landline Number"
-                                            pattern="^02-[0-9]{8}$"
-                                            title="Format: 02-12345678. Must start with 02, followed by a dash, and then 8 digits."
-                                            maxlength="11"
-                                            onkeypress="return event.charCode >= 48 && event.charCode <= 57 || event.charCode === 45"
-                                            oninput="this.value = this.value.replace(/[^0-9-]/g, '').slice(0, 11);">
+                                            class="form-control" placeholder="e.g. 1234-5678" pattern="^\d{4}-\d{4}$"
+                                            maxlength="9"
+                                            title="Please enter a valid telephone number in the format: 1234-5678"
+                                            oninput="formatTelephone(this)" required>
+
                                     </div>
                                 </div>
 
@@ -196,6 +224,7 @@
             </div>
         </div>
     </div>
+    
     @include('Jobseeker.components.scripts')
     @include('Jobseeker.components.AgencyAuthscripts')
 
