@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Jobseeker;
 use App\Models\JobseekerSkillAnswers;
 use App\Models\AssessmentResult;
+use App\Models\JobCategory;
 use App\Models\Question;
 use App\Models\Section;
 use App\Models\JobDetails;
@@ -138,6 +139,13 @@ class AssessmentResultsController extends Controller
         $jobseekerId = session('user_id');
 
         $result = AssessmentResult::where('jobseeker_id', $jobseekerId)->latest()->first();
+        $categories = JobseekerSkillAssessmentResult::where('jobseeker_id', $jobseekerId)
+                    ->join('sections', 'sections.id', '=' ,'jobseeker_skill_assessment_results.section_id')->get();
+
+        foreach($categories as $cat){
+            $jobCat = JobCategory::where('id', $cat->job_category)->first();
+            $cat->category = $jobCat;
+        }
 
         if ($result) {
 
@@ -149,7 +157,8 @@ class AssessmentResultsController extends Controller
                 'percentage' => number_format($percentage, 2),
                 'passed' => $result->passed,
                 'total_questions' => $result->total_questions,
-                'correct_answers' => $result->correct_answers
+                'correct_answers' => $result->correct_answers,
+                'categories' => $categories
             ]);
         } else {
             return response()->json([

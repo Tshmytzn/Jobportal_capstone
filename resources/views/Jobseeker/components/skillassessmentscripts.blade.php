@@ -48,7 +48,7 @@
                         timer: 1000
                     }).then(() => {
 
-            
+
                         var myModal = new bootstrap.Modal(document.getElementById(
                             'assessmentModal'));
                         myModal.show();
@@ -83,6 +83,11 @@
                     $('#scoreResult span').text(response.score);
                     $('#passStatus span').text(response.passed);
                     $('#scorePercentage span').text(response.percentage + '%');
+
+                    const categories = document.getElementById('categoryScores');
+                    response.categories.forEach( data=> {
+                        categories.innerHTML += `<p>${data.category.name} (${data.percentage}%)</p>`
+                      });
 
                 } else {
                     // Show error message in case no results were found
