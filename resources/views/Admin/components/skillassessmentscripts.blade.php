@@ -1,8 +1,20 @@
 <script>
     let sectionCount = 0;
 
-    document.getElementById('addSectionBtn').addEventListener('click', function() {
+
+    document.getElementById('addSectionBtn').addEventListener('click', async function() {
         sectionCount++;
+
+        const response = await fetch('/fetch-job-categories', {method:"GET", headers: {"ContentType": "application/json"}});
+
+        const result = await response.json();
+
+        let jobCat = '';
+
+        result.data.forEach(d => {
+            jobCat += `<option value="${d.id}">${d.name}</option>`;
+        });
+
         const sectionHTML = `
         <div class="border border-primary rounded p-3 section" id="section${sectionCount}">
             <div class="modal-header bgp-gradient d-flex justify-content-between align-items-center" style="height: 60px;">
@@ -14,6 +26,16 @@
                 <label for="sectionTitle${sectionCount}">Section Title</label>
                 <input type="text" id="sectionTitle${sectionCount}" class="form-control" required>
             </div>
+
+
+            <div class="form-group">
+                <label for="sectionCategory${sectionCount}">Select Job Category</label>
+                <select id="sectionCategory${sectionCount}" class="form-select">
+                    <option>----Select Category----</option>
+                    ${jobCat}
+                </select>
+            </div>
+
             <div class="form-group">
                 <label for="sectionDescription${sectionCount}">Description</label>
                 <textarea id="sectionDescription${sectionCount}" class="form-control" rows="3"></textarea>
@@ -84,6 +106,8 @@
             const sectionTitle = section.querySelector('input[id^="sectionTitle"]').value;
             const sectionDescription = section.querySelector('textarea[id^="sectionDescription"]')
                 .value;
+            const jobCat = section.querySelector('select[id^="sectionCategory"]').value;
+
 
             const questions = Array.from(section.querySelectorAll('.question-section')).map(
                 question => {
@@ -102,6 +126,7 @@
             return {
                 title: sectionTitle,
                 description: sectionDescription,
+                jobCat: jobCat,
                 questions: questions,
             };
         });

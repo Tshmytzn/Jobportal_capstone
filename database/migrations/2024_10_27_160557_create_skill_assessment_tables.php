@@ -28,6 +28,7 @@ class CreateSkillAssessmentTables extends Migration
             $table->foreignId('assessment_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->text('description')->nullable();
+            $table->integer('job_category')->nullable();
             $table->timestamps();
         });
 

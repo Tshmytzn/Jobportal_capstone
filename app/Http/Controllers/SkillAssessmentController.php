@@ -8,6 +8,7 @@ use App\Models\Assessment;
 use App\Models\Section;
 use App\Models\Question;
 use App\Models\Option;
+use App\Models\JobCategory;
 use Illuminate\Http\Response;
 
 class SkillAssessmentController extends Controller
@@ -35,7 +36,7 @@ class SkillAssessmentController extends Controller
             return response()->json(['error' => 'Could not fetch assessments'], 500);
         }
     }
-    
+
     public function store(Request $request)
         {
             $validated = $request->validate([
@@ -54,6 +55,7 @@ class SkillAssessmentController extends Controller
                     'assessment_id' => $assessment->id,
                     'title' => $sectionData['title'],
                     'description' => $sectionData['description'],
+                    'job_category' => $sectionData['jobCat']
                 ]);
 
                 foreach ($sectionData['questions'] as $questionData) {
@@ -92,7 +94,7 @@ class SkillAssessmentController extends Controller
             {
                 try {
                     $assessment = Assessment::with(['sections.questions.options'])->findOrFail($id);
-            
+
                     return response()->json([
                         'id' => $assessment->id,
                         'title' => $assessment->title,
@@ -123,7 +125,7 @@ class SkillAssessmentController extends Controller
                     return response()->json(['error' => 'Assessment not found'], 404);
                 }
             }
-            
+
     // public function update(Request $request, $id)
     // {
     //     $validated = $request->validate([
@@ -151,10 +153,10 @@ class SkillAssessmentController extends Controller
     {
         // Validate incoming data
         $request->validate([
-            'selectedAnswers' => 'required|string', 
-            'assessmentId' => 'required|integer|exists:assessments,id', 
-            'title' => 'required|string|max:255', 
-            'description' => 'nullable|string', 
+            'selectedAnswers' => 'required|string',
+            'assessmentId' => 'required|integer|exists:assessments,id',
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
         ]);
 
         // Decode JSON string of selected answers
@@ -167,7 +169,7 @@ class SkillAssessmentController extends Controller
 
             if ($question) {
 
-                $question->answer = $optionId; 
+                $question->answer = $optionId;
                 $question->save();
             }
         }
@@ -178,5 +180,9 @@ class SkillAssessmentController extends Controller
         ], 200);
     }
 
-        
+    public function getJobCategories(Request $req){
+        $job = JobCategory::all();
+
+        return response()->json(['data'=> $job]);
     }
+}

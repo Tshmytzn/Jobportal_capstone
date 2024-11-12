@@ -68,7 +68,7 @@
                                 style="height: 200px; width: 200px; object-fit: cover; cursor: pointer;"
                                 onclick="printImage('dtiPermit')" />
                         </div>
-                        
+
                         <div class="col-6 mb-1">
                             <label for="birPermit" class="form-label">BIR Permit</label> <br>
                             <img id="birPermit" src="" alt="BIR Permit" class="img-fluid"
@@ -99,7 +99,7 @@
     function printImage(imgId) {
         // Get the image element by ID
         var img = document.getElementById(imgId);
-        
+
         // Create a hidden div to hold the image for printing
         var printWindow = window.open('', '', 'width=600,height=600');
         printWindow.document.write('<html><head><title>Print Image</title></head><body>');

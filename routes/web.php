@@ -33,6 +33,7 @@ Route::get('/Admin/GeneralSkills', function () { return view('Admin.generalskill
 Route::get('/Admin/PesoForms', function () { return view('Admin.pesoforms'); })->name('adminpesoforms');
 
 //create general skill assessment
+Route::get('/fetch-job-categories', [SkillAssessmentController::class, 'getJobCategories']);
 Route::post('/assessments', [SkillAssessmentController::class, 'store'])->name('assessments.store');
 
 //display general skill assessment
