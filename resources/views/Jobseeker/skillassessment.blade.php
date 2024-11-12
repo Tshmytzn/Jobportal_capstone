@@ -7,7 +7,7 @@
     $userId = session('user_id');
     $assessmentId = $skillassessment ? $skillassessment->id : null;
     $existingResult = \App\Models\AssessmentResult::where('jobseeker_id', session('user_id'))
-                            ->where('assessment_id', $skillassessment->id) 
+                            ->where('assessment_id', $skillassessment->id)
                             ->first();
 
 @endphp
@@ -98,7 +98,14 @@
                     @foreach ($skillassessment->sections as $section)
                         <div class="card mb-4">
                             <div class="card-header">
-                                <h5 class="mb-0">{{ $section->title }}</h5>
+                                <h5 class="mb-0">{{ $section->title }} @if($section->job_category != null)
+                                        @php
+                                            $job_category = App\Models\JobCategory::where('id', $section->job_category)->first();
+                                        @endphp
+
+                                        <span class="text-muted">({{ $job_category->name }})</span>
+                                    @endif
+                                </h5>
                             </div>
                             <div class="card-body">
                                 <p>{{ $section->description }}</p>

@@ -53,34 +53,35 @@ class AssessmentResultsController extends Controller
     {
         // Fetch the sections associated with the assessment
         $sections = Section::where('assessment_id', $assessmentId)->get();
-    
+
         // Fetch all the questions belonging to these sections
         $questions = Question::whereIn('section_id', $sections->pluck('id'))->get();
-    
+
         // Fetch the jobseeker's answers
         $jobseekerAnswers = JobseekerGlobalAnswer::where('js_id', $jobseekerId)->get();
-    
+
         $correctAnswersCount = 0;
         $totalQuestions = $questions->count();
-    
+        
+
         // Loop through each question and compare answers
         foreach ($questions as $question) {
             // Find the jobseeker's answer for this question
             $jobseekerAnswer = $jobseekerAnswers->firstWhere('question_id', $question->id);
-    
+
             if ($jobseekerAnswer) {
                 // Compare the jobseeker's selected option_id with the stored correct option_id
                 $correctOptionId = $question->answer; // This stores option_id as the correct answer
-    
+
                 if ($jobseekerAnswer->option_id == $correctOptionId) {
                     $correctAnswersCount++; // Increment correct answer count
                 }
             }
         }
-    
+
         // Determine if the jobseeker passed or failed (70% or higher correct answers)
         $passed = $correctAnswersCount >= ($totalQuestions * 0.7) ? 'Passed' : 'Failed';
-    
+
         // Save the result in the assessment_results table
         $assessmentResult = AssessmentResult::create([
             'jobseeker_id' => $jobseekerId,
@@ -90,7 +91,7 @@ class AssessmentResultsController extends Controller
             'score' => $correctAnswersCount, // Store the number of correct answers as the score
             'passed' => $passed, // Store 'Passed' or 'Failed'
         ]);
-    
+
         // If the jobseeker passed, set the badge image
         if ($passed == 'Passed') {
             // Update the jobseeker's js_badge field with the path to the badge image
@@ -98,25 +99,25 @@ class AssessmentResultsController extends Controller
             $jobseeker->js_badge = 'badge.png';
             $jobseeker->save();
         }
-    
+
         return $correctAnswersCount;
     }
 
     public function getAssessmentResults(Request $request)
     {
         $jobseekerId = session('user_id');
-        
-        $result = AssessmentResult::where('jobseeker_id', $jobseekerId)->latest()->first(); 
-    
+
+        $result = AssessmentResult::where('jobseeker_id', $jobseekerId)->latest()->first();
+
         if ($result) {
 
             $percentage = ($result->correct_answers / $result->total_questions) * 100;
-    
+
             return response()->json([
                 'status' => 'success',
-                'score' => $result->correct_answers,  
-                'percentage' => number_format($percentage, 2),  
-                'passed' => $result->passed,  
+                'score' => $result->correct_answers,
+                'percentage' => number_format($percentage, 2),
+                'passed' => $result->passed,
                 'total_questions' => $result->total_questions,
                 'correct_answers' => $result->correct_answers
             ]);
@@ -127,12 +128,12 @@ class AssessmentResultsController extends Controller
             ]);
         }
     }
-    
 
-    
-    
-    
-    
+
+
+
+
+
 
     //     public function calculateResults($jobseekerId, $assessmentId)
     // {
