@@ -11,9 +11,10 @@ class JobListingController extends Controller
     public function getJobRequests(Request $request)
     {
         $jobRequests = JobDetails::with(['category', 'agency'])
-            ->select('id', 'category_id', 'agency_id', 'job_title', 'job_location', 'created_at', 'updated_at')
-            ->orderBy('id', 'desc')
-            ->get();
+        ->where('job_status', 'pending') 
+        ->select('id', 'category_id', 'agency_id', 'job_title', 'job_location', 'created_at', 'updated_at')
+        ->orderBy('id', 'desc')
+        ->get();
 
         return response()->json([
             'data' => $jobRequests->map(function($jobRequest) {

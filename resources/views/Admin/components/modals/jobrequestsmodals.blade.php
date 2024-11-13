@@ -11,6 +11,14 @@
                     @csrf
                     <div class="row g-3">
 
+                        {{-- <div class="col-md-12">
+                            <label for="job_title" class="form-label">Job Title</label>
+                            <div id="job_title" class="form-control" style="text-align: center;">
+                                <img id="job_image" src="path/to/your/image.jpg" alt="Job Title Image" class="img-fluid rounded-circle" />
+                            </div>
+                        </div> --}}
+                        
+
                         <!-- Job Title -->
                         <div class="col-md-6">
                             <label for="job_title" class="form-label">Job Title</label>
@@ -53,6 +61,11 @@
                             <input type="text" class="form-control" id="job_salary" disabled>
                         </div>
 
+                        <div class="col-md-6">
+                            <label for="job_status" class="form-label">Status</label>
+                            <input type="text" class="form-control" id="job_status" disabled>
+                        </div>
+
                         <!-- Job Description -->
                         <div class="col-12">
                             <label for="job_description" class="form-label">Job Description</label>
@@ -61,10 +74,7 @@
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="job_status" class="form-label">Status</label>
-                            <input type="text" class="form-control" id="job_status" disabled>
-                        </div>
+
 
 
                     </div>

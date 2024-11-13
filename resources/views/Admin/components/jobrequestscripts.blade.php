@@ -104,11 +104,12 @@
             fixedHeader: true,
         });
 
-        // Open Modal and Fetch Job Details by ID
-        $('#reviewjob').on('show.bs.modal', function(e) {
-            var jobId = $(e.relatedTarget).data('id'); // Get the job ID from the button that triggered the modal
 
-            // Set the job ID for both the "Approve" and "Reject" buttons dynamically
+        $('#reviewjob').on('show.bs.modal', function(e) {
+            var jobId = $(e.relatedTarget).data(
+                'id');
+
+
             $('#approveBtn').data('id', jobId);
             $('#rejectBtn').data('id', jobId);
 
@@ -116,6 +117,8 @@
                 url: '/job-details/' + jobId,
                 method: 'GET',
                 success: function(response) {
+                    $('#jobId').val(response.id);
+
                     $('#job_title').val(response.job_title);
                     $('#category_name').val(response.category_name);
                     $('#agency_name').val(response.agency_name);
@@ -125,6 +128,12 @@
                     $('#job_salary').val(response.job_salary);
                     $('#job_description').html(response.job_description);
                     $('#job_status').val(response.job_status);
+
+                    // if (response.job_image) {
+                    //     var imageUrl = "{{ asset('agencyfiles/job_image/') }}/" + response
+                    //         .job_image;
+                    //     $('#job_image').attr('src', imageUrl);
+                    // }
                 },
                 error: function() {
                     alert('Failed to fetch job details');
@@ -136,56 +145,137 @@
             let jobId = $(this).data('id');
 
             if (jobId) {
-                $.ajax({
-                    url: '/update-job-status',
-                    type: 'POST',
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        job_id: jobId,
-                        status: 'approved',
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            alert('Job status updated to approved');
-                        } else {
-                            alert('Error updating job status');
-                        }
-                        $('#reviewjob').modal('hide');
-                    },
-                    error: function() {
-                        alert('Error processing your request');
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You are about to approve this job status.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, approve it!',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        $.ajax({
+                            url: '/update-job-status',
+                            type: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                    'content')
+                            },
+                            data: {
+                                job_id: jobId,
+                                status: 'approved',
+                            },
+                            success: function(response) {
+
+                                $('#JobRequests_tbl').DataTable().ajax.reload();
+
+                                if (response.success) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Success',
+                                        text: 'Job status updated to approved',
+                                        confirmButtonColor: '#3085d6',
+                                        confirmButtonText: 'OK'
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error',
+                                        text: 'Error updating job status',
+                                        confirmButtonColor: '#d33',
+                                        confirmButtonText: 'OK'
+                                    });
+                                }
+                                $('#reviewjob').modal('hide');
+                            },
+                            error: function() {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Request Failed',
+                                    text: 'Error processing your request',
+                                    confirmButtonColor: '#d33',
+                                    confirmButtonText: 'OK'
+                                });
+                            }
+                        });
                     }
                 });
             }
         });
 
-        // When the "Reject" button is clicked
+
+
         $('#rejectBtn').on('click', function() {
             let jobId = $(this).data('id');
 
             if (jobId) {
-                $.ajax({
-                    url: '/update-job-status',
-                    type: 'POST',
-                    data: {
-                        _token: $('meta[name="csrf-token"]').attr('content'),
-                        job_id: jobId,
-                        status: 'rejected',
-                    },
-                    success: function(response) {
-                        if (response.success) {
-                            alert('Job status updated to rejected');
-                        } else {
-                            alert('Error updating job status');
-                        }
-                        $('#reviewjob').modal('hide');
-                    },
-                    error: function() {
-                        alert('Error processing your request');
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You are about to reject this job status.",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Yes, reject it!',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+
+                        $.ajax({
+                            url: '/update-job-status',
+                            type: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr(
+                                    'content')
+                            },
+                            data: {
+                                job_id: jobId,
+                                status: 'rejected',
+                            },
+                            success: function(response) {
+                                $('#JobRequests_tbl').DataTable().ajax.reload();
+
+                                if (response.success) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Success',
+                                        text: 'Job status updated to rejected',
+                                        confirmButtonColor: '#3085d6',
+                                        confirmButtonText: 'OK'
+                                    }).then(() => {
+                                        $('#reviewjob').modal('hide');
+                                    });
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error',
+                                        text: 'Error updating job status',
+                                        confirmButtonColor: '#d33',
+                                        confirmButtonText: 'OK'
+                                    });
+                                }
+                                $('#reviewjob').modal('hide');
+                            },
+                            error: function() {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Request Failed',
+                                    text: 'Error processing your request',
+                                    confirmButtonColor: '#d33',
+                                    confirmButtonText: 'OK'
+                                });
+                            }
+                        });
                     }
                 });
             }
         });
+
 
     });
 </script>
