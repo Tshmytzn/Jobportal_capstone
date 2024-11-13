@@ -104,7 +104,6 @@
         border-radius: 5px;
         background-color: #28a745;
     }
-    
 </style>
 
 <body>
@@ -147,55 +146,65 @@
 
             <!-- Card 1 - Submitted -->
             @php
-            use App\Models\JobseekerApplication;
-        
-            // Query to get applications for the current user with job and agency details
-            $applications = JobseekerApplication::where('js_id', session('user_id'))
-                ->with(['job.agency']) // Eager load the agency through the job relation
-                ->get();
-        @endphp
-        
-        @foreach ($applications as $application)
-            <div class="card col-4 mx-auto mb-5" style="width: 400px;">
-                <div class="card-header">
-                    <div>
-                        <div class="job-title">{{ $application->job->job_title ?? 'Job Title Not Found' }}</div>
-                        <div class="company-name">{{ $application->job->agency->agency_name ?? 'Agency Name Not Found' }}</div>
-                    </div>
-                    <span class="status-icon">⚡</span>
-                </div>
-                <div class="card-body">
-                    <p>Location: <strong>{{ $application->job->job_location ?? 'Location Not Available' }}</strong></p>
-                    <p>Applied on: <strong>{{ $application->created_at->format('M d, Y') }}</strong></p>
-                    <div class="timeline">
-                {{-- Pending Application --}}
-                <div class="timeline-step {{ $application->js_status == 'pending' ? 'active' : '' }}">
-                    <div class="circle"></div>
-                    <span class="step-label">Pending Application</span>
-                </div>
-                
-                {{-- Screening --}}
-                <div class="timeline-step {{ $application->js_status == 'qualified' ? 'active' : '' }}">
-                    <div class="circle"></div>
-                    <span class="step-label">Screening</span>
-                </div>
-                
-                {{-- Hired --}}
-                <div class="timeline-step {{ $application->js_status == 'hired' ? 'active' : '' }}">
-                    <div class="circle"></div>
-                    <span class="step-label">Hired</span>
-                </div>
+                use App\Models\JobseekerApplication;
 
-                   {{-- Disqualified --}}
-                   <div class="timeline-step {{ $application->js_status == 'rejected' ? 'active' : '' }}">
-                    <div class="circle"></div>
-                    <span class="step-label">Disqualified</span>
-                </div>
+                // Query to get applications for the current user with job and agency details
+                $applications = JobseekerApplication::where('js_id', session('user_id'))
+                    ->with(['job.agency']) // Eager load the agency through the job relation
+                    ->get();
+            @endphp
+
+            @foreach ($applications as $application)
+                <div class="card col-4 mx-auto mb-5" style="width: 400px;">
+                    <div class="card-header">
+                        <div>
+                            <div class="job-title">{{ $application->job->job_title ?? 'Job Title Not Found' }}</div>
+                            <div class="company-name">
+                                {{ $application->job->agency->agency_name ?? 'Agency Name Not Found' }}</div>
+                        </div>
+                        <span class="status-icon">⚡</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Location: <strong>{{ $application->job->job_location ?? 'Location Not Available' }}</strong>
+                        </p>
+                        <p>Applied on: <strong>{{ $application->created_at->format('M d, Y') }}</strong></p>
+                        <div class="timeline">
+                            {{-- Pending Application --}}
+                            <div class="timeline-step {{ $application->js_status == 'pending' ? 'active' : '' }}">
+                                <div class="circle"></div>
+                                <span class="step-label">Pending Application</span>
+                            </div>
+
+                            {{-- Disqualified --}}
+                            <div class="timeline-step {{ $application->js_status == 'disqualified' ? 'active' : '' }}">
+                                <div class="circle"></div>
+                                <span class="step-label">Disqualified</span>
+                            </div>
+
+                            {{-- Screening --}}
+                            <div class="timeline-step {{ $application->js_status == 'qualified' ? 'active' : '' }}">
+                                <div class="circle"></div>
+                                <span class="step-label">Screening</span>
+                            </div>
+
+                             {{-- Declined --}}
+                             <div class="timeline-step {{ $application->js_status == 'declined' ? 'active' : '' }}">
+                                <div class="circle"></div>
+                                <span class="step-label">Declined</span>
+                            </div>
+
+                            {{-- Hired --}}
+                            <div class="timeline-step {{ $application->js_status == 'hired' ? 'active' : '' }}">
+                                <div class="circle"></div>
+                                <span class="step-label">Hired</span>
+                            </div>
+
+
+                        </div>
                     </div>
                 </div>
-            </div>
-        @endforeach
-        
+            @endforeach
+
 
         </div>
     </div>

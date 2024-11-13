@@ -1,5 +1,5 @@
 <script>
-      $(document).ready(function() {
+    $(document).ready(function() {
         $('#Screened_tbl').DataTable({
             processing: true,
             serverSide: true,
@@ -9,13 +9,14 @@
                 type: 'GET',
                 dataSrc: 'data'
             },
-            order: [[0, 'asc']],
+            order: [
+                [0, 'asc']
+            ],
             scrollY: '400px',
             scrollX: true,
             scrollCollapse: true,
             paging: true,
-            columns: [
-                {
+            columns: [{
                     data: null,
                     name: 'index',
                     render: function(data, type, row, meta) {
@@ -41,20 +42,43 @@
                 },
                 {
                     data: null,
-                    render: function(data, type, row) {
-                        return `<button class="btn bgp-gradient" onclick="HireJobSeeker(${row.id})">Hire</button>`;
-                    },
+                        render: function(data, type, row) {
+                            return `
+                                <div style="display: flex; gap: 5px;">
+                                    <button class="btn bgp-gradient" onclick="HireJobSeeker(${row.id})">Hire</button>
+                                    <button class="btn btn-danger" onclick="DeclineJobSeeker(${row.id})">Decline</button>
+                                </div>
+                            `;
+                        },
+
+
                     orderable: false
                 }
             ],
             dom: 'Bfrtip',
             buttons: [
                 'colvis',
-                { extend: 'copy' },
-                { extend: 'csv' },
-                { extend: 'excel' },
-                { extend: 'pdf', exportOptions: { columns: ':visible' }},
-                { extend: 'print', exportOptions: { columns: ':visible' }}
+                {
+                    extend: 'copy'
+                },
+                {
+                    extend: 'csv'
+                },
+                {
+                    extend: 'excel'
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: ':visible'
+                    }
+                }
             ],
             fixedHeader: true
         });
@@ -62,55 +86,99 @@
 </script>
 
 <script>
-function HireJobSeeker(id) {
+    function HireJobSeeker(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you really want to hire this job seeker?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, hire them!',
+            cancelButtonText: 'No, cancel!'
+        }).then((result) => {
+            if (result.isConfirmed) {
 
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "Do you really want to hire this job seeker?",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Yes, hire them!',
-        cancelButtonText: 'No, cancel!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-
-            $.ajax({
-                url: "{{ route('hireJobSeeker') }}",  
-                type: 'POST',
-                data: {
-                    _token: "{{ csrf_token() }}", 
-                    id: id,
-                    js_status: 'hired'
-                },
-                success: function(response) {
-
-                    if (response.success) {
-                        Swal.fire(
-                            'Hired!',
-                            'The job seeker has been hired successfully.',
-                            'success'
-                        );
-                        $('#Screened_tbl').DataTable().ajax.reload();  
-                    } else {
+                $.ajax({
+                    url: "{{ route('hireJobSeeker') }}",
+                    type: 'POST',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        id: id,
+                        js_status: 'hired'
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire(
+                                'Hired!',
+                                'The job seeker has been hired successfully.',
+                                'success'
+                            );
+                            $('#Screened_tbl').DataTable().ajax.reload();
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                response.message || 'There was an error hiring the job seeker.',
+                                'error'
+                            );
+                        }
+                    },
+                    error: function(xhr, status, error) {
                         Swal.fire(
                             'Error!',
-                            'There was an error hiring the job seeker.',
+                            'An error occurred while hiring the job seeker.',
                             'error'
                         );
                     }
-                },
-                error: function(xhr, status, error) {
+                });
+            }
+        });
+    }
+</script>
 
-                    Swal.fire(
-                        'Error!',
-                        'An error occurred while hiring the job seeker.',
-                        'error'
-                    );
-                }
-            });
-        }
-    });
-}
+<script>
+    function DeclineJobSeeker(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you really want to decline this job seeker?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, decline them!',
+            cancelButtonText: 'No, cancel!'
+        }).then((result) => {
+            if (result.isConfirmed) {
 
-
+                $.ajax({
+                    url: "{{ route('declineJobSeeker') }}",  
+                    type: 'POST',
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        id: id,
+                        js_status: 'declined'
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire(
+                                'Declined!',
+                                'The job seeker has been declined successfully.',
+                                'success'
+                            );
+                            $('#Screened_tbl').DataTable().ajax.reload();
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                response.message || 'There was an error declining the job seeker.',
+                                'error'
+                            );
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.fire(
+                            'Error!',
+                            'An error occurred while declining the job seeker.',
+                            'error'
+                        );
+                    }
+                });
+            }
+        });
+    }
 </script>

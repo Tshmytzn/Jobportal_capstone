@@ -23,6 +23,7 @@ class JobDetails extends Model
         'other_skills',
         'job_salary',
         'job_description',
+        'job_status',
     ];
 
     public function agency()

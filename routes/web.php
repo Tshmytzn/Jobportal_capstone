@@ -32,7 +32,13 @@ Route::get('/Admin/CustomerInquiries', function () { return view('Admin.customer
 Route::get('/Admin/GeneralSkills', function () { return view('Admin.generalskills'); })->name('generalskills');
 Route::get('/Admin/PesoForms', function () { return view('Admin.pesoforms'); })->name('adminpesoforms');
 
+//Job Post Management
+Route::get('/Admin/Jobpost', function () { return view('Admin.jobpostrequest'); })->name('jobpostrequest');
+Route::get('/Admin/JobpostApproved', function () { return view('Admin.jobpostapproved'); })->name('jobpostapproved');
+Route::get('/Admin/JobpostDeclined', function () { return view('Admin.jobpostdeclined'); })->name('jobpostdeclined');
+
 //create general skill assessment
+Route::get('/fetch-job-categories', [SkillAssessmentController::class, 'getJobCategories']);
 Route::post('/assessments', [SkillAssessmentController::class, 'store'])->name('assessments.store');
 
 //display general skill assessment
@@ -51,7 +57,8 @@ Route::get('/showassessments/{id}', [SkillAssessmentController::class, 'show']);
 Route::post('/saveAssessment', [SkillAssessmentController::class, 'saveAssessment'])->name('saveAssessment');
 
 //dashboard chart
-Route::get('/api/registrations', [AdminChartsController::class, 'getMonthlyRegistrations']);
+Route::get('/api/registrations', [AdminChartsController::class, 'getRegistrationsData']);
+
 //Admin view
 Route::get('/Admin/Settings', [AdminController::class, 'showAdminDetails'])->name('adminsettings');
 Route::get('/Admin/AddAdministrators', [AdminController::class, 'showAllAdmins'])->name('administrators');
@@ -112,6 +119,9 @@ Route::post('/LoginAdmin', [AuthController::class, 'LoginAdmin'])->name('LoginAd
 Route::post('/logoutAdmin', [AuthController::class, 'logoutAdmin'])->name('logoutAdmin');
 Route::get('/Admin/Login', function () { return view('Admin.Login'); })->name('AdminLogin');
 
+//dashboard chart
+Route::get('/api/hiredjobseekers', [AdminChartsController::class, 'getHiredJobseekersData']);
+
 //update job categories
 Route::get('/admin/getjobcategory/{id}', action: [AdminCRUDController::class, 'getJobcategory']);
 // Route::post('/admin/updatejobcategory', [AdminCRUDController::class, 'updatejobcategory'])->name('updatejobcategory');
@@ -142,16 +152,18 @@ Route::post('/disqualify-jobseeker', [JobApplicationController::class, 'disquali
 // Add this route in your routes/web.php or routes/api.php depending on how you're handling AJAX requests
 Route::post('/hire-job-seeker', [JobApplicationController::class, 'hireJobSeeker'])->name('hireJobSeeker');
 
-
 // routes/api.php
 Route::get('/screened-applicants', [JobApplicationController::class, 'getScreenedApplicants'])->name('getScreened');
 
+//decline jobseeker application
+Route::post('/decline-job-seeker', [JobApplicationController::class, 'declineJobSeeker'])->name('declineJobSeeker');
 
 //Agency update password: pending
 Route::post('/UpdatePassword', [AgencyController::class, 'updatePassword'])->name('UpdatePassword');
 
 // Agency Protected routes
 Route::get('/Agency/Dashboard', [AuthController::class, 'dashboard'])->name('agencydashboard');
+
 Route::get('/Agency/Notification', [AuthController::class, 'notification'])->name('agencynotif');
 // Route::get('/Agency/Settings', [AuthController::class, 'settings'])->name('agencysettings');
 Route::get('/Agency/JobPosting', [AuthController::class, 'jobposting'])->name('agencyjobposting');
@@ -227,6 +239,7 @@ Route::get('/SkillAssessment', function () { return view('Jobseeker.skillassessm
 
 //answer submission
 Route::post('/assessment/submit', [AssessmentResultsController::class, 'submit'])->name('submitassessment');
+Route::get('/recommended-jobs-for-you', [AssessmentResultsController::class, 'recommendedJob']);
 
 //results assessment display
 Route::get('/getAssessmentResults', [AssessmentResultsController::class, 'getAssessmentResults'])

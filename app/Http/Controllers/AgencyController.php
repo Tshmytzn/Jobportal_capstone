@@ -34,10 +34,13 @@ class AgencyController extends Controller
 
         $validatedData = $request->validate([
             'agency_name' => 'required|string|max:255',
+            'agency_province' => 'required|string|max:255',
+            'agency_city' => 'required|string|max:255',
+            'agency_baranggay' => 'required|string|max:255',
             'agency_address' => 'required|string|max:255',
             'email_address' => 'required|string|email|max:255|unique:agencies',
             'contact_number' => 'required|string|regex:/^9[0-9]{9}$/',
-            'landline_number' => 'nullable|string|regex:/^02-[0-9]{8}$/',
+            'landline_number' => 'required|string|max:20',
             'geo_coverage' => 'required|in:local,national,international',
             'employee_count' => 'required|string',
             'password' => 'required|string|min:8|confirmed',
@@ -55,6 +58,9 @@ class AgencyController extends Controller
 
         $data = new Agency();
         $data->agency_name = $request->agency_name;
+        $data->agency_province = $request->agency_province;
+        $data->agency_city = $request->agency_city;
+        $data->agency_baranggay = $request->agency_baranggay;
         $data->agency_address = $request->agency_address;
         $data->email_address = $request->email_address;
         $data->contact_number = $request->contact_number;

@@ -18,6 +18,9 @@ return new class extends Migration
         Schema::create('agencies', function (Blueprint $table) {
             $table->id();
             $table->string('agency_name');
+            $table->string('agency_province');
+            $table->string('agency_city');
+            $table->string('agency_baranggay');
             $table->string('agency_address');
             $table->string('email_address')->unique();
             $table->string('contact_number', 15);
@@ -38,6 +41,9 @@ return new class extends Migration
         DB::table('agencies')->insert([
             [
                 'agency_name' => 'Workforce Pro Staffing',
+                'agency_province' => 'Aklan',
+                'agency_city' => 'kalibo',
+                'agency_baranggay' => 'Baranggay 1',
                 'agency_address' => '500 fake st',
                 'email_address' => 'wpf@job.com',
                 'contact_number' => '9784365734',
@@ -56,6 +62,9 @@ return new class extends Migration
             ],
             [
                 'agency_name' => 'Elite Recruitment',
+                'agency_province' => 'Aklan',
+                'agency_city' => 'kalibo',
+                'agency_baranggay' => 'Baranggay 1',
                 'agency_address' => '123 main st',
                 'email_address' => 'elite@recruit.com',
                 'contact_number' => '9876543210',
@@ -74,6 +83,9 @@ return new class extends Migration
             ],
             [
                 'agency_name' => 'Quick Hire Solutions',
+                'agency_province' => 'Aklan',
+                'agency_city' => 'kalibo',
+                'agency_baranggay' => 'Baranggay 1',
                 'agency_address' => '456 jobs ave',
                 'email_address' => 'quickhire@solutions.com',
                 'contact_number' => '9123456789',

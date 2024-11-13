@@ -18,12 +18,19 @@
                 <p id="scoreResult">Your score: <span></span></p>
                 <p id="scorePercentage">Your percentage: <span></span></p> <!-- New line for percentage -->
                 <p id="passStatus">Status: <span></span></p>
+
+                <div class="mt-4">
+                    <h4>Category Scores</h4>
+                    <div id="categoryScores">
+
+                    </div>
+                </div>
             </div>
-            
+
             <div class="modal-footer justify-content-center border-0">
                 <a href="javascript:void(0);" class="btn btn-success" id="viewResultsBtn" onclick="showResults()">View Results</a>
             </div>
-            
+
         </div>
     </div>
 </div>

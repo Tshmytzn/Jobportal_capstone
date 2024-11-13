@@ -197,40 +197,50 @@
                             </select>
                         </div>
 
-                    @php
-                        $jobs = \App\Models\JobDetails::join('agencies','job_details.agency_id','=','agencies.id')
-                            ->where('agencies.status', 'approved')
-                            ->select('job_details.id as job_id','job_details.job_title')
-                            ->get();
-                    @endphp
+                        @php
+                            $jobs = \App\Models\JobDetails::join(
+                                'agencies',
+                                'job_details.agency_id',
+                                '=',
+                                'agencies.id',
+                            )
+                                ->where('agencies.status', 'approved')
+                                ->select('job_details.id as job_id', 'job_details.job_title')
+                                ->get();
+                        @endphp
 
                         <div class="input-field">
                             <label for="preferred_position">Preferred Position</label>
                             <select id="preferred_position" name="preferred_position" required>
-                                <option value="">Select Preferred Position</option>
-                                @foreach($jobs as $job)
+
+                                <option value="{{ $pesoForm->preferred_position ?? '' }}" hidden selected>
+                                    {{ $pesoForm->peso_position ?? 'Select Preferred Position' }}
+                                </option>
+
+                                @foreach ($jobs as $job)
                                     <option value="{{ $job->job_title }}">{{ $job->job_title }}</option>
                                 @endforeach
                             </select>
                         </div>
 
+
                         @php
-                        $pesoSkill = \App\Models\JobseekerSkill::all();
-                    @endphp
+                            $pesoSkill = \App\Models\JobseekerSkill::all();
+                        @endphp
 
-                    <div class="input-field">
-                        <label for="skills">Skills</label>
-                        <select class="form-control" id="skills" name="skills[]" multiple required>
-                            <option value="" disabled>Select your skills</option>
+                        <div class="input-field">
+                            <label for="skills">Skills</label>
+                            <select class="form-control" id="skills" name="skills[]" multiple required>
+                                <option value="" disabled>Select your skills</option>
 
-                            @foreach($pesoSkill as $skill)
-                                <option value="{{ $skill->skill_name }}">{{ $skill->skill_name }}</option>
-                            @endforeach
-                        </select>
+                                @foreach ($pesoSkill as $skill)
+                                    <option value="{{ $skill->skill_name }}">{{ $skill->skill_name }}</option>
+                                @endforeach
+                            </select>
 
-                        <input type="text" id="selectedSkill" name="selectedSkill" hidden>
-                        <div id="selected-skills" style="margin-top: 10px;"></div>
-                    </div>
+                            <input type="text" id="selectedSkill" name="selectedSkill" hidden>
+                            <div id="selected-skills" style="margin-top: 10px;"></div>
+                        </div>
 
                         <div class="input-field">
                             <label>Work Experience</label>
@@ -306,10 +316,17 @@
                             <label for="event_name">Event</label>
                             <select id="event_name" name="event_name" required>
                                 <option value="" disabled selected>Select an event</option>
-                                <option value="Job Fair" {{ $pesoForm->peso_event == 'Job Fair' ? 'selected' : '' }}>Job Fair</option>
-                                <option value="Skills Training" {{ $pesoForm->peso_event == 'Skills Training' ? 'selected' : '' }}>Skills Training</option>
-                                <option value="Referral Program" {{ $pesoForm->peso_event == 'Referral Program' ? 'selected' : '' }}>Referral Program</option>
-                                <option value="Community Job Drives" {{ $pesoForm->peso_event == 'Community Job Drives' ? 'selected' : '' }}>Community Job Drives</option>
+                                <option value="Job Fair" {{ $pesoForm->peso_event == 'Job Fair' ? 'selected' : '' }}>
+                                    Job Fair</option>
+                                <option value="Skills Training"
+                                    {{ $pesoForm->peso_event == 'AYOS' ? 'selected' : '' }}>AYOS</option>
+                                <option value="Referral Program"
+                                    {{ $pesoForm->peso_event == 'DILP' ? 'selected' : '' }}>DILP</option>
+                                <option value="Community Job Drives"
+                                    {{ $pesoForm->peso_event == 'SPES' ? 'selected' : '' }}>SPES</option>
+                                <option value="Community Job Drives"
+                                    {{ $pesoForm->peso_event == 'TUPAD' ? 'selected' : '' }}>TUPAD</option>
+
                             </select>
                         </div>
 

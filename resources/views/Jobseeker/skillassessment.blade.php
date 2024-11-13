@@ -7,9 +7,11 @@
     $userId = session('user_id');
     $assessmentId = $skillassessment ? $skillassessment->id : null;
     $existingResult = \App\Models\AssessmentResult::where('jobseeker_id', session('user_id'))
-                            ->where('assessment_id', $skillassessment->id) 
+                            ->where('assessment_id', $skillassessment->id)
                             ->first();
 
+    $skillAssessmentResult = App\Models\JobseekerSkillAssessmentResult::where('jobseeker_id', session('user_id'))
+                                ->join('sections', 'sections.id', '=', 'jobseeker_skill_assessment_results.section_id')->get();
 @endphp
 
 <!DOCTYPE html>
@@ -44,9 +46,9 @@
         $percentage = ($existingResult->score / $existingResult->total_questions) * 100;
     @endphp
             <!-- Display existing result if the assessment has already been submitted -->
-            <div class="container text-center my-5">
-                <h3 class="mb-4">Assessment Already Submitted</h3>
-                <p class="text-muted">You have already submitted this assessment. Here are your results:</p>
+            <div class="container  my-5">
+                <h3 class="mb-4 text-center">Assessment Already Submitted</h3>
+                <p class="text-muted text-center">You have already submitted this assessment. Here are your results:</p>
 
                 <div class="card my-4 mx-auto shadow-lg" style="max-width: 600px; border-radius: 12px;">
                     <div class="card-header bgp-gradient text-white" style="border-radius: 12px 12px 0 0;">
@@ -64,7 +66,7 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="row text-center">
+                        <div class="row text-center mb-4">
                             <div class="col-6">
                                 <h6 class="font-weight-bold text-muted">Correct Answers</h6>
                                 <p>{{ $existingResult->correct_answers }} / {{ $existingResult->total_questions }}</p>
@@ -73,6 +75,23 @@
                                 <h6 class="font-weight-bold text-muted">Total Questions</h6>
                                 <p>{{ $existingResult->total_questions }}</p>
                             </div>
+                        </div>
+
+                        <div class="text-left">
+                            <h6>Category Scores</h6>
+                            @if($skillAssessmentResult)
+                               <ul>
+                                @foreach ($skillAssessmentResult as $result)
+                                @php
+                                    $cat = App\Models\JobCategory::where('id', $result->job_category)->first();
+                                @endphp
+
+                                <li>{{ $cat->name }} ({{ $result->percentage }}%)</li>
+                            @endforeach
+                               </ul>
+                            @else
+                            <p class="text-muted">Not available</p>
+                            @endif
                         </div>
                     </div>
 
@@ -98,7 +117,14 @@
                     @foreach ($skillassessment->sections as $section)
                         <div class="card mb-4">
                             <div class="card-header">
-                                <h5 class="mb-0">{{ $section->title }}</h5>
+                                <h5 class="mb-0">{{ $section->title }} @if($section->job_category != null)
+                                        @php
+                                            $job_category = App\Models\JobCategory::where('id', $section->job_category)->first();
+                                        @endphp
+
+                                        <span class="text-muted">({{ $job_category->name }})</span>
+                                    @endif
+                                </h5>
                             </div>
                             <div class="card-body">
                                 <p>{{ $section->description }}</p>

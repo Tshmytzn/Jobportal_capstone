@@ -1,49 +1,116 @@
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 <script>
+    function calculateAge() {
+        const birthdateInput = document.getElementById('birthdate').value;
+        const ageInput = document.getElementById('age');
+
+        if (birthdateInput) {
+            const birthdate = new Date(birthdateInput);
+            const today = new Date();
+
+            let age = today.getFullYear() - birthdate.getFullYear();
+            let monthDifference = today.getMonth() - birthdate.getMonth();
+
+            // Adjust age if birthdate has not occurred this year yet
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < birthdate.getDate())) {
+                age--;
+                monthDifference += 12;
+            }
+
+            // Check if age is below 18
+            if (age < 15) {
+                ageInput.value = '';
+                ageInput.style.borderColor = 'red';
+
+                // Display SweetAlert notification
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Age Restriction',
+                    text: 'You must be at least 15 years old to proceed.',
+                    confirmButtonText: 'OK'
+                });
+
+                ageInput.title = "You must be at least 15 years old.";
+            } else {
+                // Format the age as "XXyrs and XXmonths"
+                const formattedAge = `${age}yrs and ${monthDifference}months`;
+                ageInput.value = formattedAge;
+                ageInput.style.borderColor = ''; // Reset border color
+                ageInput.title = ""; // Clear title if valid
+            }
+        }
+    }
+
+
+
+    window.onload = function() {
+        flatpickr("#birthdate", {
+            dateFormat: "Y-m-d",
+            onChange: function() {
+                calculateAge(); // Calculate age whenever the date changes
+            }
+        });
+    };
+
     // Data for cities and their respective barangays by province
     const citiesByProvince = {
-    "Aklan": {
-        "Kalibo": ["Andagao", "Bachaw Norte", "Bachaw Sur", "Bulwang", "Poblacion", "Tigayon", "Tinigao"],
-        "Malay": ["Caticlan", "Manoc-Manoc", "Balabag", "Argao", "Cubay Sur", "Naasug", "Yapak"],
-        "Numancia": ["Albasan", "Badio", "Bacong", "Camanci", "Navitas", "Poblacion", "Laguinbanua East"],
-        "Ibajay": ["Agdugayan", "Agcuyawan", "Bugtong", "Poblacion", "Santa Cruz", "Tabon", "Maloco"],
-        "Banga": ["Agcawilan", "Cortes", "Jumarap", "Morocoro", "Venturanza", "Poblacion", "Sibalew"]
-    },
-    "Antique": {
-        "San Jose": ["Barangay 1", "Barangay 2", "Barangay 3", "Barangay 4", "Barangay 5", "Barangay 6", "Barangay 7"],
-        "Sibalom": ["Bongbongan I", "Bongbongan II", "Bugnay", "Igbucagay", "Pasong", "Poblacion", "Villafont"],
-        "Hamtic": ["Binangbang Centro", "Binangbang Ilaya", "Casanayan", "Caridad", "Cubay", "Guintas", "Poblacion"],
-        "Tobias Fornier": ["Batuan", "Bagumbayan", "Balud I", "Balud II", "Igpanolong", "Pasong", "San Juan"],
-        "Patnongon": ["Amparo", "Apdo", "Aureliana", "Camarines", "Padang", "Poblacion", "Tigbalua"]
-    },
-    "Capiz": {
-        "Roxas City": ["Bago", "Balijuagan", "Banica", "Dinginan", "Jumabong", "Lonoy", "Poblacion"],
-        "Panay": ["Agbabadiang", "Agkilo", "Bailan", "Poblacion Ilawod", "Poblacion Ilaya", "Talon", "Pawa"],
-        "Pilar": ["Binaobawan", "Culilang", "Natividad", "Poblacion", "San Blas", "San Esteban", "San Nicolas"],
-        "Ivisan": ["Agmalobo", "Balaring", "Cabugao", "Malocloc Norte", "Malocloc Sur", "Poblacion", "Santa Cruz"],
-        "Dumalag": ["Aglimocon", "Bato", "Concepcion", "Duran", "San Juan", "San Rafael", "Poblacion"]
-    },
-    "Guimaras": {
-        "Jordan": ["Alaguisoc", "Balcon Maravilla", "Balcon Melliza", "Hoskyn", "Poblacion", "San Miguel", "Santa Teresa"],
-        "Buenavista": ["Avila", "Banban", "Cabano", "Dagsaan", "East Valencia", "Getulio", "Poblacion"],
-        "Nueva Valencia": ["Canhawan", "Concordia", "Dolores", "Igang", "La Paz", "Magamay", "Poblacion"],
-        "San Lorenzo": ["Agsanayan", "Ayangan", "Cabalagnan", "M. Chavez", "Poblacion", "San Enrique", "Suclaran"],
-        "Sibunag": ["Alegria", "Bubog", "Concordia", "Dasal", "Inampulugan", "Poblacion", "Tanglad"]
-    },
-    "Iloilo": {
-        "Iloilo City": ["Aduana", "Aripdip", "Baldoza", "Bantud", "Calaparan", "Calumpang", "Jalandoni Estate"],
-        "Oton": ["Abilay Norte", "Abilay Sur", "Agbabadiang", "Botong", "Calam-Isan", "Cagbang", "Poblacion South"],
-        "Pototan": ["Agcuyawan", "Agdahon", "Amamaros", "Igang", "Poblacion", "Rumbang", "Zarrague"],
-        "Passi City": ["Aglalana", "Agupalo Este", "Agupalo Oeste", "Agtabo", "Agtambi", "Maasin", "Poblacion"],
-        "Santa Barbara": ["Agutayan", "Bagumbayan", "Bakhaw", "Bancal", "Catoogan", "Daga", "Poblacion"]
-    },
-    "Negros Occidental": {
-        "Bacolod": ["Alijis", "Banago", "Barangay 1", "Barangay 2", "Barangay 3", "Barangay 4", "Barangay 5"],
-        "Bago": ["Atipuluan", "Balingasag", "Binubuhan", "Bunga", "Calumangan", "Don Jorge Araneta", "Poblacion"],
-        "Cadiz": ["Andres Bonifacio", "Banquerohan", "Burgos", "Cabahug", "Caduha-an", "Daga", "Poblacion"],
-        "Escalante": ["Alimango", "Arac", "Balintawak", "Cervantes", "Japitan", "Poblacion", "Washington"],
-        "Sagay": ["Bato", "Bulanon", "Carmen", "Colonia Divina", "Lopez Jaena", "Poblacion", "Vito"]
-    }
-};
+        "Aklan": {
+            "Kalibo": ["Andagao", "Bachaw Norte", "Bachaw Sur", "Bulwang", "Poblacion", "Tigayon", "Tinigao"],
+            "Malay": ["Caticlan", "Manoc-Manoc", "Balabag", "Argao", "Cubay Sur", "Naasug", "Yapak"],
+            "Numancia": ["Albasan", "Badio", "Bacong", "Camanci", "Navitas", "Poblacion", "Laguinbanua East"],
+            "Ibajay": ["Agdugayan", "Agcuyawan", "Bugtong", "Poblacion", "Santa Cruz", "Tabon", "Maloco"],
+            "Banga": ["Agcawilan", "Cortes", "Jumarap", "Morocoro", "Venturanza", "Poblacion", "Sibalew"]
+        },
+        "Antique": {
+            "San Jose": ["Barangay 1", "Barangay 2", "Barangay 3", "Barangay 4", "Barangay 5", "Barangay 6",
+                "Barangay 7"
+            ],
+            "Sibalom": ["Bongbongan I", "Bongbongan II", "Bugnay", "Igbucagay", "Pasong", "Poblacion", "Villafont"],
+            "Hamtic": ["Binangbang Centro", "Binangbang Ilaya", "Casanayan", "Caridad", "Cubay", "Guintas",
+                "Poblacion"
+            ],
+            "Tobias Fornier": ["Batuan", "Bagumbayan", "Balud I", "Balud II", "Igpanolong", "Pasong", "San Juan"],
+            "Patnongon": ["Amparo", "Apdo", "Aureliana", "Camarines", "Padang", "Poblacion", "Tigbalua"]
+        },
+        "Capiz": {
+            "Roxas City": ["Bago", "Balijuagan", "Banica", "Dinginan", "Jumabong", "Lonoy", "Poblacion"],
+            "Panay": ["Agbabadiang", "Agkilo", "Bailan", "Poblacion Ilawod", "Poblacion Ilaya", "Talon", "Pawa"],
+            "Pilar": ["Binaobawan", "Culilang", "Natividad", "Poblacion", "San Blas", "San Esteban", "San Nicolas"],
+            "Ivisan": ["Agmalobo", "Balaring", "Cabugao", "Malocloc Norte", "Malocloc Sur", "Poblacion",
+                "Santa Cruz"
+            ],
+            "Dumalag": ["Aglimocon", "Bato", "Concepcion", "Duran", "San Juan", "San Rafael", "Poblacion"]
+        },
+        "Guimaras": {
+            "Jordan": ["Alaguisoc", "Balcon Maravilla", "Balcon Melliza", "Hoskyn", "Poblacion", "San Miguel",
+                "Santa Teresa"
+            ],
+            "Buenavista": ["Avila", "Banban", "Cabano", "Dagsaan", "East Valencia", "Getulio", "Poblacion"],
+            "Nueva Valencia": ["Canhawan", "Concordia", "Dolores", "Igang", "La Paz", "Magamay", "Poblacion"],
+            "San Lorenzo": ["Agsanayan", "Ayangan", "Cabalagnan", "M. Chavez", "Poblacion", "San Enrique",
+                "Suclaran"
+            ],
+            "Sibunag": ["Alegria", "Bubog", "Concordia", "Dasal", "Inampulugan", "Poblacion", "Tanglad"]
+        },
+        "Iloilo": {
+            "Iloilo City": ["Aduana", "Aripdip", "Baldoza", "Bantud", "Calaparan", "Calumpang", "Jalandoni Estate"],
+            "Oton": ["Abilay Norte", "Abilay Sur", "Agbabadiang", "Botong", "Calam-Isan", "Cagbang",
+                "Poblacion South"
+            ],
+            "Pototan": ["Agcuyawan", "Agdahon", "Amamaros", "Igang", "Poblacion", "Rumbang", "Zarrague"],
+            "Passi City": ["Aglalana", "Agupalo Este", "Agupalo Oeste", "Agtabo", "Agtambi", "Maasin", "Poblacion"],
+            "Santa Barbara": ["Agutayan", "Bagumbayan", "Bakhaw", "Bancal", "Catoogan", "Daga", "Poblacion"]
+        },
+        "Negros Occidental": {
+            "Bacolod": ["Alijis", "Banago", "Barangay 1", "Barangay 2", "Barangay 3", "Barangay 4", "Barangay 5"],
+            "Bago": ["Atipuluan", "Balingasag", "Binubuhan", "Bunga", "Calumangan", "Don Jorge Araneta",
+                "Poblacion"],
+            "Cadiz": ["Andres Bonifacio", "Banquerohan", "Burgos", "Cabahug", "Caduha-an", "Daga", "Poblacion"],
+            "Escalante": ["Alimango", "Arac", "Balintawak", "Cervantes", "Japitan", "Poblacion", "Washington"],
+            "Sagay": ["Bato", "Bulanon", "Carmen", "Colonia Divina", "Lopez Jaena", "Poblacion", "Vito"]
+        }
+    };
 
 
     document.getElementById("province").addEventListener("change", function() {
@@ -82,12 +149,12 @@
             });
         }
     });
-    </script>
+</script>
 
 <script>
     function loginJobseeker() {
 
-        document.getElementById('loading').style.display='grid';
+        document.getElementById('loading').style.display = 'grid';
 
         var formElement = document.getElementById('jobseekerloginform');
         var formData = new FormData(formElement);
@@ -101,12 +168,12 @@
             success: function(response) {
 
                 if (response.status === 'error') {
-                    document.getElementById('loading').style.display='none';
+                    document.getElementById('loading').style.display = 'none';
 
                     Swal.fire('Error', response.message, 'error');
 
                 } else {
-                    document.getElementById('loading').style.display='none';
+                    document.getElementById('loading').style.display = 'none';
 
                     Swal.fire({
                         title: 'Success',
@@ -120,7 +187,7 @@
                 }
             },
             error: function(xhr) {
-                document.getElementById('loading').style.display='none';
+                document.getElementById('loading').style.display = 'none';
 
                 console.error('AJAX Error:', xhr.responseText);
                 Swal.fire('Error', 'Invalid Credentials.', 'error');
@@ -143,7 +210,7 @@
 
         $('#jobseekerForm').on('submit', function(event) {
             event.preventDefault();
-            document.getElementById('loading').style.display='grid';
+            document.getElementById('loading').style.display = 'grid';
 
 
             $.ajax({
@@ -151,7 +218,7 @@
                 method: 'POST',
                 data: $(this).serialize(),
                 success: function(response) {
-                    document.getElementById('loading').style.display='none';
+                    document.getElementById('loading').style.display = 'none';
 
                     Swal.fire({
                         title: 'Success',
@@ -167,7 +234,7 @@
                 },
 
                 error: function(xhr) {
-                    document.getElementById('loading').style.display='none';
+                    document.getElementById('loading').style.display = 'none';
                     var errors = xhr.responseJSON.errors;
                     var errorMessages = '';
                     $.each(errors, function(key, value) {

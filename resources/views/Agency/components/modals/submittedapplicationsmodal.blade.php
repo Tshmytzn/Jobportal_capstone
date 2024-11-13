@@ -66,11 +66,6 @@
                                     </iframe>
                                 </div>
 
-                                {{-- <img id="jobseekerresume" 
-                                     src="{{ asset('jobseeker_resume/' . $application->resume_file) }}" 
-                                     alt="jobseeker resume" 
-                                     class="img-fluid"
-                                     style="height: 200px; width: 200px; object-fit: cover; cursor: pointer;" /> --}}
 
                             <div class="col-6 mb-1">
                                 <label for="pesoform" class="form-label">Peso Registration Forms</label> <br>
@@ -79,9 +74,7 @@
                                 style="height: 200px; width: 100%; border: none;" title="Jobseeker Resume">
                                 Your browser does not support iframes.
                             </iframe>
-                                {{-- <img id="pesoform" src="" alt="peso form" class="img-fluid"
-                                    style="height: 200px; width: 200px; object-fit: cover; cursor: pointer;"
-                                    data-bs-toggle="modal" data-bs-target="#imageModal" onclick="viewImage(this.src)" /> --}}
+                              
                             </div>
                         </div>
 

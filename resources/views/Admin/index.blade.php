@@ -44,7 +44,7 @@
                             <div class="row">
                                 <div class="col-8">
                                     <div class="numbers">
-                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Registered Job Seekers</p>
+                                        <p class="text-sm mb-0 text-capitalize font-weight-bold">Job Seekers</p>
                                         <h5 class="font-weight-bolder mb-0">
                                             {{ \App\Models\Jobseeker::count() }}
                                     </div>
@@ -116,14 +116,11 @@
                         <div class="card z-index-2">
                           <div class="card-header pb-0">
                             <h6>Monthly Overview: Jobseeker and Agency Registrations</h6>
-                            <p class="text-sm">
-                              <i class="fa fa-arrow-up text-success"></i>
-                              <span class="font-weight-bold">4% more</span> in 2024
-                            </p>
+
                           </div>
                           <div class="card-body p-3">
                             <div class="chart">
-                              <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
+                                <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
                             </div>
                           </div>
                         </div>
@@ -133,6 +130,7 @@
             @include('Admin.components.footer')
         </div>
     </main>
+    
 
     @include('Admin.components.scripts')
     @include('Admin.components.dashboardscripts')

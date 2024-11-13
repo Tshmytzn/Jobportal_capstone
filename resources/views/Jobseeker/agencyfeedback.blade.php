@@ -25,7 +25,7 @@
                             </div>
                             <div>
                                 <h5 class="mb-2">Acme Recruitment Agency</h5>
-                                <p class="mb-0">Bacolod, negros</p>
+                                <p class="mb-0">Bacolod, Negros</p>
                             </div>
                         </div>
                         <p class="fs-7">"The job portal system has streamlined our hiring process significantly. We've
@@ -79,7 +79,7 @@
                             </div>
                             <div>
                                 <h5 class="mb-2">Pioneer Talent Agency</h5>
-                                <p class="mb-0">Sydney, Australia</p>
+                                <p class="mb-0">Victorias, Negros</p>
                             </div>
                         </div>
                         <p class="fs-7">"The portal has made it easy for us to post jobs and review applications. The customer support has been exceptional, ensuring that any issues are resolved quickly. We are thrilled with the results so far."

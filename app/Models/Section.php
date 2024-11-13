@@ -13,6 +13,7 @@ class Section extends Model
         'assessment_id',
         'title',
         'description',
+        'job_category',
     ];
 
     public function assessment()

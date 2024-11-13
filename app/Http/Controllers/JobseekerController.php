@@ -68,7 +68,7 @@ class JobseekerController extends Controller
             'email' => 'required|email|max:100|unique:jobseeker_details,js_email',
             'contact' => 'required|regex:/^9[0-9]{9}$/|max:10',
             'password' => 'required|string|min:8|confirmed', // Confirm the password
-            'age'=> 'required|integer'
+            'age' => 'required|string|max:255',
         ]);
 
         // Create a new Jobseeker instance and fill it with form data
