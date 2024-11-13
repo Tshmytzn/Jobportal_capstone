@@ -196,6 +196,9 @@ Route::get('/Login', function () { return view('Jobseeker.Login'); })->name('log
 Route::get('/job-requests', [JobListingController::class, 'getJobRequests'])->name('getJobRequests');
 
 //Approved Jobs get route
+Route::get('/job-declined', [JobListingController::class, 'getJobDeclined'])->name('getJobDeclined');
+
+//Approved Jobs get route
 Route::get('/job-approved', [JobListingController::class, 'getJobApproved'])->name('getJobApproved');
 
 //populate modal with data

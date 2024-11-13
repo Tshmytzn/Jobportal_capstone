@@ -95,5 +95,28 @@ class JobListingController extends Controller
         ]);
     }
 
+    public function getJobDeclined(Request $request)
+    {
+        $jobRequests = JobDetails::with(['category', 'agency'])
+        ->where('job_status', 'rejected') 
+        ->select('id', 'category_id', 'agency_id', 'job_title', 'job_location', 'created_at', 'updated_at')
+        ->orderBy('id', 'desc')
+        ->get();
+
+        return response()->json([
+            'data' => $jobRequests->map(function($jobRequest) {
+                return [
+                    'id' => $jobRequest->id,
+                    'category_name' => $jobRequest->category->name,
+                    'agency_name' => $jobRequest->agency->agency_name,
+                    'job_title' => $jobRequest->job_title,
+                    'job_location' => $jobRequest->job_location,
+                    'created_at' => $jobRequest->created_at->format('Y-m-d H:i:s'),
+                    'updated_at' => $jobRequest->updated_at->format('Y-m-d H:i:s'),
+                ];
+            })
+        ]);
+    }
+
 }
 

@@ -1,6 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    .modal-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
 
+    .form-label {
+        font-weight: 500;
+        font-size: 0.95rem;
+    }
+
+    .form-control {
+        border-radius: 0.375rem;
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    .modal-body {
+        padding: 2rem;
+    }
+
+    #job_description {
+        max-height: 250px;
+        overflow-y: auto;
+    }
+
+    #job_description p {
+        margin: 10px 0;
+        font-size: 16px;
+    }
+</style>
 @include('Admin.components.head', ['title' => 'Admin Dashboard'])
 @include('admin.components.loading')
 
