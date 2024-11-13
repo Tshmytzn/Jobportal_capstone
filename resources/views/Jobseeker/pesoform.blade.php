@@ -139,7 +139,7 @@
                             <label>Telephone<span style="color:red"> *</span></label>
                             <input type="tel" id="telephone" name="telephone" placeholder="e.g. 1234-5678"
                                 pattern="^\d{4}-\d{4}$" maxlength="9"
-                                title="Please enter a valid telephone number in the format: 1234-5678" required
+                                title="Please enter a valid telephone number in the format: 1234-5678" optional
                                 oninput="formatTelephone(this)">
                         </div>
 

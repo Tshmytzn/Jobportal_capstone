@@ -196,6 +196,7 @@ class AgencyController extends Controller
             $data->job_vacancy = $request->job_vacancy;
             $data->salary_frequency = $request->salary_frequency;
             $data->job_salary = $request->job_salary;
+            $data->job_status = 'pending';
             $data->other_skills = $request->other_skills;
             $data->skills_required = implode(',', $request->input('skills'));
             $data->job_description = $request->job_details;
