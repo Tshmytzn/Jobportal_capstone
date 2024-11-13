@@ -28,7 +28,13 @@ class JobDetails extends Model
 
     public function agency()
     {
-        return $this->belongsTo(Agency::class, 'agency_id', 'id');
+        return $this->belongsTo(Agency::class);
     }
+
+    public function category()
+    {
+        return $this->belongsTo(JobCategory::class, 'category_id', 'id');
+    }
+
 
 }

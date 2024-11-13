@@ -14,6 +14,8 @@ use App\Http\Controllers\SkillAssessmentController;
 use App\Http\Controllers\AssessmentResultsController;
 use App\Http\Controllers\JobQuestion;
 use App\Http\Controllers\JobQuestionController;
+use App\Http\Controllers\JobListingController;
+
 
 // Admin Protected Routes
 Route::middleware([AuthMiddleware::class])->group(function () {
@@ -143,7 +145,7 @@ Route::post('/UpdateAgency', [AgencyController::class, 'UpdateAgency'])->name('U
 //Agency Job details creation done, update $ delete: pending
 Route::post('/Agency', [AgencyController::class, 'Agency'])->name('Agency');
 
-//Qualify Agency
+//Qualify Agencyf
 Route::post('/qualify-jobseeker', [JobApplicationController::class, 'qualifyjobseeker'])->name('qualifyjobseeker');
 
 Route::post('/disqualify-jobseeker', [JobApplicationController::class, 'disqualifyJobseeker'])->name('disqualifyJobseeker');
@@ -189,6 +191,16 @@ Route::get('/AgencySignUp', function () { return view('Jobseeker.agencysignup');
 Route::get('/AgencyLogin', function () { return view('Jobseeker.agencylogin'); })->name('agencylogin');
 Route::get('/Login', function () { return view('Jobseeker.Login'); })->name('login');
 // Route::get('/Jobs', function () { return view('Jobseeker.jobs'); })->name('jobs');
+
+//Job request get route
+Route::get('/job-requests', [JobListingController::class, 'getJobRequests'])->name('getJobRequests');
+
+//populate modal with data
+Route::get('/job-details/{id}', [JobListingController::class, 'getJobDetails']);
+
+//update jobstatus
+Route::post('/update-job-status', [JobListingController::class, 'updateJobStatus'])->name('updateJobStatus');
+
 
 //Show Jobs in Jobslist
 Route::get('/jobslist', [JobseekerController::class, 'jobslist'])->name('jobslist');
