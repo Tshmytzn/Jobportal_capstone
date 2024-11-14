@@ -84,7 +84,6 @@
         color: gold;
     }
 
-    /* Hide radio buttons */
     input[type="radio"] {
         display: none;
     }
@@ -93,16 +92,20 @@
         color: gold;
     }
 
-    input[type="radio"]:checked~label~label {
+    input[type="radio"]:checked:nth-of-type(1)~label,
+    input[type="radio"]:checked:nth-of-type(2)~label,
+    input[type="radio"]:checked:nth-of-type(3)~label,
+    input[type="radio"]:checked:nth-of-type(4)~label,
+    input[type="radio"]:checked:nth-of-type(5)~label {
         color: gold;
     }
 
-    .rating-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
+    input[type="radio"]:checked~label,
+    input[type="radio"]:checked~label~label,
+    input[type="radio"]:checked~label~label~label,
+    input[type="radio"]:checked~label~label~label~label {
+        color: gold;
+    }
 </style>
 
 <body>
@@ -138,15 +141,23 @@
 
     @php
         use App\Models\JobseekerApplication;
+        use App\Models\UserFeedbacks;
 
         $applications = JobseekerApplication::where('js_id', session('user_id'))
             ->with(['job.agency'])
             ->get();
 
+        $hiredApplication = $applications->firstWhere('js_status', 'hired');
+
         $hasHiredStatus = $applications->contains(function ($application) {
             return $application->js_status == 'hired';
         });
+
+        $hasSubmittedFeedback = $hiredApplication
+            ? UserFeedbacks::where('application_id', $hiredApplication->id)->exists()
+            : false;
     @endphp
+
 
     <!-- Feedback Modal -->
     <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
@@ -160,81 +171,92 @@
                     <p class="text-primary">Congratulations on getting hired! We’d love to hear your feedback on your
                         application process.
                     </p>
-                    <form class="needs-validation" novalidate>
+                    <form id="SubmitContactForm" class="needs-validation" novalidate>
+
+                        <input type="hidden" name="application_id" id="application_id"
+                            value="{{ $hiredApplication->id ?? '' }}">
+                        <input type="hidden" name="user_id" id="user_id"
+                            value="{{ $hiredApplication->js_id ?? '' }}">
+
                         <div class="form-group mb-2">
-                            <label class="mb-2" for="rating">How would you rate your experience?</label>
+                            <label class="mb-2" for="rating"> <strong> How would you rate your experience?
+                                </strong></label>
 
                             <div class="container-wrapper">
                                 <div class="container d-flex align-items-center justify-content-center">
                                     <div class="row justify-content-center">
 
                                         <!-- Star Rating -->
-
-                                        <!-- Star Rating -->
                                         <div class="rating-wrapper">
-                                            <!-- Star 1 -->
-                                            <input type="radio" id="1-star-rating" name="star-rating" value="1">
-                                            <label for="1-star-rating" class="star-rating star">
-                                                <i class="fas fa-star d-inline-block"></i>
-                                            </label>
-
-                                            <!-- Star 2 -->
-                                            <input type="radio" id="2-star-rating" name="star-rating" value="2">
-                                            <label for="2-star-rating" class="star-rating star">
-                                                <i class="fas fa-star d-inline-block"></i>
-                                            </label>
-
-                                            <!-- Star 3 -->
-                                            <input type="radio" id="3-star-rating" name="star-rating" value="3">
-                                            <label for="3-star-rating" class="star-rating star">
-                                                <i class="fas fa-star d-inline-block"></i>
-                                            </label>
-
-                                            <!-- Star 4 -->
-                                            <input type="radio" id="4-star-rating" name="star-rating" value="4">
-                                            <label for="4-star-rating" class="star-rating star">
-                                                <i class="fas fa-star d-inline-block"></i>
-                                            </label>
 
                                             <!-- Star 5 -->
                                             <input type="radio" id="5-star-rating" name="star-rating" value="5">
                                             <label for="5-star-rating" class="star-rating">
                                                 <i class="fas fa-star d-inline-block"></i>
                                             </label>
-                                        </div>
 
+                                            <!-- Star 4 -->
+                                            <input type="radio" id="4-star-rating" name="star-rating" value="4">
+                                            <label for="4-star-rating" class="star-rating">
+                                                <i class="fas fa-star d-inline-block"></i>
+                                            </label>
+
+                                            <!-- Star 3 -->
+                                            <input type="radio" id="3-star-rating" name="star-rating" value="3">
+                                            <label for="3-star-rating" class="star-rating">
+                                                <i class="fas fa-star d-inline-block"></i>
+                                            </label>
+
+                                            <!-- Star 2 -->
+                                            <input type="radio" id="2-star-rating" name="star-rating" value="2">
+                                            <label for="2-star-rating" class="star-rating">
+                                                <i class="fas fa-star d-inline-block"></i>
+                                            </label>
+                                            <!-- Star 1 -->
+                                            <input type="radio" id="1-star-rating" name="star-rating" value="1">
+                                            <label for="1-star-rating" class="star-rating">
+                                                <i class="fas fa-star d-inline-block"></i>
+                                            </label>
+
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                         <!-- Comments -->
                         <div class="form-group mb-2">
-                            <label class="mb-2" for="comments">Tell us more about your experience</label>
+                            <label class="mb-2" for="comments"> <strong> Tell us more about your experience
+                                </strong></label>
                             <textarea class="form-control" id="comments" name="comments" rows="4" placeholder="Write your feedback here..."
                                 required></textarea>
                             <div class="invalid-feedback">Please enter your comments.</div>
                         </div>
 
-                        <!-- Optional Fields for Tracking (Hidden) -->
-                        <input type="hidden" class="form-control" id="applicationId" name="application_id">
-                        <input type="hidden" class="form-control" id="userId" name="user_id">
-
-                        <!-- Submit Button -->
-                        <button class="btn btn-primary btn-block mt-4" type="submit">Submit Feedback</button>
+                        <button class="btn btn-primary btn-block mt-4" onclick="SubmitFeedback('SubmitContactForm')"
+                            role="button" type="button">Submit Feedback</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
+    @php
+        $hasSubmittedFeedback = $hiredApplication
+            ? UserFeedbacks::where('application_id', $hiredApplication->id)->exists()
+            : false;
+    @endphp
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            @if ($hasHiredStatus)
+            @if ($hasHiredStatus && !$hasSubmittedFeedback)
                 var feedbackModal = new bootstrap.Modal(document.getElementById('feedbackModal'));
                 feedbackModal.show();
             @endif
         });
     </script>
+
 
     <!-- Progress for Job Application -->
     <div class="container my-5">
@@ -302,27 +324,12 @@
         </div>
     </div>
 
-    <script>
-        (function() {
-            'use strict';
-            window.addEventListener('load', function() {
-                var forms = document.getElementsByClassName('needs-validation');
-                Array.prototype.filter.call(forms, function(form) {
-                    form.addEventListener('submit', function(event) {
-                        if (form.checkValidity() === false) {
-                            event.preventDefault();
-                            event.stopPropagation();
-                        }
-                        form.classList.add('was-validated');
-                    }, false);
-                });
-            }, false);
-        })();
-    </script>
 
     @include('Jobseeker.components.footer')
 
     @include('Jobseeker.components.scripts')
+    @include('Jobseeker.components.feedbackscripts')
+
 
 
 </body>

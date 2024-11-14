@@ -65,7 +65,7 @@
         </div>
     </main>
     @include('Admin.components.scripts')
-    {{-- @include('Admin.components.feedbackscripts') --}}
+    @include('Admin.components.feedbackscripts')
     @include('Admin.components.modals.feedbacksmodal')
 
 </body>

@@ -292,12 +292,10 @@ Route::post('/update-jobseeker-profile-pic', [JobSeekerController::class, 'updat
 
 //Application status page
 Route::get('/ApplicationStatus', function () { return view('Jobseeker.applicationstatus'); })->name('applicationstatus');
-
-// Jobcategory Display
-// Route::get('/job-categories', [JobseekerController::class, 'index']);
-
 Route::post('/contacts', [JobseekerController::class, 'SaveContact'])->name('SaveContact');
 
+//Submit feedbacks
+Route::post('/JobseekerFeedback', [UserFeedbacksController::class, 'submitfeedback'])->name('submitFeedback');
 
 //JobQuestion
 Route::post('/AddQuestion', [JobQuestionController::class, 'AddQuestion'])->name('AddQuestion');
