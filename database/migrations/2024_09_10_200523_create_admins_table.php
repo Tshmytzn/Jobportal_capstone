@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('admin_mobile');
             $table->text('admin_password');
             $table->string('admin_profile')->nullable();
+            $table->string('admin_type')->nullable();
             $table->timestamps();
         });
 
@@ -31,6 +32,7 @@ return new class extends Migration
                 'admin_mobile' => '9987654321',
                 'admin_password' => Hash::make('12345678'),
                 'admin_profile' => 'default.jpg',
+                'admin_type' => 'Peso Admin',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
@@ -40,6 +42,7 @@ return new class extends Migration
                 'admin_mobile' => '9123456789',
                 'admin_password' => Hash::make('12345678'),
                 'admin_profile' => 'default.jpg',
+                'admin_type' => 'Super Admin',
                 'created_at' => now(),
                 'updated_at' => now(),
             ],

@@ -32,6 +32,9 @@ Route::get('/Admin/SkillAssessment', function () { return view('Admin.SkillAsses
 Route::get('/Admin/Jobseeker', function () { return view('Admin.jobseeker'); })->name('jobseeker');
 Route::get('/Admin/JobCategory', function () { return view('Admin.jobcategory'); })->name('jobcategory');
 Route::get('/Admin/Administrators', function () { return view('Admin.admins'); })->name('adminadministrators');
+
+Route::get('/Admin/SystemAdministrators', function () { return view('Admin.systemadmin'); })->name('systemadministrators');
+
 Route::get('/Admin/CustomerInquiries', function () { return view('Admin.customerinquiries'); })->name('customerinquiries');
 Route::get('/Admin/GeneralSkills', function () { return view('Admin.generalskills'); })->name('generalskills');
 Route::get('/Admin/PesoForms', function () { return view('Admin.pesoforms'); })->name('adminpesoforms');
@@ -107,6 +110,10 @@ Route::get('/Job/ViewSkills/{id}', [AdminController::class, 'getSkill']);
 Route::delete('/Job/DeleteSkills/{id}', [AdminController::class, 'deleteSkill'])->name('deleteSkill');
 //Get ADmin data to populate datatable
 Route::get('/Admin/Accounts', [AdminCRUDController::class, 'getAdminData'])->name('getAdminData');
+
+//System Administrator
+Route::get('/Admin/System', [AdminCRUDController::class, 'getAdminData2'])->name('getAdminData2');
+
 Route::get('/admin/get/{id}', action: [AdminCRUDController::class, 'getAdmin']);
 Route::delete('/Admin/Delete/{id}', [AdminCRUDController::class, 'deleteAdminData'])->name('deleteAdminData');
 
@@ -121,6 +128,8 @@ Route::delete('/Job/Categories/{id}', [AdminCRUDController::class, 'deleteJobCat
 
 //Administrator post controller routes
 Route::post('/Admin/Create', [AdminController::class, 'createAdmin'])->name('createAdmin');
+Route::post('/Admin/CreateSystemAdmin', [AdminCRUDController::class, 'createAdmin2'])->name('createAdmin2');
+
 
 });
 

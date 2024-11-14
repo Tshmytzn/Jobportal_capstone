@@ -57,6 +57,7 @@ class AdminController extends Controller
             $admin->admin_name = $validatedData['name'];
             $admin->admin_mobile = $validatedData['contact_number'];
             $admin->admin_email = $validatedData['email'];
+            $admin->admin_type = ('Peso Admin');
             $admin->admin_password = bcrypt($validatedData['password']); 
             $admin->admin_profile = null; 
             $admin->save();

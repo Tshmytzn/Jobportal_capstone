@@ -276,12 +276,56 @@ class AdminCRUDController extends Controller
         $loggedInAdminId = session('admin_id');
     
         $admins = Admins::where('id', '!=', $loggedInAdminId)
-                        ->orderBy('id', 'desc')
-                        ->get();
+        ->where('admin_type', 'Peso Admin') 
+        ->orderBy('id', 'desc')
+        ->get();
+
     
         return response()->json([
             'data' => $admins
         ]);
+    }
+
+    public function getAdminData2(Request $request)
+    {
+        $loggedInAdminId = session('admin_id');
+    
+        $admins = Admins::where('id', '!=', $loggedInAdminId)
+        ->where('admin_type', 'Super Admin') 
+        ->orderBy('id', 'desc')
+        ->get();
+
+    
+        return response()->json([
+            'data' => $admins
+        ]);
+    }
+
+    public function createAdmin2(Request $request)
+    {
+        try {
+
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255',
+                'contact_number' => 'required|string|max:20',
+                'email' => 'required|email|unique:admins,admin_email',
+                'password' => 'required|string|min:8|confirmed', 
+            ]);
+    
+
+            $admin = new Admins();
+            $admin->admin_name = $validatedData['name'];
+            $admin->admin_mobile = $validatedData['contact_number'];
+            $admin->admin_email = $validatedData['email'];
+            $admin->admin_type = ('Super Admin');
+            $admin->admin_password = bcrypt($validatedData['password']); 
+            $admin->admin_profile = null; 
+            $admin->save();
+    
+            return response()->json(['success' => true, 'message' => 'Admin created successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['success' => false, 'error' => $e->getMessage()], 500);
+        }
     }
     
 

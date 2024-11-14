@@ -33,7 +33,15 @@
     <div class="modal-dialog modal-dialog-custom">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="profileModalLabel">Administrator</h5>
+                @php
+                $admin = \App\Models\Admins::find(session('admin_id'));
+                @endphp
+                
+                @if ($admin && $admin->admin_type === 'Peso Admin')
+                <h5 class="modal-title" id="profileModalLabel">PESO ADMIN</h5>
+                @else
+                <h5 class="modal-title" id="profileModalLabel">SUPER ADMIN</h5>
+            @endif
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
              @php

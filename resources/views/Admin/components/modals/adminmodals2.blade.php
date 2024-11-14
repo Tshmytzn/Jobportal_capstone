@@ -9,7 +9,7 @@
             </div>
             <div class="modal-body">
                 <!-- Form Start -->
-                <form id="adminForm" action="{{ route('createAdmin') }}" method="POST">
+                <form id="adminForm" method="POST">
                     @csrf 
 
                     <!-- Full Name Input -->

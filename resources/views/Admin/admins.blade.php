@@ -1,7 +1,7 @@
     <!DOCTYPE html>
     <html lang="en">
 
-    @include('Admin.components.head', ['title' => 'Administrators'])
+    @include('Admin.components.head', ['title' => 'PESO Administrators'])
 
     <body class="g-sidenav-show  bg-gray-100">
 
@@ -14,7 +14,7 @@
             @include(
                 'Admin.components.navbar',
                 ['headtitle' => 'Administrators'],
-                ['pagetitle' => 'Admin']
+                ['pagetitle' => 'PESO']
             )
             <!-- End Navbar -->
 
