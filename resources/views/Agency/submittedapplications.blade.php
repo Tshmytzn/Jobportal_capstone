@@ -101,7 +101,7 @@
                                                     <input type="hidden" id="applicationId" name="applicationId" readonly value="{{ $application->id }}" />
                                                     <div class="mb-0 text-center">
                                                         @if ($jobseeker && $jobseeker->js_image)
-                                                            <img src="{{ asset('jobseeker_profile/' . $jobseeker->js_image) }}" class="card-img-top mx-auto mt-2" alt="Jobseeker Image" style="max-height: 150px; width: auto; border: 2px solid #007bff;" />
+                                                            <img src="{{ asset('jobseeker_profile/' . $jobseeker->js_image) }}" class="img-fluid rounded-circle d-block mx-auto mt-2" alt="Jobseeker Image" style="max-height: 150px; width: auto; border: 2px solid #007bff;" />
                                                         @else
                                                             <p>No image available</p>
                                                         @endif
@@ -140,16 +140,20 @@
                                                                 style="height: 200px; width: 100%; border: none;" title="Jobseeker Resume">
                                                                 Your browser does not support iframes.
                                                             </iframe>
+                                                            <button onclick="printResume()" class="btn btn-primary mt-2">Print Resume</button>
+
                                                         </div>
 
                                                         <div class="col-6 mb-1">
-                                                            <label for="pesoform" class="form-label">Peso Registration Forms</label> <br>
-                                                            <iframe id="pesoform"
-                                                                src="{{ asset('jobseeker_resume/' . $application->peso_form) }}"
-                                                                style="height: 200px; width: 100%; border: none;" title="Peso Form">
+                                                            <label for="jobseekerresume" class="form-label">Resume</label> <br>
+                                                            <iframe id="jobseekerresume"
+                                                                    src="{{ asset('jobseeker_resume/' . $application->resume_file) }}"
+                                                                    style="height: 200px; width: 100%; border: none;" title="Jobseeker Resume">
                                                                 Your browser does not support iframes.
                                                             </iframe>
+                                                            <button onclick="printResume()" class="btn btn-primary mt-2">Print Resume</button>
                                                         </div>
+                                                        
                                                     </div>
 
                                                 </form>
@@ -182,5 +186,12 @@
 @include('Agency.components.scripts')
 @include('Agency.components.modals.submittedapplicationsmodal')
 @include('Agency.components.submittedapplicationscripts')
+
+<script>
+    function printResume() {
+        const iframe = document.getElementById('jobseekerresume');
+        iframe.contentWindow.print();
+    }
+</script>
 
 </html>
