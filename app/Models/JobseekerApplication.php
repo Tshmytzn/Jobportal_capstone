@@ -31,4 +31,9 @@ class JobseekerApplication extends Model
         return $this->belongsTo(JobDetails::class, 'job_id', 'id');
     }
 
+    public function feedback()
+    {
+        return $this->hasMany(UserFeedbacks::class, 'application_id');
+    }
+
 }

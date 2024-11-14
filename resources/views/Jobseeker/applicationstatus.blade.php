@@ -138,19 +138,15 @@
     <!-- Header End -->
 
     <!-- Progress Bar for Job Application -->
-
     <div class="container my-5">
         <div class="row mb-2">
 
 
-
-            <!-- Card 1 - Submitted -->
             @php
                 use App\Models\JobseekerApplication;
 
-                // Query to get applications for the current user with job and agency details
                 $applications = JobseekerApplication::where('js_id', session('user_id'))
-                    ->with(['job.agency']) // Eager load the agency through the job relation
+                    ->with(['job.agency']) 
                     ->get();
             @endphp
 

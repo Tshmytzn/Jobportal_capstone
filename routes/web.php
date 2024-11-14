@@ -15,6 +15,8 @@ use App\Http\Controllers\AssessmentResultsController;
 use App\Http\Controllers\JobQuestion;
 use App\Http\Controllers\JobQuestionController;
 use App\Http\Controllers\JobListingController;
+use App\Http\Controllers\UserFeedbacksController;
+
 
 
 // Admin Protected Routes
@@ -33,6 +35,7 @@ Route::get('/Admin/Administrators', function () { return view('Admin.admins'); }
 Route::get('/Admin/CustomerInquiries', function () { return view('Admin.customerinquiries'); })->name('customerinquiries');
 Route::get('/Admin/GeneralSkills', function () { return view('Admin.generalskills'); })->name('generalskills');
 Route::get('/Admin/PesoForms', function () { return view('Admin.pesoforms'); })->name('adminpesoforms');
+Route::get('/Admin/Feedbacks', function () { return view('Admin.feedback'); })->name('Feedbacks');
 
 //Job Post Management
 Route::get('/Admin/Jobpost', function () { return view('Admin.jobpostrequest'); })->name('jobpostrequest');
@@ -41,6 +44,10 @@ Route::get('/Admin/JobpostDeclined', function () { return view('Admin.jobpostdec
 
 //create general skill assessment
 Route::get('/fetch-job-categories', [SkillAssessmentController::class, 'getJobCategories']);
+
+//get agency feedback
+Route::get('/agency-feedbacks', [UserFeedbacksController::class, 'getAgencyFeedbacks']);
+
 Route::post('/assessments', [SkillAssessmentController::class, 'store'])->name('assessments.store');
 
 //display general skill assessment
