@@ -11,6 +11,13 @@
                     @csrf
                     <div class="row g-3">
 
+                        <div class="col-md-12">
+                            <label for="job_title" class="form-label">Job Title</label>
+                            <div id="job_title" class="form-control" style="text-align: center;">
+                                <img id="job_image" src="path/to/your/image.jpg" alt="Job Title Image" class="img-fluid rounded-circle" style="height: 150px; width: 150px; object-fit: cover; border-radius: 50%"/>
+                            </div>
+                        </div>
+
                         <!-- Job Title -->
                         <div class="col-md-6">
                             <label for="job_title" class="form-label">Job Title</label>

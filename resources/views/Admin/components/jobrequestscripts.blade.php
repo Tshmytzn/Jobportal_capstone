@@ -129,11 +129,11 @@
                     $('#job_description').html(response.job_description);
                     $('#job_status').val(response.job_status);
 
-                    // if (response.job_image) {
-                    //     var imageUrl = "{{ asset('agencyfiles/job_image/') }}/" + response
-                    //         .job_image;
-                    //     $('#job_image').attr('src', imageUrl);
-                    // }
+                    if (response.job_image) {
+                        var imageUrl = "{{ asset('agencyfiles/job_image/') }}/" + response
+                            .job_image;
+                        $('#job_image').attr('src', imageUrl);
+                    }
                 },
                 error: function() {
                     alert('Failed to fetch job details');
@@ -148,7 +148,7 @@
 
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: "You are about to approve this job status.",
+                    text: "You are about to approve this job post.",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -216,7 +216,7 @@
 
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: "You are about to reject this job status.",
+                    text: "You are about to reject this job post.",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#d33',

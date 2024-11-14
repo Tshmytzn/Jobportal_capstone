@@ -71,6 +71,11 @@
                         '/agency_profile/' + agency.agency_image :
                         '/agency_profile/default.png';
                     modal.find('#agencyName').val(agency.agency_name);
+
+                    modal.find('#province').val(agency.province);
+                    modal.find('#city').val(agency.city);
+                    modal.find('#baranggay').val(agency.baranggay);
+
                     modal.find('#agencyAddress').val(agency.agency_address);
                     modal.find('#emailAddress').val(agency.email_address);
                     modal.find('#contactNumber').val(agency.contact_number);

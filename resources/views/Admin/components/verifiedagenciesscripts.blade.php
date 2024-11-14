@@ -74,7 +74,7 @@
                     data: null,
                     render: function(data, type, row) {
                         return `
-                            <button class="btn btn-sm bgp-table delete-btn" data-bs-toggle='modal' data-bs-target='#deactivateagency' data-id="${row.id}">Deactivate</button>
+                            <button class="btn btn-sm bgp-table delete-btn" data-bs-toggle='modal' data-bs-target='#agencyInfoModal' data-id="${row.id}">View</button>
                         `;
                     }
                 }
@@ -108,54 +108,65 @@
             fixedHeader: true,
         });
 
+    $('#agencyInfoModal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget);
+            var agencyId = button.data('id');
+
+            $.ajax({
+                url: `/agency/${agencyId}`,
+                type: 'GET',
+                success: function(data) {
+                    var agency = data.data;
+
+                    var modal = $('#agencyInfoModal');
+                    modal.find('#agencyIdInput').val(agency.id);
+                    document.getElementById('agencyImage').src = agency.agency_image ?
+                        '/agency_profile/' + agency.agency_image :
+                        '/agency_profile/default.png';
+                    modal.find('#agencyName').val(agency.agency_name);
+
+                    modal.find('#province').val(agency.province);
+                    modal.find('#city').val(agency.city);
+                    modal.find('#baranggay').val(agency.baranggay);
+
+                    modal.find('#agencyAddress').val(agency.agency_address);
+                    modal.find('#emailAddress').val(agency.email_address);
+                    modal.find('#contactNumber').val(agency.contact_number);
+                    modal.find('#landlineNumber').val(agency.landline_number);
+                    modal.find('#geoCoverage').val(agency.geo_coverage);
+                    modal.find('#employeeCount').val(agency.employee_count);
+                    document.getElementById('businessPermit').src = '/agencyfiles/' + agency
+                        .agency_business_permit;
+                    document.getElementById('dtiPermit').src = '/agencyfiles/' + agency
+                        .agency_dti_permit;
+                    document.getElementById('birPermit').src = '/agencyfiles/' + agency
+                        .agency_bir_permit;
+                        document.getElementById('mayorsPermit').src = '/agencyfiles/' + agency
+                        .agency_mayors_permit;
+
+                    var statusBadge = modal.find('#statusBadge');
+                    statusBadge.text(agency.status.charAt(0).toUpperCase() + agency.status
+                        .slice(1));
+                    if (agency.status === 'approved') {
+                        statusBadge.removeClass('bg-warning text-dark').addClass(
+                            'bg-success text-white');
+                    } else if (agency.status === 'rejected') {
+                        statusBadge.removeClass('bg-warning text-dark').addClass(
+                            'bg-danger text-white');
+                    } else {
+                        statusBadge.removeClass(
+                            'bg-success text-white bg-danger text-white').addClass(
+                            'bg-warning text-dark');
+                    }
+                },
+                error: function(xhr) {
+
+                    console.error('Error fetching agency data:', xhr);
+                }
+            });
+        });
+
     });
-
-    function deactivateAgency(button) {
-    const agencyId = button.getAttribute('data-id');
-
-    Swal.fire({
-        title: 'Are you sure?',
-        text: "You are about to deactivate this agency account!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, deactivate it!'
-    }).then((result) => {
-        if (result.isConfirmed) {
-
-            document.getElementById('loading').style.display = 'none';
-
-
-            // $.ajax({
-            //     url: '/agency/deactivate/' + agencyId,
-            //     type: 'POST',
-            //     data: {
-            //         _token: '{{ csrf_token() }}',
-
-            //     },
-            //     success: function(response) {
-            //         // Show success message
-            //         Swal.fire(
-            //             'Deactivated!',
-            //             'The agency account has been deactivated.',
-            //             'success'
-            //         );
-
-            //         $('#AgencyTable').DataTable().ajax.reload();
-            //     },
-            //     error: function(xhr) {
-            //         // Show error message
-            //         Swal.fire(
-            //             'Error!',
-            //             'Something went wrong. Please try again.',
-            //             'error'
-            //         );
-            //     }
-            // });
-        }
-    });
-}
 
 </script>
 

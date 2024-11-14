@@ -1,45 +1,122 @@
-    {{-- Create JobSeeker Modal start --}}
-    <div class="modal fade" id="deactivateagency" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header bgp-gradient">
-                    <h5 class="modal-title text-white" id="exampleModalLabel">Job Seeker</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!-- Modal -->
 
-                </div>
-                <div class="modal-body">
-                    <form method="POST" id="banjobseekerform">
-                        @csrf
+<div class="modal fade" id="agencyInfoModal" tabindex="-1" aria-labelledby="agencyInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bgp-gradient">
+                <h5 class="modal-title text-white" id="agencyInfoModalLabel">Agency Information</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="max-height: 650px; overflow-y: auto;">
+                <form id="agencyApprovalForm">
+                    @csrf
+                    <input type="hidden" id="agencyIdInput" class="form-control" readonly />
 
-                        <input type="hidden" class="form-control" name="jobseeker_name" id="jobseeker_name" required
-                            placeholder="Enter jobseeker's name">
+                    <div class="mb-0 text-center">
+                        <img id="agencyImage" src="" alt="Agency Image" class="img-fluid rounded-circle"
+                            style="max-height: 150px; width: auto; border: 2px solid #007bff;" />
+                        <div class="m-2">
+                            <label class="form-label">Status:</label>
+                            <span id="statusBadge" class="badge bg-warning text-dark">Pending</span>
+                            <!-- Use different classes for different statuses -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 mb-1">
+                            <label for="agencyName" class="form-label">Agency Name</label>
+                            <input type="text" class="form-control" id="agencyName" readonly>
+                        </div>
+                        <div class="col-3 mb-1">
+                            <label for="province" class="form-label">Province</label>
+                            <input type="text" class="form-control" id="province" readonly>
+                        </div>
+                        <div class="col-3 mb-1">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" class="form-control" id="city" readonly>
+                        </div>
+                        <div class="col-3 mb-1">
+                            <label for="baranggay" class="form-label">Baranggay</label>
+                            <input type="text" class="form-control" id="baranggay" readonly>
+                        </div>
+                        <div class="col-3 mb-1">
+                            <label for="agencyAddress" class="form-label">Street</label>
+                            <input type="text" class="form-control" id="agencyAddress" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 mb-1">
+                            <label for="emailAddress" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="emailAddress" readonly>
+                        </div>
+                        <div class="col-4 mb-1">
+                            <label for="contactNumber" class="form-label">Contact Number</label>
+                            <input type="text" class="form-control" id="contactNumber" readonly>
+                        </div>
+                        <div class="col-4 mb-1">
+                            <label for="landlineNumber" class="form-label">Landline Number</label>
+                            <input type="text" class="form-control" id="landlineNumber" readonly>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6 mb-1">
+                            <label for="geoCoverage" class="form-label">Geographical Coverage</label>
+                            <input type="text" class="form-control" id="geoCoverage" readonly>
+                        </div>
+                        <div class="col-6 mb-1">
+                            <label for="employeeCount" class="form-label">Employee Count</label>
+                            <input type="text" class="form-control" id="employeeCount" readonly>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-6 mb-1">
+                            <label for="businessPermit" class="form-label">Business Permit</label> <br>
+                            <img id="businessPermit" src="" alt="Business Permit" class="img-fluid"
+                                style="height: 200px; width: 200px; object-fit: cover; cursor: pointer;"
+                                onclick="printImage('businessPermit')" />
+                        </div>
+                        <div class="col-6 mb-1">
+                            <label for="dtiPermit" class="form-label">DTI Permit</label> <br>
+                            <img id="dtiPermit" src="" alt="DTI Permit" class="img-fluid"
+                                style="height: 200px; width: 200px; object-fit: cover; cursor: pointer;"
+                                onclick="printImage('dtiPermit')" />
+                        </div>
 
-                            <div class="form-group">
-                                <label for="block_reason" class="col-form-label">Reason for Deactivating:</label>
-                                <select class="form-select" name="block_reason" id="block_reason" required>
-                                    <option value="" disabled selected>Select Reason</option>
-                                    <option value="Inappropriate Behavior">Inappropriate Behavior</option>
-                                    <option value="Unreliable Performance">Unreliable Performance</option>
-                                    <option value="Violation of Policies">Violation of Policies</option>
-                                    <option value="Fraudulent Activity">Fraudulent Activity</option>
-                                    <option value="Lack of Communication">Lack of Communication</option>
-                                    <option value="Failure to Meet Standards">Failure to Meet Standards</option>
-                                    <option value="Misrepresentation of Services">Misrepresentation of Services</option>
-                                    <option value="Persistent Complaints from Jobseekers">Persistent Complaints from Jobseekers</option>
-                                    <option value="Other">Other</option>
-                                </select>
-                            </div>
+                        <div class="col-6 mb-1">
+                            <label for="birPermit" class="form-label">BIR Permit</label> <br>
+                            <img id="birPermit" src="" alt="BIR Permit" class="img-fluid"
+                                style="height: 200px; width: 200px; object-fit: cover; cursor: pointer;"
+                                onclick="printImage('birPermit')" />
+                        </div>
+                        <div class="col-6 mb-1">
+                            <label for="mayorsPermit" class="form-label">Mayor's Permit</label> <br>
+                            <img id="mayorsPermit" src="" alt="Mayors Permit" class="img-fluid"
+                                style="height: 200px; width: 200px; object-fit: cover; cursor: pointer;"
+                                onclick="printImage('mayorsPermit')" />
+                        </div>
 
-                    </form>
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" data-id="USER_ID" onclick="deactivateAgency(this)" class="btn bgp-gradient">Deactivate Account</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
-    {{-- Create Agency Modal end --}}
+</div>
 
+
+<script>
+
+function printImage(imgId) {
+
+    var img = document.getElementById(imgId);
+
+
+    var printWindow = window.open('', '', 'width=600,height=600');
+        printWindow.document.write('<html><head><title>Print Image</title></head><body>');
+        printWindow.document.write('<img src="' + img.src + '" style="max-width:100%; height:auto;" />');
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+
+
+        printWindow.onload = function () {
+            printWindow.print(); 
+        };
+    }
+</script>

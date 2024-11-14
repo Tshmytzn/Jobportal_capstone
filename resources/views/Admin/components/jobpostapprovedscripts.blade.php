@@ -72,7 +72,7 @@
                     data: null,
                     render: function(data, type, row) {
                         return `
-                        <button class="btn btn-sm bgp-table delete-btn" data-bs-toggle='modal' data-bs-target='#reviewjob' data-id="${row.id}">Review</button>
+                        <button class="btn btn-sm bgp-table delete-btn" data-bs-toggle='modal' data-bs-target='#reviewjob' data-id="${row.id}">View</button>
                     `;
                     }
                 }
@@ -126,11 +126,11 @@
                     $('#job_description').html(response.job_description);
                     $('#job_status').val(response.job_status);
 
-                    // if (response.job_image) {
-                    //     var imageUrl = "{{ asset('agencyfiles/job_image/') }}/" + response
-                    //         .job_image;
-                    //     $('#job_image').attr('src', imageUrl);
-                    // }
+                    if (response.job_image) {
+                        var imageUrl = "{{ asset('agencyfiles/job_image/') }}/" + response
+                            .job_image;
+                        $('#job_image').attr('src', imageUrl);
+                    }
                 },
                 error: function() {
                     alert('Failed to fetch job details');

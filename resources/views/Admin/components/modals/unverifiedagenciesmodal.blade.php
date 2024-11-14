@@ -6,7 +6,7 @@
                 <h5 class="modal-title text-white" id="agencyInfoModalLabel">Agency Information</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
                 <form id="agencyApprovalForm">
                     @csrf
                     <input type="hidden" id="agencyIdInput" class="form-control" readonly />
@@ -21,12 +21,24 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6 mb-1">
+                        <div class="col-12 mb-1">
                             <label for="agencyName" class="form-label">Agency Name</label>
                             <input type="text" class="form-control" id="agencyName" readonly>
                         </div>
-                        <div class="col-6 mb-1">
-                            <label for="agencyAddress" class="form-label">Agency Address</label>
+                        <div class="col-3 mb-1">
+                            <label for="province" class="form-label">Province</label>
+                            <input type="text" class="form-control" id="province" readonly>
+                        </div>
+                        <div class="col-3 mb-1">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" class="form-control" id="city" readonly>
+                        </div>
+                        <div class="col-3 mb-1">
+                            <label for="baranggay" class="form-label">Baranggay</label>
+                            <input type="text" class="form-control" id="baranggay" readonly>
+                        </div>
+                        <div class="col-3 mb-1">
+                            <label for="agencyAddress" class="form-label">Street</label>
                             <input type="text" class="form-control" id="agencyAddress" readonly>
                         </div>
                     </div>
@@ -54,7 +66,7 @@
                             <input type="text" class="form-control" id="employeeCount" readonly>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row text-center">
                         <div class="col-6 mb-1">
                             <label for="businessPermit" class="form-label">Business Permit</label> <br>
                             <img id="businessPermit" src="" alt="Business Permit" class="img-fluid"
@@ -67,7 +79,7 @@
                                 style="height: 200px; width: 200px; object-fit: cover; cursor: pointer;"
                                 onclick="printImage('dtiPermit')" />
                         </div>
-                        
+
                         <div class="col-6 mb-1">
                             <label for="birPermit" class="form-label">BIR Permit</label> <br>
                             <img id="birPermit" src="" alt="BIR Permit" class="img-fluid"

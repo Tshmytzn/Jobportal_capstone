@@ -7,7 +7,7 @@
                 <h5 class="modal-title text-white" id="agencyInfoModalLabel">Agency Information</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="max-height: 650px; overflow-y: auto;">
                 <form id="agencyApprovalForm">
                     @csrf
                     <input type="hidden" id="agencyIdInput" class="form-control" readonly />
@@ -22,12 +22,24 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-6 mb-1">
+                        <div class="col-12 mb-1">
                             <label for="agencyName" class="form-label">Agency Name</label>
                             <input type="text" class="form-control" id="agencyName" readonly>
                         </div>
-                        <div class="col-6 mb-1">
-                            <label for="agencyAddress" class="form-label">Agency Address</label>
+                        <div class="col-3 mb-1">
+                            <label for="province" class="form-label">Province</label>
+                            <input type="text" class="form-control" id="province" readonly>
+                        </div>
+                        <div class="col-3 mb-1">
+                            <label for="city" class="form-label">City</label>
+                            <input type="text" class="form-control" id="city" readonly>
+                        </div>
+                        <div class="col-3 mb-1">
+                            <label for="baranggay" class="form-label">Baranggay</label>
+                            <input type="text" class="form-control" id="baranggay" readonly>
+                        </div>
+                        <div class="col-3 mb-1">
+                            <label for="agencyAddress" class="form-label">Street</label>
                             <input type="text" class="form-control" id="agencyAddress" readonly>
                         </div>
                     </div>

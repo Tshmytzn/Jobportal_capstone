@@ -34,9 +34,10 @@
             order: [
                 [0, 'asc']
             ],
-            scrollY: '400px', // Fixed height for vertical scroll
+            scrollY: '400px', 
             scrollX: true,
             scrollCollapse: true,
+            processing:true,
             paging: true,
             columns: [{
                     data: null,
@@ -67,14 +68,6 @@
                     render: function(data) {
                         const date = new Date(data);
                         return date.toLocaleString();
-                    }
-                },
-                {
-                    data: null,
-                    render: function(data, type, row) {
-                        return `
-                    <button class="btn btn-sm bgp-table delete-btn" data-bs-toggle='modal' data-bs-target='#banjobseeker' data-id="${row.js_id}">Restrict</button>
-                `;
                     }
                 }
             ],

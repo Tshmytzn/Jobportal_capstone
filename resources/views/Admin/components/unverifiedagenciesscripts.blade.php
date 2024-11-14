@@ -48,7 +48,7 @@
                     data: null,
                     render: function(data, type, row) {
                         return `
-                            <button class="btn btn-sm bgp-table" data-bs-toggle='modal' data-bs-target='#viewAgencymodal' data-id="${row.id}">Review Again </button>
+                            <button class="btn btn-sm bgp-table" data-bs-toggle='modal' data-bs-target='#viewAgencymodal' data-id="${row.id}">Reevaluate </button>
                         `;
                     }
                 }
@@ -71,6 +71,11 @@
                         '/agencyfiles/' + agency.agency_image :
                         '/agencyfiles/default_image.jpg';
                     modal.find('#agencyName').val(agency.agency_name);
+
+                    modal.find('#province').val(agency.province);
+                    modal.find('#city').val(agency.city);
+                    modal.find('#baranggay').val(agency.baranggay);
+
                     modal.find('#agencyAddress').val(agency.agency_address);
                     modal.find('#emailAddress').val(agency.email_address);
                     modal.find('#contactNumber').val(agency.contact_number);
@@ -83,6 +88,8 @@
                         .agency_dti_permit;
                     document.getElementById('birPermit').src = '/agencyfiles/' + agency
                         .agency_bir_permit;
+                        document.getElementById('mayorsPermit').src = '/agencyfiles/' + agency
+                        .agency_mayors_permit;
 
                     var statusBadge = modal.find('#statusBadge');
                     statusBadge.text(agency.status.charAt(0).toUpperCase() + agency.status

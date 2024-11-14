@@ -49,6 +49,8 @@ class JobListingController extends Controller
             'job_salary' => $jobDetails->job_salary,
             'job_description' => $jobDetails->job_description,
             'job_status' => $jobDetails->job_status,
+            'job_image' => $jobDetails->job_image,
+
         ]);
     }
 

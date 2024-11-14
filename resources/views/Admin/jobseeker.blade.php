@@ -29,7 +29,6 @@
                             <th>Email</th>
                             <th>Contact Number</th>
                             <th>Date Created</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                 </table>
