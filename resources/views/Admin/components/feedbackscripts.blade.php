@@ -19,90 +19,86 @@
 <script src="https://cdn.datatables.net/buttons/2.3.6/js/buttons.colVis.min.js"></script>
 
 <script>
-     $(document).ready(function() {
-        $('#AgencyF_tbl').DataTable({
-            processing: true,
-            serverSide: false,
-            destroy: true,
-            ajax: {
-                url: "{{ route('getAgencyFeedbacks') }}",
-                type: 'GET',
-                dataSrc: 'data',
-            },
-            order: [
-                [0, 'asc']
-            ],
-            scrollY: '400px',
-            scrollX: true,
-            scrollCollapse: true,
-            paging: true,
-            columns: [{
-                    data: null,
-                    name: 'index',
-                    render: function(data, type, row, meta) {
-                        return meta.row + 1;
+    $(document).ready(function() {
+
+        $('#jobseeker-tab').on('show.bs.tab', function(e) {
+
+            $('#JobseekerF_tbl').DataTable({
+                processing: true,
+                serverSide: false,
+                destroy: true,
+                ajax: {
+                    url: "{{ route('getJobseekerFeedbacks') }}",
+                    type: 'GET',
+                    dataSrc: 'data',
+                },
+                order: [
+                    [0, 'asc']
+                ],
+                scrollY: '400px',
+                scrollX: true,
+                scrollCollapse: true,
+                paging: true,
+                columns: [{
+                        data: null,
+                        name: 'index',
+                        render: function(data, type, row, meta) {
+                            return meta.row + 1;
+                        },
+                        orderable: false
                     },
-                    orderable: false
-                },
-                {
-                    data: 'category_name',
-                    name: 'category_name'
-                },
-                {
-                    data: 'agency_name',
-                    name: 'agency_name'
-                },
-                {
-                    data: 'job_title',
-                    name: 'job_title'
-                },
-                {
-                    data: 'job_location',
-                    name: 'job_location'
-                },
-                {
-                    data: 'created_at',
-                    render: function(data) {
-                        const date = new Date(data);
-                        return date.toLocaleString();
+                    {
+                        data: 'applicant_name',
+                        name: 'applicant_name'
+                    },
+                    {
+                        data: 'job_title',
+                        name: 'job_title'
+                    },
+                    {
+                        data: 'rating',
+                        name: 'rating'
+                    },
+                    {
+                        data: 'comments',
+                        name: 'comments'
+                    },
+                    {
+                        data: 'created_at',
+                        render: function(data) {
+                            const date = new Date(data);
+                            return date.toLocaleString();
+                        }
+                    },
+                ],
+                dom: 'Bfrtip',
+                buttons: [
+                    'colvis',
+                    {
+                        extend: 'copy'
+                    },
+                    {
+                        extend: 'csv'
+                    },
+                    {
+                        extend: 'excel'
+                    },
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
                     }
-                },
-                {
-                    data: null,
-                    render: function(data, type, row) {
-                        return `
-                        <button class="btn btn-sm bgp-table delete-btn" data-bs-toggle='modal' data-bs-target='#reviewjob' data-id="${row.id}">Review</button>
-                    `;
-                    }
-                }
-            ],
-            dom: 'Bfrtip',
-            buttons: [
-                'colvis',
-                {
-                    extend: 'copy'
-                },
-                {
-                    extend: 'csv'
-                },
-                {
-                    extend: 'excel'
-                },
-                {
-                    extend: 'pdf',
-                    exportOptions: {
-                        columns: ':visible'
-                    }
-                },
-                {
-                    extend: 'print',
-                    exportOptions: {
-                        columns: ':visible'
-                    }
-                }
-            ],
-            fixedHeader: true,
+                ],
+                fixedHeader: true,
+            });
         });
     });
-
+    
 </script>

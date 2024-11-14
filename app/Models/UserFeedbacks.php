@@ -20,4 +20,8 @@ class UserFeedbacks extends Model
         return $this->belongsTo(JobseekerApplication::class, 'application_id');
     }
 
+    public function jobseeker() {
+        return $this->belongsTo(Jobseeker::class, 'user_id', 'js_id'); 
+    }
+
 }

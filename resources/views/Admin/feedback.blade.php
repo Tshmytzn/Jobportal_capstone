@@ -14,14 +14,14 @@
 
         {{-- cards --}}
         <div class="container-fluid">
-            <div class="row m-2">
+            <div class="row">
 
                 <ul class="nav nav-pills">
                     <li class="nav-item">
                       <a class="nav-link active" id="agency-tab" data-bs-toggle="pill" href="#agency">Agency</a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" id="jobseeker-tab" data-bs-toggle="pill" href="#jobseeker">Jobseeker</a>
+                        <a class="nav-link" id="jobseeker-tab" data-bs-toggle="pill" href="#jobseeker">Jobseeker</a>
                     </li>
                   </ul>
                   
@@ -31,11 +31,13 @@
                         <table id="AgencyF_tbl" class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">User Name</th>
-                                    <th scope="col">Contact</th>
-                                    <th scope="col">Feedback Rating</th>
-                                    <th scope="col">Feedback Comments</th>
+                                    <th>#</th>
+                                    <th>Applicant Name</th>
+                                    <th>Job Title</th>
+                                    <th>Rating</th>
+                                    <th>Comments</th>
+                                    <th>Created At</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                         </table>
@@ -44,14 +46,15 @@
                   
                     <!-- Jobseeker Tab Content -->
                     <div class="tab-pane fade" id="jobseeker">
-                        <table id="JobseekerF_tbl" class="table table-striped">
-                            <thead>
+                        <table id="JobseekerF_tbl" class="table table-striped" style="width: 100%">
+                            <thead style="width: 100%">
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">User Name</th>
-                                    <th scope="col">Contact</th>
-                                    <th scope="col">Feedback Rating</th>
-                                    <th scope="col">Feedback Comments</th>
+                                    <th>#</th>
+                                    <th>Applicant Name</th>
+                                    <th>Job Title</th>
+                                    <th>Rating</th>
+                                    <th>Comments</th>
+                                    <th>Submitted At</th>
                                 </tr>
                             </thead>
                         </table>

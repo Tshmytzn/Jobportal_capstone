@@ -45,8 +45,9 @@ Route::get('/Admin/JobpostDeclined', function () { return view('Admin.jobpostdec
 //create general skill assessment
 Route::get('/fetch-job-categories', [SkillAssessmentController::class, 'getJobCategories']);
 
-//get agency feedback
-Route::get('/agency-feedbacks', [UserFeedbacksController::class, 'getAgencyFeedbacks']);
+//get jobseeker and agency feedback
+Route::get('/jobseeker-feedbacks', [UserFeedbacksController::class, 'getJobseekerFeedbacks'])->name('getJobseekerFeedbacks');
+Route::get('/agency-feedbacks', [UserFeedbacksController::class, 'getAgencyFeedbacks'])->name('getAgencyFeedbacks');
 
 Route::post('/assessments', [SkillAssessmentController::class, 'store'])->name('assessments.store');
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Crypt;
 
 class Jobseeker extends Model
 {
@@ -39,4 +40,9 @@ class Jobseeker extends Model
     {
         $this->attributes['js_password'] = bcrypt($value);
     }
+
+    public function userFeedbacks() {
+        return $this->hasMany(UserFeedbacks::class, 'user_id', 'js_id'); 
+    }
+
 }
