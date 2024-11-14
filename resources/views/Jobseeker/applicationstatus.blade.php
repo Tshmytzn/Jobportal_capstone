@@ -71,39 +71,38 @@
         font-size: 0.85rem;
     }
 
-    #progressbar {
-        display: flex;
-        justify-content: space-between;
-        padding: 0;
-        list-style: none;
-        margin: 0;
+    .star-rating {
+        font-size: 2rem;
+        color: #ccc;
+        cursor: pointer;
+        transition: color 0.3s ease;
+        padding: 0 5px;
     }
 
-    #progressbar li {
-        text-align: center;
-        font-size: 0.9rem;
-        width: 100%;
-        position: relative;
-        color: #6c757d;
+    .star-rating:hover,
+    .star-rating.checked {
+        color: gold;
     }
 
-    #progressbar li.active {
-        font-weight: bold;
-        color: #28a745;
+    /* Hide radio buttons */
+    input[type="radio"] {
+        display: none;
     }
 
-    .progress {
-        height: 8px;
-        border-radius: 5px;
-        background-color: #ced4da;
-        position: relative;
-        margin-bottom: 1em;
+    input[type="radio"]:checked~label {
+        color: gold;
     }
 
-    .progress-bar {
-        border-radius: 5px;
-        background-color: #28a745;
+    input[type="radio"]:checked~label~label {
+        color: gold;
     }
+
+    .rating-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 </style>
 
 <body>
@@ -115,6 +114,7 @@
     <!-- Header Start -->
     <div class="container-fluid bg-breadcrumb">
         <ul class="breadcrumb-animation">
+
             <li></li>
             <li></li>
             <li></li>
@@ -128,23 +128,119 @@
         </ul>
         <div class="container text-center py-1" style="max-width: 900px;">
             <h3 class="h1 mb-1 wow fadeInDown" data-wow-delay="0.1s"> Job Applications Status</h3>
-            <!-- Reduced to h5 and mb-1 -->
             <ol class="breadcrumb justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
-                <li class="breadcrumb-item"><a href="{{ route('homepage') }}">Track the status of each application at a
-                        glance </li>
+                <li class="breadcrumb-item"><a href="#">Track the status of each application at a glance</a></li>
             </ol>
-            <!-- Button to Open the Modal -->
         </div>
     </div>
     <!-- Header End -->
 
-    <!-- Progress Bar for Job Application -->
+
+    @php
+        use App\Models\JobseekerApplication;
+
+        $applications = JobseekerApplication::where('js_id', session('user_id'))
+            ->with(['job.agency'])
+            ->get();
+
+        $hasHiredStatus = $applications->contains(function ($application) {
+            return $application->js_status == 'hired';
+        });
+    @endphp
+
+    <!-- Feedback Modal -->
+    <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bgp-gradient">
+                    <h5 class="modal-title text-white" id="exampleModalLabel"> We Value Your Feedback </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-primary">Congratulations on getting hired! We’d love to hear your feedback on your
+                        application process.
+                    </p>
+                    <form class="needs-validation" novalidate>
+                        <div class="form-group mb-2">
+                            <label class="mb-2" for="rating">How would you rate your experience?</label>
+
+                            <div class="container-wrapper">
+                                <div class="container d-flex align-items-center justify-content-center">
+                                    <div class="row justify-content-center">
+
+                                        <!-- Star Rating -->
+
+                                        <!-- Star Rating -->
+                                        <div class="rating-wrapper">
+                                            <!-- Star 1 -->
+                                            <input type="radio" id="1-star-rating" name="star-rating" value="1">
+                                            <label for="1-star-rating" class="star-rating star">
+                                                <i class="fas fa-star d-inline-block"></i>
+                                            </label>
+
+                                            <!-- Star 2 -->
+                                            <input type="radio" id="2-star-rating" name="star-rating" value="2">
+                                            <label for="2-star-rating" class="star-rating star">
+                                                <i class="fas fa-star d-inline-block"></i>
+                                            </label>
+
+                                            <!-- Star 3 -->
+                                            <input type="radio" id="3-star-rating" name="star-rating" value="3">
+                                            <label for="3-star-rating" class="star-rating star">
+                                                <i class="fas fa-star d-inline-block"></i>
+                                            </label>
+
+                                            <!-- Star 4 -->
+                                            <input type="radio" id="4-star-rating" name="star-rating" value="4">
+                                            <label for="4-star-rating" class="star-rating star">
+                                                <i class="fas fa-star d-inline-block"></i>
+                                            </label>
+
+                                            <!-- Star 5 -->
+                                            <input type="radio" id="5-star-rating" name="star-rating" value="5">
+                                            <label for="5-star-rating" class="star-rating">
+                                                <i class="fas fa-star d-inline-block"></i>
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Comments -->
+                        <div class="form-group mb-2">
+                            <label class="mb-2" for="comments">Tell us more about your experience</label>
+                            <textarea class="form-control" id="comments" name="comments" rows="4" placeholder="Write your feedback here..."
+                                required></textarea>
+                            <div class="invalid-feedback">Please enter your comments.</div>
+                        </div>
+
+                        <!-- Optional Fields for Tracking (Hidden) -->
+                        <input type="hidden" class="form-control" id="applicationId" name="application_id">
+                        <input type="hidden" class="form-control" id="userId" name="user_id">
+
+                        <!-- Submit Button -->
+                        <button class="btn btn-primary btn-block mt-4" type="submit">Submit Feedback</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @if ($hasHiredStatus)
+                var feedbackModal = new bootstrap.Modal(document.getElementById('feedbackModal'));
+                feedbackModal.show();
+            @endif
+        });
+    </script>
+
+    <!-- Progress for Job Application -->
     <div class="container my-5">
         <div class="row mb-2">
 
-
             @php
-                use App\Models\JobseekerApplication;
 
                 $applications = JobseekerApplication::where('js_id', session('user_id'))
                     ->with(['job.agency'])
@@ -206,11 +302,23 @@
         </div>
     </div>
 
-    <button type="button" class="btn btn-primary ms-5" data-bs-toggle="modal" data-bs-target="#feedbackFormModal">
-        Open Feedback Form
-    </button>
-
-    @include('Jobseeker.components.feedbackmodal')
+    <script>
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                var forms = document.getElementsByClassName('needs-validation');
+                Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
 
     @include('Jobseeker.components.footer')
 
