@@ -53,7 +53,7 @@
 
                     <div class="card m-2" style="width: 15rem; height: auto;">
                         @if ($jobseeker && $jobseeker->js_image)
-                            <img src="{{ asset('jobseeker_profile/' . $jobseeker->js_image) }}" class="card-img-top mx-auto mt-2" alt="Jobseeker Image">
+                            <img class="img-fluid rounded-circle d-block mx-auto mt-2" src="{{ asset('jobseeker_profile/' . $jobseeker->js_image) }} " alt="Jobseeker Image" style="width: 100px">
                         @else
                             <p>No image available</p>
                         @endif
