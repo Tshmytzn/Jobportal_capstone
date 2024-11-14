@@ -133,6 +133,7 @@
                 <li class="breadcrumb-item"><a href="{{ route('homepage') }}">Track the status of each application at a
                         glance </li>
             </ol>
+            <!-- Button to Open the Modal -->
         </div>
     </div>
     <!-- Header End -->
@@ -146,7 +147,7 @@
                 use App\Models\JobseekerApplication;
 
                 $applications = JobseekerApplication::where('js_id', session('user_id'))
-                    ->with(['job.agency']) 
+                    ->with(['job.agency'])
                     ->get();
             @endphp
 
@@ -183,8 +184,8 @@
                                 <span class="step-label">Screening</span>
                             </div>
 
-                             {{-- Declined --}}
-                             <div class="timeline-step {{ $application->js_status == 'declined' ? 'active' : '' }}">
+                            {{-- Declined --}}
+                            <div class="timeline-step {{ $application->js_status == 'declined' ? 'active' : '' }}">
                                 <div class="circle"></div>
                                 <span class="step-label">Declined</span>
                             </div>
@@ -205,6 +206,11 @@
         </div>
     </div>
 
+    <button type="button" class="btn btn-primary ms-5" data-bs-toggle="modal" data-bs-target="#feedbackFormModal">
+        Open Feedback Form
+    </button>
+
+    @include('Jobseeker.components.feedbackmodal')
 
     @include('Jobseeker.components.footer')
 
