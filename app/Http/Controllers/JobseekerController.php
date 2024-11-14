@@ -178,19 +178,18 @@ class JobseekerController extends Controller
     }
 
     public function searchfilterjobs(Request $request) {
-        // Start a query on the JobDetails model
+
         $query = JobDetails::query()
         ->join('agencies', 'job_details.agency_id', '=', 'agencies.id')
         ->where('agencies.status', 'approved')
-        ->select('job_details.id as job_id', 'job_details.job_title', 'job_details.job_location', 'job_details.job_type', 'job_details.job_vacancy','job_details.salary_frequency','job_details.job_salary', 'job_details.job_description', 'job_details.job_image');
+        ->where('job_details.job_status', 'approved')  
+        ->select('job_details.id as job_id', 'job_details.job_title', 'job_details.job_location', 'job_details.job_type', 'job_details.job_vacancy', 'job_details.salary_frequency', 'job_details.job_salary', 'job_details.job_description', 'job_details.job_image');
+    
 
-
-        // Check if employment type is provided, and apply a filter if so
         if (!empty($request->employmenttype)) {
             $query->where('job_type', $request->employmenttype);
         }
 
-        // Check if category is provided, and apply a filter if so
         if (!empty($request->category)) {
             $query->where('category_id', $request->category);
         }
@@ -198,10 +197,9 @@ class JobseekerController extends Controller
         if (!empty($request->joblocation)) {
             $query->where('job_location', $request->joblocation);
         }
-        // Execute the query and get the filtered job categories
+
         $jobcategory = $query->get();
 
-        // Return the response as JSON with status 'success' and the job data
         return response()->json(['status' => 'success', 'data' => $jobcategory], 201);
     }
 

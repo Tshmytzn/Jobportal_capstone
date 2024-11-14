@@ -49,7 +49,7 @@
         <!-- End Navbar -->
 
         {{-- cards --}}
-        <div class="container-fluid py-4">
+        <div class="container-fluid">
         <!-- End Navbar -->
 
         {{-- cards --}}
