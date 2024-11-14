@@ -273,12 +273,17 @@ class AdminCRUDController extends Controller
 
     public function getAdminData(Request $request)
     {
-        $admins = Admins::orderBy('id', 'desc')->get();
-
+        $loggedInAdminId = session('admin_id');
+    
+        $admins = Admins::where('id', '!=', $loggedInAdminId)
+                        ->orderBy('id', 'desc')
+                        ->get();
+    
         return response()->json([
             'data' => $admins
         ]);
     }
+    
 
         public function getAdmin($id)
     {
