@@ -315,22 +315,16 @@
                         <div class="input-field">
                             <label for="event_name">Event</label>
                             <select id="event_name" name="event_name" required>
-                                <option value="" disabled selected>Select an event</option>
-                                <option value="Job Fair" {{ $pesoForm->peso_event == 'Job Fair' ? 'selected' : '' }}>
-                                    Job Fair</option>
-                                <option value="Skills Training"
-                                    {{ $pesoForm->peso_event == 'AYOS' ? 'selected' : '' }}>AYOS</option>
-                                <option value="Referral Program"
-                                    {{ $pesoForm->peso_event == 'DILP' ? 'selected' : '' }}>DILP</option>
-                                <option value="Community Job Drives"
-                                    {{ $pesoForm->peso_event == 'SPES' ? 'selected' : '' }}>SPES</option>
-                                <option value="Community Job Drives"
-                                    {{ $pesoForm->peso_event == 'TUPAD' ? 'selected' : '' }}>TUPAD</option>
-
+                                <option value="{{ $pesoForm->peso_event ?? '' }}" hidden selected>
+                                    {{ $pesoForm->peso_event ?? 'Select an event' }}</option>
+                                <option value="Job Fair">Job Fair</option>
+                                <option value="Skills Training">Skills Training</option>
+                                <option value="Referral Program">Referral Program</option>
+                                <option value="Community Job Drives">Community Job Drives</option>
+                                <option value="TUPAD">TUPAD</option>
                             </select>
+                            
                         </div>
-
-
 
                         <div class="input-field">
                             <label>Transaction</label>
