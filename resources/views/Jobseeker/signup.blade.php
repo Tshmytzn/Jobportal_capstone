@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
 @include('Jobseeker.components.head', ['title' => 'Job Portal'])
 
@@ -24,7 +24,7 @@
                         <p class="mb-3">Please fill in the information below to create an account</p>
                     </div>
                     <hr>
-                    <div class="card-body " style="border: none">
+                    <div class="card-body " style="border: none;">
                         <form id="jobseekerForm" role="form" method="POST">
                             @csrf
                             <div class="row">
@@ -42,8 +42,9 @@
                                 </div>
                                 <div class="col-3 mb-3">
                                     <label for="lastname">Last Name: </label>
-                                    <input type="text" class="form-control"
-                                        name="lastname" onfocus="detectInput(this)" placeholder="Enter Last Name" aria-label="Last Name" required>
+                                    <input type="text" class="form-control" name="lastname"
+                                        onfocus="detectInput(this)" placeholder="Enter Last Name" aria-label="Last Name"
+                                        required>
                                     <small class="text-danger d-none">Last name is required*</small>
                                 </div>
                                 <div class="col-3 mb-3">
@@ -77,12 +78,13 @@
                                 </div>
                                 <div class="col-3">
                                     <label for="age" class="mb-2">Select Birthdate </label>
-                                        <input type="date" class="form-control" id="birthdate" name="birthdate" oninput="calculateAge()"
-                                            placeholder="Enter birthdate" aria-label="birthdate" required>
+                                    <input type="date" class="form-control" id="birthdate" name="birthdate"
+                                        oninput="calculateAge()" placeholder="Enter birthdate" aria-label="birthdate"
+                                        required>
                                 </div>
                                 <div class="col-3">
                                     <label for="age" class="mb-2"> Age </label>
-                                        <input type="text" class="form-control" id="age" name="age"
+                                    <input type="text" class="form-control" id="age" name="age"
                                         placeholder="0yrs 0months" aria-label="Age" required>
                                 </div>
                             </div>
@@ -90,7 +92,8 @@
                             <div class="row mt-3">
                                 <div class="col-3 mb-3">
                                     <label for="province">Province: </label>
-                                    <select class="form-select" id="province" name="province" aria-label="province" required>
+                                    <select class="form-select" id="province" name="province" aria-label="province"
+                                        required>
                                         <option value="" disabled selected>Select Province</option>
                                         <option value="Aklan">Aklan</option>
                                         <option value="Antique">Antique</option>
@@ -103,14 +106,16 @@
 
                                 <div class="col-3 mb-3">
                                     <label for="city">City: </label>
-                                    <select class="form-select" id="city" name="city" aria-label="city" required>
+                                    <select class="form-select" id="city" name="city" aria-label="city"
+                                        required>
                                         <option value="" disabled selected>Select City</option>
                                     </select>
                                 </div>
 
                                 <div class="col-3 mb-3">
                                     <label for="baranggay">Barangay: </label>
-                                    <select class="form-select" id="baranggay" name="baranggay" aria-label="baranggay" required>
+                                    <select class="form-select" id="baranggay" name="baranggay"
+                                        aria-label="baranggay" required>
                                         <option value="" disabled selected>Select Barangay</option>
                                     </select>
                                 </div>
@@ -118,23 +123,17 @@
                                 <div class="col-3 mb-3">
                                     <label for="street">Street: </label>
                                     <input type="text" class="form-control" name="address"
-                                    placeholder="Enter Street" aria-label="Home Address" required>
+                                        placeholder="Enter Street" aria-label="Home Address" required>
                                 </div>
                             </div>
-
-
-                            {{-- <label for="address">Home Address: </label>
-                            <div class="mb-3">
-                                <input type="text" class="form-control" name="address"
-                                    placeholder="Enter Home Address" aria-label="Home Address" required>
-                            </div> --}}
-
 
                             <div class="row">
                                 <div class="col-6 mb-3">
                                     <label for="email">Email Address: </label>
-                                    <input type="email" class="form-control" name="email"
+                                    <input type="email" class="form-control" name="email" id="email"
                                         placeholder="Enter Email Address" aria-label="Email" required>
+                                    <small id="emailError" class="form-text text-danger"
+                                        style="display: none;">Please enter a valid email address.</small>
                                 </div>
                                 <div class="col-6 mb-3">
                                     <label for="contact">Contact Number: </label>
@@ -144,6 +143,9 @@
                                             placeholder="Enter Contact Number" aria-label="Contact Number" required
                                             maxlength="10" pattern="9[0-9]{9}"
                                             title="Phone number must start with 9 and be exactly 10 digits long.">
+                                        <small id="contactError" class="form-text text-danger"
+                                            style="display: none;">Please enter a valid phone number starting with 9
+                                            and containing exactly 10 digits.</small>
                                     </div>
 
                                 </div>
@@ -152,19 +154,35 @@
                             <div class="row">
                                 <div class="col-6 mb-3">
                                     <label for="password">Password: </label>
-                                    <input type="password" class="form-control" name="password"
+                                    <input type="password" class="form-control" name="password" id="password"
                                         placeholder="Enter Password" aria-label="Password" required>
                                 </div>
+
                                 <div class="col-6 mb-3">
                                     <label for="password_confirmation">Confirm Password: </label>
                                     <input type="password" class="form-control" name="password_confirmation"
-                                        placeholder="Confirm Password" aria-label="Confirm Password" required>
+                                        id="password_confirmation" placeholder="Confirm Password"
+                                        aria-label="Confirm Password" required>
+                                    <small id="passwordError" class="form-text text-danger"
+                                        style="display: none;">Passwords do not match.</small>
                                 </div>
                             </div>
-                            <div class="text-center">
-                                <button type="submit"
-                                    class="btn btn-light border border-primary rounded-pill w-100 mt-3 mb-3">Sign
-                                    Up</button>
+                            <div class="row me-2 mt-1 mb-1">
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="privacyCheckbox"
+                                            required>
+                                        <label class="form-check-label" for="privacyCheckbox">
+                                            I have read and agree to the <a href="/PrivacyPolicy" target="_blank">Data
+                                                Privacy Terms and Conditions</a>.
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" id="submitBtn"
+                                    class="btn btn-light border w-100 border-primary rounded-pill mt-3 mb-3"
+                                    disabled>Submit</button>
                             </div>
                         </form>
                         <div class="text-center">
@@ -182,6 +200,58 @@
     @include('Jobseeker.components.scripts')
     @include('Jobseeker.components.jsAuthscripts')
 
+
+    <script>
+        const checkbox = document.getElementById('privacyCheckbox');
+        const submitBtn = document.getElementById('submitBtn');
+
+        checkbox.addEventListener('change', function() {
+            submitBtn.disabled = !checkbox.checked;
+        });
+    </script>
+
+    <script>
+        document.getElementById('email').addEventListener('input', function() {
+            const email = this.value;
+            const emailError = document.getElementById('emailError');
+            const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+            if (!regex.test(email)) {
+                emailError.style.display = 'block';
+            } else {
+                emailError.style.display = 'none';
+            }
+        });
+
+        document.getElementById('contactInput').addEventListener('input', function() {
+            const contact = this.value;
+            const contactError = document.getElementById('contactError');
+
+            const regex = /^9\d{9}$/;
+
+            if (!regex.test(contact)) {
+                contactError.style.display = 'block';
+            } else {
+                contactError.style.display = 'none';
+            }
+        });
+
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('password_confirmation');
+        const passwordError = document.getElementById('passwordError');
+
+        passwordInput.addEventListener('input', validatePasswords);
+        confirmPasswordInput.addEventListener('input', validatePasswords);
+
+        function validatePasswords() {
+
+            if (passwordInput.value !== confirmPasswordInput.value) {
+                passwordError.style.display = 'block';
+            } else {
+                passwordError.style.display = 'none';
+            }
+        }
+    </script>
 </body>
 
 </html>

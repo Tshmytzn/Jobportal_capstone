@@ -95,22 +95,56 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
 
-                                            <div class="modal-body">
+                                            <div class="modal-body m-2" style="max-height: 400px; overflow-y: auto;">
                                                 <form id="Applicationform">
                                                     @csrf
                                                     <input type="hidden" id="applicationId" name="applicationId" readonly value="{{ $application->id }}" />
                                                     <div class="mb-0 text-center">
-                                                        @if ($jobseeker && $jobseeker->js_image)
-                                                            <img src="{{ asset('jobseeker_profile/' . $jobseeker->js_image) }}" class="img-fluid rounded-circle d-block mx-auto mt-2" alt="Jobseeker Image" style="max-height: 150px; width: auto; border: 2px solid #007bff;" />
+                                                        {{-- @if ($jobseeker && $jobseeker->js_image)
+                                                            <img src="{{ asset('jobseeker_profile/' . $jobseeker->js_image) }}" class="img-fluid rounded-circle d-block mx-auto mt-2" alt="Jobseeker Image" style="max-height: 100px; width: auto; border: 2px solid #007bff;" />
                                                         @else
                                                             <p>No image available</p>
-                                                        @endif
-
-                                                        <div class="m-2">
-                                                            <label class="form-label">Job Position:</label>
-                                                            <span id="statusBadge" class="badge bg-info text-white">{{ $jobName }}</span>
+                                                        @endif --}}
+                                                    
+                                                        <div class="mb-0 text-center">
+                                                            @if ($jobseeker && $jobseeker->js_image)
+                                                                <img src="{{ asset('jobseeker_profile/' . $jobseeker->js_image) }}" class="img-fluid rounded-circle d-block mx-auto mt-2 mb-2" alt="Jobseeker Image" style="max-height: 100px; width: auto; border: 2px solid #007bff;" />
+                                                            @else
+                                                                <p>No image available</p>
+                                                            @endif
+                                                        
+                                                            <div class="m-2">
+                                                                <div class="badge">
+                                                                    @php
+                                                                        $jobSeeker = App\Models\JobSeeker::find(session('user_id'));
+                                                                    @endphp
+                                                                    @if ($jobSeeker && $jobSeeker->js_badge)
+                                                                        <!-- If js_badge exists, display the badge image and success message -->
+                                                                        <img class="img-fluid rounded" id="badge-preview"
+                                                                             src="{{ asset('img/' . $jobSeeker->js_badge) }}"
+                                                                             alt="Skill Assessment Badge" style="display: block; width: 80px; height: auto; border-radius: 50%; margin: 0 auto;">
+                                                                        <p class="badge-message text-primary" style="font-size: 14px; margin-top: 5px;">The jobseeker has passed the global skill assessment for Blue Collared Workers!</p>
+                                                                    @elseif ($jobSeeker)
+                                                                        <!-- If no badge and jobseeker exists, display failure message -->
+                                                                        <div class="badge-placeholder">
+                                                                            <span class="badge-message text-danger" style="font-size: 14px; padding: 5px; background-color: #f8d7da; border-radius: 12px; border: 1px solid #f5c6cb;">
+                                                                                The jobseeker has not passed the global skill assessment for Blue Collared Workers.
+                                                                            </span>
+                                                                        </div>
+                                                                    @else
+                                                                        <!-- If no jobseeker is found -->
+                                                                        <div class="badge-placeholder">
+                                                                            <span class="badge-message text-warning" style="font-size: 14px; padding: 5px; background-color: #fff3cd; border-radius: 12px; border: 1px solid #ffeeba;">
+                                                                                The jobseeker have not yet taken the global skill assessment for Blue Collared workers.
+                                                                            </span>
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
                                                         </div>
+                                                        
                                                     </div>
+                                                    
                                                     <div class="row">
                                                         <div class="col-6 mb-1">
                                                             <label for="agencyName" class="form-label">Jobseeker Name</label>

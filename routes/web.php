@@ -283,6 +283,8 @@ Route::get('/getAssessmentResults', [AssessmentResultsController::class, 'getAss
 Route::get('/404', function () { return view('Jobseeker.404'); })->name('404');
 Route::get('/Profile', function () { return view('Jobseeker.profile'); })->name('profile');
 Route::get('/FAQS', function () { return view('Jobseeker.faqs'); })->name('faqs');
+Route::get('/PrivacyPolicy', function () { return view('Jobseeker.pesoprivacy'); })->name('pesoprivacy');
+
 
 // Jobseeker Page Controllers
 Route::post('/', [JobseekerController::class, 'create'])->name('jobseekersCreate');
