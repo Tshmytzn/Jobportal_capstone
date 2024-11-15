@@ -2,9 +2,7 @@
     $(document).ready(function() {
         const urlParams = new URLSearchParams(window.location.search);
         let id = urlParams.get('id'); // Get the job ID from the URL
-
-        console.log('Retrieved Job ID from URL:', id);
-
+        $('#applyButton').prop('disabled', true);
         if (id) {
             id = parseInt(id, 10);
 
@@ -17,7 +15,11 @@
                     type: 'GET',
                     success: function(response) {
                         if (response) {
-
+                            if(response.job_status === "disabled"){
+                                   $('#applyButton').prop('disabled', true);
+                            }else{
+                                $('#applyButton').prop('disabled', false);
+                            }
                             $('#jobIdInput').val(id);
 
                             $('#job_title').text(response.job_title);
@@ -45,7 +47,9 @@
 
                             $('#job_image').attr('src',
                                 `/agencyfiles/job_image/${response.job_image}`);
+                                
                         } else {
+                             
                             console.log('No job details found');
                         }
                     },

@@ -235,15 +235,15 @@ class AgencyController extends Controller
 
             $oldImagePath = public_path('agencyfiles/job_image/' . $job->job_image);
             unlink($oldImagePath);
-
+            
             $job->update([
                 'job_title' => $request->job_title,
                 'job_category' => $request->job_category,
                 'job_location' => $request->job_location,
                 'job_type' => $request->job_type,
                 'job_vacancy' => $request->job_vacancy,
-                'salary_frequency' => $request->salary_frequency,
-                'job_salary' => $request->job_salary,
+                'salary_frequency' => $request->frequency,
+                'job_salary' => $request->salary,
                 'other_skills' => $request->other_skills,
                 'skills_required' => implode(',', $request->input('skills')),
                 'job_description' => $request->job_details,
@@ -253,10 +253,17 @@ class AgencyController extends Controller
             return response()->json(['message' => 'Job Details successfully added.', 'modal' => 'jobpostmodal', 'form' => 'jobDetailsForm', 'reload' => 'getJobDetails', 'status' => 'success']);
         } else if ($request->process == 'delete') {
             $job = JobDetails::where('id', $request->id)->first();
-            $oldImagePath = public_path('agencyfiles/job_image/' . $job->job_image);
-            unlink($oldImagePath); // Delete the old image
-            $job->delete();
-            return response()->json(['message' => 'Job Details successfully Deleted.', 'form' => 'deletejobdetail', 'reload' => 'getJobDetails', 'status' => 'success']);
+            if($job->job_status == 'approved'){
+                $job->job_status = 'disabled';
+                $job->save();
+            }else{
+                return response()->json(['message' => 'Job Details Cannot Be Disable.', 'form' => 'deletejobdetail', 'reload' => 'getJobDetails', 'status' => 'error']);
+            }
+            
+            // $oldImagePath = public_path('agencyfiles/job_image/' . $job->job_image);
+            // unlink($oldImagePath); // Delete the old image
+            // $job->delete();
+            return response()->json(['message' => 'Job Details successfully Disabled.', 'form' => 'deletejobdetail', 'reload' => 'getJobDetails', 'status' => 'success']);
         }
     }
 
