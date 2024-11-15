@@ -9,7 +9,10 @@
 
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
-        @include('Agency.components.navbar', ['headtitle' => 'Submitted Applications', 'pagetitle' => 'Agency'])
+        @include('Agency.components.navbar', [
+            'headtitle' => 'Submitted Applications',
+            'pagetitle' => 'Agency',
+        ])
         <!-- End Navbar -->
 
         <div class="container-fluid py-0">
@@ -52,22 +55,29 @@
                     @endphp
 
                     <div class="card m-2" style="width: 15rem; height: auto;">
-                        @if ($jobseeker && $jobseeker->js_image)
-                            <img class="img-fluid rounded-circle d-block mx-auto mt-2" src="{{ asset('jobseeker_profile/' . $jobseeker->js_image) }} " alt="Jobseeker Image" style="width: 100px">
+                        @if ($jobseeker->js_image)
+                            <img class="img-fluid rounded-circle d-block mx-auto mt-2"
+                                src="{{ asset('jobseeker_profile/' . $jobseeker->js_image) }}" alt="Jobseeker Image"
+                                style="width: 100px">
                         @else
                             <p>No image available</p>
                         @endif
 
                         <div class="card-body">
-                            <h5 class="card-title text-center" style="font-size: 1rem; background: linear-gradient(to right, purple, #8A2BE2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                            <h5 class="card-title text-center"
+                                style="font-size: 1rem; background: linear-gradient(to right, purple, #8A2BE2); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
                                 {{ $application->applicant_name }}
                             </h5>
-                            <hr class="mt-3 mb-3" style="border: none; height: 2px; background-image: linear-gradient(to right, rgb(128, 0, 0), #7a0000);">
-                            <p class="card-text" style="font-size: 0.7rem;"><strong>Position:</strong> {{ $jobName }}</p>
-                            <p class="card-text" style="font-size: 0.7rem;"><strong>Application Date:</strong> {{ $application->created_at->format('Y-m-d') }}</p>
+                            <hr class="mt-3 mb-3"
+                                style="border: none; height: 2px; background-image: linear-gradient(to right, rgb(128, 0, 0), #7a0000);">
+                            <p class="card-text" style="font-size: 0.7rem;"><strong>Position:</strong>
+                                {{ $jobName }}</p>
+                            <p class="card-text" style="font-size: 0.7rem;"><strong>Application Date:</strong>
+                                {{ $application->created_at->format('Y-m-d') }}</p>
                             <p class="card-text" style="font-size: 0.7rem;">
                                 <strong>Status:</strong>
-                                <span style="color:
+                                <span
+                                    style="color:
                                     @if ($application->js_status === 'pending') orange
                                     @elseif($application->js_status === 'Approved') green
                                     @elseif($application->js_status === 'Rejected') red
@@ -76,7 +86,8 @@
                                     {{ $application->js_status ?? 'No Status' }}
                                 </span>
                             </p>
-                            <p class="card-text" style="font-size: 0.7rem;"><strong>Email:</strong> {{ $application->applicant_email }}</p>
+                            <p class="card-text" style="font-size: 0.7rem;"><strong>Email:</strong>
+                                {{ $application->applicant_email }}</p>
                             <div class="text-center mt-4">
                                 <!-- Review Button with Application ID -->
                                 <a href="javascript:void(0);" data-bs-toggle="modal"
@@ -91,103 +102,151 @@
                                     <div class="modal-dialog modal-lg">
                                         <div class="modal-content">
                                             <div class="modal-header bgp-gradient">
-                                                <h5 class="modal-title text-white" id="agencyInfoModalLabel">Review Application</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                <h5 class="modal-title text-white" id="agencyInfoModalLabel">Review
+                                                    Application</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
                                             </div>
 
-                                            <div class="modal-body m-2" style="max-height: 400px; overflow-y: auto;">
+                                            <div class="modal-body m-2" style="max-height: 500px; overflow-y: auto;">
                                                 <form id="Applicationform">
                                                     @csrf
-                                                    <input type="hidden" id="applicationId" name="applicationId" readonly value="{{ $application->id }}" />
+                                                    <input type="hidden" id="applicationId" name="applicationId"
+                                                        readonly value="{{ $application->id }}" />
                                                     <div class="mb-0 text-center">
-                                                        {{-- @if ($jobseeker && $jobseeker->js_image)
-                                                            <img src="{{ asset('jobseeker_profile/' . $jobseeker->js_image) }}" class="img-fluid rounded-circle d-block mx-auto mt-2" alt="Jobseeker Image" style="max-height: 100px; width: auto; border: 2px solid #007bff;" />
-                                                        @else
-                                                            <p>No image available</p>
-                                                        @endif --}}
-                                                    
+
                                                         <div class="mb-0 text-center">
                                                             @if ($jobseeker && $jobseeker->js_image)
-                                                                <img src="{{ asset('jobseeker_profile/' . $jobseeker->js_image) }}" class="img-fluid rounded-circle d-block mx-auto mt-2 mb-2" alt="Jobseeker Image" style="max-height: 100px; width: auto; border: 2px solid #007bff;" />
+                                                                <img src="{{ asset('jobseeker_profile/' . $jobseeker->js_image) }}"
+                                                                    class="img-fluid rounded-circle d-block mx-auto mt-2 mb-2"
+                                                                    alt="Jobseeker Image"
+                                                                    style="max-height: 100px; width: auto; border: 2px solid #007bff;" />
                                                             @else
                                                                 <p>No image available</p>
                                                             @endif
-                                                        
+
                                                             <div class="m-2">
                                                                 <div class="badge">
                                                                     @php
-                                                                        $jobSeeker = App\Models\JobSeeker::find(session('user_id'));
+                                                                        // Correctly fetch the jobseeker using the js_id (jobseeker id from the application)
+                                                                        $jobSeeker = App\Models\JobSeeker::find(
+                                                                            $application->js_id,
+                                                                        );
                                                                     @endphp
+
                                                                     @if ($jobSeeker && $jobSeeker->js_badge)
-                                                                        <!-- If js_badge exists, display the badge image and success message -->
-                                                                        <img class="img-fluid rounded" id="badge-preview"
-                                                                             src="{{ asset('img/' . $jobSeeker->js_badge) }}"
-                                                                             alt="Skill Assessment Badge" style="display: block; width: 80px; height: auto; border-radius: 50%; margin: 0 auto;">
-                                                                        <p class="badge-message text-primary" style="font-size: 14px; margin-top: 5px;">The jobseeker has passed the global skill assessment for Blue Collared Workers!</p>
+                                                                        <!-- If the jobseeker has passed the global skill assessment -->
+                                                                        <img class="img-fluid rounded mb-2"
+                                                                            id="badge-preview"
+                                                                            src="{{ asset('img/' . $jobSeeker->js_badge) }}"
+                                                                            alt="Skill Assessment Badge"
+                                                                            style="display: block; width: 80px; height: auto; border-radius: 50%; margin: 0 auto;">
+
+                                                                        <span class="badge-message text-dark"
+                                                                            style="font-size: 14px; padding: 5px; background-color: #d362ff; border-radius: 12px; border: 1px solid #f5c6cb;">
+                                                                            Jobseeker has passed the Blue Collared
+                                                                            Workers' skill assessment.
+                                                                        </span>
                                                                     @elseif ($jobSeeker)
-                                                                        <!-- If no badge and jobseeker exists, display failure message -->
+                                                                        <!-- If the jobseeker exists but has not passed the assessment -->
                                                                         <div class="badge-placeholder">
-                                                                            <span class="badge-message text-danger" style="font-size: 14px; padding: 5px; background-color: #f8d7da; border-radius: 12px; border: 1px solid #f5c6cb;">
-                                                                                The jobseeker has not passed the global skill assessment for Blue Collared Workers.
+                                                                            <span class="badge-message text-danger"
+                                                                                style="font-size: 14px; padding: 5px; background-color: #f8d7da; border-radius: 12px; border: 1px solid #f5c6cb;">
+                                                                                Jobseeker has not passed the Blue
+                                                                                Collared Workers' skill assessment.
                                                                             </span>
                                                                         </div>
                                                                     @else
-                                                                        <!-- If no jobseeker is found -->
+                                                                        <!-- If no jobseeker data exists -->
                                                                         <div class="badge-placeholder">
-                                                                            <span class="badge-message text-warning" style="font-size: 14px; padding: 5px; background-color: #fff3cd; border-radius: 12px; border: 1px solid #ffeeba;">
-                                                                                The jobseeker have not yet taken the global skill assessment for Blue Collared workers.
+                                                                            <span class="badge-message text-warning"
+                                                                                style="font-size: 14px; padding: 5px; background-color: #fff3cd; border-radius: 12px; border: 1px solid #ffeeba;">
+                                                                                Jobseeker has not yet taken the Blue
+                                                                                Collared Workers' skill assessment.
                                                                             </span>
                                                                         </div>
                                                                     @endif
                                                                 </div>
+
                                                             </div>
                                                         </div>
-                                                        
+
                                                     </div>
-                                                    
+
                                                     <div class="row">
                                                         <div class="col-6 mb-1">
-                                                            <label for="agencyName" class="form-label">Jobseeker Name</label>
-                                                            <input type="text" class="form-control" id="agencyName" value="{{ $application->applicant_name }}" readonly>
+                                                            <label for="agencyName" class="form-label">Jobseeker
+                                                                Name</label>
+                                                            <input type="text" class="form-control" id="agencyName"
+                                                                value="{{ $application->applicant_name }}" readonly>
                                                         </div>
                                                         <div class="col-6 mb-1">
-                                                            <label for="emailAddress" class="form-label">Email Address</label>
-                                                            <input type="email" class="form-control" value="{{ $application->applicant_email }}" id="emailAddress" readonly>
+                                                            <label for="emailAddress" class="form-label">Email
+                                                                Address</label>
+                                                            <input type="email" class="form-control"
+                                                                value="{{ $application->applicant_email }}"
+                                                                id="emailAddress" readonly>
                                                         </div>
                                                     </div>
                                                     <div class="row">
                                                         <div class="col-6 mb-1">
-                                                            <label for="contactNumber" class="form-label">Contact Number</label>
-                                                            <input type="text" class="form-control" value="{{ $application->applicant_phone }}" id="contactNumber" readonly>
+                                                            <label for="contactNumber" class="form-label">Contact
+                                                                Number</label>
+                                                            <input type="text" class="form-control"
+                                                                value="{{ $application->applicant_phone }}"
+                                                                id="contactNumber" readonly>
                                                         </div>
                                                         <div class="col-6 mb-1">
-                                                            <label for="landlineNumber" class="form-label">Skills</label>
-                                                            <input type="text" class="form-control" id="landlineNumber" value="{{ $jobName }}" readonly>
+                                                            <label for="landlineNumber"
+                                                                class="form-label">Skills</label>
+                                                            <input type="text" class="form-control"
+                                                                id="landlineNumber" value="{{ $jobName }}"
+                                                                readonly>
                                                         </div>
                                                     </div>
 
                                                     <div class="row m-4">
-                                                        <div class="col-6 mb-1">
-                                                            <label for="jobseekerresume" class="form-label">Resume</label> <br>
-                                                            <iframe id="jobseekerresume"
-                                                                src="{{ asset('jobseeker_resume/' . $application->resume_file) }}"
-                                                                style="height: 200px; width: 100%; border: none;" title="Jobseeker Resume">
-                                                                Your browser does not support iframes.
-                                                            </iframe>
-                                                            <button onclick="printResume()" class="btn btn-primary mt-2">Print Resume</button>
+                                                        <div class="col-12 mb-1">
+                                                            <label for="jobseeker_resume"
+                                                                class="form-label">Resume</label><br>
 
-                                                        </div>
+                                                            @php
+                                                                $resumePath = public_path(
+                                                                    'jobseeker_resume/' . $application->resume_file,
+                                                                );
+                                                            @endphp
 
-                                                        <div class="col-6 mb-1">
-                                                            <label for="jobseekerresume" class="form-label">Resume</label> <br>
-                                                            <iframe id="jobseekerresume"
+                                                            @if (file_exists($resumePath))
+                                                                <iframe id="jobseekerresume"
                                                                     src="{{ asset('jobseeker_resume/' . $application->resume_file) }}"
-                                                                    style="height: 200px; width: 100%; border: none;" title="Jobseeker Resume">
-                                                                Your browser does not support iframes.
-                                                            </iframe>
-                                                            <button onclick="printResume()" class="btn btn-primary mt-2">Print Resume</button>
+                                                                    style="height: 200px; width: 100%; border: none;"
+                                                                    title="Jobseeker Resume">
+                                                                    Your browser does not support iframes.
+                                                                </iframe>
+                                                                <button onclick="printResume()"
+                                                                    class="btn btn-primary mt-2">Print Resume</button>
+                                                            @else
+                                                                <div class="container my-4">
+                                                                    <div class="row justify-content-center">
+                                                                        <div class="col-md-6">
+                                                                            <div
+                                                                                class="card shadow-sm border-light rounded p-4 text-center">
+                                                                                <div class="mb-3">
+                                                                                    <img src="https://img.icons8.com/ios/452/error.png"
+                                                                                        alt="Error icon"
+                                                                                        width="50" />
+                                                                                </div>
+                                                                                <h5 class="text-danger mb-3">Oops!
+                                                                                    Resume Not Found</h5>
+                                                                                <button class="btn btn-outline-danger"
+                                                                                    onclick="location.reload()">Retry</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endif
                                                         </div>
-                                                        
+
                                                     </div>
 
                                                 </form>
@@ -200,7 +259,9 @@
 
                                                 <button type="button" class="btn btn-danger"
                                                     onclick="disqualifyJobseeker('Applicationform')"
-                                                    id="rejectButton">Disqualify</button>                                            </div>
+                                                    id="rejectButton">Disqualify</button>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -223,8 +284,15 @@
 
 <script>
     function printResume() {
-        const iframe = document.getElementById('jobseekerresume');
-        iframe.contentWindow.print();
+        var iframe = document.getElementById('jobseekerresume');
+
+        if (iframe) {
+            var iframeContent = iframe.contentWindow;
+
+            iframeContent.print(); 
+        } else {
+            alert('Unable to print. No resume found.');
+        }
     }
 </script>
 
