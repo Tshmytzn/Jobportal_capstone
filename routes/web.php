@@ -130,6 +130,8 @@ Route::delete('/Job/Categories/{id}', [AdminCRUDController::class, 'deleteJobCat
 Route::post('/Admin/Create', [AdminController::class, 'createAdmin'])->name('createAdmin');
 Route::post('/Admin/CreateSystemAdmin', [AdminCRUDController::class, 'createAdmin2'])->name('createAdmin2');
 
+Route::get('/Admin/AgencyCompliance', function () { return view('Admin.agencycompliance'); })->name('agencycompliance');
+Route::get('/Admin/AgencyReports', function () { return view('Admin.agencyreports'); })->name('agencyreports');
 
 });
 
