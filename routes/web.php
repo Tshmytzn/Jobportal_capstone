@@ -16,6 +16,7 @@ use App\Http\Controllers\JobQuestion;
 use App\Http\Controllers\JobQuestionController;
 use App\Http\Controllers\JobListingController;
 use App\Http\Controllers\UserFeedbacksController;
+use App\Http\Controllers\ReportsController;
 
 
 
@@ -129,6 +130,11 @@ Route::delete('/Job/Categories/{id}', [AdminCRUDController::class, 'deleteJobCat
 //Administrator post controller routes
 Route::post('/Admin/Create', [AdminController::class, 'createAdmin'])->name('createAdmin');
 Route::post('/Admin/CreateSystemAdmin', [AdminCRUDController::class, 'createAdmin2'])->name('createAdmin2');
+
+//get agency compliance and reports
+Route::get('/Admin/getcompliance', [ReportsController::class, 'getcompliance'])->name('getcompliance');
+Route::get('/Admin/getreports', [ReportsController::class, 'getreports'])->name('getreports');
+
 
 Route::get('/Admin/AgencyCompliance', function () { return view('Admin.agencycompliance'); })->name('agencycompliance');
 Route::get('/Admin/AgencyReports', function () { return view('Admin.agencyreports'); })->name('agencyreports');

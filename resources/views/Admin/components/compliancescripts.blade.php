@@ -23,12 +23,12 @@
 <script>
     $(document).ready(function() {
 
-        $('#Reports_tbl').DataTable({
+        $('#Compliance_tbl').DataTable({
             processing: false,
             serverSide: false,
             destroy: true,
             ajax: {
-                url: "{{ route('getreports') }}",
+                url: "{{ route('getcompliance') }}",
                 type: 'GET',
             },
             order: [[0,'asc']],
@@ -50,19 +50,25 @@
 
                 },
                 {
-                    data: 'category_name',
+                    data: 'geo_coverage',
                 },
                 {
-                    data: 'job_title',
+                    data: 'employee_count',
                 },
                 {
-                    data: 'job_vacancy',
+                    data: 'created_at',
+                    render: function(data) {
+                        const date = new Date(data);
+                        return date.toLocaleString();
+                    }
                 },
                 {
-                    data: 'pending_count',
-                },
-                {
-                    data: 'hired_count',
+                    data: null,
+                    render: function(data, type, row) {
+                        return `
+                            <button class="btn btn-sm bgp-table delete-btn" data-bs-toggle='modal' data-bs-target='#viewdata' data-id="${row.id}">View Checklist</button>
+                        `;
+                    }
                 }
             ],
             dom: 'Bfrtip',
@@ -93,6 +99,8 @@
             ],
             fixedHeader: true,
         });
+        
 
     });
 </script>
+

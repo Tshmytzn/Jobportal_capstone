@@ -15,12 +15,34 @@
         {{-- cards --}}
         <div class="container-fluid py-4">
             <div class="row">
+
+                <table id="Compliance_tbl" class="table table-hover" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Agency Name</th>
+                            <th>Geo-Coverage</th>
+                            <th>Employee</th>
+                            <th>Submission Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                        </tr>
+                    </tbody>
+                </table>
                 
             </div>
             @include('Admin.components.footer')
         </div>
     </main>
     @include('Admin.components.scripts')
+    @include('Admin.components.compliancescripts')
+    @include('Admin.components.modals.compliancemodals')
+
+
 </body>
 
 </html>

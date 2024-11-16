@@ -29,7 +29,7 @@ class Agency extends Model
         'agency_dti_permit',
         'agency_bir_permit',
         'mayors_permit',
-        'agency_image',
+        'agency_mayors_permit',
         'password',
         'status'
     ];
@@ -42,4 +42,9 @@ class Agency extends Model
     protected $hidden = [
         'password',
     ];
+
+    public function jobs()
+    {
+        return $this->hasMany(JobDetails::class, 'agency_id', 'id');
+    }
 }

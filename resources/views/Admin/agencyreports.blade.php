@@ -15,12 +15,32 @@
         {{-- cards --}}
         <div class="container-fluid py-4">
             <div class="row">
+                <table id="Reports_tbl" class="table table-hover" style="width:100%;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Agency</th>
+                            <th>Job Category</th>
+                            <th>Job Posted</th>
+                            <th>Vacancies Available</th>
+                            <th>Applicants</th>
+                            <th>Hired Applicants</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                        </tr>
+                    </tbody>
+                </table>
                 
             </div>
             @include('Admin.components.footer')
         </div>
     </main>
     @include('Admin.components.scripts')
+    @include('Admin.components.reportscripts')
+
 </body>
 
 </html>
