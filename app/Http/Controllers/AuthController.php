@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Models\Agency;
-
+use App\Models\Jobseeker;
+use Illuminate\Support\Facades\Crypt;
 
 class AuthController extends Controller
 {
@@ -56,7 +57,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('agencylogin'); 
+        return redirect()->route('agencylogin');
     }
 
     // AGENCY PAGE AUTHENTICATION
@@ -66,17 +67,17 @@ class AuthController extends Controller
         if ($response instanceof \Illuminate\Http\RedirectResponse) {
             return $response;
         }
-    
+
         $userId = Session::get('agency_id');
         $user = DB::table('agencies')->where('id', $userId)->first();
-    
+
         // Count jobseekers and agencies
         $jobseekerCount = DB::table('jobseeker_details')->count();
         $agencyCount = DB::table('agencies')->count();
-    
+
         return view('Agency.index', compact('user', 'jobseekerCount', 'agencyCount'));
     }
-    
+
 
     public function notification(Request $request)
     {
@@ -185,16 +186,14 @@ class AuthController extends Controller
             'password' => 'required|string',
         ]);
 
-        $user = DB::table('jobseeker_details')
-            ->where('js_email', $request->input('email'))
-            ->first();
+        $user = Jobseeker::where('js_email', $request->email)->first();
 
         if ($user && Hash::check($request->input('password'), $user->js_password)) {
-            Auth::loginUsingId($user->js_id); 
+            Auth::loginUsingId($user->js_id);
 
             session([
-                'user_id' => $user->js_id, 
-                'user_name' => $user->js_firstname, 
+                'user_id' => $user->js_id,
+                'user_name' => $user->js_firstname,
             ]);
 
             return response()->json(['message' => 'Login successful!', 'status' => 'success']);
@@ -211,7 +210,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('homepage'); 
+        return redirect()->route('homepage');
     }
 
     // ADMIN LOGIN
@@ -227,11 +226,11 @@ class AuthController extends Controller
             ->first();
 
         if ($user && Hash::check($request->input('password'), $user->admin_password)) {
-            Auth::loginUsingId($user->id); 
+            Auth::loginUsingId($user->id);
 
             session([
-                'admin_id' => $user->id, 
-                'admin_name' => $user->admin_name, 
+                'admin_id' => $user->id,
+                'admin_name' => $user->admin_name,
             ]);
 
             return response()->json(['message' => 'Login successful!', 'status' => 'success']);
@@ -248,7 +247,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('AdminLogin'); 
+        return redirect()->route('AdminLogin');
     }
 
 

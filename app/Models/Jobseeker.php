@@ -34,15 +34,24 @@ class Jobseeker extends Model
         'js_password',
         'js_accstatus',
         'js_image',
+        'js_badge'
     ];
 
-    public function setPasswordAttribute($value)
+    protected function casts(): array
     {
-        $this->attributes['js_password'] = bcrypt($value);
-    }
-
-    public function userFeedbacks() {
-        return $this->hasMany(UserFeedbacks::class, 'user_id', 'js_id'); 
+        return [
+            'js_firstname' => 'encrypted',
+            'js_middlename' => 'encrypted',
+            'js_lastname' => 'encrypted',
+            'js_suffix' => 'encrypted',
+            'js_gender' => 'encrypted',
+            'js_province' => 'encrypted',
+            'js_city' => 'encrypted',
+            'js_baranggay' => 'encrypted',
+            'js_address' => 'encrypted',
+            'js_contactnumber' => 'encrypted',
+            'js_accstatus' => 'encrypted',
+        ];
     }
 
 }
