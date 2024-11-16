@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\JobseekerApplication;
 use Illuminate\Support\Facades\Validator;
+use App\Models\JobDetails;
 
 
 class JobApplicationController extends Controller
@@ -194,33 +195,56 @@ class JobApplicationController extends Controller
         ]);
     
         $jobSeeker = JobseekerApplication::find($request->id);
+        $jobId = $jobSeeker->job_id; 
     
-        $jsId = $jobSeeker->js_id;
+        $jobDetails = JobDetails::find($jobId);
     
-        $existingHired = JobseekerApplication::where('js_id', $jsId)
+        if (!$jobDetails) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Job details not found for the specified application.'
+            ]);
+        }
+    
+        $hiredCount = JobseekerApplication::where('job_id', $jobId)
+                                            ->where('js_status', 'hired')
+                                            ->count();
+    
+        if ($hiredCount >= $jobDetails->job_vacancy) {
+
+            $jobDetails->update(['job_status' => 'disabled']); 
+    
+            JobseekerApplication::where('job_id', $jobId)
+                                ->where('js_status', '!=', 'hired')
+                                ->update(['js_status' => 'declined']);
+    
+            return response()->json([
+                'success' => false,
+                'message' => 'All job vacancies have already been filled for this position. The job has been disabled, and pending applications have been declined.'
+            ]);
+        }
+    
+        $existingHired = JobseekerApplication::where('js_id', $jobSeeker->js_id)
                                               ->where('js_status', 'hired')
                                               ->exists();
     
         if ($existingHired) {
-
-            JobseekerApplication::where('js_id', $jsId)
-            ->where('js_status', '!=', 'hired')  
-            ->update(['js_status' => 'declined']);
-
+            JobseekerApplication::where('js_id', $jobSeeker->js_id)
+                                ->where('js_status', '!=', 'hired')
+                                ->update(['js_status' => 'declined']);
+    
             return response()->json([
                 'success' => false,
                 'message' => 'This jobseeker has already been hired for another position.'
             ]);
-        } else {
-
-            $jobSeeker->js_status = 'hired';
-            $jobSeeker->save();
-        
-            return response()->json(['success' => true]);
-
         }
-        
+    
+        $jobSeeker->js_status = 'hired';
+        $jobSeeker->save();
+    
+        return response()->json(['success' => true]);
     }
+    
 
     public function declineJobSeeker(Request $request)
     {
