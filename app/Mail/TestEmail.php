@@ -38,6 +38,7 @@ class TestEmail extends Mailable
                     ->with([
                         'content' => $this->content, // Pass dynamic content
                     ])
-                    ->subject('Test Email from Laravel');
+                    ->subject('Test Email from Laravel')
+                    ->from('kailahleyva02@gmail.com', 'Peso Job Portal');
     }
 }
