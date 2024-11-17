@@ -17,7 +17,8 @@ use App\Http\Controllers\JobQuestionController;
 use App\Http\Controllers\JobListingController;
 use App\Http\Controllers\UserFeedbacksController;
 use App\Http\Controllers\ReportsController;
-
+use App\Mail\TestEmail;
+use Illuminate\Support\Facades\Mail;
 
 
 // Admin Protected Routes
@@ -326,3 +327,12 @@ Route::post('/DeleteAssessment', [JobQuestionController::class, 'DeleteAssessmen
 Route::get('/LoadTestAssessment', [JobQuestionController::class, 'LoadTestAssessment'])->name('LoadTestAssessment');
 Route::post('/SubmitAssessmentTest', [JobQuestionController::class, 'SubmitAssessmentTest'])->name('SubmitAssessmentTest');
 Route::get('/AssessmentList', [JobQuestionController::class, 'AssessmentList'])->name('AssessmentList');
+
+
+Route::get('/send-test-email', function () {
+    $content = "HEHE";
+    Mail::to('jpubas@gmail.com')->queue(new TestEmail($content));
+
+    return 'Test email queued!';
+});
+Route::post('/codeverify', [AuthController::class, 'sendcode'])->name('sendcode');

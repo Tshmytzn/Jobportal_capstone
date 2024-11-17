@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Agency;
 use App\Models\Jobseeker;
 use Illuminate\Support\Facades\Crypt;
+use App\Mail\TestEmail;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -200,6 +202,20 @@ class AuthController extends Controller
         } else {
             return response()->json(['message' => 'Invalid credentials.', 'status' => 'error']);
         }
+    }
+
+    public function sendcode(Request $request){
+
+        $user = Jobseeker::where('js_email', $request->email)->first();
+        if ($user && Hash::check($request->input('password'), $user->js_password)) {
+            $randomNumber = rand(100000, 999999);
+            $content = $randomNumber;
+            Mail::to('jpubas@gmail.com')->queue(new TestEmail($content));
+            return response()->json([$randomNumber]);
+        }else {
+            return response()->json(['message' => 'Invalid credentials.', 'status' => 'error']);
+        }
+
     }
 
     //JOBSEEKER LOGOUT

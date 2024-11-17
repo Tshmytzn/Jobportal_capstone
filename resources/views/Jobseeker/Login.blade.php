@@ -41,13 +41,23 @@
                                 aria-label="Password" aria-describedby="password-addon">
                         </div>
                         <div class="text-center">
-                            <button type="button" onclick="loginJobseeker()"
+                            <button type="button" onclick="showCode()"
                                 class="btn btn-light border border-primary rounded-pill w-100 mt-3 mb-3">Login</button>
                         </div>
                         <div class="text-center">
                             <label for="signup">Don't have an account yet? <span class="text-secondary small"> <a
                                         href="{{ route('signup') }}">Sign up here. </a> </span></label>
                         </div>
+                    </form>
+                    <form action="" class="gap-2 justify-content-center text-center" id="verifyForm" method="POST" style="display: none">
+                        @csrf
+                        <label for="">Verification</label>
+                        <input type="text" class="form-control m-2" name="codeV" id="codeV">
+                        <button class="btn btn-success m-2" type="button" onclick="loginJobseeker()">
+                            verifty
+                        </button><button class="btn btn-danger m-2" type="button" onclick="showCode()">
+                            Resend
+                        </button>
                     </form>
                 </div>
             </div>

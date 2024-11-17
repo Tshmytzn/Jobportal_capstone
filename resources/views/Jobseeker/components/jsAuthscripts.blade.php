@@ -152,9 +152,36 @@
 // </script>
 
 <script>
-    function loginJobseeker() {
-
+    let codeforverify ='';
+    function showCode(){
+        document.getElementById('jobseekerloginform').style.display='none';
+        document.getElementById('verifyForm').style.display='';
         document.getElementById('loading').style.display = 'grid';
+        var formElement = document.getElementById('jobseekerloginform');
+        var formData = new FormData(formElement);
+
+        $.ajax({
+            type: "POST",
+            url: '{{ route('sendcode') }}',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                document.getElementById('loading').style.display = '';
+                codeforverify =response;
+            },
+            error: function(xhr) {
+                document.getElementById('loading').style.display = 'none';
+
+                console.error('AJAX Error:', xhr.responseText);
+                Swal.fire('Error', 'Invalid Credentials.', 'error');
+            }
+        });
+    }
+    function loginJobseeker() {
+        const codeV = document.getElementById('codeV').value;
+        if(codeforverify == codeV){
+            document.getElementById('loading').style.display = 'grid';
 
         var formElement = document.getElementById('jobseekerloginform');
         var formData = new FormData(formElement);
@@ -193,6 +220,18 @@
                 Swal.fire('Error', 'Invalid Credentials.', 'error');
             }
         });
+        }else{
+            Swal.fire({
+                        title: 'Error',
+                        text: 'Incorrect verification code',
+                        icon: 'error',
+                        showConfirmButton: false,
+                        timer: 1000
+                    }).then(() => {
+
+                    });
+        }
+
     }
 </script>
 
