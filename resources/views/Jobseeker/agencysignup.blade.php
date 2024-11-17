@@ -128,12 +128,17 @@
                                 <!-- Contact Number -->
                                 <div class="col-4 mb-3">
                                     <label for="phone_number">Phone Number: </label>
-                                    <input type="text" id="phone_number" name="phone_number" class="form-control"
+
+                                
+                                    <input type="text" id="contact_number" name="contact_number" class="form-control"
                                         maxlength="10" placeholder="Enter Phone Number" aria-label="Phone Number"
+                                        onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                                        oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);"
                                         required>
                                     <small id="phone_error" style="color: red; display: none;">Phone number is
                                         required*</small>
-                                    <small id="phone_invalid_error" style="color: red; display: none;">Phone number must
+                                    <small id="phone_invalid_error" style="color: red; display: none;">Phone number
+                                        must
                                         start with 9 and be 10 digits*</small>
                                 </div>
 
@@ -226,7 +231,8 @@
 
                                 <div class="col-6 mb-3">
                                     <label for="confirm_password" class="form-label">Confirm Password:</label>
-                                    <input type="password" id="confirm_password" name="confirm_password"
+                                    <input type="password" id="password_confirmation"
+                                        name="password_confirmation"
                                         class="form-control" placeholder="Confirm Password"
                                         aria-label="Confirm Password" required>
                                     <small id="confirm_password_error" style="color: red; display: none;">Confirm

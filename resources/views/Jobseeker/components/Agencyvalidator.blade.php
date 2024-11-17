@@ -104,7 +104,7 @@
 </script>
 
 <script>
-    const phoneInput = document.getElementById("phone_number");
+    const phoneInput = document.getElementById("contact_number");
     const phoneError = document.getElementById("phone_error");
     const phoneInvalidError = document.getElementById("phone_invalid_error");
 
