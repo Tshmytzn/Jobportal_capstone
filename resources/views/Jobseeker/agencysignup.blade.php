@@ -64,7 +64,9 @@
                                 <div class="col-12 mb-3">
                                     <label for="agency_name">Agency Name: </label>
                                     <input type="text" id="agency_name" name="agency_name" class="form-control"
-                                        placeholder="Enter Agency Name" aria-label="Agency Name" >
+                                        placeholder="Enter Agency Name" aria-label="Agency Name">
+                                    <small id="agency_name_error" style="color: red; display: none;">Agency name is
+                                        required*</small>
                                 </div>
 
                                 <!-- Agency Address -->
@@ -80,6 +82,8 @@
                                         <option value="Iloilo">Iloilo</option>
                                         <option value="Negros Occidental">Negros Occidental</option>
                                     </select>
+                                    <small id="province_error" style="color: red; display: none;">Province is
+                                        required*</small>
                                 </div>
 
                                 <div class="col-3 mb-3">
@@ -88,41 +92,49 @@
                                         aria-label="agency_city" required>
                                         <option value="" disabled selected>Select City</option>
                                     </select>
+                                    <small id="city_error" style="color: red; display: none;">City is required*</small>
                                 </div>
 
                                 <div class="col-3 mb-3">
-                                    <label for="baranggay">Barangay: </label>
+                                    <label for="barangay">Barangay: </label>
                                     <select class="form-select" id="agency_baranggay" name="agency_baranggay"
                                         aria-label="agency_baranggay" required>
                                         <option value="" disabled selected>Select Barangay</option>
                                     </select>
+                                    <small id="barangay_error" style="color: red; display: none;">Barangay is
+                                        required*</small>
                                 </div>
+
                                 <div class="col-3 mb-3">
                                     <label for="agency_address">Street: </label>
                                     <input type="text" id="agency_address" name="agency_address" class="form-control"
                                         placeholder="Enter Agency Address" aria-label="Agency Address" required>
+                                    <small id="address_error" style="color: red; display: none;">Street address is
+                                        required*</small>
                                 </div>
+
 
                                 <!-- Email Address -->
                                 <div class="col-4 mb-3">
                                     <label for="email_address">Email Address: </label>
                                     <input type="email" id="email_address" name="email_address" class="form-control"
                                         placeholder="Enter Email Address" aria-label="Email Address" required>
+                                    <small id="email_error" style="color: red; display: none;">Email address is
+                                        required*</small>
+                                    <small id="email_invalid_error" style="color: red; display: none;">Please enter a
+                                        valid email address*</small>
                                 </div>
 
                                 <!-- Contact Number -->
                                 <div class="col-4 mb-3">
-                                    <label for="contact_number">Contact Number: </label>
-                                    <div class="input-group">
-                                        <span class="input-group-text">+63</span>
-                                        <input type="tel" id="contact_number" name="contact_number"
-                                            class="form-control" placeholder="9123456789" aria-label="Contact Number"
-                                            required pattern="^9[0-9]{9}$"
-                                            title="Phone number must start with 9 and be exactly 10 digits long."
-                                            maxlength="10"
-                                            onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);">
-                                    </div>
+                                    <label for="phone_number">Phone Number: </label>
+                                    <input type="text" id="phone_number" name="phone_number" class="form-control"
+                                        maxlength="10" placeholder="Enter Phone Number" aria-label="Phone Number"
+                                        required>
+                                    <small id="phone_error" style="color: red; display: none;">Phone number is
+                                        required*</small>
+                                    <small id="phone_invalid_error" style="color: red; display: none;">Phone number must
+                                        start with 9 and be 10 digits*</small>
                                 </div>
 
                                 <!-- Landline Number -->
@@ -131,28 +143,34 @@
                                     <div class="input-group">
                                         <input type="tel" id="landline_number" name="landline_number"
                                             class="form-control" placeholder="e.g. 1234-5678" pattern="^\d{4}-\d{4}$"
-                                            maxlength="9"
+                                            maxlength="9" oninput="formatTelephone(this)"
                                             title="Please enter a valid telephone number in the format: 1234-5678"
-                                            oninput="formatTelephone(this)" required>
-
+                                            required>
                                     </div>
+                                    <small id="landline_error" style="color: red; display: none;">Landline number is
+                                        required*</small>
+                                    <small id="landline_invalid_error" style="color: red; display: none;">Landline
+                                        number must be in the format 1234-5678*</small>
                                 </div>
 
 
-                                <!-- Geographical Coverage Dropdown -->
                                 <div class="col-6 mb-3">
                                     <label for="geo_coverage" class="form-label">Geographical Coverage:</label>
                                     <select id="geo_coverage" name="geo_coverage" class="form-select">
+                                        <option value="" disabled selected>Select Geographical Coverage</option>
                                         <option value="local">Local</option>
                                         <option value="national">National</option>
                                         <option value="international">International</option>
                                     </select>
+                                    <small id="geo_coverage_error" style="color: red; display: none;">Please select
+                                        geographical coverage*</small>
                                 </div>
 
                                 <!-- Number of Employees Dropdown -->
                                 <div class="col-6 mb-3">
                                     <label for="employee_count" class="form-label">Number of Employees:</label>
                                     <select id="employee_count" name="employee_count" class="form-select">
+                                        <option value="" disabled selected>Select Number of Employees</option>
                                         <option value="1-10">1-10</option>
                                         <option value="11-20">11-20</option>
                                         <option value="21-30">21-30</option>
@@ -160,6 +178,8 @@
                                         <option value="41-50">41-50</option>
                                         <option value="51-above">51 and above</option>
                                     </select>
+                                    <small id="employee_count_error" style="color: red; display: none;">Please select
+                                        the number of employees*</small>
                                 </div>
                             </div>
 
@@ -197,21 +217,42 @@
 
                             <div class="row">
                                 <div class="col-6 mb-3">
-                                    <label>Password: </label>
+                                    <label for="password" class="form-label">Password:</label>
                                     <input type="password" id="password" name="password" class="form-control"
-                                        placeholder="Enter Password" aria-label="Password">
+                                        placeholder="Enter Password" aria-label="Password" required>
+                                    <small id="password_error" style="color: red; display: none;">Password is
+                                        required*</small>
                                 </div>
+
                                 <div class="col-6 mb-3">
-                                    <label>Confirm Password: </label>
-                                    <input type="password" class="form-control" id="password_confirmation"
-                                        name="password_confirmation" placeholder="Confirm Password"
-                                        aria-label="Confirm Password">
+                                    <label for="confirm_password" class="form-label">Confirm Password:</label>
+                                    <input type="password" id="confirm_password" name="confirm_password"
+                                        class="form-control" placeholder="Confirm Password"
+                                        aria-label="Confirm Password" required>
+                                    <small id="confirm_password_error" style="color: red; display: none;">Confirm
+                                        Password is required*</small>
+                                    <small id="password_mismatch_error" style="color: red; display: none;">Passwords
+                                        do not match*</small>
                                 </div>
                             </div>
+
+                            <div class="row me-2 mt-1 mb-1">
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" id="privacyCheckbox"
+                                            required>
+                                        <label class="form-check-label" for="privacyCheckbox">
+                                            I have read and agree to the <a href="/PrivacyPolicy" target="_blank">Data
+                                                Privacy Terms and Conditions</a>.
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="text-center">
-                                <button type="button" onclick="registerAgency()"
-                                    class="btn btn-light border border-primary rounded-pill w-100 mt-3 mb-3">Sign
-                                    Up</button>
+                                <button type="button" onclick="registerAgency()" id="submitBtn"
+                                    class="btn btn-light border border-primary rounded-pill w-100 mt-3 mb-3"
+                                    disabled>Sign Up</button>
                             </div>
                             <div class="text-center">
                                 <label for="signin">Already have an account? <span class="text-secondary small"> <a
@@ -224,9 +265,20 @@
             </div>
         </div>
     </div>
-    
+
     @include('Jobseeker.components.scripts')
     @include('Jobseeker.components.AgencyAuthscripts')
+    @include('Jobseeker.components.Agencyvalidator')
+
+    <script>
+        const privacyCheckbox = document.getElementById("privacyCheckbox");
+        const submitBtn = document.getElementById("submitBtn");
+
+
+        privacyCheckbox.addEventListener("change", function() {
+            submitBtn.disabled = !privacyCheckbox.checked;
+        });
+    </script>
 
 </body>
 
