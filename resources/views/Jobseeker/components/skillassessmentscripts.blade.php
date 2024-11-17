@@ -73,6 +73,8 @@
         // Show the "Results" section inside the modal
         document.getElementById('assessmentResults').style.display = 'block';
 
+        document.getElementById('viewResultsBtn').style.display = 'none';
+
         // Make an AJAX request to get the assessment results
         $.ajax({
             type: "GET",
@@ -105,4 +107,6 @@
             }
         });
     }
+
 </script>
+
