@@ -8,7 +8,7 @@
 <script src="https://cdn.datatables.net/fixedheader/3.3.2/js/dataTables.fixedHeader.min.js"></script>
 
 @include('Admin.components.head', ['title' => 'Customer Inquiries'])
-@include('admin.components.loading')
+@include('Admin.components.loading')
 
 <body class="g-sidenav-show  bg-gray-100">
 

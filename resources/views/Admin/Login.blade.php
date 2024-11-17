@@ -3,7 +3,7 @@
 @include('Admin.components.head', ['title' => 'Admin Login'])
 <body class="">
     @include('Admin.components.loading')
-    
+
     <div class="container position-sticky z-index-sticky top-0">
         <div class="row">
             <div class="col-12">

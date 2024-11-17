@@ -2,14 +2,14 @@
 <html lang="en">
 
 @include('Admin.components.head', ['title' => 'Agency Reports'])
-@include('admin.components.loading')
+@include('Admin.components.loading')
 <body class="g-sidenav-show  bg-gray-100">
 
     @include('Admin.components.aside', ['active' => 'agencyreports'])
 
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
-        @include('Admin.components.navbar', ['headtitle' => 'Compliance'], ['pagetitle' => 'Agency'])        
+        @include('Admin.components.navbar', ['headtitle' => 'Compliance'], ['pagetitle' => 'Agency'])
         <!-- End Navbar -->
 
         {{-- cards --}}
@@ -33,7 +33,7 @@
                         </tr>
                     </tbody>
                 </table>
-                
+
             </div>
             @include('Admin.components.footer')
         </div>

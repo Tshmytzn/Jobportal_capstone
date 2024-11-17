@@ -33,7 +33,7 @@
 @include('Admin.components.head', ['title' => 'Skill Assessment'])
 
 <body class="g-sidenav-show  bg-gray-100">
-    @include('admin.components.loading')
+    @include('Admin.components.loading')
 
     @include('Admin.components.aside', ['active' => 'SkillAssessment'])
 

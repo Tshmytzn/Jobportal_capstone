@@ -53,7 +53,7 @@
                             <h6 class="mb-0">Update Account Password</h6>
                         </div>
                         <div class="card-body p-3">
-                            
+
                             <div class="ms-4 me-4 mt-4">
                                 <button data-bs-toggle="modal" data-bs-target="#UpdateProfilePic" class="btn btn-outline-primary w-100">Update Profile Picture</button>
                             </div>

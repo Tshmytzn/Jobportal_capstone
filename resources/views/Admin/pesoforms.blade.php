@@ -9,7 +9,7 @@
 
 
 @include('Admin.components.head', ['title' => 'PESO Registration Forms'])
-@include('admin.components.loading')
+@include('Admin.components.loading')
 <body class="g-sidenav-show  bg-gray-100">
 
     @include('Admin.components.aside', ['active' => 'adminpesoforms'])

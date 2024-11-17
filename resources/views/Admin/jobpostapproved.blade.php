@@ -31,7 +31,7 @@
     }
 </style>
 @include('Admin.components.head', ['title' => 'Admin Dashboard'])
-@include('admin.components.loading')
+@include('Admin.components.loading')
 
 <body class="g-sidenav-show  bg-gray-100">
 
