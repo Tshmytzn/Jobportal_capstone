@@ -260,7 +260,7 @@ class AssessmentResultsController extends Controller
             }
         }
 
-        $joblist = JobDetails::whereIn('category_id', $categories)->get();
+        $joblist = JobDetails::whereIn('category_id', $categories)->where('job_status','approved')->get();
 
         return response()->json(['data'=> $joblist]);
 
