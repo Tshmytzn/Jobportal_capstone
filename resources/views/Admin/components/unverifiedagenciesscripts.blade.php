@@ -17,7 +17,7 @@
                     render: function(data, type, row, meta) {
                         return meta.row + 1;
                     },
-                    orderable: false 
+                    orderable: false
                 },
                 {
                     data: null,
@@ -72,9 +72,9 @@
                         '/agencyfiles/default_image.jpg';
                     modal.find('#agencyName').val(agency.agency_name);
 
-                    modal.find('#province').val(agency.province);
-                    modal.find('#city').val(agency.city);
-                    modal.find('#baranggay').val(agency.baranggay);
+                    modal.find('#province').val(agency.agency_province);
+                    modal.find('#city').val(agency.agency_city);
+                    modal.find('#baranggay').val(agency.agency_baranggay);
 
                     modal.find('#agencyAddress').val(agency.agency_address);
                     modal.find('#emailAddress').val(agency.email_address);

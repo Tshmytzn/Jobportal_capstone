@@ -92,15 +92,9 @@
                             <div class="row mt-3">
                                 <div class="col-3 mb-3">
                                     <label for="province">Province: </label>
-                                    <select class="form-select" id="province" name="province" aria-label="province"
+                                    <select class="form-select" id="province" name="province" aria-label="province" readonly
                                         required>
-                                        <option value="" disabled selected>Select Province</option>
-                                        <option value="Aklan">Aklan</option>
-                                        <option value="Antique">Antique</option>
-                                        <option value="Capiz">Capiz</option>
-                                        <option value="Guimaras">Guimaras</option>
-                                        <option value="Iloilo">Iloilo</option>
-                                        <option value="Negros Occidental">Negros Occidental</option>
+                                        <option value="Negros Occidental" selected>Negros Occidental</option>
                                     </select>
                                 </div>
 
@@ -108,7 +102,7 @@
                                     <label for="city">City: </label>
                                     <select class="form-select" id="city" name="city" aria-label="city"
                                         required>
-                                        <option value="" disabled selected>Select City</option>
+                                        <option value="Victorias" selected>Victorias</option>
                                     </select>
                                 </div>
 
@@ -117,6 +111,32 @@
                                     <select class="form-select" id="baranggay" name="baranggay"
                                         aria-label="baranggay" required>
                                         <option value="" disabled selected>Select Barangay</option>
+                                        <option value="Barangay I (Poblacion)">Barangay I (Poblacion)</option>
+                                        <option value="Barangay II (Quezon; Pob.)">Barangay II (Quezon; Pob.)</option>
+                                        <option value="Barangay III (Poblacion)">Barangay III (Poblacion)</option>
+                                        <option value="Barangay IV (Poblacion)">Barangay IV (Poblacion)</option>
+                                        <option value="Barangay V (Poblacion)">Barangay V (Poblacion)</option>
+                                        <option value="Barangay VI (Estrella Village/Salvacion; Pob.)">Barangay VI (Estrella Village/Salvacion; Pob.)</option>
+                                        <option value="Barangay VI-A (Boulevard/Villa Miranda/Sitio Cubay/Pasil)">Barangay VI-A (Boulevard/Villa Miranda/Sitio Cubay/Pasil)</option>
+                                        <option value="Barangay VII (Poblacion)">Barangay VII (Poblacion)</option>
+                                        <option value="Barangay VIII (Old Simboryo)">Barangay VIII (Old Simboryo)</option>
+                                        <option value="Barangay IX (Daan Banwa)">Barangay IX (Daan Banwa)</option>
+                                        <option value="Barangay X (Estado)">Barangay X (Estado)</option>
+                                        <option value="Barangay XI (Gawahon)">Barangay XI (Gawahon)</option>
+                                        <option value="Barangay XII (Dacumon)">Barangay XII (Dacumon)</option>
+                                        <option value="Barangay XIII (Gloryville)">Barangay XIII (Gloryville)</option>
+                                        <option value="Barangay XIV (Sayding)">Barangay XIV (Sayding)</option>
+                                        <option value="Barangay XV West Caticlan">Barangay XV West Caticlan</option>
+                                        <option value="Barangay XV-A East Caticlan">Barangay XV-A East Caticlan</option>
+                                        <option value="Barangay XVI (Millsite)">Barangay XVI (Millsite)</option>
+                                        <option value="Barangay XVI-A (New Barrio)">Barangay XVI-A (New Barrio)</option>
+                                        <option value="Barangay XVII (Garden)">Barangay XVII (Garden)</option>
+                                        <option value="Barangay XVIII (Palma)">Barangay XVIII (Palma)</option>
+                                        <option value="Barangay XVIII-A (Golf)">Barangay XVIII-A (Golf)</option>
+                                        <option value="Barangay XIX (Bacayan)">Barangay XIX (Bacayan)</option>
+                                        <option value="Barangay XIX-A (Canetown Subdivision)">Barangay XIX-A (Canetown Subdivision)</option>
+                                        <option value="Barangay XX (Cuaycong)">Barangay XX (Cuaycong)</option>
+                                        <option value="Barangay XXI">Barangay XXI</option>
                                     </select>
                                 </div>
 

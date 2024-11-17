@@ -74,13 +74,9 @@
                                     <label for="province">Province: </label>
                                     <select class="form-select" id="agency_province" name="agency_province"
                                         aria-label="agency_province" required>
-                                        <option value="" disabled selected>Select Province</option>
-                                        <option value="Aklan">Aklan</option>
-                                        <option value="Antique">Antique</option>
-                                        <option value="Capiz">Capiz</option>
-                                        <option value="Guimaras">Guimaras</option>
-                                        <option value="Iloilo">Iloilo</option>
+                                        <option value="" >Select Province</option>
                                         <option value="Negros Occidental">Negros Occidental</option>
+
                                     </select>
                                     <small id="province_error" style="color: red; display: none;">Province is
                                         required*</small>
@@ -129,7 +125,7 @@
                                 <div class="col-4 mb-3">
                                     <label for="phone_number">Phone Number: </label>
 
-                                
+
                                     <input type="text" id="contact_number" name="contact_number" class="form-control"
                                         maxlength="10" placeholder="Enter Phone Number" aria-label="Phone Number"
                                         onkeypress="return event.charCode >= 48 && event.charCode <= 57"
