@@ -99,7 +99,7 @@
 
     async function recommendedJobs() {
         const response = await fetch('/recommended-jobs-for-you');
-
+        
         const result = await response.json();
         const displayJobs = document.getElementById('displayJobs');
         displayJobs.innerHTML = ``;
@@ -126,7 +126,7 @@
                                                                 <hr>
 
                     <p class="mb-4">${desc}</p>
-                <a href="{{ route('jobdetails') }}?id=${data.job_id}" class="btn btn-light rounded-pill col-12 text-primary py-2 px-4"> Job Details</a>
+                <a href="{{ route('jobdetails') }}?id=${data.id}" class="btn btn-light rounded-pill col-12 text-primary py-2 px-4"> Job Details</a>
                 </div>
             </div>
         </div>
