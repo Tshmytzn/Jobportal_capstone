@@ -173,6 +173,17 @@
             success: function(response) {
                 document.getElementById('loading').style.display = '';
                 codeforverify =response;
+
+                Swal.fire({
+                        title: 'Verification code sent',
+                        text: 'Please check your email inbox',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 1000
+                    }).then(() => {
+
+                    });
+
             },
             error: function(xhr) {
                 document.getElementById('loading').style.display = 'none';
