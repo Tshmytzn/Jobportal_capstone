@@ -113,7 +113,7 @@
                 <option value="5">5</option>
             </select>
             <label for="">Comments</label>
-            <textarea name="comment" class="form-control" id="" cols="30" rows="10"></textarea>
+            <textarea name="comments" class="form-control" id="" cols="30" rows="10"></textarea>
         </form>
       </div>
       <div class="modal-footer">
