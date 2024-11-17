@@ -38,7 +38,8 @@ return new class extends Migration
             $table->timestamps(); // Automatically adds created_at and updated_at fields
         });
 
-        DB::table('jobseeker_details')->insert([
+        // DB::table('jobseeker_details')->insert([
+        $data = [
             [
                 'js_firstname' => 'MARIVIC',
                 'js_middlename' => 'CHOME',
@@ -1569,9 +1570,21 @@ return new class extends Migration
                 'created_at' => '2024-07-12 19:24:13',
                 'updated_at' => now(),
             ],
+        ];
+        // ]);
+        foreach ($data as &$record) {
+            // Encrypt the necessary fields
+            $record['js_firstname'] = Crypt::encryptString($record['js_firstname']);
+            $record['js_middlename'] = Crypt::encryptString($record['js_middlename']);
+            $record['js_lastname'] = Crypt::encryptString($record['js_lastname']);
+            $record['js_gender'] = Crypt::encryptString($record['js_gender']);
+            $record['js_age'] = Crypt::encryptString($record['js_age']);
+            $record['js_address'] = Crypt::encryptString($record['js_address']);
+            $record['js_contactnumber'] = Crypt::encryptString($record['js_contactnumber']);
+            $record['js_accstatus'] = Crypt::encryptString($record['js_accstatus']);
+        }
 
-        ]);
-
+        DB::table('jobseeker_details')->insert($data);
     }
 
     /**
