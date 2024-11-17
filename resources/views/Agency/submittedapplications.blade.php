@@ -116,14 +116,14 @@
                                                     <div class="mb-0 text-center">
 
                                                         <div class="mb-0 text-center">
-                                                            @if ($jobseeker && $jobseeker->js_image)
+                                                            {{-- @if ($jobseeker && $jobseeker->js_image)
                                                                 <img src="{{ asset('jobseeker_profile/' . $jobseeker->js_image) }}"
                                                                     class="img-fluid rounded-circle d-block mx-auto mt-2 mb-2"
                                                                     alt="Jobseeker Image"
                                                                     style="max-height: 100px; width: auto; border: 2px solid #007bff;" />
                                                             @else
                                                                 <p>No image available</p>
-                                                            @endif
+                                                            @endif --}}
 
                                                             <div class="m-2">
                                                                 <div class="badge">
@@ -140,7 +140,7 @@
                                                                             id="badge-preview"
                                                                             src="{{ asset('img/' . $jobSeeker->js_badge) }}"
                                                                             alt="Skill Assessment Badge"
-                                                                            style="display: block; width: 80px; height: auto; border-radius: 50%; margin: 0 auto;">
+                                                                            style="max-height: 100px; width: auto; border: 2px solid #007bff;">
 
                                                                         <span class="badge-message text-dark"
                                                                             style="font-size: 14px; padding: 5px; background-color: #d362ff; border-radius: 12px; border: 1px solid #f5c6cb;">
