@@ -6,7 +6,8 @@
                 <h5 class="modal-title text-center w-100" id="assessmentModalLabel">
                     <i class="bi bi-check-circle-fill text-success"></i> Assessment Completed
                 </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="location.reload();"></button>
+
             </div>
             <div class="modal-body text-center p-4">
                 <p class="lead mb-3">Well done! Your assessment is complete.</p>
