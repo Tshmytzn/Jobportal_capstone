@@ -152,6 +152,10 @@
 // </script>
 
 <script>
+    function backtoLogin(){
+        document.getElementById('jobseekerloginform').style.display='';
+        document.getElementById('verifyForm').style.display='none';
+    }
     let codeforverify ='';
     function showCode(){
         document.getElementById('jobseekerloginform').style.display='none';

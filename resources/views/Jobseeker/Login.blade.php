@@ -53,8 +53,11 @@
                         @csrf
                         <label for="">Verification</label>
                         <input type="text" class="form-control m-2" name="codeV" id="codeV">
+                        <button class="btn btn-info m-2" type="button" onclick="backtoLogin()">
+                            Back
+                        </button>
                         <button class="btn btn-success m-2" type="button" onclick="loginJobseeker()">
-                            verifty
+                            Verifty
                         </button><button class="btn btn-danger m-2" type="button" onclick="showCode()">
                             Resend
                         </button>
