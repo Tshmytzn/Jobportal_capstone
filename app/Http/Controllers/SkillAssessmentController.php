@@ -44,6 +44,19 @@ class SkillAssessmentController extends Controller
                 'description' => 'nullable|string',
                 'sections' => 'required|array',
             ]);
+            $reset= Assessment::all();
+            foreach($reset as $res){
+                $res->delete();
+                // $deletesec= Section::all();
+                // foreach($deletesec as $sec){
+                //     $sec->delete();
+                //     $deleteques = Question::all();
+                //     foreach($deleteques as $ques){
+                //         $ques->delete();
+                //         $deleteop = Option::all()->delete();
+                //     }
+                // }
+            }
 
             $assessment = Assessment::create([
                 'title' => $validated['title'],
