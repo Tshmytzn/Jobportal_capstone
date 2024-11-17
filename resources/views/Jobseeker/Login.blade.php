@@ -57,7 +57,7 @@
                             Back
                         </button>
                         <button class="btn btn-success m-2" type="button" onclick="loginJobseeker()">
-                            Verifty
+                            Verify
                         </button><button class="btn btn-danger m-2" type="button" onclick="showCode()">
                             Resend
                         </button>
