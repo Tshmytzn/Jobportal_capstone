@@ -179,7 +179,7 @@
                         text: 'Please check your email inbox',
                         icon: 'success',
                         showConfirmButton: false,
-                        timer: 1000
+                        timer: 2500
                     }).then(() => {
 
                     });
