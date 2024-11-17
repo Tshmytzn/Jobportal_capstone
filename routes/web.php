@@ -316,6 +316,8 @@ Route::post('/contacts', [JobseekerController::class, 'SaveContact'])->name('Sav
 
 //Submit feedbacks
 Route::post('/JobseekerFeedback', [UserFeedbacksController::class, 'submitfeedback'])->name('submitFeedback');
+Route::post('/AgencyFeedback', [UserFeedbacksController::class, 'submitagencyfeedback'])->name('submitagencyfeedback');
+Route::get('/GetFeedback', [UserFeedbacksController::class, 'getallagencyfeedback'])->name('getallagencyfeedback');
 
 //JobQuestion
 Route::post('/AddQuestion', [JobQuestionController::class, 'AddQuestion'])->name('AddQuestion');

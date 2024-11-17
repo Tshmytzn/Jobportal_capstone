@@ -86,6 +86,35 @@ class UserFeedbacksController extends Controller
         ]);
     }
     
-    
-    
+    public function submitagencyfeedback(Request $request){
+
+        $check = UserFeedbacks::where('application_id',$request->jd_id)->where('user_id', session('agency_id'))->first();
+        if($check){
+            return response()->json([
+                'status' => 'error',
+                'message' => 'You already submitted feedback for this job detail',
+            ]);
+        }
+        $data = new UserFeedbacks();
+        $data->application_id = $request->jd_id;
+        $data->user_id = session('agency_id');
+        $data->feedback_type = 'agency';
+        $data->rating = $request->rating;
+        $data->comments = $request->comments;
+        $data->save();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Thank you for your feedback!',
+            'form'=> 'feedbackform'
+            ]);
+    }
+    public function getallagencyfeedback(){
+        $data = UserFeedbacks::join('agencies', 'user_feedbacks.user_id', '=', 'agencies.id')
+            ->join('job_details', 'user_feedbacks.application_id', '=', 'job_details.id')
+            ->where('feedback_type', 'agency')
+            ->get();
+
+        return response()->json(['data' => $data]);
+
+    }
 }

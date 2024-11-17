@@ -28,16 +28,15 @@
                   <div class="tab-content mt-3">
                     <!-- Agency Tab Content -->
                     <div class="tab-pane fade show active" id="agency">
-                        <table id="AgencyF_tbl" class="table table-striped">
-                            <thead>
+                        <table id="AgencyF_tbl" class="table table-striped" style="width: 100%">
+                            <thead style="width: 100%">
                                 <tr>
                                     <th>#</th>
                                     <th>Applicant Name</th>
                                     <th>Job Title</th>
                                     <th>Rating</th>
                                     <th>Comments</th>
-                                    <th>Created At</th>
-                                    <th>Action</th>
+                                    <th>Submitted At</th>
                                 </tr>
                             </thead>
                         </table>

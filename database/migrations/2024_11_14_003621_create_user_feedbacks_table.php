@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_feedbacks', function (Blueprint $table) {
             $table->id();
-            $table->string('application_id'); 
+            $table->string('application_id')->nullable(); 
             $table->string('user_id'); 
             $table->enum('feedback_type', ['jobseeker', 'agency']); 
             $table->integer('rating')->check('rating >= 1 AND rating <= 5'); 

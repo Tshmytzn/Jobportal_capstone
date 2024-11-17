@@ -99,6 +99,88 @@
                 fixedHeader: true,
             });
         });
+        
+
+         $('#agency-tab').on('show.bs.tab', function(e) {
+loadagencyfeedback()
+        });
+loadagencyfeedback()
     });
-    
+    function loadagencyfeedback(){
+         $('#AgencyF_tbl').DataTable({
+                processing: true,
+                serverSide: false,
+                destroy: true,
+                ajax: {
+                    url: "{{ route('getallagencyfeedback') }}",
+                    type: 'GET',
+                    dataSrc: 'data',
+                },
+                order: [
+                    [0, 'asc']
+                ],
+                scrollY: '400px',
+                scrollX: true,
+                scrollCollapse: true,
+                paging: true,
+                columns: [{
+                        data: null,
+                        name: 'index',
+                        render: function(data, type, row, meta) {
+                            return meta.row + 1;
+                        },
+                        orderable: false
+                    },
+                    {
+                        data: 'agency_name',
+                        name: 'Agency'
+                    },
+                    {
+                        data: 'job_title',
+                        name: 'job_title'
+                    },
+                    {
+                        data: 'rating',
+                        name: 'rating'
+                    },
+                    {
+                        data: 'comments',
+                        name: 'comments'
+                    },
+                    {
+                        data: 'created_at',
+                        render: function(data) {
+                            const date = new Date(data);
+                            return date.toLocaleString();
+                        }
+                    },
+                ],
+                dom: 'Bfrtip',
+                buttons: [
+                    'colvis',
+                    {
+                        extend: 'copy'
+                    },
+                    {
+                        extend: 'csv'
+                    },
+                    {
+                        extend: 'excel'
+                    },
+                    {
+                        extend: 'pdf',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    },
+                    {
+                        extend: 'print',
+                        exportOptions: {
+                            columns: ':visible'
+                        }
+                    }
+                ],
+                fixedHeader: true,
+            });
+    }
 </script>

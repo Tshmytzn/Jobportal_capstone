@@ -134,7 +134,7 @@
                             item.job_description;
 
                         var cardHtml = `
-                        <div class="list-group-item list-group-item-action custom-hover" onclick="display('get','${item.id}','${item.job_title}','${item.job_description}','${item.job_location}','${item.job_type}','${item.name}','${item.category_id}','${item.skills_required}','${item.job_salary}','${item.job_vacancy}','${item.salary_frequency}','${item.skill_required}','${item.other_skills}')">
+                        <div class="list-group-item list-group-item-action custom-hover" onclick="display('get','${item.id}','${item.job_title}','${item.job_description}','${item.job_location}','${item.job_type}','${item.name}','${item.category_id}','${item.skills_required}','${item.job_salary}','${item.job_vacancy}','${item.salary_frequency}','${item.skill_required}','${item.other_skills}','${item.job_status}')">
                                 <div class="row align-items-center">
                                     <!-- Image Column -->
                                     <div class="col-4">
@@ -167,21 +167,22 @@
         });
     }
 
-    function display(process, id, title, description, location, type, cat_name, cat_id, skill,salary,vacancy,frequency,required,other) {
+    function display(process, id, title, description, location, type, cat_name, cat_id, skill,salary,vacancy,frequency,required,other,status) {
         
         var cardsContainer = document.getElementById('job_detail');
         if (process == 'get') {
             let data = skill;
             let uniqueDataArray = [...new Set(data.split(","))];
             let formattedData = uniqueDataArray.join("<br>");
-            cardsContainer.innerHTML = `
+            cardsContainer.innerHTML = ``;
+            cardsContainer.innerHTML += `
              <div class="row">
                 <div class="card mb-4 border-light shadow-sm">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h3 class="card-title">${title}</h3>
                             <div>
-                                <button class="btn btn-sm text-white" style="background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%);" type="button" onclick="display('edit','${id}','${title}','${description}','${location}','${type}','${cat_name}','${cat_id}','${skill}','${salary}','${vacancy}','${frequency}','${required}','${other}')">Update</button>
+                                <button class="btn btn-sm text-white" style="background: linear-gradient(90deg, rgba(77, 7, 99, 1) 0%, rgba(121, 9, 128, 1) 50%, rgba(189, 11, 186, 1) 100%);" type="button" onclick="display('edit','${id}','${title}','${description}','${location}','${type}','${cat_name}','${cat_id}','${skill}','${salary}','${vacancy}','${frequency}','${required}','${other}','${status}')">Update</button>
                                 <button class="btn btn-sm btn-danger" type="button" onclick="deletejobdetails('${id}')">Disable</button>
                             </div>
                         </div>
@@ -223,7 +224,11 @@
                                 </ul>
                             </div>
                         </div>
-
+                        `
+                        if(status == 'disabled'){
+        cardsContainer.innerHTML +=`<button class="btn btn-info w-100" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="feedback('${id}')">Feedback</button>`
+                        }
+        cardsContainer.innerHTML +=`
                     </div>
                 </div>
 
@@ -355,6 +360,9 @@
             });
 
         }
+    }
+    function feedback(id){
+        document.getElementById('jd_id').value=id;
     }
 
     function deletejobdetails(id) {
