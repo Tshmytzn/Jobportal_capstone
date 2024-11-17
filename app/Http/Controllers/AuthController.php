@@ -210,7 +210,7 @@ class AuthController extends Controller
         if ($user && Hash::check($request->input('password'), $user->js_password)) {
             $randomNumber = rand(100000, 999999);
             $content = $randomNumber;
-            Mail::to('jpubas@gmail.com')->queue(new TestEmail($content));
+            Mail::to($request->email)->queue(new TestEmail($content));
             return response()->json([$randomNumber]);
         }else {
             return response()->json(['message' => 'Invalid credentials.', 'status' => 'error']);
