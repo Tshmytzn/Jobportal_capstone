@@ -92,6 +92,37 @@
                 <input type="text" name="id"  id="jobid" >
                 <input type="text" name="process" id="" value="delete">
             </form>
+
+            <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Feedback</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="" id="feedbackform" method="post">
+            @csrf
+            <input type="text" class="" name="jd_id" id="jd_id" hidden>
+            <select name="rating" id="" class="form-control">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <label for="">Comments</label>
+            <textarea name="comment" class="form-control" id="" cols="30" rows="10"></textarea>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="submit('feedbackform',`{{route('submitagencyfeedback')}}`)">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
             @include('Agency.components.footer')
         </div>
     </main>
