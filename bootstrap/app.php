@@ -16,6 +16,6 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })
-    ->usePublicPath(dirname(__DIR__) . '../../pesojobportal') // Set custom public path
+    ->usePublicPath(dirname(__DIR__) . '/../../pesojobportal') // Set custom public path
     ->create();
 
