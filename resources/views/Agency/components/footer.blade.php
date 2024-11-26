@@ -8,7 +8,7 @@
                         document.write(new Date().getFullYear())
                     </script>,
                     by
-                    BSIS 4A @ Carlos Hilado Memorial State University
+                    Kailah Leyva, Sharmene Tanaya & Gutsy Dave Pasuelo
                 </div>
             </div>
             <div class="col-lg-6">

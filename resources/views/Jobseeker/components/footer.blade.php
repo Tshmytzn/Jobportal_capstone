@@ -45,13 +45,18 @@
             <div class="container">
                 <div class="row g-4 align-items-center">
                     <div class="col-md-6 text-center text-md-start mb-md-0">
-                        <span class="text-white"><a href="#"><i class="fas fa-copyright text-light me-2"></i>BSIS 4A</a>, All right reserved.</span>
-                    </div>
+                        <span>
+                            <a href="#" class="text-decoration-none" style="color: #f1f1f1;">
+                                <i class="fas fa-copyright me-2"></i>
+                                Kailah Leyva, Sharmene Tanaya & Gutsy Dave Pasuelo
+                            </a>
+                            <br />
+                        </span>                    </div>
                     <div class="col-md-6 text-center text-md-end text-white">
                         <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
                         <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
                         <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By <a class="border-bottom" href="">BSIS 4A</a>
+                        {{-- Designed By <a class="border-bottom" href="">BSIS 4A</a> --}}
                     </div>
                 </div>
             </div>
