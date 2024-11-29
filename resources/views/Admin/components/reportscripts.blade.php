@@ -89,17 +89,18 @@
                         columns: ':visible:not(:first-child)'
                     },
                     customize: function(win) {
-                        var currentDate = new Date();
-                        var formattedDate = currentDate.toLocaleString();
 
                         $(win.document.body)
                             .prepend(
-                                '<div class="print-header">' +
-                                '<img src="{{ asset('../assets/img/PESOLOGO.png') }}" style="width: 100px; height: auto;">' +
-                                '</div>' +
-                                '<div class="print-header-date">' +
-                                'Printed on: ' + formattedDate + '</div>'
+                                `<div class="print-header">
+                                    <img src="{{ asset('assets/img/PESOLOGO.png') }}" style="width: 100px; height: auto;">
+                                    <h1>Public Employment Service Office Victorias City</h1>
+                                </div>
+                                <div class="print-header-date">
+                                    Public Employment Service Office Victorias City
+                                </div>`
                             );
+
 
                         $(win.document.body).find('h1').remove();
 
@@ -132,9 +133,11 @@
                         background: #fff;
                     }
                     .print-header-date {
-                        font-size: 12px;
+                        font-size: 22px;
                         color: #666;
                         margin-top: 100px;
+                        margin-bottom: 20px;
+
                     }
                     body {
                         margin-top: 150px; 
@@ -163,7 +166,7 @@
                         // Add the style to the printed window
                         $(win.document.head).append(style);
 
-                        var rowsPerPage = 25;
+                        var rowsPerPage = 20;
                         var rows = $(win.document.body).find('table tr');
                         for (var i = rowsPerPage; i < rows.length; i += rowsPerPage) {
                             $(rows[i]).before(
