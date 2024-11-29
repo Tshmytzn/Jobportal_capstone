@@ -156,7 +156,7 @@
                         // Add the style to the printed window
                         $(win.document.head).append(style);
 
-                        var rowsPerPage = 20;
+                      var rowsPerPage = 25;
                         var rows = $(win.document.body).find('table tr');
                         for (var i = rowsPerPage; i < rows.length; i += rowsPerPage) {
                             $(rows[i]).before(
